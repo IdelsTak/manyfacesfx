@@ -1,0 +1,37 @@
+/*
+Copyright 2019.
+*/
+/* 
+    Created on : Oct 5, 2019, 2:17:33 AM
+    Author     : Hiram K <hiram.kamau@outlook.com>
+*/
+.root {
+    -fx-padding: 0px 0px 0px 23px;
+}
+
+.logo-pane {
+    -fx-pref-height: 140px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+    -fx-padding: 23px 0px 0px 0px;
+}
+
+.logo-pane > .image-view {
+    -fx-image: url(../images/logo.png);
+}
+
+.menu-pane {
+    -fx-max-width: infinity;
+    -fx-pref-height: 200px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+    /*-fx-spacing: 20px;*/
+}
+
+.menu-pane > .radio-button {
+    -fx-font-size: 16.5px;
+    -fx-max-width: infinity;
+    -fx-pref-height: 34px;
+    -fx-min-height: -fx-pref-height;
+    -fx-alignment: top-left;
+}

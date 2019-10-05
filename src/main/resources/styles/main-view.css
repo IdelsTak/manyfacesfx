@@ -1,0 +1,59 @@
+/*
+Copyright 2019.
+*/
+/* 
+    Created on : Oct 5, 2019, 12:33:40 AM
+    Author     : Hiram K <hiram.kamau@outlook.com>
+*/
+.master-view {
+    -fx-pref-width: 240px;
+    -fx-min-width: -fx-pref-width;
+    -fx-max-width: -fx-pref-width;
+    /*-fx-min-height: 741px;*/
+    -fx-min-height: 700px;
+    -fx-max-height: infinity;
+}
+
+.detail-view {
+    -fx-pref-width: 710px;
+    -fx-min-width: -fx-pref-width;
+    -fx-max-width: infinity;
+    -fx-background-color: white;
+}
+
+.detail-view > .title-pane {
+    -fx-pref-height: 64px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+    /*for test purposes*/
+    /*-fx-border-color: transparent transparent red transparent;*/
+    -fx-padding: 19px 39px -1px 33px;
+}
+
+.detail-view > .title-pane > .title-label {
+    -fx-font-family: 'Roboto Light';
+    -fx-font-size: 20px;
+    -fx-text-fill: #9ca5ae;
+    -fx-padding: 4px 0px 4px 0px;
+    -fx-max-width: infinity;
+}
+
+.detail-view > .title-pane > .jfx-toggle-node {
+    -fx-background-radius: 24px;
+    -fx-padding: 8px;
+    -jfx-toggle-color: #dadada;
+}
+
+.detail-view > .title-pane > .jfx-toggle-node .jfx-rippler {
+    -jfx-rippler-fill: -jfx-toggle-color;
+}
+
+.detail-view > .title-pane > .jfx-toggle-node  .ikonli-font-icon {
+    -fx-icon-code: mdi-bell;
+    -fx-icon-size: 20px;
+    -fx-icon-color: #e0e2e7;
+}
+
+.detail-view > .title-pane > .jfx-toggle-node:selected  .ikonli-font-icon {
+    -fx-icon-color: #bfc1c6;
+}

@@ -1,0 +1,160 @@
+/*
+Copyright 2019.
+*/
+/* 
+    Created on : Oct 4, 2019, 11:30:58 PM
+    Author     : Hiram K <hiram.kamau@outlook.com>
+*/
+
+@font-face{
+    src: url(../fonts/roboto/Roboto-Regular.ttf);
+}
+
+@font-face{
+    src: url(../fonts/roboto/Roboto-Bold.ttf);
+}
+
+@font-face{
+    src: url(../fonts/roboto/Roboto-Light.ttf);
+}
+
+.root {
+    -fx-base: #0d3fb9;
+    -fx-background-color: #0d3fb9;
+    -fx-font-family: 'Roboto';
+}
+
+.radio-button,
+.jfx-button,
+.jfx-check-box,
+.jfx-toggle-node {
+    -fx-cursor: hand;
+}
+
+.radio-button {
+    -fx-label-padding: 0px;
+}
+
+.radio-button:selected {
+    -fx-background-color: -fx-base;
+    -fx-text-fill: #e0e0e0;
+}
+
+.radio-button > .radio {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0px;
+    -fx-padding: 0.0em;
+}
+
+.radio-button > .radio > .dot {
+    -fx-background-color: transparent;
+    /*This is important!*/
+    -fx-background-radius: 0;
+    -fx-padding: 0;
+}
+
+.radio-button:selected > .radio > .dot {
+    -fx-background-color: transparent;
+}
+
+.jfx-tab-pane {
+    -fx-tab-min-width: 160px;
+    -fx-tab-max-width: 160px;
+    -fx-tab-min-height: 47px;
+    -fx-tab-max-height: 47px;
+}
+
+.jfx-tab-pane .headers-region .jfx-rippler {
+    -jfx-rippler-fill: #d2d7e1;
+}
+
+.jfx-tab-pane .headers-region, .jfx-tab-pane .tab-header-background {
+    -fx-background-color: white;
+    -fx-border-color: #e1e3e7; 
+    -fx-border-width: 0 0 1 0;
+}
+
+/*Issue #636: remove the shadow of JFXTabPane*/
+.jfx-tab-pane .depth-container {
+    -fx-effect: null;
+}
+
+.jfx-tab-pane .tab-selected-line {
+    -fx-pref-width: 1px !important;
+    -fx-pref-height: 2px;
+    -fx-background-color: #174bc9;
+}
+
+.jfx-tab-pane .tab {
+    -fx-cursor: hand;
+}
+
+.jfx-tab-pane .tab:selected {
+    -fx-background-color: #eaeffa;
+}
+
+.jfx-tab-pane .tab .tab-label {
+    -fx-font-family: 'Roboto Bold';
+    -fx-font-size: 14px;
+    -fx-text-fill: #868686;
+}
+
+.jfx-tab-pane .tab:selected .tab-label {
+    -fx-text-fill: #1e1f20;
+}
+
+.jfx-tab-pane .tab:selected:hover {
+    -fx-background-color: #eaeffa;
+}
+
+.jfx-text-field {
+    -fx-border-color: #949494;
+    -fx-font-size: 14px;
+    -fx-padding: 1.7 0 4.7 0;
+}
+
+.jfx-text-field > .input-line {
+    -fx-pref-height: 0px;
+    -fx-max-height: 0px;
+}
+
+.jfx-text-field > .input-focused-line {
+    -fx-pref-height: 0px;
+    -fx-max-height: 0px;
+}
+
+.jfx-text-field:focused {
+    -fx-border-color: #174bc9;
+}
+
+.jfx-check-box{
+    -jfx-checked-color: #174bc9;
+}
+
+.jfx-check-box > .jfx-rippler {
+    -jfx-rippler-fill: #8ca6e4;
+}
+
+.titled-pane > .title {
+    -fx-cursor: hand;
+    -fx-pref-height: 0;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 0;
+}
+
+.titled-pane > .title > .arrow-button {
+    -fx-padding: 0;
+}
+
+.titled-pane > .title > .arrow-button > .arrow {
+    -fx-background-color: null;
+    -fx-padding: 0;
+}
+
+.titled-pane > *.content {
+    -fx-border-color: null;
+    -fx-border-insets: 0;
+    -fx-background-color: white;
+}

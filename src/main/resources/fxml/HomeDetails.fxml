@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTabPane?>
+<?import javafx.scene.control.Tab?>
+
+<JFXTabPane fx:id="detailsTabPane" stylesheets="@../styles/app.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.idelstak.manyfacesfx.ui.controllers.HomeDetailsController">
+   <tabs>
+      <Tab fx:id="profileListTab" text="Profile list" />
+      <Tab fx:id="groupsTab" text="Groups" />
+   </tabs>
+</JFXTabPane>
