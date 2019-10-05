@@ -24,6 +24,13 @@ Copyright 2019.
     -fx-font-family: 'Roboto';
 }
 
+.jfx-button {
+    -fx-pref-height: 38px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+    -fx-padding: 0px;
+}
+
 .radio-button,
 .jfx-button,
 .jfx-check-box,
@@ -31,7 +38,8 @@ Copyright 2019.
     -fx-cursor: hand;
 }
 
-.radio-button {
+.radio-button,
+.jfx-check-box {
     -fx-label-padding: 0px;
 }
 

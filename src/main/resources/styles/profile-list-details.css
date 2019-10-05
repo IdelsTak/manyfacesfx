@@ -9,9 +9,26 @@ Copyright 2019.
     -fx-background-color: white;
 }
 
+.actions-pane {
+    -fx-pref-height: 50px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+    -fx-padding: 0px 0px 0px 33px;
+}
+
+.actions-pane > .jfx-check-box {
+    -fx-pref-width: 20px;
+    -fx-max-width: -fx-pref-width;
+    -fx-min-width: -fx-pref-width;
+    -fx-pref-height: 38px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+}
+
 .actions-pane > .jfx-button {
     -fx-font-size: 14px;
     -fx-text-fill: #174bc9;
+    -fx-padding: 0px 22px 0px 22px;
 }
 
 .actions-pane > .jfx-button:disabled {
