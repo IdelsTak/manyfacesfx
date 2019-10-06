@@ -9,6 +9,10 @@ Copyright 2019.
     -fx-background-color: white;
 }
 
+.titled-pane {
+    -fx-border-color: white white #e1e3e7 white;
+}
+
 .titled-pane > .title {
     -fx-pref-height: 40px;
     -fx-background-color: white;
@@ -44,6 +48,10 @@ Copyright 2019.
 .title-box > .label > .ikonli-font-icon {
     -fx-icon-code: mdi-menu-right;
     -fx-icon-size: 25px;
+}
+
+.titled-pane:expanded > .title > .title-box > .label > .ikonli-font-icon {
+    -fx-icon-code: mdi-menu-down;
 }
 
 .title-box > .name-label {
