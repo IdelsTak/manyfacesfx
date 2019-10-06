@@ -10,15 +10,18 @@ import com.github.idelstak.manyfacesfx.ui.SelectProfiles;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextArea;
+import java.time.LocalDate;
 import java.time.format.FormatStyle;
 import java.util.Iterator;
 import java.util.Objects;
+import java.util.concurrent.Callable;
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.StringBinding;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
-import javafx.util.converter.LocalDateTimeStringConverter;
+import javafx.util.converter.LocalDateStringConverter;
 import org.openide.util.Lookup;
 
 /**
@@ -75,17 +78,16 @@ public class ProfileDetailsController {
         ProfileNode node = Objects.requireNonNull(profileNode, message);
         Profile profile = node.getLookup().lookup(Profile.class);
 
+        titlePane.setId(profile.getName() + ":" + profile.getLastEdited());
+
         nameLabel.textProperty().bind(profile.nameProperty());
         idLabel.textProperty().bind(profile.idProperty());
         notesTextArea.textProperty().bindBidirectional(profile.notesProperty());
-        lastEditedLabel.textProperty().bind(Bindings.createStringBinding(
-                () -> {
-                    LocalDateTimeStringConverter c = new LocalDateTimeStringConverter(
-                            FormatStyle.MEDIUM,
-                            FormatStyle.SHORT);
-                    return c.toString(profile.getLastEdited());
-                },
-                profile.lastEditedProperty()));
+        
+        StringBinding lastEditedStringProp = Bindings.createStringBinding(
+                new LastEditedAsString(profile.getLastEdited()),
+                profile.lastEditedProperty());
+        lastEditedLabel.textProperty().bind(lastEditedStringProp);
 
         lookupResult.addLookupListener(e -> {
             Iterator<? extends SelectProfiles> it = lookupResult.allInstances().iterator();
@@ -115,6 +117,21 @@ public class ProfileDetailsController {
                 context.remove(node);
             }
         });
+    }
+
+    private static class LastEditedAsString implements Callable<String> {
+
+        private final LocalDate lastEdited;
+
+        private LastEditedAsString(LocalDate lastEdited) {
+            this.lastEdited = lastEdited;
+        }
+
+        @Override
+        public String call() throws Exception {
+            LocalDateStringConverter ldsc = new LocalDateStringConverter(FormatStyle.SHORT);
+            return ldsc.toString(lastEdited);
+        }
     }
 
 }
