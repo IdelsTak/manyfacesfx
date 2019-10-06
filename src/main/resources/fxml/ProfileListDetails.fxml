@@ -46,7 +46,10 @@
       </HBox>
       <HBox fx:id="headersBox" styleClass="headers-pane">
          <children>
-            <JFXToggleNode fx:id="nameToggle" styleClass="name-toggle" text="Name" HBox.hgrow="ALWAYS" />
+            <JFXToggleNode fx:id="nameToggle" styleClass="name-toggle" text="Name" HBox.hgrow="ALWAYS">
+               <graphic>
+                  <FontIcon />
+               </graphic></JFXToggleNode>
             <JFXToggleNode fx:id="statusToggle" layoutX="10.0" layoutY="10.0" styleClass="status-toggle" text="Status" />
             <JFXToggleNode fx:id="membersToggle" layoutX="10.0" layoutY="10.0" styleClass="members-toggle" text="Members" />
             <JFXToggleNode fx:id="lastEditedToggle" layoutX="28.0" layoutY="10.0" styleClass="last-edited-toggle" text="Last edited" />
