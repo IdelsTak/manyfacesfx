@@ -5,11 +5,16 @@ package com.github.idelstak.manyfacesfx.api;
 
 import com.github.idelstak.manyfacesfx.model.Profile;
 import com.github.javafaker.Ancient;
+import com.github.javafaker.DateAndTime;
 import com.github.javafaker.Faker;
+import com.github.javafaker.Internet;
+import com.github.javafaker.Lorem;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
 import org.openide.util.Lookup;
@@ -45,9 +50,19 @@ public abstract class ProfilesRepository {
             this.profiles = FXCollections.observableSet(new HashSet<>());
 
             //Add bogus data
+            Internet internet = new Faker().internet();
             Ancient ancient = new Faker().ancient();
+            DateAndTime dat = new Faker().date();
+            Lorem lorem = new Faker().lorem();
+
             for (int i = 0; i < 10; i++) {
-                create(ancient.titan());
+                String id = internet.uuid();
+                String name = ancient.titan();
+                String notes = lorem.paragraph();
+                Date d = dat.past(100, TimeUnit.DAYS);
+                LocalDateTime ldt = new java.sql.Timestamp(d.getTime()).toLocalDateTime();
+                
+                add(new Profile(id, name, notes, ldt));
             }
         }
 
