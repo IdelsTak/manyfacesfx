@@ -8,6 +8,7 @@ import com.github.idelstak.manyfacesfx.model.Profile;
 import com.github.idelstak.manyfacesfx.ui.SelectProfiles;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
+import java.time.format.FormatStyle;
 import java.util.Iterator;
 import java.util.Objects;
 import javafx.beans.binding.Bindings;
@@ -15,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
+import javafx.util.converter.LocalDateTimeStringConverter;
 import org.openide.util.Lookup;
 
 /**
@@ -61,7 +63,7 @@ public class ProfileDetailsController {
      */
     @FXML
     public void initialize() {
-        titleBox.prefWidthProperty().bind(titlePane.widthProperty());
+        titleBox.minWidthProperty().bind(titlePane.widthProperty());
     }
 
     public void setProfile(Profile inst) {
@@ -70,6 +72,14 @@ public class ProfileDetailsController {
 
         nameLabel.textProperty().bind(profile.nameProperty());
         idLabel.textProperty().bind(profile.idProperty());
+        lastEditedLabel.textProperty().bind(Bindings.createStringBinding(
+                () -> {
+                    LocalDateTimeStringConverter c = new LocalDateTimeStringConverter(
+                            FormatStyle.MEDIUM,
+                            FormatStyle.SHORT);
+                    return c.toString(profile.getLastEdited());
+                },
+                profile.lastEditedProperty()));
 
         lookupResult.addLookupListener(e -> {
             Iterator<? extends SelectProfiles> it = lookupResult.allInstances().iterator();
