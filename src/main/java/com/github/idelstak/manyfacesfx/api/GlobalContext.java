@@ -3,7 +3,10 @@
  */
 package com.github.idelstak.manyfacesfx.api;
 
+import java.util.HashSet;
+import java.util.Objects;
 import java.util.Optional;
+import java.util.Set;
 import java.util.logging.Logger;
 import org.openide.util.Lookup;
 import org.openide.util.lookup.AbstractLookup;
@@ -48,18 +51,21 @@ public abstract class GlobalContext extends ProxyLookup {
 //        
 //        LOG.log(Level.INFO, "Before lookup: {0}", template);
 //    }
-    private static class SimpleContext extends GlobalContext {
+    private static final class SimpleContext extends GlobalContext {
 
         private final InstanceContent content;
+        private final Set<Lookup> localLookups = new HashSet<>();
 
         private SimpleContext() {
             this(new InstanceContent());
         }
 
         private SimpleContext(InstanceContent content) {
-            super(new AbstractLookup(content));
+            super(Lookup.EMPTY);
 
             this.content = content;
+
+            addLookup(new AbstractLookup(content));
         }
 
         @Override
@@ -76,52 +82,26 @@ public abstract class GlobalContext extends ProxyLookup {
         }
 
         @Override
-        public synchronized GlobalContext addLookup(Lookup lookup) {
-            Lookup[] newLookup = null;
-            Lookup[] currentLookup = getLookups();
+        public synchronized GlobalContext addLookup(Lookup lkp) {
+            String message = "Should not add a null lookup";
+            Lookup lookup = Objects.requireNonNull(lkp, message);
 
-            if ((currentLookup != null) && (currentLookup.length > 0)) {
-                newLookup = new Lookup[currentLookup.length + 1];
-                for (int i = newLookup.length - 2; i >= 0; i--) {
-                    newLookup[i] = currentLookup[i];
-                }
-                newLookup[currentLookup.length] = lookup;
-            } else {
-                newLookup = new Lookup[]{lookup};
-            }
-
-            if (newLookup != null) {
-                setLookups(newLookup);
+            if (localLookups.add(lookup)) {
+                setLookups(localLookups.toArray(new Lookup[localLookups.size()]));
             }
 
             return this;
         }
 
         @Override
-        public synchronized GlobalContext removeLookup(Lookup lookup) {
-            Lookup[] currentLookup = getLookups();
-            if ((currentLookup != null) && (currentLookup.length > 0)) {
-                int removedIndex = -1;
-                for (int i = currentLookup.length - 1; i >= 0; i--) {
-                    if (currentLookup[i].equals(lookup)) {
-                        removedIndex = i;
-                        break;
-                    }
-                }
-                if (removedIndex > 0) {
-                    Lookup[] newLookup = new Lookup[currentLookup.length - 1];
-                    int newIndex = 0;
-                    for (int i = currentLookup.length - 1; i >= 0; i--) {
-                        if (i != removedIndex) {
-                            newLookup[newIndex] = currentLookup[i];
-                            newIndex++;
-                        }
-                    }
-                    if (newLookup != null) {
-                        setLookups(newLookup);
-                    }
-                }
+        public synchronized GlobalContext removeLookup(Lookup lkp) {
+            String message = "Should not remove a null lookup";
+            Lookup lookup = Objects.requireNonNull(lkp, message);
+
+            if (localLookups.remove(lookup)) {
+                setLookups(localLookups.toArray(new Lookup[localLookups.size()]));
             }
+
             return this;
         }
 
