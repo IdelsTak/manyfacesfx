@@ -8,6 +8,7 @@ import com.github.idelstak.manyfacesfx.model.Profile;
 import com.github.idelstak.manyfacesfx.ui.SelectProfiles;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXTextArea;
 import java.time.format.FormatStyle;
 import java.util.Iterator;
 import java.util.Objects;
@@ -52,6 +53,8 @@ public class ProfileDetailsController {
     private JFXButton menuButton;
     @FXML
     private Label idLabel;
+    @FXML
+    private JFXTextArea notesTextArea;
     private final Lookup.Result<SelectProfiles> lookupResult;
 
     {
@@ -72,6 +75,7 @@ public class ProfileDetailsController {
 
         nameLabel.textProperty().bind(profile.nameProperty());
         idLabel.textProperty().bind(profile.idProperty());
+        notesTextArea.textProperty().bind(profile.notesProperty());
         lastEditedLabel.textProperty().bind(Bindings.createStringBinding(
                 () -> {
                     LocalDateTimeStringConverter c = new LocalDateTimeStringConverter(
