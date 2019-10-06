@@ -19,10 +19,6 @@ Copyright 2019.
     -fx-cursor: hand;
 }
 
-/*.titled-pane:expanded > * > .name-label{
-    
-}*/
-
 .title-box {
     -fx-pref-height: 40px;
     -fx-min-height: -fx-pref-height;
