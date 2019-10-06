@@ -176,8 +176,7 @@ Copyright 2019.
 
 .details-box > .buttons-box > .jfx-button {
     -fx-pref-height: 26px;
-    -fx-font-family: 'Roboto Bold';
-    -fx-font-size: 12px;
+    -fx-font-family: 'Roboto Medium';
     -fx-padding: 0px 18px 0px 18px;
 }
 

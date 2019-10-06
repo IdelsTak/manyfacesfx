@@ -18,6 +18,10 @@ Copyright 2019.
     src: url(../fonts/roboto/Roboto-Light.ttf);
 }
 
+@font-face{
+    src: url(../fonts/roboto/Roboto-Medium.ttf);
+}
+
 .root {
     -fx-base: #0d3fb9;
     -fx-background-color: #0d3fb9;
@@ -139,6 +143,10 @@ Copyright 2019.
 .jfx-text-area:focused,
 .jfx-text-field:focused {
     -fx-border-color: #174bc9;
+}
+
+.jfx-text-area {
+    -fx-border-radius: 2px;
 }
 
 .jfx-text-area,
