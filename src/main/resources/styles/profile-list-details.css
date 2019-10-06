@@ -115,6 +115,8 @@ Copyright 2019.
     -fx-text-fill: black;
     -fx-padding: 0px;
     -fx-alignment: top-left;
+    -fx-content-display: right;
+    -fx-graphic-text-gap: 80%;
 }
 
 .headers-pane > .aux-actions-header-box {
@@ -145,4 +147,19 @@ Copyright 2019.
     -fx-pref-width: 126px;
     -fx-min-width: -fx-pref-width;
     -fx-max-width: -fx-pref-width;
+}
+
+.headers-pane > .name-toggle > .ikonli-font-icon {
+    -fx-icon-code: mdi-menu-up;
+    -fx-icon-size: 17px;
+    visibility: hidden;
+}
+
+.headers-pane > .name-toggle:focused > .ikonli-font-icon,
+.headers-pane > .name-toggle:selected > .ikonli-font-icon {
+    visibility: visible;
+}
+
+.headers-pane > .name-toggle:selected > .ikonli-font-icon {
+    -fx-icon-code: mdi-menu-down;
 }
