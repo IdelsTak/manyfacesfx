@@ -19,11 +19,11 @@
          <content>
             <HBox fx:id="actionsBox" styleClass="actions-pane">
                <children>
-                  <JFXCheckBox />
-                  <JFXButton text="Select all" />
-                  <JFXButton layoutX="104.0" layoutY="20.0" text="Delete" />
-                  <JFXButton layoutX="104.0" layoutY="20.0" text="Move to a group" />
-                  <JFXButton layoutX="161.0" layoutY="20.0" text="Remove from a group" />
+                  <JFXCheckBox fx:id="selectCheckBox" />
+                  <JFXButton fx:id="selectButton" text="Select all" />
+                  <JFXButton fx:id="deleteButton" layoutX="104.0" layoutY="20.0" text="Delete" />
+                  <JFXButton fx:id="moveToGroupButton" layoutX="104.0" layoutY="20.0" text="Move to a group" />
+                  <JFXButton fx:id="removeFromGroupButton" layoutX="161.0" layoutY="20.0" text="Remove from a group" />
                </children>
             </HBox>
          </content>
