@@ -3,6 +3,7 @@
  */
 package com.github.idelstak.manyfacesfx.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 import javafx.beans.property.ReadOnlyStringProperty;
@@ -19,9 +20,9 @@ public class Profile {
     private final ReadOnlyStringWrapper idProperty;
     private final SimpleStringProperty nameProperty;
     private final SimpleStringProperty notesProperty;
-    private final SimpleObjectProperty<LocalDateTime> lastEditedProperty;
+    private final SimpleObjectProperty<LocalDate> lastEditedProperty;
 
-    public Profile(String id, String name, String notes, LocalDateTime lastEdited) {
+    public Profile(String id, String name, String notes, LocalDate lastEdited) {
         this.idProperty = new ReadOnlyStringWrapper(id);
         this.nameProperty = new SimpleStringProperty(name);
         this.notesProperty = new SimpleStringProperty(notes);
@@ -48,11 +49,11 @@ public class Profile {
         notesProperty.set(notes);
     }
 
-    public LocalDateTime getLastEdited() {
+    public LocalDate getLastEdited() {
         return lastEditedProperty.get();
     }
 
-    public void setLastEdited(LocalDateTime lastEdited) {
+    public void setLastEdited(LocalDate lastEdited) {
         lastEditedProperty.set(lastEdited);
     }
 
@@ -68,7 +69,7 @@ public class Profile {
         return notesProperty;
     }
 
-    public SimpleObjectProperty<LocalDateTime> lastEditedProperty() {
+    public SimpleObjectProperty<LocalDate> lastEditedProperty() {
         return lastEditedProperty;
     }
 
