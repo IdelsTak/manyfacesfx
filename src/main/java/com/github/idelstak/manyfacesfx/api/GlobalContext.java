@@ -3,6 +3,7 @@
  */
 package com.github.idelstak.manyfacesfx.api;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
@@ -70,6 +71,8 @@ public abstract class GlobalContext extends ProxyLookup {
 
         @Override
         public synchronized GlobalContext setLookupz(Lookup... lookups) {
+            localLookups.clear();
+            localLookups.addAll(Arrays.asList(lookups));
             setLookups(lookups);
             return this;
         }
@@ -119,6 +122,7 @@ public abstract class GlobalContext extends ProxyLookup {
 
         @Override
         public synchronized GlobalContext resetLookup() {
+            localLookups.clear();
             setLookups(new Lookup[]{});
             return this;
         }
