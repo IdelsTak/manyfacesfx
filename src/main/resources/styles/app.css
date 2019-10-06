@@ -144,6 +144,10 @@ Copyright 2019.
     -jfx-rippler-fill: #8ca6e4;
 }
 
+.titled-pane {
+    -fx-animated: false;
+}
+
 .titled-pane > .title {
     -fx-cursor: hand;
     -fx-pref-height: 0;

@@ -13,7 +13,11 @@ Copyright 2019.
     -fx-pref-height: 50px;
     -fx-min-height: -fx-pref-height;
     -fx-max-height: -fx-pref-height;
-    -fx-padding: 0px 0px 0px 33px;
+    -fx-padding: 6px 39px 0px 33px;
+}
+
+.actions-pane > * {
+    -fx-font-family: 'Roboto Bold';
 }
 
 .actions-pane > .jfx-check-box {
@@ -36,9 +40,9 @@ Copyright 2019.
 }
 
 .search-pane {
-    -fx-pref-height: 68px;
+    -fx-pref-height: 41px;
     -fx-min-height: -fx-pref-height;
-    -fx-padding: 19px 39px 22px 33px;
+    -fx-padding: 19px 39px 0px 33px;
     -fx-spacing: 15px;
 }
 
@@ -51,22 +55,94 @@ Copyright 2019.
     -fx-icon-code: mdi-settings;
 }
 
+.search-pane > .actions-button:selected > .ikonli-font-icon,
+.search-pane > .refresh-button:hover > .ikonli-font-icon {
+    -fx-icon-color: #0e46cc;
+}
+
 .search-pane > .refresh-button > .ikonli-font-icon {
     -fx-icon-code: mdi-cached;
 }
 
 .search-pane > .actions-button > .ikonli-font-icon,
 .search-pane > .refresh-button > .ikonli-font-icon {
+    -fx-icon-color: #cdd2d6;
     -fx-icon-size: 25px;
 }
 
 .search-pane > .actions-button,
 .search-pane > .refresh-button {
-    -fx-padding: 0px;
     -fx-pref-width: 25px;
     -fx-pref-height: -fx-pref-width;
     -fx-min-width: -fx-pref-width;
     -fx-min-height: -fx-pref-width;
     -fx-max-width: -fx-pref-width;
     -fx-max-height: -fx-pref-width;
+    -fx-background-radius: 25px;
+    -jfx-toggle-color: #dadada;
+}
+
+.search-pane > .actions-button {
+    -fx-padding: 8px;
+}
+
+.search-pane > .refresh-button {
+    -fx-padding: 0px;
+}
+
+.search-pane > .actions-button > .jfx-rippler,
+.search-pane > .refresh-button > .jfx-rippler {
+    -jfx-rippler-fill: white;
+}
+
+.headers-pane {
+    -fx-pref-height: 41px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+    -fx-padding: 24px 39px 0px 33px;
+}
+
+.headers-pane > * {
+    -fx-pref-height: 17px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+    -fx-border-color: transparent transparent #e1e3e7 transparent;
+    -fx-padding: 0px 0px 7px 0px;
+}
+
+.headers-pane > .jfx-toggle-node {
+    -fx-font-size: 12px;
+    -fx-text-fill: black;
+    -fx-padding: 0px;
+    -fx-alignment: top-left;
+}
+
+.headers-pane > .aux-actions-header-box {
+    -fx-pref-width: 102px;
+    -fx-min-width: -fx-pref-width;
+    -fx-max-width: -fx-pref-width;
+}
+
+.headers-pane > .name-toggle {
+    -fx-pref-width: 270px;
+    -fx-min-width: -fx-pref-width;
+    -fx-max-width: infinity;
+}
+
+.headers-pane > .status-toggle {
+    -fx-pref-width: 64px;
+    -fx-min-width: -fx-pref-width;
+    -fx-max-width: -fx-pref-width;
+}
+
+.headers-pane > .members-toggle {
+    -fx-pref-width: 82px;
+    -fx-min-width: -fx-pref-width;
+    -fx-max-width: -fx-pref-width;
+}
+
+.headers-pane > .last-edited-toggle {
+    -fx-pref-width: 126px;
+    -fx-min-width: -fx-pref-width;
+    -fx-max-width: -fx-pref-width;
 }

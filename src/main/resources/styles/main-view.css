@@ -9,7 +9,6 @@ Copyright 2019.
     -fx-pref-width: 240px;
     -fx-min-width: -fx-pref-width;
     -fx-max-width: -fx-pref-width;
-    /*-fx-min-height: 741px;*/
     -fx-min-height: 700px;
     -fx-max-height: infinity;
 }
@@ -39,7 +38,7 @@ Copyright 2019.
 }
 
 .detail-view > .title-pane > .jfx-toggle-node {
-    -fx-background-radius: 24px;
+    -fx-background-radius: 25px;
     -fx-padding: 8px;
     -jfx-toggle-color: #dadada;
 }
@@ -50,10 +49,10 @@ Copyright 2019.
 
 .detail-view > .title-pane > .jfx-toggle-node  .ikonli-font-icon {
     -fx-icon-code: mdi-bell;
-    -fx-icon-size: 20px;
-    -fx-icon-color: #e0e2e7;
+    -fx-icon-size: 25px;
+    -fx-icon-color: #cdd2d6;
 }
 
 .detail-view > .title-pane > .jfx-toggle-node:selected  .ikonli-font-icon {
-    -fx-icon-color: #bfc1c6;
+    -fx-icon-color: #0e46cc;
 }
