@@ -26,8 +26,6 @@ public class ProfileListDetailsController {
     @FXML
     private TitledPane actionsPane;
     @FXML
-    private HBox actionsBox;
-    @FXML
     private JFXCheckBox selectCheckBox;
     @FXML
     private JFXButton selectButton;
