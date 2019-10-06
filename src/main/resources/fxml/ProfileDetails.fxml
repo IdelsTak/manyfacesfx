@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<TitledPane fx:id="titlePane" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.idelstak.manyfacesfx.ui.controllers.ProfileDetailsController">
+   <content>
+      <VBox prefHeight="200.0" prefWidth="100.0" styleClass="details-box">
+         <children>
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="id-box">
+               <children>
+                  <Label styleClass="field-title" text="Profile ID" />
+                  <Label fx:id="idLabel" layoutX="10.0" layoutY="10.0" text="&lt;uuid&gt;" />
+               </children></HBox>
+            <HBox layoutX="20.0" layoutY="20.0" prefHeight="100.0" prefWidth="200.0" />
+            <HBox layoutX="20.0" layoutY="120.0" prefHeight="100.0" prefWidth="200.0" />
+         </children>
+      </VBox>
+   </content>
+   <graphic>
+      <HBox fx:id="titleBox" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="100.0" styleClass="title-box">
+         <children>
+            <HBox fx:id="selectCheckBoxPane" maxWidth="-Infinity" minWidth="-Infinity">
+               <children>
+                  <JFXCheckBox fx:id="selectCheckBox" />
+               </children>
+            </HBox>
+            <Label text="Label">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" />
+               </graphic>
+            </Label>
+            <Label text="Label">
+               <graphic>
+                  <FontIcon />
+               </graphic>
+            </Label>
+            <Label fx:id="nameLabel" styleClass="name-label" text="Profile 1" HBox.hgrow="ALWAYS" />
+            <Label fx:id="statusLabel" layoutX="85.0" layoutY="10.0" styleClass="status-label" text="status" />
+            <Label fx:id="membersLabel" layoutX="283.0" layoutY="10.0" styleClass="members-label" text="members" />
+            <Label fx:id="lastEditedLabel" layoutX="481.0" layoutY="10.0" styleClass="last-edited-label" text="01/08/2018" />
+            <HBox fx:id="actionBox" prefHeight="100.0" prefWidth="200.0" styleClass="action-box">
+               <children>
+                  <JFXButton fx:id="actionButton" text="Start" />
+               </children>
+            </HBox>
+            <HBox fx:id="menuBox" layoutX="554.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" styleClass="menu-box">
+               <children>
+                  <JFXButton fx:id="menuButton">
+                     <graphic>
+                        <FontIcon />
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </HBox>
+            <HBox minWidth="-Infinity" prefWidth="8.0" />
+         </children>
+      </HBox>
+   </graphic>
+   <stylesheets>
+      <URL value="@../styles/app.css" />
+      <URL value="@../styles/profile-details.css" />
+   </stylesheets>
+</TitledPane>
