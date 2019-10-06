@@ -6,6 +6,9 @@ package com.github.idelstak.manyfacesfx.ui.controllers;
 import com.github.idelstak.manyfacesfx.api.GlobalContext;
 import com.github.idelstak.manyfacesfx.ui.MenuNode;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -20,6 +23,8 @@ import javafx.scene.layout.VBox;
  @author Hiram K <hiram.kamau@outlook.com>
  */
 public class HomeMenuController {
+
+    private static final GlobalContext CONTEXT = GlobalContext.getDefault();
 
     @FXML
     private RadioButton homeToggle;
@@ -51,19 +56,27 @@ public class HomeMenuController {
                 pluginsToggle.getText(),
                 false,
                 new VBox());
-        GlobalContext context = GlobalContext.getDefault();
 
-        homeToggle.setOnAction(e -> {
-            context.remove(pluginsNode).add(homeNode);
-        });
-        pluginsToggle.setOnAction(e -> {
-            context.remove(homeNode).add(pluginsNode);
-        });
+        Set<MenuNode> nodes = new HashSet<>();
+
+        nodes.add(homeNode);
+        nodes.add(pluginsNode);
+
+        homeToggle.setOnAction(e -> nodes.stream().forEach(n -> updateContext(n, homeNode)));
+        pluginsToggle.setOnAction(e -> nodes.stream().forEach(n -> updateContext(n, pluginsNode)));
 
         Platform.runLater(() -> {
             homeToggle.fireEvent(new ActionEvent());
             homeToggle.setSelected(true);
         });
+    }
+
+    private void updateContext(MenuNode n1, MenuNode n2) {
+        if (Objects.equals(n1, n2)) {
+            CONTEXT.add(n1);
+        } else {
+            CONTEXT.remove(n1);
+        }
     }
 
 }
