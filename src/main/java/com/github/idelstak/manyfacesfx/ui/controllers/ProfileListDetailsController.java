@@ -13,14 +13,19 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleNode;
+import java.util.List;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableSet;
 import javafx.fxml.FXML;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.InputEvent;
 import javafx.scene.layout.HBox;
+import org.openide.util.Lookup;
 
 /**
  FXML Controller class
@@ -29,6 +34,8 @@ import javafx.scene.layout.HBox;
  */
 public class ProfileListDetailsController {
 
+    private static final Logger LOG = Logger.getLogger(ProfileListDetailsController.class.getName());
+    private static final GlobalContext CONTEXT = GlobalContext.getDefault();
     @FXML
     private TitledPane actionsPane;
     @FXML
@@ -55,6 +62,13 @@ public class ProfileListDetailsController {
     private HBox headersBox;
     @FXML
     private Accordion profileListAccordion;
+    private final Lookup.Result<ProfileNode> lookupResult;
+    private final SimpleBooleanProperty selectionAvailable;
+
+    {
+        lookupResult = CONTEXT.lookupResult(ProfileNode.class);
+        selectionAvailable = new SimpleBooleanProperty(false);
+    }
 
     /**
      Initializes the controller class.
@@ -72,10 +86,6 @@ public class ProfileListDetailsController {
 
         selectButton.setOnAction(e -> selectCheckBox.setSelected(!selectCheckBox.isSelected()));
 
-        deleteButton.disableProperty().bind(checkBoxSelected.not());
-        moveToGroupButton.disableProperty().bind(checkBoxSelected.not());
-        removeFromGroupButton.disableProperty().bind(checkBoxSelected.not());
-
         ObservableSet<Profile> profiles = ProfilesRepository.getDefault().findAll();
 
         profiles.stream()
@@ -88,7 +98,22 @@ public class ProfileListDetailsController {
         selectProfiles.selectProperty().bind(checkBoxSelected);
         selectProfiles.visibleProperty().bind(showActionsToggle.selectedProperty());
 
-        GlobalContext.getDefault().add(selectProfiles);
+        CONTEXT.add(selectProfiles);
+
+        deleteButton.disableProperty().bind(selectionAvailable.not());
+        moveToGroupButton.disableProperty().bind(selectionAvailable.not());
+        removeFromGroupButton.disableProperty().bind(selectionAvailable.not());
+
+        lookupResult.addLookupListener(e -> listenToSelectedProfiles());
+    }
+
+    private void listenToSelectedProfiles() {
+        List<Profile> selectedProfiles = lookupResult.allInstances()
+                .stream()
+                .map(node -> node.getLookup().lookup(Profile.class))
+                .collect(Collectors.toList());
+        
+        selectionAvailable.set(!selectedProfiles.isEmpty());
     }
 
 }
