@@ -6,6 +6,8 @@ package com.github.idelstak.manyfacesfx.api;
 import java.util.Optional;
 import java.util.logging.Logger;
 import org.openide.util.Lookup;
+import org.openide.util.lookup.AbstractLookup;
+import org.openide.util.lookup.InstanceContent;
 import org.openide.util.lookup.ProxyLookup;
 
 /**
@@ -36,6 +38,10 @@ public abstract class GlobalContext extends ProxyLookup {
 
     public abstract GlobalContext resetLookup();
 
+    public abstract <T> GlobalContext add(T inst);
+
+    public abstract <T> GlobalContext remove(T inst);
+
 //    @Override
 //    protected void beforeLookup(Template<?> template) {
 //        super.beforeLookup(template);
@@ -44,8 +50,16 @@ public abstract class GlobalContext extends ProxyLookup {
 //    }
     private static class SimpleContext extends GlobalContext {
 
+        private final InstanceContent content;
+
         private SimpleContext() {
-            super(Lookup.EMPTY);
+            this(new InstanceContent());
+        }
+
+        private SimpleContext(InstanceContent content) {
+            super(new AbstractLookup(content));
+
+            this.content = content;
         }
 
         @Override
@@ -108,6 +122,18 @@ public abstract class GlobalContext extends ProxyLookup {
                     }
                 }
             }
+            return this;
+        }
+
+        @Override
+        public synchronized <T> GlobalContext add(T inst) {
+            content.add(inst);
+            return this;
+        }
+
+        @Override
+        public synchronized <T> GlobalContext remove(T inst) {
+            content.remove(inst);
             return this;
         }
 
