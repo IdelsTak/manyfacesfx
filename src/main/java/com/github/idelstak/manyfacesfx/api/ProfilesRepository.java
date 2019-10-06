@@ -9,7 +9,7 @@ import com.github.javafaker.DateAndTime;
 import com.github.javafaker.Faker;
 import com.github.javafaker.Internet;
 import com.github.javafaker.Lorem;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
@@ -60,7 +60,7 @@ public abstract class ProfilesRepository {
                 String name = ancient.titan();
                 String notes = lorem.paragraph();
                 Date d = dat.past(1000, TimeUnit.DAYS);
-                LocalDateTime ldt = new java.sql.Timestamp(d.getTime()).toLocalDateTime();
+                LocalDate ldt = new java.sql.Timestamp(d.getTime()).toLocalDateTime().toLocalDate();
                 
                 add(new Profile(id, name, notes, ldt));
             }
@@ -69,7 +69,7 @@ public abstract class ProfilesRepository {
         @Override
         public Optional<Profile> create(String name) {
             String id = new Faker().internet().uuid();
-            Profile profile = new Profile(id, name, "", LocalDateTime.now());
+            Profile profile = new Profile(id, name, "", LocalDate.now());
 
             return profiles.add(profile)
                    ? Optional.of(profile)
