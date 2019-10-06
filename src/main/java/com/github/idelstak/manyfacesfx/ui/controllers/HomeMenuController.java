@@ -13,7 +13,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.VBox;
-import org.openide.util.lookup.Lookups;
 
 /**
  FXML Controller class
@@ -54,8 +53,12 @@ public class HomeMenuController {
                 new VBox());
         GlobalContext context = GlobalContext.getDefault();
 
-        homeToggle.setOnAction(e -> context.setLookup(Lookups.singleton(homeNode)));
-        pluginsToggle.setOnAction(e -> context.setLookup(Lookups.singleton(pluginsNode)));
+        homeToggle.setOnAction(e -> {
+            context.remove(pluginsNode).add(homeNode);
+        });
+        pluginsToggle.setOnAction(e -> {
+            context.remove(homeNode).add(pluginsNode);
+        });
 
         Platform.runLater(() -> {
             homeToggle.fireEvent(new ActionEvent());
