@@ -52,12 +52,15 @@
                </graphic></JFXToggleNode>
             <JFXToggleNode fx:id="statusToggle" layoutX="10.0" layoutY="10.0" styleClass="status-toggle" text="Status" />
             <JFXToggleNode fx:id="membersToggle" layoutX="10.0" layoutY="10.0" styleClass="members-toggle" text="Members" />
-            <JFXToggleNode fx:id="lastEditedToggle" layoutX="28.0" layoutY="10.0" styleClass="last-edited-toggle" text="Last edited" />
+            <JFXToggleNode fx:id="lastEditedToggle" layoutX="28.0" layoutY="10.0" styleClass="last-edited-toggle" text="Last edited">
+               <graphic>
+                  <FontIcon />
+               </graphic></JFXToggleNode>
             <HBox styleClass="aux-actions-header-box" />
          </children></HBox>
-      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vbarPolicy="ALWAYS">
+      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxWidth="1.7976931348623157E308" minWidth="-Infinity" vbarPolicy="ALWAYS">
          <content>
-            <Accordion fx:id="profileListAccordion" maxWidth="1.7976931348623157E308" />
+            <Accordion fx:id="profileListAccordion" maxWidth="1.7976931348623157E308" minWidth="-Infinity" />
          </content>
          <padding>
             <Insets left="33.0" right="30.0" />
