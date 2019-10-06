@@ -59,7 +59,7 @@ public abstract class ProfilesRepository {
                 String id = internet.uuid();
                 String name = ancient.titan();
                 String notes = lorem.paragraph();
-                Date d = dat.past(100, TimeUnit.DAYS);
+                Date d = dat.past(1000, TimeUnit.DAYS);
                 LocalDateTime ldt = new java.sql.Timestamp(d.getTime()).toLocalDateTime();
                 
                 add(new Profile(id, name, notes, ldt));
