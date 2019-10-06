@@ -5,6 +5,7 @@ package com.github.idelstak.manyfacesfx.ui.controllers;
 
 import com.github.idelstak.manyfacesfx.api.GlobalContext;
 import com.github.idelstak.manyfacesfx.model.Profile;
+import com.github.idelstak.manyfacesfx.ui.ProfileNode;
 import com.github.idelstak.manyfacesfx.ui.SelectProfiles;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
@@ -69,9 +70,10 @@ public class ProfileDetailsController {
         titleBox.minWidthProperty().bind(titlePane.widthProperty());
     }
 
-    public void setProfile(Profile inst) {
-        String message = "Profile should not be null";
-        Profile profile = Objects.requireNonNull(inst, message);
+    public void setProfileNode(ProfileNode profileNode) {
+        String message = "Profile node should not be null";
+        ProfileNode node = Objects.requireNonNull(profileNode, message);
+        Profile profile = node.getLookup().lookup(Profile.class);
 
         nameLabel.textProperty().bind(profile.nameProperty());
         idLabel.textProperty().bind(profile.idProperty());
@@ -98,9 +100,19 @@ public class ProfileDetailsController {
                                       : 0.0,
                                 sp.visibleProperty()));
 
-                sp.selectProperty().addListener((ob, ov, nv) -> {
-                    selectCheckBox.setSelected(nv);
+                sp.selectProperty().addListener((ob, ov, selected) -> {
+                    selectCheckBox.setSelected(selected);
                 });
+            }
+        });
+
+        selectCheckBox.selectedProperty().addListener((ob, ov, selected) -> {
+            GlobalContext context = GlobalContext.getDefault();
+
+            if (selected) {
+                context.add(node);
+            } else {
+                context.remove(node);
             }
         });
     }
