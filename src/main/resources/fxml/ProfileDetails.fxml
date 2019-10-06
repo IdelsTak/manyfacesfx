@@ -46,7 +46,7 @@
                   <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" />
                </graphic>
             </Label>
-            <Label text="Label">
+            <Label fx:id="expandLabel" text="Label">
                <graphic>
                   <FontIcon />
                </graphic>
