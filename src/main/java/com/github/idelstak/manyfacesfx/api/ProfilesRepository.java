@@ -4,9 +4,9 @@
 package com.github.idelstak.manyfacesfx.api;
 
 import com.github.idelstak.manyfacesfx.model.Profile;
+import com.github.javafaker.Ancient;
 import com.github.javafaker.Faker;
 import java.time.LocalDateTime;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Optional;
@@ -33,7 +33,7 @@ public abstract class ProfilesRepository {
 
     public abstract boolean delete(Profile profile);
 
-    public abstract Collection<Profile> findAll();
+    public abstract ObservableSet<Profile> findAll();
 
     public abstract Optional<Profile> findById(String id);
 
@@ -43,6 +43,12 @@ public abstract class ProfilesRepository {
 
         private BasicProfilesRepository() {
             this.profiles = FXCollections.observableSet(new HashSet<>());
+
+            //Add bogus data
+            Ancient ancient = new Faker().ancient();
+            for (int i = 0; i < 10; i++) {
+                create(ancient.titan());
+            }
         }
 
         @Override
@@ -73,7 +79,7 @@ public abstract class ProfilesRepository {
         }
 
         @Override
-        public Collection<Profile> findAll() {
+        public ObservableSet<Profile> findAll() {
             return FXCollections.unmodifiableObservableSet(profiles);
         }
     }
