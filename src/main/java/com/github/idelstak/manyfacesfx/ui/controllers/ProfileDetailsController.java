@@ -75,7 +75,7 @@ public class ProfileDetailsController {
 
         nameLabel.textProperty().bind(profile.nameProperty());
         idLabel.textProperty().bind(profile.idProperty());
-        notesTextArea.textProperty().bind(profile.notesProperty());
+        notesTextArea.textProperty().bindBidirectional(profile.notesProperty());
         lastEditedLabel.textProperty().bind(Bindings.createStringBinding(
                 () -> {
                     LocalDateTimeStringConverter c = new LocalDateTimeStringConverter(
