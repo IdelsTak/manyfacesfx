@@ -17,7 +17,7 @@
    <children>
       <TitledPane fx:id="actionsPane">
          <content>
-            <HBox fx:id="actionsBox" styleClass="actions-pane">
+            <HBox fx:id="actionsBox" maxWidth="1.7976931348623157E308" styleClass="actions-pane">
                <children>
                   <JFXCheckBox fx:id="selectCheckBox" />
                   <JFXButton fx:id="selectButton" text="Select all" />
@@ -52,9 +52,9 @@
             <JFXToggleNode fx:id="lastEditedToggle" layoutX="28.0" layoutY="10.0" styleClass="last-edited-toggle" text="Last edited" />
             <HBox styleClass="aux-actions-header-box" />
          </children></HBox>
-      <ScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" vbarPolicy="ALWAYS">
+      <ScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" vbarPolicy="ALWAYS">
          <content>
-            <Accordion fx:id="profileListAccordion" style="-fx-background-color: white; -fx-border-color: red;">
+            <Accordion fx:id="profileListAccordion" maxWidth="1.7976931348623157E308" style="-fx-background-color: white; -fx-border-color: red;">
                <panes>
                   <TitledPane prefHeight="200.0" prefWidth="200.0" />
                   <TitledPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" />
