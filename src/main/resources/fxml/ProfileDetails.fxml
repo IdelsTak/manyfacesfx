@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXTextArea?>
 <?import java.net.URL?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TitledPane?>
@@ -19,13 +20,17 @@
                   <Label styleClass="field-title" text="Profile ID" />
                   <Label fx:id="idLabel" layoutX="10.0" layoutY="10.0" text="&lt;uuid&gt;" />
                </children></HBox>
-            <HBox layoutX="20.0" layoutY="20.0" prefHeight="100.0" prefWidth="200.0" />
+            <HBox layoutX="20.0" layoutY="20.0" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Label styleClass="field-title" text="Notes" />
+                  <JFXTextArea />
+               </children></HBox>
             <HBox layoutX="20.0" layoutY="120.0" prefHeight="100.0" prefWidth="200.0" />
          </children>
       </VBox>
    </content>
    <graphic>
-      <HBox fx:id="titleBox" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="100.0" styleClass="title-box">
+      <HBox fx:id="titleBox" minWidth="-Infinity" prefHeight="100.0" styleClass="title-box">
          <children>
             <HBox fx:id="selectCheckBoxPane" maxWidth="-Infinity" minWidth="-Infinity">
                <children>
@@ -42,10 +47,10 @@
                   <FontIcon />
                </graphic>
             </Label>
-            <Label fx:id="nameLabel" styleClass="name-label" text="Profile 1" HBox.hgrow="ALWAYS" />
-            <Label fx:id="statusLabel" layoutX="85.0" layoutY="10.0" styleClass="status-label" text="status" />
-            <Label fx:id="membersLabel" layoutX="283.0" layoutY="10.0" styleClass="members-label" text="members" />
-            <Label fx:id="lastEditedLabel" layoutX="481.0" layoutY="10.0" styleClass="last-edited-label" text="01/08/2018" />
+            <Label fx:id="nameLabel" styleClass="name-label" text="&lt;profile name&gt;" HBox.hgrow="ALWAYS" />
+            <Label fx:id="statusLabel" layoutX="85.0" layoutY="10.0" styleClass="status-label" />
+            <Label fx:id="membersLabel" layoutX="283.0" layoutY="10.0" styleClass="members-label" />
+            <Label fx:id="lastEditedLabel" layoutX="481.0" layoutY="10.0" styleClass="last-edited-label" />
             <HBox fx:id="actionBox" prefHeight="100.0" prefWidth="200.0" styleClass="action-box">
                <children>
                   <JFXButton fx:id="actionButton" text="Start" />
@@ -60,7 +65,6 @@
                   </JFXButton>
                </children>
             </HBox>
-            <HBox minWidth="-Infinity" prefWidth="8.0" />
          </children>
       </HBox>
    </graphic>
