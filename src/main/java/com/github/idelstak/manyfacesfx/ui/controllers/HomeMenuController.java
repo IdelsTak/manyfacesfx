@@ -62,8 +62,8 @@ public class HomeMenuController {
         nodes.add(homeNode);
         nodes.add(pluginsNode);
 
-        homeToggle.setOnAction(e -> nodes.stream().forEach(n -> updateContext(n, homeNode)));
-        pluginsToggle.setOnAction(e -> nodes.stream().forEach(n -> updateContext(n, pluginsNode)));
+        homeToggle.setOnAction(e -> nodes.stream().forEach(n -> context(n, homeNode)));
+        pluginsToggle.setOnAction(e -> nodes.stream().forEach(n -> context(n, pluginsNode)));
 
         Platform.runLater(() -> {
             homeToggle.fireEvent(new ActionEvent());
@@ -71,7 +71,7 @@ public class HomeMenuController {
         });
     }
 
-    private void updateContext(MenuNode n1, MenuNode n2) {
+    private void context(MenuNode n1, MenuNode n2) {
         if (Objects.equals(n1, n2)) {
             CONTEXT.add(n1);
         } else {
