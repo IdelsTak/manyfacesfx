@@ -5,18 +5,19 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXToggleNode?>
 <?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-
-<VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.idelstak.manyfacesfx.ui.controllers.ProfileListDetailsController">
    <children>
       <TitledPane fx:id="actionsPane">
          <content>
-            <HBox fx:id="actionsBox" prefHeight="100.0" prefWidth="200.0" styleClass="actions-pane">
+            <HBox fx:id="actionsBox" styleClass="actions-pane">
                <children>
                   <JFXCheckBox />
                   <JFXButton text="Select all" />
@@ -43,8 +44,28 @@
             </JFXButton>
          </children>
       </HBox>
-      <HBox fx:id="headersBox" prefHeight="100.0" prefWidth="200.0" />
-      <Accordion fx:id="profileListAccordion" />
+      <HBox fx:id="headersBox" styleClass="headers-pane">
+         <children>
+            <JFXToggleNode fx:id="nameToggle" styleClass="name-toggle" text="Name" HBox.hgrow="ALWAYS" />
+            <JFXToggleNode fx:id="statusToggle" layoutX="10.0" layoutY="10.0" styleClass="status-toggle" text="Status" />
+            <JFXToggleNode fx:id="membersToggle" layoutX="10.0" layoutY="10.0" styleClass="members-toggle" text="Members" />
+            <JFXToggleNode fx:id="lastEditedToggle" layoutX="28.0" layoutY="10.0" styleClass="last-edited-toggle" text="Last edited" />
+            <HBox styleClass="aux-actions-header-box" />
+         </children></HBox>
+      <ScrollPane fitToWidth="true" maxHeight="1.7976931348623157E308" vbarPolicy="ALWAYS">
+         <content>
+            <Accordion fx:id="profileListAccordion" style="-fx-background-color: white; -fx-border-color: red;">
+               <panes>
+                  <TitledPane prefHeight="200.0" prefWidth="200.0" />
+                  <TitledPane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" />
+                  <TitledPane layoutX="10.0" layoutY="210.0" prefHeight="200.0" prefWidth="200.0" />
+               </panes>
+            </Accordion>
+         </content>
+         <padding>
+            <Insets left="33.0" right="39.0" />
+         </padding>
+      </ScrollPane>
    </children>
    <stylesheets>
       <URL value="@../styles/app.css" />
