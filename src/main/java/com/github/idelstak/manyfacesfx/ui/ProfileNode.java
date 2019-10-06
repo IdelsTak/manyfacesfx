@@ -56,7 +56,7 @@ public class ProfileNode implements Lookup.Provider {
             pane = loader.<TitledPane>load();
             ProfileDetailsController controller = loader.<ProfileDetailsController>getController();
             
-            controller.setProfile(lookup.lookup(Profile.class));
+            controller.setProfileNode(this);
         } catch (IOException ex) {
             LOG.log(Level.SEVERE, null, ex);
         }
