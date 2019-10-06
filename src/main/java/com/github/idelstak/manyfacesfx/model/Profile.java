@@ -4,6 +4,7 @@
 package com.github.idelstak.manyfacesfx.model;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleObjectProperty;
@@ -69,6 +70,32 @@ public class Profile {
 
     public SimpleObjectProperty<LocalDateTime> lastEditedProperty() {
         return lastEditedProperty;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 97 * hash + Objects.hashCode(this.idProperty);
+        hash = 97 * hash + Objects.hashCode(this.nameProperty);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Profile other = (Profile) obj;
+        if (!Objects.equals(this.idProperty.get(), other.idProperty.get())) {
+            return false;
+        }
+        return Objects.equals(this.nameProperty.get(), other.nameProperty.get());
     }
 
 }
