@@ -14,10 +14,13 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleNode;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -69,10 +72,12 @@ public class ProfileListDetailsController {
     private JFXToggleNode lastEditedToggle;
     @FXML
     private Accordion profileListAccordion;
+    private final Collection<TitledPane> titledPanes;
     private final Lookup.Result<ProfileNode> lookupResult;
     private final SimpleBooleanProperty selectionAvailable;
 
     {
+        titledPanes = new ArrayList<>();
         lookupResult = CONTEXT.lookupResult(ProfileNode.class);
         selectionAvailable = new SimpleBooleanProperty(false);
     }
@@ -98,7 +103,25 @@ public class ProfileListDetailsController {
         profiles.stream()
                 .map(ProfileNode::new)
                 .map(node -> node.getLookup().lookup(TitledPane.class))
-                .forEach(profileListAccordion.getPanes()::add);
+                .forEach(titledPane -> {
+                    titledPanes.add(titledPane);
+                    profileListAccordion.getPanes().add(titledPane);
+                });
+
+        searchField.textProperty().addListener((ob, ov, nv) -> {
+            if (nv == null || nv.trim().isEmpty()) {
+                Platform.runLater(() -> profileListAccordion.getPanes().setAll(titledPanes));
+            } else {
+                List<TitledPane> result = profileListAccordion.getPanes()
+                        .stream()
+                        .filter(tp -> {
+                            String name = tp.getId().split(":")[0];
+                            return name.toLowerCase().contains(nv.toLowerCase());
+                        })
+                        .collect(Collectors.toList());
+                Platform.runLater(() -> profileListAccordion.getPanes().setAll(result));
+            }
+        });
 
         nameToggle.selectedProperty()
                 .addListener((ob, ov, selected) -> {
@@ -106,10 +129,10 @@ public class ProfileListDetailsController {
                             .sort(selected
                                   ? Comparator.comparing(
                                             Node::getId,
-                                            this::compareStrings).reversed()
+                                            this::compareNames).reversed()
                                   : Comparator.comparing(
                                             Node::getId,
-                                            this::compareStrings));
+                                            this::compareNames));
                 });
         lastEditedToggle.selectedProperty()
                 .addListener((ob, ov, selected) -> {
@@ -144,7 +167,7 @@ public class ProfileListDetailsController {
         return ldt1.compareTo(ldt2);
     }
 
-    private int compareStrings(String id1, String id2) {
+    private int compareNames(String id1, String id2) {
         String name1 = id1.split(":")[0];
         String name2 = id2.split(":")[0];
 
