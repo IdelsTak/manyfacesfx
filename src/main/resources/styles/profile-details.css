@@ -15,6 +15,10 @@ Copyright 2019.
     -fx-cursor: hand;
 }
 
+/*.titled-pane:expanded > * > .name-label{
+    
+}*/
+
 .title-box {
     -fx-pref-height: 40px;
     -fx-min-height: -fx-pref-height;
@@ -43,12 +47,16 @@ Copyright 2019.
 }
 
 .title-box > .name-label {
-    -fx-font-family: 'Roboto Bold';
     -fx-font-size: 14px;
     -fx-text-fill: black;
     -fx-pref-width: 198px;
     -fx-max-width: infinity;
     -fx-min-width: -fx-pref-width;
+}
+
+.titled-pane:expanded > .title > .title-box > .name-label,
+.title-box > .name-label:hover {
+    -fx-font-family: 'Roboto Bold';
 }
 
 .title-box > .status-label {
@@ -66,10 +74,16 @@ Copyright 2019.
 }
 
 .title-box > .last-edited-label {
-    -fx-font-size: 14px;
-    -fx-text-fill: black;
     -fx-pref-width: 127px;
     -fx-min-width: -fx-pref-width;
+}
+
+.title-box > .status-label,
+.title-box > .members-label,
+.title-box > .last-edited-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: black;
+    -fx-padding: 0px 0px 0px -6px;
 }
 
 .title-box > .action-box {
@@ -79,7 +93,7 @@ Copyright 2019.
 }
 
 .title-box > .action-box > .jfx-button {
-    -fx-text-fill: black;
+    -fx-text-fill: #0e46cc;
     -fx-pref-width: 54px;
     -fx-min-width: -fx-pref-width;
     -fx-pref-height: 25px;
