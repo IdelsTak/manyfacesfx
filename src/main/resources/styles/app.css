@@ -116,24 +116,42 @@ Copyright 2019.
     -fx-background-color: #eaeffa;
 }
 
+.jfx-text-area,
 .jfx-text-field {
+    -fx-background-color: white;
     -fx-border-color: #949494;
     -fx-font-size: 14px;
     -fx-padding: 1.7 0 4.7 0;
 }
 
+.jfx-text-area > .input-line,
 .jfx-text-field > .input-line {
     -fx-pref-height: 0px;
     -fx-max-height: 0px;
 }
 
+.jfx-text-area > .input-focused-line,
 .jfx-text-field > .input-focused-line {
     -fx-pref-height: 0px;
     -fx-max-height: 0px;
 }
 
+.jfx-text-area:focused,
 .jfx-text-field:focused {
     -fx-border-color: #174bc9;
+}
+
+.jfx-text-area,
+.jfx-text-area .scroll-pane,
+.jfx-text-area:focused,
+.jfx-text-area:focused .scroll-pane{
+    -fx-background-color: white;
+}
+
+.jfx-text-area .content,
+.jfx-text-area:focused .content{
+    -fx-background-color:white;
+    -fx-padding: 0 0 0 0;
 }
 
 .jfx-check-box{

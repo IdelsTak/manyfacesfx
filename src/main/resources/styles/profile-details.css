@@ -118,6 +118,15 @@ Copyright 2019.
     -fx-icon-color: #cdd2d6;
 }
 
+.field-title {
+    -fx-font-family: 'Roboto Bold';
+    -fx-pref-width: 59px;
+    -fx-min-width: -fx-pref-width;
+    -fx-max-width: -fx-pref-width;
+    -fx-alignment: center-right;
+
+}
+
 .details-box {
     -fx-padding: 0px 0px 8px 0px
 }
@@ -129,17 +138,57 @@ Copyright 2019.
 .details-box > .id-box {
     -fx-pref-height: 67px;
     -fx-min-height: -fx-pref-height;
+    -fx-max-width: infinity;
     -fx-spacing: 20px;
     -fx-padding: 0px 0px 0px 42px;
 }
 
+.field-title,
 .details-box > .id-box > .label {
     -fx-font-size: 14px;
     -fx-text-fill: black;
+}
+
+.details-box > .id-box > .label {
     -fx-max-height: infinity;
 }
 
-.field-title {
-    -fx-font-family: 'Roboto Bold'
+.details-box > .notes-box {
+    -fx-pref-height: 99px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-width: infinity;
+    -fx-spacing: 20px;
+    -fx-padding: 0px 53px 21px 42px;
 }
+
+.details-box > .notes-box > .jfx-text-area {
+    -fx-max-width: infinity;
+}
+
+
+.details-box > .buttons-box {
+    -fx-pref-height: 43px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-width: infinity;
+    -fx-spacing: 20px;
+    -fx-padding: 0px 53px 0px 120px;
+}
+
+.details-box > .buttons-box > .jfx-button {
+    -fx-pref-height: 26px;
+    -fx-font-family: 'Roboto Bold';
+    -fx-font-size: 12px;
+    -fx-padding: 0px 18px 0px 18px;
+}
+
+.details-box > .buttons-box > .save-button {
+    -fx-background-color: #1b53d3;
+    -fx-text-fill: white;
+}
+
+.details-box > .buttons-box > .cancel-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #1b53d3;
+}
+
 
