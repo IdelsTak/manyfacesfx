@@ -31,6 +31,8 @@ import org.openide.util.Lookup;
  */
 public class ProfileDetailsController {
 
+    private static final GlobalContext CONTEXT = GlobalContext.getDefault();
+
     @FXML
     private TitledPane titlePane;
     @FXML
@@ -60,9 +62,10 @@ public class ProfileDetailsController {
     @FXML
     private JFXTextArea notesTextArea;
     private final Lookup.Result<SelectProfiles> lookupResult;
+    private SelectProfiles selectProfiles;
 
     {
-        lookupResult = GlobalContext.getDefault().lookupResult(SelectProfiles.class);
+        lookupResult = CONTEXT.lookupResult(SelectProfiles.class);
     }
 
     /**
@@ -83,39 +86,43 @@ public class ProfileDetailsController {
         nameLabel.textProperty().bind(profile.nameProperty());
         idLabel.textProperty().bind(profile.idProperty());
         notesTextArea.textProperty().bindBidirectional(profile.notesProperty());
-        
+
         StringBinding lastEditedStringProp = Bindings.createStringBinding(
                 new LastEditedAsString(profile.getLastEdited()),
                 profile.lastEditedProperty());
         lastEditedLabel.textProperty().bind(lastEditedStringProp);
 
+        selectProfiles = CONTEXT.lookup(SelectProfiles.class);
+        updateSelection();
+
         lookupResult.addLookupListener(e -> {
             Iterator<? extends SelectProfiles> it = lookupResult.allInstances().iterator();
 
             if (it.hasNext()) {
-                SelectProfiles sp = it.next();
-
-                selectCheckBoxPane.prefWidthProperty().bind(
-                        Bindings.createDoubleBinding(
-                                () -> sp.isVisible()
-                                      ? 25.0
-                                      : 0.0,
-                                sp.visibleProperty()));
-
-                sp.selectProperty().addListener((ob, ov, selected) -> {
-                    selectCheckBox.setSelected(selected);
-                });
+                selectProfiles = it.next();
+                updateSelection();
             }
         });
 
         selectCheckBox.selectedProperty().addListener((ob, ov, selected) -> {
-            GlobalContext context = GlobalContext.getDefault();
-
             if (selected) {
-                context.add(node);
+                CONTEXT.add(node);
             } else {
-                context.remove(node);
+                CONTEXT.remove(node);
             }
+        });
+    }
+
+    private void updateSelection() {
+        selectCheckBoxPane.prefWidthProperty().bind(
+                Bindings.createDoubleBinding(
+                        () -> selectProfiles.isVisible()
+                              ? 25.0
+                              : 0.0,
+                        selectProfiles.visibleProperty()));
+
+        selectProfiles.selectProperty().addListener((ob, ov, selected) -> {
+            selectCheckBox.setSelected(selected);
         });
     }
 
