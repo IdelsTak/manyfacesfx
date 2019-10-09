@@ -1,0 +1,46 @@
+
+
+.account-preferences-tab-root {
+    -fx-font-family: 'Roboto';
+    -fx-font-size: 14px;
+}
+
+/*.jfx-tab-pane {
+    -fx-tab-min-width: 160px;
+    -fx-tab-max-width: 160px;
+    -fx-tab-min-height: 45px;
+    -fx-tab-max-height: 45px;
+}
+
+.jfx-tab-pane .headers-region .jfx-rippler {
+    -jfx-rippler-fill: #d2d7e1;
+}
+
+.jfx-tab-pane .headers-region, .jfx-tab-pane .tab-header-background {
+    -fx-background-color: white;
+    -fx-border-color: #e1e3e7; 
+    -fx-border-width: 0 0 1 0;
+}
+
+Issue #636: remove the shadow of JFXTabPane
+.jfx-tab-pane .depth-container {
+    -fx-effect: null;
+}
+
+.jfx-tab-pane .tab-selected-line {
+    -fx-pref-width: 1px !important;
+    -fx-pref-height: 2px;
+    -fx-background-color: #174bc9;
+}
+
+.jfx-tab-pane .tab .tab-label {
+    -fx-text-fill: #868686;
+}
+
+.jfx-tab-pane .tab:selected .tab-label {
+    -fx-text-fill: #1e1f20;
+}
+
+.jfx-tab-pane .tab:selected:hover {
+    -fx-background-color: #eaeffa;
+}*/

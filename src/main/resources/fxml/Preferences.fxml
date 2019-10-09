@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" fx:id="preferencesRootPane" styleClass="preferences-pane-root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.idelstak.manyfacesfx.ui.controllers.PreferencesController">
+   <children>
+      <VBox layoutX="32.0" layoutY="30.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="32.0" AnchorPane.rightAnchor="32.0" AnchorPane.topAnchor="30.0">
+         <children>
+            <ScrollPane fitToHeight="true" fitToWidth="true" pannable="true" style="-fx-border-width: 0; -fx-background-color: white;" VBox.vgrow="ALWAYS">
+               <content>
+                  <VBox prefWidth="700.0" spacing="20.0" style="-fx-background-color: white;">
+                     <children>
+                        <Label styleClass="preferences-header" text="Browser profile default settings" />
+                        <VBox>
+                           <children>
+                              <JFXToggleButton styleClass="preference-toggle" text="Enable passwords saving" />
+                              <Label styleClass="preference-subtitle" text="This option enables saving passwords stored in browsers." />
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <JFXToggleButton styleClass="preference-toggle" text="Enable browser bookmark saving" />
+                              <Label styleClass="preference-subtitle" text="This option enables saving bookmarks in a browser interface." />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="80.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <JFXToggleButton styleClass="preference-toggle" text="Enable browser history saving" />
+                              <Label minHeight="-Infinity" styleClass="preference-subtitle" text="Warning! Enabling this option may increase the amount of data required to open/save a browser profile significantly. Since this option is not essential for your privacy, we recommend keeping it disabled." wrapText="true" />
+                           </children>
+                        </VBox>
+                        <VBox VBox.vgrow="NEVER">
+                           <children>
+                              <Label styleClass="preference-title" text="My native screen resolution:" wrapText="true" />
+                              <StackPane>
+                                 <children>
+                                    <JFXComboBox fx:id="nativeResolutionComboBox" styleClass="resolution-preferences-combo" StackPane.alignment="CENTER_LEFT" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" />
+                                 </VBox.margin>
+                              </StackPane>
+                              <Hyperlink text="Set custom native screen resolution" />
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <Label styleClass="preference-title" text="Minimal screen resolution:" wrapText="true" />
+                              <JFXComboBox fx:id="minResolutionComboBox" styleClass="resolution-preferences-combo">
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" />
+                                 </VBox.margin>
+                              </JFXComboBox>
+                              <Label layoutX="10.0" layoutY="10.0" styleClass="preference-subtitle" text="Screen resolutions that are smaller than the one you selected won't be offered in the browser fingerprint builder." wrapText="true" />
+                           </children>
+                        </VBox>
+                        <VBox>
+                           <children>
+                              <Label styleClass="preference-title" text="Maximal screen resolution:" wrapText="true" />
+                              <JFXComboBox fx:id="maxResolutionComboBox" styleClass="resolution-preferences-combo">
+                                 <VBox.margin>
+                                    <Insets bottom="15.0" />
+                                 </VBox.margin>
+                              </JFXComboBox>
+                              <Label layoutX="10.0" layoutY="10.0" styleClass="preference-subtitle" text="Screen resolutions that are bigger than the one you selected won't be offered in the browser fingerprint builder." wrapText="true" />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="60.0" spacing="6.0">
+                           <children>
+                              <Label styleClass="preference-title" text="Default browser:" wrapText="true" />
+                              <HBox styleClass="browser-preference-box">
+                                 <children>
+                                    <RadioButton fx:id="foxBrowserToggle" mnemonicParsing="false" selected="true">
+                                       <toggleGroup>
+                                          <ToggleGroup fx:id="defaultBrowser" />
+                                       </toggleGroup>
+                                       <graphic>
+                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../images/fox.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <styleClass>
+                                          <String fx:value="browser-preference-toggle" />
+                                          <String fx:value="browser-preference-toggle-fox" />
+                                       </styleClass>
+                                    </RadioButton>
+                                    <RadioButton fx:id="chromeBrowserToggle" mnemonicParsing="false" toggleGroup="$defaultBrowser">
+                                       <graphic>
+                                          <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../images/chrome.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                       <styleClass>
+                                          <String fx:value="browser-preference-toggle" />
+                                          <String fx:value="browser-preference-toggle-chrome" />
+                                       </styleClass>
+                                    </RadioButton>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="80.0" spacing="6.0">
+                           <children>
+                              <Label styleClass="preference-title" text="Languages for Stealthfox:" wrapText="true" />
+                              <HBox spacing="4.0">
+                                 <children>
+                                    <Label styleClass="option-tile" text="English (US), " />
+                                    <Label styleClass="option-tile" text="English" />
+                                    <Hyperlink text="Edit">
+                                       <HBox.margin>
+                                          <Insets top="1.5" />
+                                       </HBox.margin>
+                                    </Hyperlink>
+                                 </children>
+                              </HBox>
+                              <JFXTextField styleClass="preference-textfield" text="en-US,en;q=8" />
+                           </children>
+                        </VBox>
+                        <VBox prefHeight="80.0" spacing="6.0">
+                           <children>
+                              <Label styleClass="preference-title" text="Languages for Mimic:" wrapText="true" />
+                              <HBox spacing="4.0">
+                                 <children>
+                                    <Label styleClass="option-tile" text="English (US), " />
+                                    <Label styleClass="option-tile" text="English" />
+                                    <Hyperlink text="Edit">
+                                       <HBox.margin>
+                                          <Insets top="1.5" />
+                                       </HBox.margin>
+                                    </Hyperlink>
+                                 </children>
+                              </HBox>
+                              <JFXTextField styleClass="preference-textfield" text="en-US,en;q=8" />
+                           </children>
+                        </VBox>
+                        <VBox layoutX="20.0" layoutY="216.0" prefHeight="80.0">
+                           <children>
+                              <JFXToggleButton styleClass="preference-toggle" text="Strict mode" />
+                              <Label minHeight="-Infinity" styleClass="preference-subtitle" text="Only get fingerprints strictly corresponding to the current browser core. This will greatly improve protection from browser fingerprinting while limiting fingerprint diversity at the same time. May work well for web scraping." wrapText="true" />
+                           </children>
+                        </VBox>
+                        <VBox layoutX="20.0" layoutY="841.0" prefHeight="60.0">
+                           <children>
+                              <JFXToggleButton selected="true" styleClass="preference-toggle" text="Profile update warning" />
+                              <Label styleClass="preference-subtitle" text="Displays a warning pop-up on every profile update." wrapText="true" />
+                           </children>
+                        </VBox>
+                     </children>
+                     <padding>
+                        <Insets left="10.0" right="10.0" />
+                     </padding>
+                  </VBox>
+               </content>
+            </ScrollPane>
+            <JFXButton styleClass="save-preferences-button" text="Save preferences">
+               <VBox.margin>
+                  <Insets left="10.0" top="30.0" />
+               </VBox.margin>
+            </JFXButton>
+         </children>
+      </VBox>
+   </children>
+   <stylesheets>
+      <URL value="@../styles/app.css" />
+      <URL value="@../styles/preferences.css" />
+   </stylesheets>
+</AnchorPane>

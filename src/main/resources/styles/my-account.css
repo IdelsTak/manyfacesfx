@@ -1,0 +1,49 @@
+
+.my-account-pane-root {
+    -fx-font-family: 'Roboto';
+    -fx-font-size: 14px;
+    -fx-pref-width: 550px;
+    -fx-pref-height: 195px;
+    -fx-min-width: -fx-pref-width;
+    -fx-min-height: -fx-pref-height;
+    -fx-background-color: white;
+}
+
+.label {
+    -fx-text-fill: black;
+}
+
+.item-title-label {
+    -fx-font-family: 'Roboto Bold'
+}
+
+.open-logs-hyperlink {
+/*    -fx-padding: -1;
+    -fx-text-fill: #184cc9;
+    -fx-focus-traversable: false;*/
+}
+
+.change-password-button,
+.logout-button {
+    -fx-font-family: 'Roboto Medium';
+/*    -fx-pref-height: 38px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;*/
+}
+
+.change-password-button {
+    -fx-pref-width: 145px;
+    -fx-min-width: -fx-pref-width;
+    -fx-max-width: -fx-pref-width;
+    -fx-text-fill: #8b939b;
+    -fx-border-color: #c2c6cf;
+}
+
+.logout-button {
+    -fx-pref-width: 88px;
+    -fx-min-width: -fx-pref-width;
+    -fx-max-width: -fx-pref-width;
+    -fx-text-fill: #1048cc;
+    -fx-border-color: #b9c9ef;
+    -fx-background-color: #d6e4ff;
+}

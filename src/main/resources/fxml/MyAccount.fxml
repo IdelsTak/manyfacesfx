@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane id="AnchorPane" styleClass="my-account-pane-root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.idelstak.manyfacesfx.ui.controllers.MyAccountController">
+   <children>
+      <GridPane hgap="4.0" vgap="2.0" AnchorPane.leftAnchor="32.0" AnchorPane.topAnchor="30.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="NEVER" />
+          <ColumnConstraints hgrow="NEVER" />
+            <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints vgrow="SOMETIMES" />
+          <RowConstraints vgrow="SOMETIMES" />
+          <RowConstraints vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label styleClass="item-title-label" text="Account e-mail" />
+            <Label fx:id="emailLabel" text="contact@gmail.com" GridPane.columnIndex="2" GridPane.columnSpan="2147483647" />
+            <Label styleClass="item-title-label" text="Plan" GridPane.rowIndex="1" />
+            <Label fx:id="planLabel" text="Free (10 profiles)" GridPane.columnIndex="2" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" />
+            <Label styleClass="item-title-label" text="Logs" GridPane.rowIndex="2" />
+            <Hyperlink fx:id="logsHyperlink" styleClass="open-logs-hyperlink" text="Open logs directory" GridPane.columnIndex="2" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" />
+            <JFXButton fx:id="changePasswordButton" styleClass="change-password-button" text="Change password" GridPane.rowIndex="4" />
+            <JFXButton fx:id="logoutButton" styleClass="logout-button" text="Log out" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+         </children>
+      </GridPane>
+   </children>
+   <stylesheets>
+      <URL value="@../styles/app.css" />
+      <URL value="@../styles/my-account.css" />
+   </stylesheets>
+</AnchorPane>
