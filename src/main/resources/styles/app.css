@@ -125,6 +125,7 @@ Copyright 2019.
     -fx-background-color: #eaeffa;
 }
 
+.jfx-password-field,
 .jfx-text-area,
 .jfx-text-field {
     -fx-background-color: white;
@@ -133,18 +134,21 @@ Copyright 2019.
     -fx-padding: 1.7 0 4.7 0;
 }
 
+.jfx-password-field > .input-line,
 .jfx-text-area > .input-line,
 .jfx-text-field > .input-line {
     -fx-pref-height: 0px;
     -fx-max-height: 0px;
 }
 
+.jfx-password-field > .input-focused-line,
 .jfx-text-area > .input-focused-line,
 .jfx-text-field > .input-focused-line {
     -fx-pref-height: 0px;
     -fx-max-height: 0px;
 }
 
+.jfx-password-field:focused,
 .jfx-text-area:focused,
 .jfx-text-field:focused {
     -fx-border-color: #174bc9;
