@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -24,7 +25,7 @@ import javafx.scene.control.ToggleGroup;
 public class HomeMenuController {
 
     private static final GlobalContext CONTEXT = GlobalContext.getDefault();
-
+    private static final Logger LOG = Logger.getLogger(HomeMenuController.class.getName());
     @FXML
     private RadioButton homeToggle;
     @FXML
@@ -55,6 +56,11 @@ public class HomeMenuController {
                 pluginsToggle.getText(),
                 true,
                 FXMLLoader.load(getClass().getResource("/fxml/Plugins.fxml")));
+        MenuNode myAccountNode = new MenuNode(
+                "my account",
+                myAccountToggle.getText(),
+                true,
+                FXMLLoader.load(getClass().getResource("/fxml/AccountPreferencesTab.fxml")));
         MenuNode helpNode = new MenuNode(
                 "help & support",
                 helpToggle.getText(),
@@ -64,10 +70,12 @@ public class HomeMenuController {
         Set<MenuNode> nodes = new HashSet<>();
 
         nodes.add(homeNode);
+        nodes.add(myAccountNode);
         nodes.add(pluginsNode);
         nodes.add(helpNode);
 
         homeToggle.setOnAction(e -> nodes.stream().forEach(n -> context(n, homeNode)));
+        myAccountToggle.setOnAction(e -> nodes.stream().forEach(n -> context(n, myAccountNode)));
         pluginsToggle.setOnAction(e -> nodes.stream().forEach(n -> context(n, pluginsNode)));
         helpToggle.setOnAction(e -> nodes.stream().forEach(n -> context(n, helpNode)));
 
