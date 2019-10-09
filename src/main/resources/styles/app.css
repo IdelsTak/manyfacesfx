@@ -70,6 +70,11 @@ Copyright 2019.
     -fx-background-color: transparent;
 }
 
+.hyperlink {
+    -fx-text-fill: #174bc9;
+    -fx-focus-traversable: false;
+}
+
 .jfx-tab-pane {
     -fx-tab-min-width: 160px;
     -fx-tab-max-width: 160px;
