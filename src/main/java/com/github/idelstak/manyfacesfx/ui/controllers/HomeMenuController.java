@@ -15,7 +15,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.VBox;
 
 /**
  FXML Controller class
@@ -54,8 +53,8 @@ public class HomeMenuController {
         MenuNode pluginsNode = new MenuNode(
                 "plugins",
                 pluginsToggle.getText(),
-                false,
-                new VBox());
+                true,
+                FXMLLoader.load(getClass().getResource("/fxml/Plugins.fxml")));
         MenuNode helpNode = new MenuNode(
                 "help & support",
                 helpToggle.getText(),
