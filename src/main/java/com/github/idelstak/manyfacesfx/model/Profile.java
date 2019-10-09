@@ -3,9 +3,11 @@
  */
 package com.github.idelstak.manyfacesfx.model;
 
+import com.github.idelstak.manyfacesfx.api.GroupsRepository;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleObjectProperty;
@@ -17,16 +19,33 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class Profile {
 
+    private static final Logger LOG = Logger.getLogger(Profile.class.getName());
     private final ReadOnlyStringWrapper idProperty;
     private final SimpleStringProperty nameProperty;
     private final SimpleStringProperty notesProperty;
     private final SimpleObjectProperty<LocalDate> lastEditedProperty;
+    private final SimpleObjectProperty<Group> groupProperty;
 
     public Profile(String id, String name, String notes, LocalDate lastEdited) {
+        this(
+                id,
+                name,
+                notes,
+                lastEdited,
+                new FindGroup().find("Unassigned"));
+    }
+
+    public Profile(
+            String id,
+            String name,
+            String notes,
+            LocalDate lastEdited,
+            Group group) {
         this.idProperty = new ReadOnlyStringWrapper(id);
         this.nameProperty = new SimpleStringProperty(name);
         this.notesProperty = new SimpleStringProperty(notes);
         this.lastEditedProperty = new SimpleObjectProperty<>(lastEdited);
+        this.groupProperty = new SimpleObjectProperty<>(group);
     }
 
     public String getId() {
@@ -57,6 +76,14 @@ public class Profile {
         lastEditedProperty.set(lastEdited);
     }
 
+    public Group getGroup() {
+        return groupProperty.get();
+    }
+
+    public void setGroup(Group group) {
+        groupProperty.set(group);
+    }
+
     public ReadOnlyStringProperty idProperty() {
         return idProperty.getReadOnlyProperty();
     }
@@ -71,6 +98,10 @@ public class Profile {
 
     public SimpleObjectProperty<LocalDate> lastEditedProperty() {
         return lastEditedProperty;
+    }
+
+    public SimpleObjectProperty<Group> groupProperty() {
+        return groupProperty;
     }
 
     @Override
@@ -97,6 +128,28 @@ public class Profile {
             return false;
         }
         return Objects.equals(this.nameProperty.get(), other.nameProperty.get());
+    }
+
+    @Override
+    public String toString() {
+        return getName();
+    }
+
+    private static class FindGroup {
+
+        private FindGroup() {
+        }
+
+        private Group find(String name) {
+
+            Group group = GroupsRepository.getDefault()
+                    .findByName(name)
+                    .orElseGet(() -> GroupsRepository.getDefault().add(name));
+
+            LOG.log(Level.FINE, "Found group: " + group);
+
+            return group;
+        }
     }
 
 }

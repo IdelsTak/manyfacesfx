@@ -5,7 +5,6 @@ package com.github.idelstak.manyfacesfx.model;
 
 import com.github.idelstak.manyfacesfx.api.ProfilesRepository;
 import java.util.Objects;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyIntegerProperty;
@@ -63,31 +62,18 @@ public class Group {
      @return the numberOfProfilesProperty
      */
     private SimpleIntegerProperty getNumberOfProfilesProperty() {
-        LOG.log(Level.INFO, "numberOfProfilesProperty: {0}", numberOfProfilesProperty);
-        
         if (numberOfProfilesProperty == null) {
             numberOfProfilesProperty = new SimpleIntegerProperty();
-            
-            
-            LOG.log(Level.INFO, "=====Initializing no of profiles prop binding========== {0}", "PROFILES_REPOSITORY.findAll().toString()");
-
             ObservableSet<Profile> profiles = PROFILES_REPOSITORY.findAll();
-            
-            LOG.log(Level.INFO, "==============Profiles found: {0} ================= ", profiles);
 
-            Group thisGroup = this;
-
-            numberOfProfilesProperty.bind(Bindings.createIntegerBinding(() -> {
-                
-                LOG.log(Level.INFO, "Profiles event occured");
-
-                return Integer.parseInt(
-                        Long.toString(
-                                profiles.stream()
-                                        .map(p -> p.getGroup())
-                                        .filter(otherGroup -> Objects.equals(thisGroup, otherGroup))
-                                        .count()));
-            }, profiles));
+            numberOfProfilesProperty.bind(Bindings.createIntegerBinding(()
+                    -> Integer.parseInt(
+                            Long.toString(
+                                    profiles.stream()
+                                            .map(p -> p.getGroup())
+                                            .filter(otherGroup -> Objects.equals(Group.this, otherGroup))
+                                            .count())),
+                    profiles));
         }
         return numberOfProfilesProperty;
     }
