@@ -58,7 +58,7 @@ public abstract class GroupsRepository {
         }
 
         @Override
-        public Group add(String groupName) {
+        public synchronized Group add(String groupName) {
             LOG.log(Level.INFO, "Adding group with name: {0}", groupName);
 
             id += 1;
@@ -68,7 +68,7 @@ public abstract class GroupsRepository {
         }
 
         @Override
-        public void update(Group group) {
+        public synchronized void update(Group group) {
             groups.stream()
                     .filter(g -> g.getId() == group.getId())
                     .findFirst()
@@ -84,7 +84,7 @@ public abstract class GroupsRepository {
         }
 
         @Override
-        public void updateWithPosition(int index, Group group) {
+        public synchronized void updateWithPosition(int index, Group group) {
             groups.stream()
                     .filter(g -> g.getId() == group.getId())
                     .findFirst()
@@ -96,14 +96,14 @@ public abstract class GroupsRepository {
         }
 
         @Override
-        public Optional<Group> findbyId(int id) {
+        public synchronized Optional<Group> findbyId(int id) {
             return groups.stream()
                     .filter(g -> g.getId() == id)
                     .findFirst();
         }
 
         @Override
-        public Optional<Group> findByName(String name) {
+        public synchronized Optional<Group> findByName(String name) {
             return groups.stream()
                     .filter(group -> name == null
                                      ? group.getName() == null
@@ -112,12 +112,12 @@ public abstract class GroupsRepository {
         }
 
         @Override
-        public ObservableList<Group> findAll() {
+        public synchronized ObservableList<Group> findAll() {
             return FXCollections.unmodifiableObservableList(groups);
         }
 
         @Override
-        public void delete(Group group) {
+        public synchronized void delete(Group group) {
             groups.remove(group);
         }
 
@@ -125,8 +125,7 @@ public abstract class GroupsRepository {
         public String toString() {
             return "Simple groups repo";
         }
-        
-        
+
     }
 
 }
