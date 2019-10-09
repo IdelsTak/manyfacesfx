@@ -1,0 +1,102 @@
+
+.teleport-pane-root {
+    -fx-pref-width: 645px;
+    -fx-pref-height: 292px;
+    -fx-min-width: -fx-pref-width;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-width: -fx-pref-width;
+    -fx-max-height: -fx-pref-height;
+    -fx-background-color: #f9f9f9;
+    -fx-border-color: transparent;
+}
+
+.label {
+    -fx-text-fill: black;
+}
+
+.description-area {
+    -fx-font-size: 12px;
+    -fx-pref-height: 120px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+}
+
+.setup-area {
+    -fx-font-size: 13px;
+    -fx-pref-height: 170px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+}
+
+.setup-area > .title-label {
+    -fx-font-family: 'Roboto Bold';
+}
+
+.setup-area > .jfx-button {
+    -fx-pref-width: 60px;
+    -fx-pref-height: 25px;
+    -fx-text-fill: #0e46cc;
+    -fx-background-color: #d2dffa;
+}
+
+.password-field,
+.text-field {
+    /*    -fx-prompt-text-fill: #7b7b7b;
+        -fx-border-color: #949494;
+        -fx-border-width: 1 1 1 1;
+        -fx-pref-width: 180px;
+        -fx-pref-height: 27px;
+        -fx-padding: 0 0 0 1;*/
+}
+
+.password-field,
+.text-field:focused {
+    -fx-border-color: #949494;
+}
+
+/*.password-field > .input-line,
+.text-field > .input-line {
+    -fx-pref-height: 0px;
+    -fx-max-height: 0px;
+}
+
+.password-field > .input-focused-line,
+.text-field > .input-focused-line {
+    -fx-pref-height: 0px;
+    -fx-max-height: 0px;
+}*/
+
+.show-password-toggle {
+    -fx-pref-width: 17px;
+    -fx-pref-height: -fx-pref-width;
+    -fx-max-width: -fx-pref-width;
+    -fx-max-height: -fx-pref-width;
+    -fx-background-radius: 8.5px;
+    -jfx-toggle-color: transparent;
+    -jfx-untoggle-color: transparent;
+    -fx-cursor: hand;
+}
+
+.show-password-toggle > .jfx-rippler {
+    -jfx-rippler-fill: white;
+}
+
+.show-password-toggle:selected > .font-icon {
+    -fx-icon-code: mdi-eye-off;
+}
+
+.font-icon {
+    -fx-icon-color: black;
+    -fx-icon-code: mdi-eye;
+    -fx-icon-size: 17px;
+}
+
+.description-area > .desc-box,
+.description-area > .version-box {
+    -fx-padding: 28 40 0 23;
+}
+
+.description-area > .desc-box > .title-label,
+.description-area > .version-box > .title-label {
+    -fx-font-weight: bold;
+}

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" styleClass="geo-surf-pane-root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <HBox prefWidth="645.0" styleClass="geo-surf-description-area" VBox.vgrow="NEVER">
+                    <children>
+                        <VBox prefWidth="450.0" spacing="10.0" styleClass="desc-box" HBox.hgrow="ALWAYS">
+                            <children>
+                                <Label styleClass="title-label" text="Description" />
+                                <Label layoutX="10.0" layoutY="10.0" styleClass="description-text" text="GeoSurf is a global enterprise-level proxy network. It provides an access to over 2 million residential IP addresses and can be used for accessing any types of websites. Contact customer support if you need additional information." wrapText="true" />
+                            </children>
+                        </VBox>
+                        <GridPane hgap="10.0" prefWidth="397.0" styleClass="version-box" vgap="3.0" HBox.hgrow="ALWAYS">
+                            <columnConstraints>
+                                <ColumnConstraints halignment="RIGHT" hgrow="NEVER" />
+                                <ColumnConstraints hgrow="NEVER" />
+                            </columnConstraints>
+                            <rowConstraints>
+                                <RowConstraints vgrow="NEVER" />
+                                <RowConstraints vgrow="NEVER" />
+                                <RowConstraints vgrow="NEVER" />
+                            </rowConstraints>
+                            <children>
+                                <Label styleClass="title-label" text="Version" />
+                                <Label text="1.0" GridPane.columnIndex="1" />
+                                <Label styleClass="title-label" text="Publisher" GridPane.rowIndex="1" />
+                                <Label text="ManyFaces Ltd." GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                <Label styleClass="title-label" text="Support contact" GridPane.rowIndex="2" />
+                                <Label text="support@manyfaces.com" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                            </children>
+                            <HBox.margin>
+                                <Insets />
+                            </HBox.margin>
+                        </GridPane>
+                    </children>
+                </HBox>
+                <GridPane hgap="43.0" styleClass="setup-area">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="180.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints prefHeight="75.0" vgrow="NEVER" />
+                    </rowConstraints>
+                    <children>
+                        <JFXButton fx:id="activateButton" styleClass="activate-button" text="Activate">
+                            <padding>
+                                <Insets bottom="-1.0" left="-1.0" right="-1.0" top="-1.0" />
+                            </padding>
+                        </JFXButton>
+                    </children>
+                    <padding>
+                        <Insets left="23.0" />
+                    </padding>
+                </GridPane>
+            </children>
+        </VBox>
+    </children>
+   <stylesheets>
+      <URL value="@../styles/app.css" />
+      <URL value="@../styles/geo-surf-pane.css" />
+   </stylesheets>
+</AnchorPane>

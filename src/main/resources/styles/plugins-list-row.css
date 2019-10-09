@@ -1,0 +1,83 @@
+
+.titled-pane, 
+.title-box {
+    -fx-background-color: white;
+    -fx-font-family: 'Roboto'
+}
+
+.title-box {
+    -fx-pref-width: 645px;
+    -fx-pref-height: 35px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+}
+
+.titled-pane {
+    -fx-border-color: #e1e3e7 transparent transparent transparent;
+}
+
+.titled-pane > .title {
+    -fx-pref-height: 35px;
+    -fx-cursor: null;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 0;
+    -fx-background-color: white;
+}
+
+.titled-pane > .title > .arrow-button {
+    -fx-padding: 0;
+}
+
+.titled-pane > .title > .arrow-button > .arrow {
+    -fx-background-color: null;
+    -fx-padding: 0;
+}
+
+.titled-pane > *.content {
+    -fx-border-color: null;
+    -fx-border-insets: 0;
+    -fx-background-color: white;
+}
+
+.plugin-name-label {
+    -fx-font-size: 15px;
+    -fx-pref-height: 38px;
+    -fx-text-fill: black;
+}
+
+.recommended-label {
+    -fx-font-size: 8px;
+    -fx-font-family: 'Roboto Bold';
+    -fx-text-fill: white;
+    -fx-background-color: #174bc9;
+    -fx-background-radius: 6px;
+}
+
+.expand-pane-toggle {
+    -fx-pref-width: 18px;
+    -fx-pref-height: -fx-pref-width;
+    -fx-min-width: -fx-pref-width;
+    -fx-min-height: -fx-pref-width;
+    -fx-max-width: -fx-pref-width;
+    -fx-max-height: -fx-pref-width;
+    -fx-background-radius: 9px;
+    -jfx-toggle-color: transparent;
+    -jfx-untoggle-color: transparent;
+}
+.expand-pane-icon {
+    -fx-icon-code: mdi-settings;
+    -fx-icon-size: 18px;
+}
+
+.expand-pane-toggle > .expand-pane-icon {
+    -fx-icon-color: #cdd2d6;
+}
+
+.expand-pane-toggle:selected > .expand-pane-icon {
+    -fx-icon-color: #0d42c2;
+}
+
+.content-area {
+    /*-fx-background-color: #f9f9f9;*/
+}

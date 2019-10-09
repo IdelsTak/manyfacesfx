@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" styleClass="root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.idelstak.manyfacesfx.ui.controllers.PluginsController">
+   <children>
+      <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="60.0" prefWidth="200.0" style="-fx-background-color: transparent;">
+               <children>
+                  <JFXTextField fx:id="searchField" labelFloat="true" promptText="Search plugins..." styleClass="search-field">
+                     <HBox.margin>
+                        <Insets top="7.5" />
+                     </HBox.margin>
+                  </JFXTextField>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="26.0" right="32.0" top="10.0" />
+               </padding>
+            </HBox>
+            <VBox maxHeight="1.7976931348623157E308" VBox.vgrow="NEVER">
+               <children>
+                  <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" style="-fx-background-color: white;" VBox.vgrow="NEVER">
+                     <content>
+                        <Accordion fx:id="accordion" style="-fx-background-color: white;" />
+                     </content>
+                  </ScrollPane>
+                  <Separator orientation="VERTICAL" prefHeight="6.0" visible="false" VBox.vgrow="ALWAYS" />
+               </children>
+               <padding>
+                  <Insets left="26.0" right="32.0" top="10.0" />
+               </padding>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+   <stylesheets>
+      <URL value="@../styles/app.css" />
+      <URL value="@../styles/plugins.css" />
+   </stylesheets>
+</AnchorPane>

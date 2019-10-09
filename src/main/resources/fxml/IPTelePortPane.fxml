@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleNode?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<AnchorPane id="AnchorPane" prefWidth="600.0" styleClass="teleport-pane-root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox styleClass="description-area">
+               <children>
+                  <VBox spacing="10.0" styleClass="desc-box" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label styleClass="title-label" text="Description" />
+                        <Label layoutX="10.0" layoutY="10.0" prefHeight="45.0" prefWidth="265.0" styleClass="description-text" text="IP Teleport provides mobile proxies with residential IP addresses. You can choose from several gateway locations in United States" wrapText="true" />
+                     </children>
+                  </VBox>
+                  <GridPane hgap="25.0" styleClass="version-box" vgap="3.0" HBox.hgrow="ALWAYS">
+                    <columnConstraints>
+                      <ColumnConstraints halignment="RIGHT" hgrow="NEVER" />
+                      <ColumnConstraints hgrow="NEVER" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints vgrow="NEVER" />
+                      <RowConstraints vgrow="NEVER" />
+                      <RowConstraints vgrow="NEVER" />
+                    </rowConstraints>
+                     <children>
+                        <Label styleClass="title-label" text="Version" />
+                        <Label text="1.0" GridPane.columnIndex="1" />
+                        <Label styleClass="title-label" text="Publisher" GridPane.rowIndex="1" />
+                        <Label text="IPTeleport" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label styleClass="title-label" text="Support contact" GridPane.rowIndex="2" />
+                        <Label text="support@manyfaces.com" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                     </children>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </GridPane>
+               </children>
+            </HBox>
+            <GridPane hgap="43.0" styleClass="setup-area">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="180.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="180.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints vgrow="SOMETIMES" />
+                <RowConstraints prefHeight="30.0" vgrow="NEVER" />
+                <RowConstraints />
+                  <RowConstraints prefHeight="75.0" vgrow="NEVER" />
+              </rowConstraints>
+               <children>
+                  <Label styleClass="title-label" text="Setup" />
+                  <Label text="User ID:" GridPane.rowIndex="1" />
+                  <Label text="Password:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <JFXTextField styleClass="text-field" GridPane.rowIndex="2" />
+                  <StackPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <children>
+                        <JFXPasswordField styleClass="password-field" StackPane.alignment="CENTER" />
+                        <JFXToggleNode styleClass="show-password-toggle" StackPane.alignment="CENTER_RIGHT">
+                           <graphic>
+                              <FontIcon styleClass="font-icon" />
+                           </graphic>
+                        </JFXToggleNode>
+                     </children>
+                  </StackPane>
+                  <JFXButton text="Activate" GridPane.rowIndex="3">
+                     <padding>
+                        <Insets bottom="-1.0" left="-1.0" right="-1.0" top="-1.0" />
+                     </padding>
+                  </JFXButton>
+               </children>
+               <padding>
+                  <Insets left="23.0" />
+               </padding>
+            </GridPane>
+         </children>
+      </VBox>
+   </children>
+   <stylesheets>
+      <URL value="@../styles/app.css" />
+      <URL value="@../styles/ip-teleport-pane.css" />
+   </stylesheets>
+</AnchorPane>
