@@ -25,7 +25,6 @@ Copyright 2019.
     -fx-pref-height: 200px;
     -fx-min-height: -fx-pref-height;
     -fx-max-height: -fx-pref-height;
-    /*-fx-spacing: 20px;*/
 }
 
 .menu-pane > .radio-button {
@@ -34,4 +33,9 @@ Copyright 2019.
     -fx-pref-height: 34px;
     -fx-min-height: -fx-pref-height;
     -fx-alignment: top-left;
+    -fx-text-fill: #a7d0ff;
+}
+
+.menu-pane > .radio-button:selected {
+    -fx-text-fill: white;
 }
