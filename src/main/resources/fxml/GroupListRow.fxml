@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.HBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<TitledPane fx:id="titledPane" animated="false" expanded="false" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="48.0" prefWidth="645.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.idelstak.manyfacesfx.ui.controllers.GroupListRowController">
+   <graphic>
+      <HBox fx:id="titleHbox" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="48.0" prefWidth="645.0" spacing="2.0" styleClass="title-box" HBox.hgrow="ALWAYS">
+         <children>
+            <FontIcon iconColor="#174bc9" iconLiteral="mdi-folder" iconSize="24" HBox.hgrow="NEVER">
+               <HBox.margin>
+                  <Insets bottom="12.5" top="12.5" />
+               </HBox.margin>
+            </FontIcon>
+            <Label fx:id="groupNameLabel" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="48.0" styleClass="title-label" text="Unassigned" HBox.hgrow="ALWAYS">
+               <padding>
+                  <Insets left="17.0" />
+               </padding>
+            </Label>
+            <HBox HBox.hgrow="ALWAYS" />
+            <Label fx:id="noOfProfilesLabel" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="24.0" prefWidth="24.0" style="-fx-font-size: 12px;" text="2" HBox.hgrow="NEVER">
+               <HBox.margin>
+                  <Insets top="12.0" />
+               </HBox.margin>
+            </Label>
+            <HBox layoutX="38.0" layoutY="10.0" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="6.0" HBox.hgrow="NEVER" />
+         </children>
+      </HBox>
+   </graphic>
+   <stylesheets>
+      <URL value="@../styles/app.css" />
+      <URL value="@../styles/group-list-row.css" />
+   </stylesheets>
+</TitledPane>

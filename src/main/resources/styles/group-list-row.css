@@ -1,0 +1,43 @@
+
+.root {
+    -fx-background-color: white;
+}
+
+.label {
+    -fx-text-fill: black;
+}
+
+.title-box {
+    -fx-border-width: 0.5px;
+}
+
+.titled-pane {
+    -fx-border-color: transparent transparent #e1e3e7 transparent;
+}
+
+.titled-pane > .title {
+    -fx-pref-height: 48;
+    -fx-background-color: white;
+    -fx-font-size: 14px;
+/*    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 0;
+    -fx-cursor: hand;*/
+}
+
+/*.titled-pane > .title > .arrow-button {
+    -fx-padding: 0;
+}
+
+.titled-pane > .title > .arrow-button > .arrow {
+    -fx-background-color: null;
+    -fx-padding: 0;
+}*/
+
+.title-label {
+    -fx-font-family: 'Roboto'
+}
+
+.title-label:hover {
+    -fx-font-family: 'Roboto Bold'
+}

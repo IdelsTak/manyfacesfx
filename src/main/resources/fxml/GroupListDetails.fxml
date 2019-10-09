@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleNode?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.idelstak.manyfacesfx.ui.controllers.GroupListDetailsController">
+   <children>
+      <HBox fx:id="searchPane" styleClass="search-pane">
+         <children>
+            <JFXTextField fx:id="searchField" labelFloat="true" promptText="Search groups..." />
+            <HBox fx:id="spacerBox" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+      <HBox fx:id="headersBox" styleClass="headers-pane">
+         <children>
+            <JFXToggleNode fx:id="nameToggle" styleClass="name-toggle" text="Name" HBox.hgrow="ALWAYS">
+               <graphic>
+                  <FontIcon />
+               </graphic>
+            </JFXToggleNode>
+            <JFXToggleNode fx:id="noOfProfilesToggle" layoutX="10.0" layoutY="10.0" text="Profiles" />
+         </children>
+      </HBox>
+      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" maxWidth="1.7976931348623157E308" minWidth="-Infinity" vbarPolicy="ALWAYS">
+         <content>
+            <Accordion fx:id="groupListAccordion" maxWidth="1.7976931348623157E308" minWidth="-Infinity" />
+         </content>
+         <padding>
+            <Insets left="33.0" right="30.0" />
+         </padding>
+      </ScrollPane>
+   </children>
+   <stylesheets>
+      <URL value="@../styles/app.css" />
+      <URL value="@../styles/profile-list-details.css" />
+   </stylesheets>
+</VBox>
