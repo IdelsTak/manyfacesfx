@@ -73,6 +73,32 @@ Copyright 2019.
 .hyperlink {
     -fx-text-fill: #174bc9;
     -fx-focus-traversable: false;
+    -fx-padding: 0;
+}
+
+.combo-box-popup .list-view .jfx-list-cell:odd:selected,
+.combo-box-popup .list-view .jfx-list-cell:even:selected {
+    -fx-background-color: #e0e0e0;
+    -fx-text-fill: #1c4fca;
+}
+
+.combo-box-popup .list-view .jfx-list-cell {
+    -fx-background-insets: 0.0;
+    -fx-text-fill: BLACK;
+}
+
+.combo-box-popup .list-view .jfx-list-cell:odd,
+.combo-box-popup .list-view .jfx-list-cell:even {
+    -fx-background-color: WHITE;
+}
+
+.combo-box-popup .list-view .jfx-list-cell:filled:hover {
+    -fx-text-fill: black;
+    -fx-background-color: #f5f5f5;
+}
+
+.combo-box-popup .list-view .jfx-list-cell .jfx-rippler {
+    -jfx-rippler-fill: #dcdcdc;
 }
 
 .jfx-tab-pane {
@@ -125,6 +151,7 @@ Copyright 2019.
     -fx-background-color: #eaeffa;
 }
 
+.jfx-combo-box,
 .jfx-password-field,
 .jfx-text-area,
 .jfx-text-field {
@@ -134,6 +161,7 @@ Copyright 2019.
     -fx-padding: 1.7 0 4.7 0;
 }
 
+.jfx-combo-box > .input-line,
 .jfx-password-field > .input-line,
 .jfx-text-area > .input-line,
 .jfx-text-field > .input-line {
@@ -141,6 +169,7 @@ Copyright 2019.
     -fx-max-height: 0px;
 }
 
+.jfx-combo-box > .input-focused-line,
 .jfx-password-field > .input-focused-line,
 .jfx-text-area > .input-focused-line,
 .jfx-text-field > .input-focused-line {
@@ -148,6 +177,7 @@ Copyright 2019.
     -fx-max-height: 0px;
 }
 
+.jfx-combo-box:focused,
 .jfx-password-field:focused,
 .jfx-text-area:focused,
 .jfx-text-field:focused {
