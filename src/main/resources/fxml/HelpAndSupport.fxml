@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<AnchorPane styleClass="root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+    <BorderPane.margin>
+        <Insets left="85.0" top="25.0" />
+    </BorderPane.margin>
+    <children>
+        <GridPane styleClass="help-grid-pane" AnchorPane.leftAnchor="85.0" AnchorPane.topAnchor="25.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="NEVER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="306.0" />
+                <ColumnConstraints hgrow="NEVER" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="306.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="203.0" vgrow="NEVER" />
+                <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="203.0" vgrow="NEVER" />
+            </rowConstraints>
+            <children>
+                <VBox styleClass="cell">
+                    <children>
+                        <BorderPane styleClass="icon-area">
+                            <center>
+                                <FontIcon iconLiteral="mdi-wrench" />
+                            </center>
+                        </BorderPane>
+                        <BorderPane styleClass="sub-title-area">
+                            <center>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sub-title" text="Have a technical problem?" />
+                            </center>
+                        </BorderPane>
+                        <Hyperlink alignment="CENTER" focusTraversable="false" prefHeight="63.0" prefWidth="306.0" text="Check Troubleshooting" />
+                    </children>
+                </VBox>
+                <VBox styleClass="cell" GridPane.columnIndex="1">
+                    <children>
+                        <BorderPane styleClass="icon-area">
+                            <center>
+                                <FontIcon iconLiteral="mdi-information" />
+                            </center>
+                        </BorderPane>
+                        <BorderPane styleClass="sub-title-area">
+                            <center>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sub-title" text="Have a question regarding features?" />
+                            </center>
+                        </BorderPane>
+                        <Hyperlink text="Check Documentation" />
+                    </children>
+                </VBox>
+                <VBox styleClass="cell" GridPane.rowIndex="1">
+                    <children>
+                        <BorderPane styleClass="icon-area">
+                            <center>
+                                <FontIcon iconLiteral="fa-graduation-cap" />
+                            </center>
+                        </BorderPane>
+                        <BorderPane styleClass="sub-title-area">
+                            <center>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sub-title" text="Don't know where to start?" />
+                            </center>
+                        </BorderPane>
+                        <Hyperlink text="Check Academy" />
+                    </children>
+                </VBox>
+                <VBox styleClass="cell" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <children>
+                        <BorderPane styleClass="icon-area">
+                            <center>
+                                <FontIcon iconLiteral="mdi-email" />
+                            </center>
+                        </BorderPane>
+                        <BorderPane styleClass="sub-title-area">
+                            <center>
+                                <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="sub-title" text="Haven't found an answer?" />
+                            </center>
+                        </BorderPane>
+                        <Hyperlink text="Contact Support" />
+                    </children>
+                </VBox>
+            </children>
+        </GridPane>
+    </children>
+   <stylesheets>
+      <URL value="@../styles/app.css" />
+      <URL value="@../styles/help-and-support.css" />
+   </stylesheets>
+</AnchorPane>

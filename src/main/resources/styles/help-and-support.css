@@ -1,0 +1,51 @@
+
+.root {
+    -fx-background-color: white;
+}
+
+.help-grid-pane {
+    -fx-pref-width: 612px;
+    -fx-pref-height: 406px;
+    -fx-min-width: -fx-pref-width;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-width: -fx-pref-width;
+    -fx-max-height: -fx-pref-height;
+    -fx-background-color: white; 
+    -fx-border-color: #e0e2e7 #e0e2e7 transparent transparent;
+}
+
+.cell {
+    -fx-border-color: transparent transparent #e0e2e7 #e0e2e7;
+}
+
+.cell:hover {
+    -fx-background-color: #f9f9f9;
+}
+
+.icon-area {
+    -fx-pref-width: 306px;
+    -fx-pref-height: 115px;
+}
+
+.ikonli-font-icon {
+    -fx-icon-size: 44px;
+    -fx-icon-color: #174bc9;
+}
+
+.sub-title-area {
+    -fx-pref-width: 306px;
+    -fx-pref-height: 25px;
+}
+
+.sub-title {
+    -fx-font-size: 15px;
+}
+
+.hyperlink {
+    -fx-font-size: 13px;
+    -fx-pref-width: 306px;
+    -fx-pref-height: 63px;
+    -fx-alignment: center;
+}
+
+
