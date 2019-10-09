@@ -7,8 +7,11 @@ import com.github.idelstak.manyfacesfx.api.AbstractProfileListDetails;
 import com.github.idelstak.manyfacesfx.api.GlobalContext;
 import com.github.idelstak.manyfacesfx.ui.MenuNode;
 import com.jfoenix.controls.JFXTabPane;
+import java.io.IOException;
 import java.util.Iterator;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.control.Tab;
 import org.openide.util.Lookup;
 
@@ -25,6 +28,7 @@ public class HomeDetailsController {
     private Tab profileListTab;
     @FXML
     private Tab groupsTab;
+    private Node groupsContent;
     private MenuNode homeNode;
     private final Lookup.Result<MenuNode> lookupResult;
 
@@ -34,9 +38,11 @@ public class HomeDetailsController {
 
     /**
      Initializes the controller class.
+
+     @throws java.io.IOException
      */
     @FXML
-    public void initialize() {
+    public void initialize() throws IOException {
         detailsTabPane.getSelectionModel()
                 .selectedItemProperty()
                 .addListener((ob, ov, nv) -> {
@@ -57,13 +63,18 @@ public class HomeDetailsController {
                 }
             }
         });
-        
+
         profileListTab.setContent(AbstractProfileListDetails.getDefault().getPane());
+        groupsTab.setContent(getGroupsTab());
     }
 
     private String from(Tab tab) {
         return tab.equals(profileListTab)
                ? "Browser profile list"
                : tab.getText();
+    }
+
+    private Node getGroupsTab() throws IOException {
+        return FXMLLoader.load(getClass().getResource("/fxml/GroupListDetails.fxml"));
     }
 }
