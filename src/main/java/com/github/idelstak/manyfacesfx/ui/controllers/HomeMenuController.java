@@ -56,14 +56,21 @@ public class HomeMenuController {
                 pluginsToggle.getText(),
                 false,
                 new VBox());
+        MenuNode helpNode = new MenuNode(
+                "help & support",
+                helpToggle.getText(),
+                true,
+                FXMLLoader.load(getClass().getResource("/fxml/HelpAndSupport.fxml")));
 
         Set<MenuNode> nodes = new HashSet<>();
 
         nodes.add(homeNode);
         nodes.add(pluginsNode);
+        nodes.add(helpNode);
 
         homeToggle.setOnAction(e -> nodes.stream().forEach(n -> context(n, homeNode)));
         pluginsToggle.setOnAction(e -> nodes.stream().forEach(n -> context(n, pluginsNode)));
+        helpToggle.setOnAction(e -> nodes.stream().forEach(n -> context(n, helpNode)));
 
         Platform.runLater(() -> {
             homeToggle.fireEvent(new ActionEvent());
