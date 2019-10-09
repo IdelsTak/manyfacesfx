@@ -35,6 +35,7 @@ public class GroupListRowController {
      */
     @FXML
     public void initialize() {
+        titleHbox.minWidthProperty().bind(titledPane.widthProperty());
         titledPane.addEventFilter(InputEvent.ANY, new TitledPaneInputEventBypass());
     }
 
