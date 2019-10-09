@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javafx.application.Platform;
@@ -25,6 +26,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableSet;
+import javafx.collections.SetChangeListener.Change;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Accordion;
@@ -42,6 +44,7 @@ public class ProfileListDetailsController {
 
     private static final Logger LOG = Logger.getLogger(ProfileListDetailsController.class.getName());
     private static final GlobalContext CONTEXT = GlobalContext.getDefault();
+    private static final ProfilesRepository PROFILES_REPO = ProfilesRepository.getDefault();
     @FXML
     private TitledPane actionsPane;
     @FXML
@@ -75,11 +78,14 @@ public class ProfileListDetailsController {
     private final Collection<TitledPane> titledPanes;
     private final Lookup.Result<ProfileNode> lookupResult;
     private final SimpleBooleanProperty selectionAvailable;
+    private final ObservableSet<Profile> profiles;
+    private final SelectProfiles selectProfiles = new SelectProfiles();
 
     {
         titledPanes = new ArrayList<>();
         lookupResult = CONTEXT.lookupResult(ProfileNode.class);
         selectionAvailable = new SimpleBooleanProperty(false);
+        profiles = PROFILES_REPO.findAll();
     }
 
     /**
@@ -98,15 +104,24 @@ public class ProfileListDetailsController {
 
         selectButton.setOnAction(e -> selectCheckBox.setSelected(!selectCheckBox.isSelected()));
 
-        ObservableSet<Profile> profiles = ProfilesRepository.getDefault().findAll();
+        selectProfiles.selectProperty().bind(checkBoxSelected);
+        selectProfiles.visibleProperty().bind(showActionsToggle.selectedProperty());
 
-        profiles.stream()
-                .map(ProfileNode::new)
-                .map(node -> node.getLookup().lookup(TitledPane.class))
-                .forEach(titledPane -> {
-                    titledPanes.add(titledPane);
+        CONTEXT.add(selectProfiles);
+
+        profiles.addListener((Change<? extends Profile> change) -> {
+            LOG.log(Level.FINE, "change occured: {0}", change);
+
+            if (change.wasAdded()) {
+                ProfileNode node = new ProfileNode(change.getElementAdded());
+                TitledPane titledPane = node.getLookup().lookup(TitledPane.class);
+                titledPanes.add(titledPane);
+
+                Platform.runLater(() -> {
                     profileListAccordion.getPanes().add(titledPane);
                 });
+            }
+        });
 
         searchField.textProperty().addListener((ob, ov, nv) -> {
             if (nv == null || nv.trim().isEmpty()) {
@@ -145,13 +160,6 @@ public class ProfileListDetailsController {
                                             Node::getId,
                                             this::compareDates));
                 });
-
-        SelectProfiles selectProfiles = new SelectProfiles();
-
-        selectProfiles.selectProperty().bind(checkBoxSelected);
-        selectProfiles.visibleProperty().bind(showActionsToggle.selectedProperty());
-
-        CONTEXT.add(selectProfiles);
 
         deleteButton.disableProperty().bind(selectionAvailable.not());
         moveToGroupButton.disableProperty().bind(selectionAvailable.not());
