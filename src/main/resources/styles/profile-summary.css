@@ -1,0 +1,46 @@
+/*
+Copyright 2019.
+*/
+/* 
+    Created on : Oct 12, 2019, 12:49:15 AM
+    Author     : Hiram K <hiram.kamau@outlook.com>
+*/
+.root {
+    -fx-pref-width: 309px;
+    -fx-min-width: -fx-pref-width;
+    -fx-max-width: -fx-pref-width;
+    -fx-font-family: 'Roboto Regular';
+    -fx-padding: 24px 0 0 16px;
+    -fx-background-color: #f9f9f9;
+    -fx-border-color: #e0e2e7 transparent transparent #e0e2e7;
+}
+
+.profile-summary-field-title-box {
+    -fx-pref-width: 96px;
+    -fx-min-width: -fx-pref-width;
+    -fx-max-width: -fx-pref-width;
+}
+
+.profile-summary-field-box {
+    -fx-pref-width: 164px;
+    -fx-min-width: -fx-pref-width;
+    -fx-max-width: -fx-pref-width;
+}
+
+.profile-summary-title {
+    -fx-text-fill: #174bc9;
+    -fx-font-size: 14px;
+}
+
+.profile-summary-field-title {
+    -fx-text-fill: #3f4450;
+}
+
+.profile-summary-field {
+    -fx-text-fill: #828b93;
+}
+
+.profile-summary-field-title,
+.profile-summary-field {
+    -fx-font-size: 12px;
+}

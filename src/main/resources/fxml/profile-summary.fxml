@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+
+<VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label styleClass="profile-summary-title" text="PROFILE SUMMARY" />
+      <HBox spacing="14.0">
+         <children>
+            <VBox spacing="10.0" styleClass="profile-summary-field-title-box">
+               <children>
+                  <Label styleClass="profile-summary-field-title" text="Profile name:" />
+                  <Label layoutX="10.0" layoutY="10.0" styleClass="profile-summary-field-title" text="Proxy:" />
+                  <Label layoutX="10.0" layoutY="29.0" styleClass="profile-summary-field-title" text="Browser:" />
+                  <Label layoutX="10.0" layoutY="10.0" styleClass="profile-summary-field-title" text="OS:" />
+                  <Label layoutX="10.0" layoutY="29.0" styleClass="profile-summary-field-title" text="User-Agent:" />
+                  <Label layoutX="10.0" layoutY="48.0" styleClass="profile-summary-field-title" text="Resolution:" />
+                  <Label layoutX="10.0" layoutY="10.0" styleClass="profile-summary-field-title" text="Languages:" />
+                  <Label layoutX="10.0" layoutY="29.0" styleClass="profile-summary-field-title" text="Platform:" />
+                  <Label layoutX="10.0" layoutY="48.0" styleClass="profile-summary-field-title" text="Timezone:" />
+                  <Label layoutX="10.0" layoutY="67.0" styleClass="profile-summary-field-title" text="Geolocation:" />
+                  <Label layoutX="10.0" layoutY="86.0" styleClass="profile-summary-field-title" text="WebRTC:" />
+                  <Label layoutX="10.0" layoutY="105.0" styleClass="profile-summary-field-title" text="Canvas:" />
+                  <Label layoutX="10.0" layoutY="10.0" styleClass="profile-summary-field-title" text="WebGL metadata:" />
+                  <Label layoutX="10.0" layoutY="29.0" styleClass="profile-summary-field-title" text="WebGL image:" />
+                  <Label layoutX="10.0" layoutY="48.0" styleClass="profile-summary-field-title" text="AudioContext:" />
+                  <Label layoutX="10.0" layoutY="67.0" styleClass="profile-summary-field-title" text="Fonts:" />
+                  <Label layoutX="10.0" layoutY="86.0" styleClass="profile-summary-field-title" text="Media devices:" />
+                  <Label layoutX="10.0" layoutY="105.0" styleClass="profile-summary-field-title" text="Local storage:" />
+                  <Label layoutX="10.0" layoutY="124.0" styleClass="profile-summary-field-title" text="Ext. storage:" />
+                  <Label layoutX="10.0" layoutY="143.0" styleClass="profile-summary-field-title" text="Plugins:" />
+                  <Label layoutX="10.0" layoutY="162.0" styleClass="profile-summary-field-title" text="Flash:" />
+               </children>
+            </VBox>
+            <VBox spacing="10.0" styleClass="profile-summary-field-box">
+               <children>
+                  <Label styleClass="profile-summary-field" text="test profile" />
+                  <Label styleClass="profile-summary-field" text="104.151.88.42:3128/HTTP p..." />
+                  <Label styleClass="profile-summary-field" text="Stealthfox" />
+                  <Label styleClass="profile-summary-field" text="Linux" />
+                  <Label styleClass="profile-summary-field" text="Mozilla/5.0 (Windows NT 10...." />
+                  <Label styleClass="profile-summary-field" text="1440x900" />
+                  <Label styleClass="profile-summary-field" text="English (US), English" />
+                  <Label styleClass="profile-summary-field" text="Win32" />
+                  <Label styleClass="profile-summary-field" text="Automatic" />
+                  <Label styleClass="profile-summary-field" text="[Allow] Automatic" />
+                  <Label styleClass="profile-summary-field" text="[Disabled]" />
+                  <Label styleClass="profile-summary-field" text="[Noise]" />
+                  <Label styleClass="profile-summary-field" text="[Mask]" />
+                  <Label styleClass="profile-summary-field" text="[Noise]" />
+                  <Label styleClass="profile-summary-field" text="[Noise]" />
+                  <Label styleClass="profile-summary-field" text="Total 161 fonts" />
+                  <Label styleClass="profile-summary-field" text="Masked 1|1|1" />
+                  <Label styleClass="profile-summary-field" text="Disabled" />
+                  <Label styleClass="profile-summary-field" text="Disabled" />
+                  <Label styleClass="profile-summary-field" text="Disabled" />
+                  <Label styleClass="profile-summary-field" text="Disabled" />
+               </children>
+            </VBox>
+         </children>
+         <VBox.margin>
+            <Insets top="25.0" />
+         </VBox.margin>
+      </HBox>
+   </children>
+   <stylesheets>
+      <URL value="@../styles/app.css" />
+      <URL value="@../styles/profile-summary.css" />
+   </stylesheets>
+</VBox>
