@@ -1,0 +1,76 @@
+/*
+Copyright 2019.
+*/
+/* 
+    Created on : Oct 11, 2019, 10:52:14 PM
+    Author     : Hiram K <hiram.kamau@outlook.com>
+*/
+
+.root {
+    -fx-background-color: #0d3fb9;
+    -fx-pref-width: 240px;
+    -fx-min-width: -fx-pref-width;
+    -fx-max-width: -fx-pref-width;
+    -fx-pref-height: 716px;
+    -fx-min-height: -fx-pref-height;
+    -fx-font-family: 'Roboto Regular';
+    -fx-padding: 31px 0 0 25px;
+}
+
+.logo-button {
+    -fx-background-radius: 15px;
+    -fx-graphic-text-gap: 0;
+    -fx-padding: 0 1px 0 0;
+    -fx-pref-width: 30px;
+    -fx-max-width: -fx-pref-width;
+    -fx-min-width: -fx-pref-width;
+    -fx-pref-height: -fx-pref-width;
+    -fx-min-height: -fx-pref-width;
+}
+
+.logo-button > .ikonli-font-icon {
+    -fx-icon-color: #ffffff;
+    -fx-icon-size: 25px;
+    -fx-icon-code: mdi-home;
+}
+
+.menu-title {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 20px;
+}
+
+.menu-toggle {
+    -fx-text-fill: #a7d0ff;
+    -fx-font-size: 16px;
+    -fx-pref-height: 22px;
+    -fx-min-height: 22px;
+}
+
+.menu-toggle:selected {
+    -fx-text-fill: #ced8f1;
+    -fx-font-family: 'Roboto Medium';
+}
+
+.advanced-titled-menu {
+    -fx-text-fill: #a7d0ff;
+    -fx-font-size: 16px;
+    -fx-pref-height: 22px;
+    -fx-min-height: -fx-pref-height;
+    -fx-cursor: hand;
+}
+
+.advanced-menu-pane > .title {
+    -fx-pref-height: 55px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+    -fx-cursor: default;
+}
+
+.advanced-menu-pane > *.content {
+    -fx-background-color: transparent;
+}
+
+.advanced-menu-box {
+    -fx-padding: 12px 0 0 24px;
+    -fx-spacing: 13px;
+}
