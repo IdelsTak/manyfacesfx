@@ -48,7 +48,6 @@ Copyright 2019.
 
 .menu-toggle:selected {
     -fx-text-fill: #ced8f1;
-    -fx-font-family: 'Roboto Medium';
 }
 
 .advanced-titled-menu {
