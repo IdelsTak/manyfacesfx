@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+
+<VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <stylesheets>
+      <URL value="@../styles/app.css" />
+      <URL value="@../styles/profile-menu.css" />
+   </stylesheets>
+   <children>
+      <JFXButton styleClass="logo-button">
+         <graphic>
+            <FontIcon />
+         </graphic>
+      </JFXButton>
+      <Label styleClass="menu-title" text="Edit browser profile">
+         <VBox.margin>
+            <Insets top="27.0" />
+         </VBox.margin>
+      </Label>
+      <RadioButton mnemonicParsing="false" styleClass="menu-toggle" text="Overview">
+         <VBox.margin>
+            <Insets bottom="13.0" top="26.0" />
+         </VBox.margin>
+         <toggleGroup>
+            <ToggleGroup fx:id="profileMenuGroup" />
+         </toggleGroup>
+      </RadioButton>
+      <RadioButton layoutX="35.0" layoutY="126.0" mnemonicParsing="false" styleClass="menu-toggle" text="Proxy" toggleGroup="$profileMenuGroup">
+         <VBox.margin>
+            <Insets bottom="13.0" />
+         </VBox.margin>
+      </RadioButton>
+      <RadioButton layoutX="35.0" layoutY="126.0" mnemonicParsing="false" styleClass="menu-toggle" text="Timezone" toggleGroup="$profileMenuGroup">
+         <VBox.margin>
+            <Insets bottom="13.0" />
+         </VBox.margin>
+      </RadioButton>
+      <RadioButton layoutX="35.0" layoutY="145.0" mnemonicParsing="false" styleClass="menu-toggle" text="WebRTC" toggleGroup="$profileMenuGroup">
+         <VBox.margin>
+            <Insets bottom="13.0" />
+         </VBox.margin>
+      </RadioButton>
+      <RadioButton layoutX="35.0" layoutY="183.0" mnemonicParsing="false" styleClass="menu-toggle" text="Geolocation" toggleGroup="$profileMenuGroup" />
+      <TitledPane styleClass="advanced-menu-pane">
+         <graphic>
+            <Label styleClass="advanced-titled-menu" text="Advanced" />
+         </graphic>
+         <content>
+            <VBox maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="advanced-menu-box">
+               <children>
+                  <RadioButton mnemonicParsing="false" styleClass="menu-toggle" text="Navigator" toggleGroup="$profileMenuGroup" />
+                  <RadioButton mnemonicParsing="false" styleClass="menu-toggle" text="Fonts" toggleGroup="$profileMenuGroup" />
+                  <RadioButton mnemonicParsing="false" styleClass="menu-toggle" text="Media devices" toggleGroup="$profileMenuGroup" />
+                  <RadioButton mnemonicParsing="false" styleClass="menu-toggle" text="Hardware" toggleGroup="$profileMenuGroup" />
+                  <RadioButton mnemonicParsing="false" styleClass="menu-toggle" text="Extensions" toggleGroup="$profileMenuGroup" />
+                  <RadioButton layoutX="10.0" layoutY="92.0" mnemonicParsing="false" styleClass="menu-toggle" text="Storage options" toggleGroup="$profileMenuGroup" />
+                  <RadioButton layoutX="10.0" layoutY="127.0" mnemonicParsing="false" styleClass="menu-toggle" text="Browser plugins" toggleGroup="$profileMenuGroup" />
+                  <RadioButton layoutX="10.0" layoutY="162.0" mnemonicParsing="false" styleClass="menu-toggle" text="Other" toggleGroup="$profileMenuGroup" />
+               </children>
+               <padding>
+                  <Insets top="-1.0" />
+               </padding>
+            </VBox>
+         </content>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </TitledPane>
+   </children>
+</VBox>
