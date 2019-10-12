@@ -33,6 +33,7 @@ Copyright 2019.
     -fx-min-height: -fx-pref-height;
     -fx-max-height: -fx-pref-height;
     -fx-padding: 0px;
+    -fx-border-radius: 4px;
 }
 
 .radio-button,
