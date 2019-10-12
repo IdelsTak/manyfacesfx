@@ -1,0 +1,12 @@
+/*
+Copyright 2019.
+*/
+/* 
+    Created on : Oct 12, 2019, 5:15:12 PM
+    Author     : Hiram K <hiram.kamau@outlook.com>
+*/
+
+.profile-attributes-root {
+    -fx-background-color: white;
+    -fx-border-color: #e0e2e7 transparent transparent transparent;
+}
