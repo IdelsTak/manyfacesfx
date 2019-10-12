@@ -1,0 +1,117 @@
+
+.profile-overview-root {
+    -fx-font-family: 'Roboto';
+    -fx-background-color: white;
+    -fx-base: white;
+}
+
+.jfx-text-field {
+    -fx-border-color: #949494;
+    -fx-pref-width: 357px;
+    -fx-max-width: -fx-pref-width;
+    -fx-min-width: -fx-pref-width;
+    -fx-padding: 1.7 0 4.7 0;
+    -fx-font-size: 14px;
+}
+
+.jfx-text-field:focused {
+    -fx-border-color: #174bc9;
+}
+
+.jfx-text-field > .input-line {
+    -fx-pref-height: 0px;
+    -fx-max-height: 0px;
+}
+
+.jfx-text-field > .input-focused-line {
+    -fx-pref-height: 0px;
+    -fx-max-height: 0px;
+}
+
+.attribute-title-label {
+    -fx-font-size: 12px;
+    
+}
+
+.attribute-action-button {
+    -fx-pref-height: 38px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;    
+    -fx-border-color: #b9c9ef;
+    -fx-background-color: #d1deff;
+    -fx-text-fill: #1048cc;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.os-label {
+    -fx-background-color: #174bc9;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-background-radius: 4px;
+    -fx-padding: 0.5em;
+}
+
+.error-icon,
+.warning-icon,
+.okay-icon {
+    -fx-icon-size: 24px;
+}
+
+.error-icon,
+.warning-icon {
+    -fx-icon-code: mdi-alert;
+}
+
+.okay-icon {
+    -fx-icon-code: mdi-check;
+    -fx-icon-color: #174bc9;
+}
+
+.warning-icon {
+    -fx-icon-color: #ff9800;
+}
+
+.error-icon {
+    -fx-icon-color: #f44336;
+}
+
+.timezone-webrtc-geolocation-overview-area {
+    -fx-border-color: #e0e2e7 #e0e2e7 transparent #e0e2e7;
+}
+
+.timezone-webrtc-geolocation-overview-area > .timezone-webrtc-geolocation-overview-box {
+    -fx-border-color: transparent transparent #e0e2e7 transparent;
+    -fx-pref-width: 327px;
+    -fx-min-width: -fx-pref-width;
+}
+
+.header-label {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.content-label {
+    -fx-font-size: 11px;
+    -fx-text-fill: #979fa5;
+}
+
+.hyperlink {
+    -fx-font-size: 13px;
+    -fx-text-fill: #0e46cc;
+    -fx-focus-traversable: false;
+}
+
+.jfx-toggle-button {
+    -jfx-toggle-color: #174bc9;
+    -jfx-toggle-line-color: #8aa4e4;
+    -fx-padding: -1;
+    -fx-pref-height: 23px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+}
+
+.jfx-button {
+    -fx-padding: 4.3px 8.7px 4.3px 8.7px;
+}

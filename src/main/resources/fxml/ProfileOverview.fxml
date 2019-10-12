@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<AnchorPane id="AnchorPane" minHeight="-Infinity" styleClass="profile-overview-root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox spacing="6.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="22.0">
+         <children>
+            <Label styleClass="attribute-title-label" text="Browser profile name:" />
+            <JFXTextField fx:id="profileNameField">
+               <VBox.margin>
+                  <Insets bottom="12.0" />
+               </VBox.margin>
+            </JFXTextField>
+            <Label layoutX="10.0" layoutY="10.0" styleClass="attribute-title-label" text="Operating system:" />
+            <HBox spacing="12.0">
+               <children>
+                  <Label fx:id="osLabel" maxHeight="1.7976931348623157E308" styleClass="os-label" text="Windows">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </Label>
+                  <Hyperlink fx:id="editOsHyperlink" maxHeight="1.7976931348623157E308" text="Edit" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="12.0" />
+               </VBox.margin>
+            </HBox>
+            <Label layoutX="10.0" layoutY="50.0" styleClass="attribute-title-label" text="Browser:" />
+            <HBox layoutX="10.0" layoutY="65.0" spacing="6.0">
+               <children>
+                  <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/fox.png" />
+                     </image>
+                  </ImageView>
+                  <Label maxHeight="1.7976931348623157E308" text="Stealthfox" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="12.0" />
+               </VBox.margin>
+            </HBox>
+            <Label layoutX="10.0" layoutY="88.0" styleClass="attribute-title-label" text="Proxy settings:" />
+            <HBox layoutX="10.0" layoutY="103.0" spacing="6.0">
+               <children>
+                  <JFXButton fx:id="editProxyButton" styleClass="attribute-action-button" text="Edit proxy settings" />
+               </children>
+               <VBox.margin>
+                  <Insets bottom="12.0" />
+               </VBox.margin>
+            </HBox>
+            <Label layoutX="10.0" layoutY="119.0" styleClass="attribute-title-label" text="Timezone, WebRTC, Geolocation:" />
+            <JFXToggleButton />
+            <Label alignment="TOP_LEFT" layoutX="10.0" layoutY="159.0" minHeight="-Infinity" prefHeight="40.0" styleClass="attribute-title-label" text="Fill Timezone, WebRTC, and Geolocation fingerprints based on external IP" wrapText="true" />
+            <VBox styleClass="timezone-webrtc-geolocation-overview-area">
+               <children>
+                  <HBox styleClass="timezone-webrtc-geolocation-overview-box" VBox.vgrow="NEVER">
+                     <children>
+                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" minWidth="-Infinity" prefWidth="65.0">
+                           <graphic>
+                              <FontIcon styleClass="okay-icon" />
+                           </graphic>
+                        </Label>
+                        <VBox minWidth="-Infinity" prefWidth="180.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label maxWidth="1.7976931348623157E308" styleClass="header-label" text="Timezone" VBox.vgrow="NEVER">
+                                 <VBox.margin>
+                                    <Insets bottom="9.0" top="32.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label alignment="TOP_LEFT" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" styleClass="content-label" text="Timezone will be filled automatically on every browser profile launch based on the external IP." wrapText="true">
+                                 <VBox.margin>
+                                    <Insets bottom="26.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <Hyperlink fx:id="timezoneHyperlink" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Edit" HBox.hgrow="NEVER">
+                           <padding>
+                              <Insets left="46.0" right="14.0" />
+                           </padding></Hyperlink>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="10.0" styleClass="timezone-webrtc-geolocation-overview-box">
+                     <children>
+                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" minWidth="-Infinity" prefWidth="65.0">
+                           <graphic>
+                              <FontIcon styleClass="okay-icon" />
+                           </graphic>
+                        </Label>
+                        <VBox minWidth="-Infinity" prefWidth="180.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label maxWidth="1.7976931348623157E308" styleClass="header-label" text="WebRTC" VBox.vgrow="NEVER">
+                                 <VBox.margin>
+                                    <Insets bottom="9.0" top="32.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label alignment="TOP_LEFT" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" minHeight="-Infinity" styleClass="content-label" text="WebRTC Public IP will be filled on every browser profile launch and later adjusted on-the-fly automatically based on the external IP." wrapText="true" VBox.vgrow="ALWAYS">
+                                 <VBox.margin>
+                                    <Insets bottom="26.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <Hyperlink fx:id="webRtcHyperlink" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Edit" HBox.hgrow="NEVER">
+                           <padding>
+                              <Insets left="46.0" right="14.0" />
+                           </padding></Hyperlink>
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="135.0" styleClass="timezone-webrtc-geolocation-overview-box">
+                     <children>
+                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" minWidth="-Infinity" prefWidth="65.0">
+                           <graphic>
+                              <FontIcon styleClass="okay-icon" />
+                           </graphic>
+                        </Label>
+                        <VBox minWidth="-Infinity" prefWidth="180.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label maxWidth="1.7976931348623157E308" styleClass="header-label" text="Geolocation" VBox.vgrow="NEVER">
+                                 <VBox.margin>
+                                    <Insets bottom="9.0" top="32.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <Label alignment="TOP_LEFT" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" minHeight="-Infinity" styleClass="content-label" text="Geolocation coordinates will be filled automatically on every browser profile launch based on the external IP. You will be prompted when a website requests to reveal your coordinates." wrapText="true" VBox.vgrow="ALWAYS">
+                                 <VBox.margin>
+                                    <Insets bottom="26.0" />
+                                 </VBox.margin>
+                              </Label>
+                           </children>
+                        </VBox>
+                        <Hyperlink fx:id="geolocationHyperlink" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Edit" HBox.hgrow="NEVER">
+                           <padding>
+                              <Insets left="46.0" right="14.0" />
+                           </padding></Hyperlink>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <JFXButton styleClass="attribute-action-button" text="Get new fingerprint">
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </JFXButton>
+         </children>
+      </VBox>
+   </children>
+   <stylesheets>
+      <URL value="@../styles/app.css" />
+      <URL value="@../styles/profile-overview.css" />
+   </stylesheets>
+</AnchorPane>
