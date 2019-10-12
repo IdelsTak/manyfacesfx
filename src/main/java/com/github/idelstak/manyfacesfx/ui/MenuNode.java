@@ -5,30 +5,31 @@ package com.github.idelstak.manyfacesfx.ui;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.Node;
-import org.openide.util.Lookup;
-import org.openide.util.lookup.AbstractLookup;
-import org.openide.util.lookup.InstanceContent;
+import javafx.scene.layout.Pane;
 
 /**
 
  @author Hiram K <hiram.kamau@outlook.com>
  */
-public class MenuNode implements Lookup.Provider {
+public class MenuNode {
 
-    private final InstanceContent content;
-    private final Lookup lookup;
     private final SimpleStringProperty displayNameProperty;
     private final boolean showsNotifications;
     private final Node detailsPane;
     private final String name;
+    private final AppMenu menu;
 
-    public MenuNode(String name, String displayName, boolean showsNotifications, Node detailsPane) {
-        this.content = new InstanceContent();
-        this.lookup = new AbstractLookup(content);
+    public MenuNode(
+            String name,
+            String displayName,
+            boolean showsNotifications,
+            Node detailsPane,
+            AppMenu menu) {
         this.name = name;
         this.displayNameProperty = new SimpleStringProperty(displayName);
         this.showsNotifications = showsNotifications;
         this.detailsPane = detailsPane;
+        this.menu = menu;
     }
 
     public SimpleStringProperty displayNameProperty() {
@@ -55,14 +56,13 @@ public class MenuNode implements Lookup.Provider {
         return detailsPane;
     }
 
-    @Override
-    public Lookup getLookup() {
-        return lookup;
+    public Pane getMenuPane() {
+        return menu.get();
     }
 
     @Override
     public String toString() {
-        return displayNameProperty.get();
+        return "[Menu node: " + displayNameProperty.get() + ']';
     }
 
 }
