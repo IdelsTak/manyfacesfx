@@ -50,10 +50,7 @@
          </VBox.margin>
       </RadioButton>
       <RadioButton layoutX="35.0" layoutY="183.0" mnemonicParsing="false" styleClass="menu-toggle" text="Geolocation" toggleGroup="$profileMenuGroup" />
-      <TitledPane expanded="false" styleClass="advanced-menu-pane">
-         <graphic>
-            <Label styleClass="advanced-titled-menu" text="Advanced" />
-         </graphic>
+      <TitledPane fx:id="advancedMenuTitledPane" expanded="false" styleClass="advanced-menu-pane">
          <content>
             <VBox maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="advanced-menu-box">
                <children>
@@ -74,6 +71,9 @@
          <VBox.margin>
             <Insets />
          </VBox.margin>
+         <graphic>
+            <RadioButton fx:id="advancedMenuToggle" mnemonicParsing="false" styleClass="advanced-titled-menu-toggle" text="Advanced" />
+         </graphic>
       </TitledPane>
    </children>
 </VBox>
