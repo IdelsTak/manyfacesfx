@@ -3,10 +3,14 @@
 <?import java.net.URL?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
 <ScrollPane fitToHeight="true" fitToWidth="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="profile-attributes-root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.idelstak.manyfacesfx.ui.controllers.ProfileAttributesController">
    <content>
-      <HBox fx:id="detailsBox" />
+      <HBox fx:id="attributesBox">
+         <children>
+            <VBox fx:id="detailsBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+         </children></HBox>
    </content>
    <stylesheets>
       <URL value="@../styles/app.css" />
