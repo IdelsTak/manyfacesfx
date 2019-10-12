@@ -77,8 +77,8 @@ public class HomeMenuController {
         MenuNode newProfileNode = new MenuNode(
                 "new profile",
                 newProfileToggle.getText(),
-                true,
-                FXMLLoader.load(getClass().getResource("/fxml/ProfileSummary.fxml")),
+                false,
+                FXMLLoader.load(getClass().getResource("/fxml/ProfileAttributes.fxml")),
                 AppMenu.PROFILE);
 
         Set<MenuNode> nodes = new HashSet<>();
