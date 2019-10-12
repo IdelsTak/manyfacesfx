@@ -5,7 +5,7 @@ Copyright 2019.
     Created on : Oct 12, 2019, 12:49:15 AM
     Author     : Hiram K <hiram.kamau@outlook.com>
 */
-.root {
+.profile-summary-root {
     -fx-pref-width: 309px;
     -fx-min-width: -fx-pref-width;
     -fx-max-width: -fx-pref-width;
