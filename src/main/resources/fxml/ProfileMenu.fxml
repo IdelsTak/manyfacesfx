@@ -26,7 +26,7 @@
             <Insets top="27.0" />
          </VBox.margin>
       </Label>
-      <RadioButton mnemonicParsing="false" styleClass="menu-toggle" text="Overview">
+      <RadioButton fx:id="overviewToggle" mnemonicParsing="false" styleClass="menu-toggle" text="Overview">
          <VBox.margin>
             <Insets bottom="13.0" top="26.0" />
          </VBox.margin>
@@ -34,34 +34,34 @@
             <ToggleGroup fx:id="profileMenuGroup" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton layoutX="35.0" layoutY="126.0" mnemonicParsing="false" styleClass="menu-toggle" text="Proxy" toggleGroup="$profileMenuGroup">
+      <RadioButton fx:id="proxyToggle" layoutX="35.0" layoutY="126.0" mnemonicParsing="false" styleClass="menu-toggle" text="Proxy" toggleGroup="$profileMenuGroup">
          <VBox.margin>
             <Insets bottom="13.0" />
          </VBox.margin>
       </RadioButton>
-      <RadioButton layoutX="35.0" layoutY="126.0" mnemonicParsing="false" styleClass="menu-toggle" text="Timezone" toggleGroup="$profileMenuGroup">
+      <RadioButton fx:id="timezoneToggle" layoutX="35.0" layoutY="126.0" mnemonicParsing="false" styleClass="menu-toggle" text="Timezone" toggleGroup="$profileMenuGroup">
          <VBox.margin>
             <Insets bottom="13.0" />
          </VBox.margin>
       </RadioButton>
-      <RadioButton layoutX="35.0" layoutY="145.0" mnemonicParsing="false" styleClass="menu-toggle" text="WebRTC" toggleGroup="$profileMenuGroup">
+      <RadioButton fx:id="webRtcToggle" layoutX="35.0" layoutY="145.0" mnemonicParsing="false" styleClass="menu-toggle" text="WebRTC" toggleGroup="$profileMenuGroup">
          <VBox.margin>
             <Insets bottom="13.0" />
          </VBox.margin>
       </RadioButton>
-      <RadioButton layoutX="35.0" layoutY="183.0" mnemonicParsing="false" styleClass="menu-toggle" text="Geolocation" toggleGroup="$profileMenuGroup" />
+      <RadioButton fx:id="geolocationToggle" layoutX="35.0" layoutY="183.0" mnemonicParsing="false" styleClass="menu-toggle" text="Geolocation" toggleGroup="$profileMenuGroup" />
       <TitledPane fx:id="advancedMenuTitledPane" expanded="false" styleClass="advanced-menu-pane">
          <content>
             <VBox maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="advanced-menu-box">
                <children>
-                  <RadioButton mnemonicParsing="false" styleClass="menu-toggle" text="Navigator" toggleGroup="$profileMenuGroup" />
-                  <RadioButton mnemonicParsing="false" styleClass="menu-toggle" text="Fonts" toggleGroup="$profileMenuGroup" />
-                  <RadioButton mnemonicParsing="false" styleClass="menu-toggle" text="Media devices" toggleGroup="$profileMenuGroup" />
-                  <RadioButton mnemonicParsing="false" styleClass="menu-toggle" text="Hardware" toggleGroup="$profileMenuGroup" />
-                  <RadioButton mnemonicParsing="false" styleClass="menu-toggle" text="Extensions" toggleGroup="$profileMenuGroup" />
-                  <RadioButton layoutX="10.0" layoutY="92.0" mnemonicParsing="false" styleClass="menu-toggle" text="Storage options" toggleGroup="$profileMenuGroup" />
-                  <RadioButton layoutX="10.0" layoutY="127.0" mnemonicParsing="false" styleClass="menu-toggle" text="Browser plugins" toggleGroup="$profileMenuGroup" />
-                  <RadioButton layoutX="10.0" layoutY="162.0" mnemonicParsing="false" styleClass="menu-toggle" text="Other" toggleGroup="$profileMenuGroup" />
+                  <RadioButton fx:id="navigatorToggle" mnemonicParsing="false" styleClass="menu-toggle" text="Navigator" toggleGroup="$profileMenuGroup" />
+                  <RadioButton fx:id="fontsToggle" mnemonicParsing="false" styleClass="menu-toggle" text="Fonts" toggleGroup="$profileMenuGroup" />
+                  <RadioButton fx:id="mediaDevicesToggle" mnemonicParsing="false" styleClass="menu-toggle" text="Media devices" toggleGroup="$profileMenuGroup" />
+                  <RadioButton fx:id="hardwareToggle" mnemonicParsing="false" styleClass="menu-toggle" text="Hardware" toggleGroup="$profileMenuGroup" />
+                  <RadioButton fx:id="extensionsToggle" mnemonicParsing="false" styleClass="menu-toggle" text="Extensions" toggleGroup="$profileMenuGroup" />
+                  <RadioButton fx:id="storageOptionsToggle" layoutX="10.0" layoutY="92.0" mnemonicParsing="false" styleClass="menu-toggle" text="Storage options" toggleGroup="$profileMenuGroup" />
+                  <RadioButton fx:id="browserPluginsToggle" layoutX="10.0" layoutY="127.0" mnemonicParsing="false" styleClass="menu-toggle" text="Browser plugins" toggleGroup="$profileMenuGroup" />
+                  <RadioButton fx:id="otherToggle" layoutX="10.0" layoutY="162.0" mnemonicParsing="false" styleClass="menu-toggle" text="Other" toggleGroup="$profileMenuGroup" />
                </children>
                <padding>
                   <Insets top="-1.0" />
