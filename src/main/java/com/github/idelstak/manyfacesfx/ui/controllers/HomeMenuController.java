@@ -89,11 +89,11 @@ public class HomeMenuController {
         nodes.add(pluginsNode);
         nodes.add(helpNode);
 
-        homeToggle.setOnAction(e -> nodes.stream().forEach(n -> context(n, homeNode)));
-        newProfileToggle.setOnAction(e -> nodes.stream().forEach(n -> context(n, newProfileNode)));
-        myAccountToggle.setOnAction(e -> nodes.stream().forEach(n -> context(n, myAccountNode)));
-        pluginsToggle.setOnAction(e -> nodes.stream().forEach(n -> context(n, pluginsNode)));
-        helpToggle.setOnAction(e -> nodes.stream().forEach(n -> context(n, helpNode)));
+        homeToggle.setOnAction(e -> nodes.stream().forEach(n -> switchContext(n, homeNode)));
+        newProfileToggle.setOnAction(e -> nodes.stream().forEach(n -> switchContext(n, newProfileNode)));
+        myAccountToggle.setOnAction(e -> nodes.stream().forEach(n -> switchContext(n, myAccountNode)));
+        pluginsToggle.setOnAction(e -> nodes.stream().forEach(n -> switchContext(n, pluginsNode)));
+        helpToggle.setOnAction(e -> nodes.stream().forEach(n -> switchContext(n, helpNode)));
 
         ensureHomeSelected();
 
@@ -116,7 +116,7 @@ public class HomeMenuController {
         });
     }
 
-    private void context(MenuNode n1, MenuNode n2) {
+    private void switchContext(MenuNode n1, MenuNode n2) {
         if (Objects.equals(n1, n2)) {
             CONTEXT.add(n1);
         } else {
