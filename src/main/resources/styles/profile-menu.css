@@ -39,23 +39,17 @@ Copyright 2019.
     -fx-font-size: 20px;
 }
 
+.advanced-titled-menu-toggle,
+.advanced-titled-menu-toggle:selected,
 .menu-toggle {
     -fx-text-fill: #a7d0ff;
     -fx-font-size: 16px;
     -fx-pref-height: 22px;
-    -fx-min-height: 22px;
+    -fx-min-height: -fx-pref-height;
 }
 
 .menu-toggle:selected {
-    -fx-text-fill: #ced8f1;
-}
-
-.advanced-titled-menu {
-    -fx-text-fill: #a7d0ff;
-    -fx-font-size: 16px;
-    -fx-pref-height: 22px;
-    -fx-min-height: -fx-pref-height;
-    -fx-cursor: hand;
+    -fx-text-fill: #ffffff;
 }
 
 .advanced-menu-pane > .title {
