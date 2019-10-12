@@ -6,7 +6,7 @@ Copyright 2019.
     Author     : Hiram K <hiram.kamau@outlook.com>
 */
 
-.root {
+.profile-menu-root {
     -fx-background-color: #0d3fb9;
     -fx-pref-width: 240px;
     -fx-min-width: -fx-pref-width;
