@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox styleClass="profile-summary-root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<VBox minHeight="-Infinity" styleClass="profile-summary-root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <Label styleClass="profile-summary-title" text="PROFILE SUMMARY" />
-      <HBox spacing="14.0">
+      <Label styleClass="profile-summary-title" text="PROFILE SUMMARY">
+         <VBox.margin>
+            <Insets left="16.0" />
+         </VBox.margin></Label>
+      <HBox minHeight="-Infinity" spacing="14.0">
          <children>
             <VBox spacing="10.0" styleClass="profile-summary-field-title-box">
                <children>
@@ -63,8 +67,15 @@
             </VBox>
          </children>
          <VBox.margin>
-            <Insets top="25.0" />
+            <Insets left="16.0" top="25.0" />
          </VBox.margin>
+      </HBox>
+      <HBox maxHeight="1.7976931348623157E308" spacing="14.0" VBox.vgrow="ALWAYS" />
+      <HBox styleClass="actions-box">
+         <children>
+            <JFXButton styleClass="cancel-button" text="Cancel" />
+            <JFXButton styleClass="update-button" text="Update profile" />
+         </children>
       </HBox>
    </children>
    <stylesheets>
