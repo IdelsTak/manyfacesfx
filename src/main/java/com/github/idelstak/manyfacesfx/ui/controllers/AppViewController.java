@@ -3,19 +3,22 @@
  */
 package com.github.idelstak.manyfacesfx.ui.controllers;
 
-import com.github.idelstak.manyfacesfx.api.AbstractNavigationBar;
 import com.github.idelstak.manyfacesfx.api.AbstractNotificationPane;
 import com.github.idelstak.manyfacesfx.api.GlobalContext;
+import com.github.idelstak.manyfacesfx.ui.AppMenu;
 import com.github.idelstak.manyfacesfx.ui.MenuNode;
 import com.jfoenix.controls.JFXToggleNode;
-import java.util.Collection;
 import java.util.Iterator;
+import java.util.Objects;
+import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.openide.util.Lookup;
@@ -28,6 +31,7 @@ import org.openide.util.Lookup;
 public class AppViewController {
 
     private static final Logger LOG = Logger.getLogger(AppViewController.class.getName());
+    private static final GlobalContext CONTEXT = GlobalContext.getDefault();
     @FXML
     private VBox masterBox;
     @FXML
@@ -43,7 +47,7 @@ public class AppViewController {
     private final Lookup.Result<MenuNode> lookupResult;
 
     {
-        lookupResult = GlobalContext.getDefault().lookupResult(MenuNode.class);
+        lookupResult = CONTEXT.lookupResult(MenuNode.class);
     }
 
     /**
@@ -51,22 +55,13 @@ public class AppViewController {
      */
     @FXML
     public void initialize() {
-        Pane navigationPane = AbstractNavigationBar.getDefault()
-                .getLookup()
-                .lookup(Pane.class);
-
-        masterBox.getChildren().setAll(navigationPane);
+        masterBox.getChildren().setAll(AppMenu.HOME.get());
 
         lookupResult.addLookupListener(e -> {
-            Collection<? extends MenuNode> result = lookupResult.allInstances();
-            Iterator<? extends MenuNode> it = result.iterator();
+            Iterator<? extends MenuNode> it = lookupResult.allInstances().iterator();
 
             if (it.hasNext()) {
-                MenuNode menuNode = it.next();
-
-                titleLabel.textProperty().bind(menuNode.displayNameProperty());
-                notificationsToggle.setVisible(menuNode.showsNotifications());
-                detailPane.getChildren().setAll(menuNode.getDetailsPane());
+                Platform.runLater(() -> initComponents(it.next()));
             }
         });
     }
@@ -79,5 +74,20 @@ public class AppViewController {
     @FXML
     void showNotification(ActionEvent event) {
         AbstractNotificationPane.getDefault().notify(event.toString());
+    }
+
+    private void initComponents(MenuNode node) {
+        LOG.log(Level.FINE, "Initting components with node: {0}", node);
+
+        titleLabel.textProperty().bind(node.displayNameProperty());
+        notificationsToggle.setVisible(node.showsNotifications());
+        detailPane.getChildren().setAll(node.getDetailsPane());
+
+        ObservableList<Node> nodes = masterBox.getChildren();
+
+        if (!nodes.isEmpty()
+                && !Objects.equals(nodes.get(0), node.getMenuPane())) {
+            nodes.set(0, node.getMenuPane());
+        }
     }
 }
