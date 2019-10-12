@@ -10,9 +10,9 @@ Copyright 2019.
     -fx-min-width: -fx-pref-width;
     -fx-max-width: -fx-pref-width;
     -fx-font-family: 'Roboto Regular';
-    -fx-padding: 24px 0 0 16px;
+    -fx-padding: 24px 0 0 0;
     -fx-background-color: #f9f9f9;
-    -fx-border-color: #e0e2e7 transparent transparent #e0e2e7;
+    -fx-border-color: transparent transparent transparent #e0e2e7;
 }
 
 .profile-summary-field-title-box {
@@ -43,4 +43,34 @@ Copyright 2019.
 .profile-summary-field-title,
 .profile-summary-field {
     -fx-font-size: 12px;
+}
+
+.actions-box {
+    -fx-background-color: white;
+    -fx-padding: 22px 0 23px 70px;
+    -fx-spacing: 10px;
+    -fx-pref-height: 83px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+}
+
+.actions-box > .cancel-button {
+    -fx-text-fill: #828b93;
+    -fx-pref-width: 87px;
+    -fx-min-width: -fx-pref-width;
+    -fx-background-color: #fdfdfd;
+    -fx-border-color: #c2c6cf;
+}
+
+.actions-box > .update-button {
+    -fx-text-fill: #174bc9;
+    -fx-pref-width: 122px;
+    -fx-min-width: -fx-pref-width;
+    -fx-background-color: #d7e4ff;
+    -fx-border-color: #b9c9ef;
+}
+
+.actions-box > .cancel-button,
+.actions-box > .update-button {
+    -fx-font-size: 14px;
 }
