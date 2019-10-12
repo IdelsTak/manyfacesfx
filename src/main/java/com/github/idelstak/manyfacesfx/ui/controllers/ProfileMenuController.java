@@ -25,22 +25,50 @@ public class ProfileMenuController {
     private TitledPane advancedMenuTitledPane;
     @FXML
     private RadioButton advancedMenuToggle;
+    @FXML
+    private RadioButton overviewToggle;
+    @FXML
+    private RadioButton proxyToggle;
+    @FXML
+    private RadioButton timezoneToggle;
+    @FXML
+    private RadioButton webRtcToggle;
+    @FXML
+    private RadioButton geolocationToggle;
+    @FXML
+    private RadioButton navigatorToggle;
+    @FXML
+    private RadioButton fontsToggle;
+    @FXML
+    private RadioButton mediaDevicesToggle;
+    @FXML
+    private RadioButton hardwareToggle;
+    @FXML
+    private RadioButton extensionsToggle;
+    @FXML
+    private RadioButton storageOptionsToggle;
+    @FXML
+    private RadioButton browserPluginsToggle;
+    @FXML
+    private RadioButton otherToggle;
 
     /**
      Initializes the controller class.
      */
     @FXML
     public void initialize() {
-        goHomeButton.setOnAction(e -> {
-            new HomeNodeContext().refreshContext();
-            //Collapse the advanced menu when
-            //the edit profile page is exited
-            Platform.runLater(() -> advancedMenuToggle.setSelected(false));
-        });
-
         advancedMenuTitledPane.addEventFilter(InputEvent.ANY, new TitledPaneInputEventBypass());
-        
         advancedMenuTitledPane.expandedProperty().bind(advancedMenuToggle.selectedProperty());
+        
+        goHomeButton.setOnAction(e -> switchToHome());
+
+    }
+
+    private void switchToHome() {
+        new HomeNodeContext().refreshContext();
+        //Collapse the advanced menu when
+        //the edit profile page is exited
+        Platform.runLater(() -> advancedMenuToggle.setSelected(false));
     }
 
 }
