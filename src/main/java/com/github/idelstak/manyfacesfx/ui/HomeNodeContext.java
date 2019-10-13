@@ -49,13 +49,6 @@ public class HomeNodeContext {
     }
 
     public void refreshContext() {
-        GlobalContext context = GlobalContext.getDefault();
-        MenuNode node = context.lookup(MenuNode.class);
-
-        if (node != null && !node.equals(HOME_NODE)) {
-            context.remove(node);
-        }
-
-        context.add(HOME_NODE);
+        GlobalContext.getDefault().replace(MenuNode.class, HOME_NODE);
     }
 }
