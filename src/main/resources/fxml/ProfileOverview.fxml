@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane id="AnchorPane" minHeight="-Infinity" styleClass="profile-overview-root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" styleClass="profile-overview-root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox spacing="6.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="22.0">
          <children>
