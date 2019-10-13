@@ -32,6 +32,8 @@ public abstract class GlobalContext extends ProxyLookup {
 
     public abstract <T> GlobalContext remove(T inst);
 
+    public abstract <T> void replace(Class<? extends T> type, T inst);
+
     private static final class SimpleContext extends GlobalContext {
 
         private final InstanceContent content;
@@ -56,6 +58,18 @@ public abstract class GlobalContext extends ProxyLookup {
         public synchronized <T> GlobalContext remove(T inst) {
             content.remove(inst);
             return this;
+        }
+
+        @Override
+        public synchronized <T> void replace(Class<? extends T> type, T inst) {
+            lookupAll(type).stream()
+                    .filter(t -> !t.equals(inst))
+                    .forEach(content::remove);
+            
+            //Check against the new lookup list
+            if (lookupAll(type).isEmpty()) {
+                content.add(inst);
+            }
         }
 
     }
