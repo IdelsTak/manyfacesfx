@@ -60,13 +60,9 @@ public class MenuNode {
         return menu.get();
     }
 
-    public AppMenu getMenu() {
-        return menu;
-    }
-
     @Override
     public String toString() {
-        return "[Menu node: " + displayNameProperty.get() + ']';
+        return "[Menu node: " + getDisplayName() + ']';
     }
 
 }
