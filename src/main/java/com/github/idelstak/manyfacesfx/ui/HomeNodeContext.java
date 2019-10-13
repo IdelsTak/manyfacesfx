@@ -15,7 +15,7 @@ import javafx.scene.Node;
 
  @author Hiram K <hiram.kamau@outlook.com>
  */
-public class HomeNodeContext {
+public class HomeNodeContext implements NodeContext<MenuNode> {
 
     private static final Logger LOG = Logger.getLogger(HomeNodeContext.class.getName());
     private static final MenuNode HOME_NODE;
@@ -44,10 +44,12 @@ public class HomeNodeContext {
     public HomeNodeContext() {
     }
 
+    @Override
     public MenuNode getNode() {
         return HOME_NODE;
     }
 
+    @Override
     public void refreshContext() {
         GlobalContext.getDefault().replace(MenuNode.class, HOME_NODE);
     }
