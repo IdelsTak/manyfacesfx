@@ -1,0 +1,143 @@
+
+.profile-proxy-root {
+    -fx-base: white;
+    -fx-background-color: white;
+    -fx-font-family: 'Roboto';
+}
+
+.profile-proxy-content-box {
+    -fx-pref-width: 337px;
+    -fx-min-width: -fx-pref-width;
+}
+
+.field-header-label {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+}
+
+.jfx-combo-box,
+.jfx-combo-box:focused,
+.jfx-combo-box:editable,
+.jfx-combo-box:editable:focused {
+    -fx-background-radius: 0px;
+    -fx-padding: -1;
+}
+
+.jfx-password-field {
+
+}
+
+.jfx-combo-box,
+.jfx-password-field,
+.jfx-text-field {
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: #7b7b7b;
+    -fx-border-color: #949494;
+    -fx-pref-height: 27px;
+    -fx-max-height: -fx-pref-height;
+    -fx-min-height: -fx-pref-height;
+    -fx-pref-width: 337px;
+    -fx-min-width: -fx-pref-width;
+    -fx-max-width: -fx-pref-width;
+}
+
+.jfx-password-field,
+.jfx-text-field {
+    -fx-padding: 1 0 1 1;
+}
+
+.jfx-combo-box:focused,
+.jfx-password-field:focused,
+.jfx-text-field:focused {
+    -fx-border-color: #174bc9;
+}
+
+.jfx-password-field > .input-line,
+.jfx-combo-box > .input-line,
+.jfx-text-field > .input-line {
+    -fx-pref-height: 0px;
+    -fx-max-height: 0px;
+}
+
+.jfx-password-field > .input-focused-line,
+.jfx-combo-box > .input-focused-line,
+.jfx-text-field > .input-focused-line {
+    -fx-pref-height: 0px;
+    -fx-max-height: 0px;
+}
+
+.combo-box-popup .list-view .jfx-list-cell:odd:selected,
+.combo-box-popup .list-view .jfx-list-cell:even:selected {
+    -fx-background-color: #e0e0e0;
+    -fx-text-fill: #1c4fca;
+}
+
+.combo-box-popup .list-view .jfx-list-cell {
+    -fx-background-insets: 0.0;
+    -fx-text-fill: BLACK;
+}
+
+.combo-box-popup .list-view .jfx-list-cell:odd,
+.combo-box-popup .list-view .jfx-list-cell:even {
+    -fx-background-color: WHITE;
+}
+
+.combo-box-popup .list-view .jfx-list-cell:filled:hover {
+    -fx-text-fill: black;
+    -fx-background-color: #f5f5f5;
+}
+
+.combo-box-popup .list-view .jfx-list-cell .jfx-rippler {
+    -jfx-rippler-fill: #dcdcdc;
+}
+
+.show-password-toggle {
+    -fx-pref-width: 24px;
+    -fx-pref-height: 24px;
+    -fx-min-width: -fx-pref-width;
+    -fx-max-width: -fx-pref-width;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+    -fx-padding: 0 1 0 1;
+    -fx-cursor: hand;
+    -jfx-toggle-color: transparent;
+    -jfx-untoggle-color: -jfx-toggle-color;
+}
+
+.show-password-toggle > .ikonli-font-icon {
+    -fx-icon-code: mdi-eye;
+    -fx-icon-size: 22px;
+}
+
+.show-password-toggle:selected > .ikonli-font-icon {
+    -fx-icon-code: mdi-eye-off;
+}
+
+.show-password-toggle .jfx-rippler {
+    -jfx-rippler-fill: white;
+}
+
+.check-proxy-button {
+    -fx-pref-width: 84px;
+    -fx-pref-height: 26px;
+    -fx-min-width: -fx-pref-width;
+    -fx-max-width: -fx-pref-width;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+    -fx-font-size: 13px;
+    -fx-padding: -1;
+    -fx-text-fill: #0e46cc;
+    -fx-background-color: #d1dfff;
+    -fx-border-color: #b9c9ef;
+    -fx-font-family: 'Roboto Medium';
+}
+
+.proxy-format-info-label {
+    -fx-font-size: 12px;
+    -fx-pref-height: 33px;
+    -fx-min-height: -fx-pref-height;
+}
+
+.header-info-label {
+    -fx-font-size: 13px;
+}

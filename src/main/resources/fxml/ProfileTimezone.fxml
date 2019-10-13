@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" styleClass="profile-timezone-root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox styleClass="profile-timezone-content-box" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="33.0" AnchorPane.topAnchor="15.0">
+         <children>
+            <JFXToggleButton fx:id="fillTimezoneToggle" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" text="Fill timezone based on the IP." VBox.vgrow="NEVER" />
+            <Label alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" styleClass="field-subtitle-label" text="Fill timezone on browser profile start based on the external IP." VBox.vgrow="NEVER" />
+            <VBox fx:id="timezonePickerBox" VBox.vgrow="NEVER">
+               <children>
+                  <JFXComboBox fx:id="timezonesComboBox" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="335.0" promptText="Select timezone">
+                     <VBox.margin>
+                        <Insets bottom="27.0" />
+                     </VBox.margin>
+                  </JFXComboBox>
+                  <HBox spacing="3.0">
+                     <children>
+                        <Label styleClass="utc-offset-label" text="Offset UTC:">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                        <Label fx:id="utcOffsetLabel" styleClass="utc-offset-label" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+   <stylesheets>
+      <URL value="@../styles/app.css" />
+      <URL value="@../styles/profile-timezone.css" />
+   </stylesheets>
+</AnchorPane>
