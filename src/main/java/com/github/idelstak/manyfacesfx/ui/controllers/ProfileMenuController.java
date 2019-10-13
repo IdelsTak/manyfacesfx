@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.InputEvent;
@@ -74,8 +75,18 @@ public class ProfileMenuController {
     @FXML
     public void initialize() throws IOException {
         ProfileMenuNode overviewNode = new OverViewNodeContext().getNode();
+        ProfileMenuNode proxyNode = new ProfileMenuNode(
+                "proxy",
+                proxyToggle.getText(),
+                FXMLLoader.load(getClass().getResource("/fxml/ProfileProxy.fxml")));
+        ProfileMenuNode timezoneNode = new ProfileMenuNode(
+                "timezone",
+                timezoneToggle.getText(),
+                FXMLLoader.load(getClass().getResource("/fxml/ProfileTimezone.fxml")));
 
         overviewToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, overviewNode));
+        proxyToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, proxyNode));
+        timezoneToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, timezoneNode));
 
         //Ensure overview is selected
         Platform.runLater(() -> {
@@ -93,6 +104,5 @@ public class ProfileMenuController {
             Platform.runLater(() -> advancedMenuToggle.setSelected(false));
         });
     }
-
 
 }
