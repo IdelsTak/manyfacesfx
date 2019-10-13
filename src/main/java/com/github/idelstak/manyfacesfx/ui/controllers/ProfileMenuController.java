@@ -5,16 +5,15 @@ package com.github.idelstak.manyfacesfx.ui.controllers;
 
 import com.github.idelstak.manyfacesfx.api.GlobalContext;
 import com.github.idelstak.manyfacesfx.ui.HomeNodeContext;
+import com.github.idelstak.manyfacesfx.ui.OverViewNodeContext;
 import com.github.idelstak.manyfacesfx.ui.ProfileMenuNode;
 import com.github.idelstak.manyfacesfx.ui.util.TitledPaneInputEventBypass;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.InputEvent;
@@ -74,35 +73,26 @@ public class ProfileMenuController {
      */
     @FXML
     public void initialize() throws IOException {
-        LOG.log(Level.INFO, "Initializing profile menu controller");
-        
-        ProfileMenuNode overviewNode = new ProfileMenuNode(
-                "overview",
-                overviewToggle.getText(),
-                FXMLLoader.load(getClass().getResource("/fxml/ProfileOverview.fxml")));
+        ProfileMenuNode overviewNode = new OverViewNodeContext().getNode();
 
         overviewToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, overviewNode));
-        
-        ensureOverviewSelected();
 
-        advancedMenuTitledPane.addEventFilter(InputEvent.ANY, new TitledPaneInputEventBypass());
-        advancedMenuTitledPane.expandedProperty().bind(advancedMenuToggle.selectedProperty());
-
-        goHomeButton.setOnAction(e -> switchToHome());
-    }
-
-    private void switchToHome() {
-        new HomeNodeContext().refreshContext();
-        //Collapse the advanced menu when
-        //the edit profile page is exited
-        Platform.runLater(() -> advancedMenuToggle.setSelected(false));
-    }
-
-    private void ensureOverviewSelected() {
+        //Ensure overview is selected
         Platform.runLater(() -> {
             overviewToggle.fireEvent(new ActionEvent());
             overviewToggle.setSelected(true);
         });
+
+        advancedMenuTitledPane.addEventFilter(InputEvent.ANY, new TitledPaneInputEventBypass());
+        advancedMenuTitledPane.expandedProperty().bind(advancedMenuToggle.selectedProperty());
+
+        goHomeButton.setOnAction(e -> {
+            new HomeNodeContext().refreshContext();
+            //Collapse the advanced menu when
+            //the edit profile page is exited
+            Platform.runLater(() -> advancedMenuToggle.setSelected(false));
+        });
     }
+
 
 }
