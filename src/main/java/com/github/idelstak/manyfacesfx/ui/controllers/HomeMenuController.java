@@ -7,6 +7,7 @@ import com.github.idelstak.manyfacesfx.api.GlobalContext;
 import com.github.idelstak.manyfacesfx.ui.AppMenu;
 import com.github.idelstak.manyfacesfx.ui.HomeNodeContext;
 import com.github.idelstak.manyfacesfx.ui.MenuNode;
+import com.github.idelstak.manyfacesfx.ui.OverViewNodeContext;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.logging.Logger;
@@ -73,13 +74,17 @@ public class HomeMenuController {
                 AppMenu.HOME);
         MenuNode newProfileNode = new MenuNode(
                 "new profile",
-                "Overview",
+                newProfileToggle.getText(),
                 false,
                 FXMLLoader.load(getClass().getResource("/fxml/ProfileAttributes.fxml")),
                 AppMenu.PROFILE);
 
         homeToggle.setOnAction(e -> CONTEXT.replace(MenuNode.class, homeNode));
-        newProfileToggle.setOnAction(e -> CONTEXT.replace(MenuNode.class, newProfileNode));
+        newProfileToggle.setOnAction(e -> {
+            CONTEXT.replace(MenuNode.class, newProfileNode);
+            //Ensure the overview node context is added to lookup
+            Platform.runLater(() -> new OverViewNodeContext().refreshContext());
+        });
         myAccountToggle.setOnAction(e -> CONTEXT.replace(MenuNode.class, myAccountNode));
         pluginsToggle.setOnAction(e -> CONTEXT.replace(MenuNode.class, pluginsNode));
         helpToggle.setOnAction(e -> CONTEXT.replace(MenuNode.class, helpNode));
