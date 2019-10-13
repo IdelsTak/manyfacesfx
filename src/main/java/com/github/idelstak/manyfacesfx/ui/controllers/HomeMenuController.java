@@ -8,10 +8,7 @@ import com.github.idelstak.manyfacesfx.ui.AppMenu;
 import com.github.idelstak.manyfacesfx.ui.HomeNodeContext;
 import com.github.idelstak.manyfacesfx.ui.MenuNode;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Iterator;
-import java.util.Objects;
-import java.util.Set;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -76,24 +73,16 @@ public class HomeMenuController {
                 AppMenu.HOME);
         MenuNode newProfileNode = new MenuNode(
                 "new profile",
-                newProfileToggle.getText(),
+                "Overview",
                 false,
                 FXMLLoader.load(getClass().getResource("/fxml/ProfileAttributes.fxml")),
                 AppMenu.PROFILE);
 
-        Set<MenuNode> nodes = new HashSet<>();
-
-        nodes.add(homeNode);
-        nodes.add(newProfileNode);
-        nodes.add(myAccountNode);
-        nodes.add(pluginsNode);
-        nodes.add(helpNode);
-
-        homeToggle.setOnAction(e -> nodes.stream().forEach(n -> switchContext(n, homeNode)));
-        newProfileToggle.setOnAction(e -> nodes.stream().forEach(n -> switchContext(n, newProfileNode)));
-        myAccountToggle.setOnAction(e -> nodes.stream().forEach(n -> switchContext(n, myAccountNode)));
-        pluginsToggle.setOnAction(e -> nodes.stream().forEach(n -> switchContext(n, pluginsNode)));
-        helpToggle.setOnAction(e -> nodes.stream().forEach(n -> switchContext(n, helpNode)));
+        homeToggle.setOnAction(e -> CONTEXT.replace(MenuNode.class, homeNode));
+        newProfileToggle.setOnAction(e -> CONTEXT.replace(MenuNode.class, newProfileNode));
+        myAccountToggle.setOnAction(e -> CONTEXT.replace(MenuNode.class, myAccountNode));
+        pluginsToggle.setOnAction(e -> CONTEXT.replace(MenuNode.class, pluginsNode));
+        helpToggle.setOnAction(e -> CONTEXT.replace(MenuNode.class, helpNode));
 
         ensureHomeSelected();
 
@@ -114,14 +103,6 @@ public class HomeMenuController {
             homeToggle.fireEvent(new ActionEvent());
             homeToggle.setSelected(true);
         });
-    }
-
-    private void switchContext(MenuNode n1, MenuNode n2) {
-        if (Objects.equals(n1, n2)) {
-            CONTEXT.add(n1);
-        } else {
-            CONTEXT.remove(n1);
-        }
     }
 
 }
