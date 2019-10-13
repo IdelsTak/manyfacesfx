@@ -95,12 +95,14 @@
 .content-label {
     -fx-font-size: 11px;
     -fx-text-fill: #979fa5;
+    -fx-padding: 0 12px 0 0;
 }
 
 .hyperlink {
     -fx-font-size: 13px;
     -fx-text-fill: #0e46cc;
     -fx-focus-traversable: false;
+    -fx-padding: 0 12px 0 0;
 }
 
 .jfx-toggle-button {

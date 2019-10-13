@@ -73,4 +73,5 @@ Copyright 2019.
 .actions-box > .cancel-button,
 .actions-box > .update-button {
     -fx-font-size: 14px;
+    -fx-font-family: 'Roboto Medium';
 }
