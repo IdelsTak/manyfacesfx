@@ -4,10 +4,10 @@
 package com.github.idelstak.manyfacesfx.ui.controllers;
 
 import com.github.idelstak.manyfacesfx.api.GlobalContext;
-import com.github.idelstak.manyfacesfx.ui.AppMenu;
-import com.github.idelstak.manyfacesfx.ui.MenuNode;
+import com.github.idelstak.manyfacesfx.ui.ProfileMenuNode;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,15 +25,16 @@ import org.openide.util.Lookup;
  */
 public class ProfileAttributesController {
 
+    private static final Logger LOG = Logger.getLogger(ProfileAttributesController.class.getName());
     private static final GlobalContext CONTEXT = GlobalContext.getDefault();
     @FXML
     private HBox attributesBox;
     @FXML
     private AnchorPane detailsBox;
-    private final Lookup.Result<MenuNode> lookupResult;
+    private final Lookup.Result<ProfileMenuNode> lookupResult;
 
     {
-        lookupResult = CONTEXT.lookupResult(MenuNode.class);
+        lookupResult = CONTEXT.lookupResult(ProfileMenuNode.class);
     }
 
     /**
@@ -51,20 +52,14 @@ public class ProfileAttributesController {
         });
 
         lookupResult.addLookupListener(e -> {
-            Iterator<? extends MenuNode> it = lookupResult.allInstances().iterator();
+            Iterator<? extends ProfileMenuNode> it = lookupResult.allInstances().iterator();
 
             if (it.hasNext()) {
-                MenuNode node = it.next();
-                
-                if (node.getMenu()!= AppMenu.PROFILE) {
-                    return;
-                }
-                
-                Node detailsPane = node.getDetailsPane();
-
                 Platform.runLater(() -> {
+                    Node detailsPane = it.next().getDetailsPane();
+                    
                     detailsBox.getChildren().setAll(detailsPane);
-
+                    
                     AnchorPane.setTopAnchor(detailsPane, 0.0);
                     AnchorPane.setRightAnchor(detailsPane, 0.0);
                     AnchorPane.setBottomAnchor(detailsPane, 0.0);
