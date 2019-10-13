@@ -7,10 +7,10 @@ import com.github.idelstak.manyfacesfx.api.AbstractNotificationPane;
 import com.github.idelstak.manyfacesfx.api.GlobalContext;
 import com.github.idelstak.manyfacesfx.ui.AppMenu;
 import com.github.idelstak.manyfacesfx.ui.MenuNode;
+import com.github.idelstak.manyfacesfx.ui.ProfileMenuNode;
 import com.jfoenix.controls.JFXToggleNode;
 import java.util.Iterator;
 import java.util.Objects;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
@@ -44,10 +44,12 @@ public class AppViewController {
     private JFXToggleNode notificationsToggle;
     @FXML
     private StackPane detailPane;
-    private final Lookup.Result<MenuNode> lookupResult;
+    private final Lookup.Result<MenuNode> menuNodeResult;
+    private final Lookup.Result<ProfileMenuNode> profileMenuNodeResult;
 
     {
-        lookupResult = CONTEXT.lookupResult(MenuNode.class);
+        menuNodeResult = CONTEXT.lookupResult(MenuNode.class);
+        profileMenuNodeResult = CONTEXT.lookupResult(ProfileMenuNode.class);
     }
 
     /**
@@ -57,11 +59,21 @@ public class AppViewController {
     public void initialize() {
         masterBox.getChildren().setAll(AppMenu.HOME.get());
 
-        lookupResult.addLookupListener(e -> {
-            Iterator<? extends MenuNode> it = lookupResult.allInstances().iterator();
+        menuNodeResult.addLookupListener(e -> {
+            Iterator<? extends MenuNode> it = menuNodeResult.allInstances().iterator();
 
             if (it.hasNext()) {
                 Platform.runLater(() -> initComponents(it.next()));
+            }
+        });
+
+        profileMenuNodeResult.addLookupListener(e -> {
+            Iterator<? extends ProfileMenuNode> it = profileMenuNodeResult.allInstances().iterator();
+
+            if (it.hasNext()) {
+                Platform.runLater(() -> {
+                    titleLabel.setText(it.next().getDisplayName());
+                });
             }
         });
     }
@@ -77,9 +89,7 @@ public class AppViewController {
     }
 
     private void initComponents(MenuNode node) {
-        LOG.log(Level.FINE, "Initting components with node: {0}", node);
-
-        titleLabel.textProperty().bind(node.displayNameProperty());
+        titleLabel.setText(node.getDisplayName());
         notificationsToggle.setVisible(node.showsNotifications());
         detailPane.getChildren().setAll(node.getDetailsPane());
 
