@@ -100,6 +100,10 @@ public class ProfileMenuController {
                 "extensions",
                 extensionsToggle.getText(),
                 FXMLLoader.load(getClass().getResource("/fxml/ProfileAdvancedExtensions.fxml")));
+        ProfileMenuNode fontsNode = new ProfileMenuNode(
+                "fonts",
+                fontsToggle.getText(),
+                FXMLLoader.load(getClass().getResource("/fxml/ProfileAdvancedFonts.fxml")));
 
         overviewToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, overviewNode));
         proxyToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, proxyNode));
@@ -109,6 +113,7 @@ public class ProfileMenuController {
         
         mediaDevicesToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, mediaDevicesNode));
         extensionsToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, extensionsNode));
+        fontsToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, fontsNode));
 
         //Ensure overview is selected
         Platform.runLater(() -> {
