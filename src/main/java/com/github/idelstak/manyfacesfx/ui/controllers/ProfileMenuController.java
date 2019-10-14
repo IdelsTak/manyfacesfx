@@ -91,12 +91,18 @@ public class ProfileMenuController {
                 "geolocation",
                 geolocationToggle.getText(),
                 FXMLLoader.load(getClass().getResource("/fxml/ProfileGeolocation.fxml")));
+        ProfileMenuNode mediaDevicesNode = new ProfileMenuNode(
+                "media devices",
+                mediaDevicesToggle.getText(),
+                FXMLLoader.load(getClass().getResource("/fxml/ProfileAdvancedDevices.fxml")));
 
         overviewToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, overviewNode));
         proxyToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, proxyNode));
         timezoneToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, timezoneNode));
         webRtcToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, webRtcNode));
         geolocationToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, geolocationNode));
+        
+        mediaDevicesToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, mediaDevicesNode));
 
         //Ensure overview is selected
         Platform.runLater(() -> {
