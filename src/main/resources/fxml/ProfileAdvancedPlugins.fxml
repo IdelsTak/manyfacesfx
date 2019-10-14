@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" styleClass="advanced-plugins-root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox styleClass="advanced-plugins-content" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="18.0">
+         <children>
+            <JFXToggleButton fx:id="vulnerablePluginsToggle" text="Enable potentially vulnerable plugins" />
+            <Label styleClass="vulnerable-plugins-subtitle" text="By default, potentially vulnerable plugins (AdobePDF, Widevine, and Native Client) embedded with Chrome will be masked. Websites will see them as enabled but won't be able to actually utilize. Enabling this option will make them usable while exposing your browser to the potential risk of being fingerprinted." wrapText="true" />
+            <JFXToggleButton fx:id="flashPluginToggle" layoutX="10.0" layoutY="10.0" text="Enable Flash plugin">
+               <VBox.margin>
+                  <Insets top="23.0" />
+               </VBox.margin>
+            </JFXToggleButton>
+            <Label layoutX="10.0" layoutY="70.0" styleClass="flash-plugins-subtitle" text="By default, Flash plugin is disabled in modern browsers. Enabling it will expose your browser to the potential risk of being fingerprinted. Flash API grants websites an access to a very big amount of uniquely identifiable data." wrapText="true" />
+         </children>
+      </VBox>
+   </children>
+   <stylesheets>
+      <URL value="@../styles/app.css" />
+      <URL value="@../styles/profile-advanced-plugins.css" />
+   </stylesheets>
+</AnchorPane>
