@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" styleClass="advanced-navigator-root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox styleClass="advanced-navigator-content" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="18.0">
+         <children>
+            <Label styleClass="field-header-label" text="User-Agent:" />
+            <JFXTextField>
+               <VBox.margin>
+                  <Insets bottom="27.0" />
+               </VBox.margin>
+            </JFXTextField>
+            <Label layoutX="10.0" layoutY="10.0" styleClass="field-header-label" text="Screen resolution:" />
+            <JFXComboBox fx:id="resolutionComboBox">
+               <VBox.margin>
+                  <Insets bottom="17.0" />
+               </VBox.margin>
+            </JFXComboBox>
+            <Hyperlink fx:id="setResolutionHyperlink" text="Set custom screen resolution">
+               <VBox.margin>
+                  <Insets bottom="36.0" />
+               </VBox.margin>
+            </Hyperlink>
+            <Label styleClass="field-header-label" text="Languages:" />
+            <HBox maxHeight="-Infinity" minHeight="-Infinity" prefHeight="21.0" spacing="6.0">
+               <children>
+                  <Label alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" text="English (US), English" />
+                  <Hyperlink fx:id="editLanguagesHyperlink" alignment="TOP_LEFT" maxHeight="1.7976931348623157E308" text="Edit" />
+               </children>
+            </HBox>
+            <JFXTextField layoutX="10.0" layoutY="25.0">
+               <VBox.margin>
+                  <Insets bottom="44.0" />
+               </VBox.margin>
+            </JFXTextField>
+            <Label layoutX="10.0" layoutY="113.0" styleClass="field-header-label" text="Platform:" />
+            <JFXTextField layoutX="10.0" layoutY="25.0">
+               <VBox.margin>
+                  <Insets bottom="29.0" />
+               </VBox.margin>
+            </JFXTextField>
+            <Label layoutX="10.0" layoutY="176.0" styleClass="field-header-label" text="Oscpu:" />
+            <JFXTextField layoutX="10.0" layoutY="191.0">
+               <VBox.margin>
+                  <Insets bottom="29.0" />
+               </VBox.margin>
+            </JFXTextField>
+            <Label layoutX="10.0" layoutY="216.0" text="Do not track:" />
+            <JFXComboBox fx:id="trackComboBox" layoutX="10.0" layoutY="65.0">
+               <VBox.margin>
+                  <Insets bottom="29.0" />
+               </VBox.margin>
+            </JFXComboBox>
+            <Label layoutX="10.0" layoutY="216.0" styleClass="field-header-label" text="Build:" />
+            <JFXTextField layoutX="10.0" layoutY="231.0">
+               <VBox.margin>
+                  <Insets bottom="29.0" />
+               </VBox.margin>
+            </JFXTextField>
+            <Label layoutX="10.0" layoutY="256.0" styleClass="field-header-label" text="Hardware concurrency:" />
+            <JFXComboBox fx:id="concurrencyComboBox" layoutX="10.0" layoutY="271.0" />
+         </children>
+      </VBox>
+   </children>
+   <stylesheets>
+      <URL value="@../styles/app.css" />
+      <URL value="@../styles/profile-advanced-navigator.css" />
+   </stylesheets>
+</AnchorPane>

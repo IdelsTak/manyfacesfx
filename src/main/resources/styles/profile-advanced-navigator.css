@@ -1,0 +1,53 @@
+
+.advanced-navigator-root {
+    -fx-base: white;
+    -fx-background-color: white;
+    -fx-font-family: 'Roboto';
+}
+
+.advanced-navigator-content {
+    -fx-pref-width: 335px;
+    -fx-min-width: -fx-pref-width;
+}
+
+.field-header-label {
+    -fx-font-size: 12px;
+    -fx-pref-height: 21px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+    -fx-alignment: top-left;
+}
+
+.hyperlink {
+    -fx-font-size: 13px;
+    -fx-text-fill: #194ece;
+    -fx-padding: 0;
+    -fx-focus-traversable: false;
+}
+
+.jfx-combo-box,
+.jfx-text-field {
+    -fx-border-color: #949494;
+    -fx-pref-width: 335px;
+    -fx-min-width: -fx-pref-width;
+    -fx-max-width: -fx-pref-width;
+    -fx-font-size: 14px;
+    -fx-padding: 1.7 0 4.7 0;
+}
+
+.jfx-combo-box > .input-line,
+.jfx-text-field > .input-line {
+    -fx-pref-height: 0px;
+    -fx-max-height: 0px;
+}
+
+.jfx-combo-box > .input-focused-line,
+.jfx-text-field > .input-focused-line {
+    -fx-pref-height: 0px;
+    -fx-max-height: 0px;
+}
+
+.jfx-combo-box:focused,
+.jfx-text-field:focused {
+    -fx-border-color: #174bc9;
+}
