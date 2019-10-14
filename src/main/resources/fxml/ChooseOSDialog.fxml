@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<AnchorPane id="AnchorPane" styleClass="os-dialog-root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.idelstak.manyfacesfx.ui.controllers.ChooseOSDialogController">
+   <children>
+      <HBox styleClass="header-area" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="headerLabel" text="Choose OS">
+               <HBox.margin>
+                  <Insets left="33.0" top="20.0" />
+               </HBox.margin>
+            </Label>
+            <HBox HBox.hgrow="ALWAYS" />
+            <JFXButton fx:id="closeButton">
+               <graphic>
+                  <FontIcon fx:id="icon" />
+               </graphic>
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin>
+            </JFXButton>
+            <HBox maxHeight="-Infinity" minWidth="-Infinity" prefWidth="10.0" />
+         </children>
+      </HBox>
+      <VBox fx:id="contentBox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0">
+         <children>
+            <Label styleClass="info-label" text="Operating System selector limits browser fingerprints you receive to a certain OS. It is applied when you click &quot;Get new fingerprint&quot; or change a browser." wrapText="true">
+               <VBox.margin>
+                  <Insets bottom="18.0" left="32.0" right="31.0" top="24.0" />
+               </VBox.margin>
+            </Label>
+            <Label layoutX="10.0" layoutY="10.0" styleClass="info-label" text="We do not recommend choosing an operating system different from your real one unless you are sure in what you are doing." wrapText="true">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="32.0" right="31.0" />
+               </VBox.margin>
+            </Label>
+            <Label fx:id="chooseOSLabel" layoutX="10.0" layoutY="25.0" text="Choose OS:">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="32.0" />
+               </VBox.margin>
+            </Label>
+            <VBox fx:id="osListBox" styleClass="content-area">
+               <children>
+                  <HBox fx:id="windowsBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="349.0" style="-fx-background-color: white;" styleClass="font-list-cell-root" stylesheets="@../styles/font-list-cell.css">
+                     <children>
+                        <Label fx:id="windowsLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Windows" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets left="22.0" />
+                           </HBox.margin>
+                        </Label>
+                        <JFXCheckBox fx:id="windowsCheckBox" checkedColor="#174bc9" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="19.0">
+                           <HBox.margin>
+                              <Insets right="9.0" />
+                           </HBox.margin>
+                        </JFXCheckBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" top="28.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox fx:id="linuxBox" layoutX="11.0" layoutY="11.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="349.0" style="-fx-background-color: white;" styleClass="font-list-cell-root" stylesheets="@../styles/font-list-cell.css">
+                     <children>
+                        <Label fx:id="linuxLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Linux" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets left="22.0" />
+                           </HBox.margin>
+                        </Label>
+                        <JFXCheckBox fx:id="linuxCheckBox" checkedColor="#174bc9" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="19.0">
+                           <HBox.margin>
+                              <Insets right="9.0" />
+                           </HBox.margin>
+                        </JFXCheckBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets left="20.0" right="20.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <HBox fx:id="macBox" layoutX="11.0" layoutY="61.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="50.0" prefWidth="349.0" style="-fx-background-color: white;" styleClass="font-list-cell-root" stylesheets="@../styles/font-list-cell.css">
+                     <children>
+                        <Label fx:id="macLabel" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Mac OS" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets left="22.0" />
+                           </HBox.margin>
+                        </Label>
+                        <JFXCheckBox fx:id="macCheckBox" checkedColor="#174bc9" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="19.0">
+                           <HBox.margin>
+                              <Insets right="9.0" />
+                           </HBox.margin>
+                        </JFXCheckBox>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="37.0" left="20.0" right="20.0" />
+                     </VBox.margin>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets left="32.0" right="31.0" />
+               </VBox.margin>
+            </VBox>
+            <HBox fx:id="buttonsBox" spacing="10.0" styleClass="buttons-area">
+               <children>
+                  <HBox prefHeight="44.0" HBox.hgrow="ALWAYS" />
+                  <JFXButton fx:id="saveButton" defaultButton="true" styleClass="save-button" text="Save" />
+                  <JFXButton fx:id="cancelButton" cancelButton="true" styleClass="cancel-button" text="Cancel" />
+                  <HBox layoutX="213.0" layoutY="26.0" prefHeight="44.0" HBox.hgrow="ALWAYS" />
+               </children>
+               <padding>
+                  <Insets top="16.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="40.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+   <stylesheets>
+      <URL value="@../styles/app.css" />
+      <URL value="@../styles/choose-os-dialog.css" />
+   </stylesheets>
+</AnchorPane>

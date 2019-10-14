@@ -1,0 +1,108 @@
+
+.os-dialog-root {
+    -fx-base: white;
+    -fx-background-color: white;
+    -fx-font-family: 'Roboto';
+    -fx-pref-width: 458px;
+    -fx-pref-height: 538px;
+    -fx-min-width: -fx-pref-width;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-width: -fx-pref-width;
+    -fx-max-height: -fx-pref-height;
+}
+
+.header-area {
+    -fx-pref-height: 55px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+    -fx-background-color: #174bc9;
+}
+
+.header-area > .label {
+    -fx-font-family: 'Roboto';
+    -fx-font-size: 18px;
+    -fx-text-fill: white;
+}
+
+.header-area > .jfx-button {
+    -fx-pref-width: 40px;
+    -fx-pref-height: 40px;
+    -fx-min-width: -fx-pref-width;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-width: -fx-pref-width;
+    -fx-max-height: -fx-pref-height;
+    -fx-background-radius: 20px;
+    -fx-cursor: hand;
+}
+
+.header-area > .jfx-button > .ikonli-font-icon {
+    -fx-icon-code: mdi-close;
+    -fx-icon-size: 20px;
+    -fx-icon-color: #8db8f3;
+}
+
+
+.content-area {
+    -fx-pref-width: 395px;
+    -fx-min-width: -fx-pref-width;
+    -fx-max-width: -fx-pref-width;
+    -fx-pref-height: 211px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+    -fx-border-color: #e0e2e7;
+    -fx-background-color: #f9f9f9;
+}
+
+.buttons-area {
+    -fx-pref-height: 60px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+}
+
+.buttons-area {
+    -fx-font-size: 14px;
+}
+
+.buttons-area > .jfx-button {
+    -fx-pref-width: 90px;
+    -fx-min-width: -fx-pref-width;
+    -fx-max-width: -fx-pref-width;
+    -fx-pref-height: 40px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.cancel-button {
+    -fx-border-color: #c2c6cf;
+    -fx-background-color: #fcfcfc;
+    -fx-text-fill: #828b93;
+}
+
+.save-button {
+    -fx-border-color: #b9c9ef;
+    -fx-background-color: #d2e0ff;
+    -fx-text-fill: #0e46cc;
+}
+
+.os-list-area {
+    -fx-border-color: #e0e2e7 #e0e2e7 transparent #e0e2e7;
+}
+
+#windowsBox {
+    -fx-border-color: #e0e2e7;
+}
+
+#linuxBox,
+#macBox {
+    -fx-border-color: transparent #e0e2e7 #e0e2e7 #e0e2e7;
+}
+
+#chooseOSLabel {
+    -fx-font-size: 11px;
+}
+
+.info-label {
+    -fx-font-size: 14px;
+}
