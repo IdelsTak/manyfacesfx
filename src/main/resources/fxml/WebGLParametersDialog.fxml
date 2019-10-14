@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" styleClass="parameters-dialog-root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.idelstak.manyfacesfx.ui.controllers.WebGLParametersDialogController">
+   <children>
+      <HBox styleClass="header-area" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Label fx:id="headerLabel" text="WebGL parameters">
+               <HBox.margin>
+                  <Insets left="33.0" top="20.0" />
+               </HBox.margin>
+            </Label>
+            <HBox HBox.hgrow="ALWAYS" />
+            <JFXButton fx:id="closeButton">
+               <graphic>
+                  <FontIcon fx:id="icon" />
+               </graphic>
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin>
+            </JFXButton>
+            <HBox maxHeight="-Infinity" minWidth="-Infinity" prefWidth="10.0" />
+         </children>
+      </HBox>
+      <VBox fx:id="contentBox" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="55.0">
+         <children>
+            <HBox styleClass="table-header-box">
+               <children>
+                  <Label text="Extension">
+                     <styleClass>
+                        <String fx:value="table-header-label" />
+                        <String fx:value="extension-label" />
+                     </styleClass>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="10.0" text="Name">
+                     <styleClass>
+                        <String fx:value="table-header-label" />
+                        <String fx:value="name-label" />
+                     </styleClass>
+                  </Label>
+                  <Label layoutX="10.0" layoutY="10.0" text="Code">
+                     <styleClass>
+                        <String fx:value="table-header-label" />
+                        <String fx:value="code-label" />
+                     </styleClass>
+                  </Label>
+                  <Label layoutX="42.0" layoutY="10.0" text="Value">
+                     <styleClass>
+                        <String fx:value="table-header-label" />
+                        <String fx:value="value-label" />
+                     </styleClass>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets left="30.0" right="30.0" top="20.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+   <stylesheets>
+      <URL value="@../styles/app.css" />
+      <URL value="@../styles/webgl-parameters-dialog.css" />
+   </stylesheets>
+</AnchorPane>
