@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import org.kordamp.ikonli.javafx.FontIcon?>
 
-<AnchorPane id="AnchorPane" styleClass="profile-proxy-root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" styleClass="profile-proxy-root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.idelstak.manyfacesfx.ui.controllers.ProfileProxyController">
     <children>
         <VBox styleClass="profile-proxy-content-box" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="31.0" AnchorPane.topAnchor="0.0">
             <children>
