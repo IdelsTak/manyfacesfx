@@ -4,10 +4,13 @@
 package com.github.idelstak.manyfacesfx.ui.controllers;
 
 import com.github.idelstak.manyfacesfx.api.GlobalContext;
+import com.github.idelstak.manyfacesfx.ui.GeolocationNodeContext;
 import com.github.idelstak.manyfacesfx.ui.HomeNodeContext;
 import com.github.idelstak.manyfacesfx.ui.OverViewNodeContext;
 import com.github.idelstak.manyfacesfx.ui.ProfileMenuNode;
 import com.github.idelstak.manyfacesfx.ui.ProxyNodeContext;
+import com.github.idelstak.manyfacesfx.ui.TimezoneNodeContext;
+import com.github.idelstak.manyfacesfx.ui.WebRtcNodeContext;
 import com.github.idelstak.manyfacesfx.ui.util.TitledPaneInputEventBypass;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
@@ -81,18 +84,9 @@ public class ProfileMenuController {
     public void initialize() throws IOException {
         ProfileMenuNode overviewNode = new OverViewNodeContext().getNode();
         ProfileMenuNode proxyNode = new ProxyNodeContext().getNode();
-        ProfileMenuNode timezoneNode = new ProfileMenuNode(
-                "timezone",
-                timezoneToggle.getText(),
-                FXMLLoader.load(getClass().getResource("/fxml/ProfileTimezone.fxml")));
-        ProfileMenuNode webRtcNode = new ProfileMenuNode(
-                "webrtc",
-                webRtcToggle.getText(),
-                FXMLLoader.load(getClass().getResource("/fxml/ProfileWebRtc.fxml")));
-        ProfileMenuNode geolocationNode = new ProfileMenuNode(
-                "geolocation",
-                geolocationToggle.getText(),
-                FXMLLoader.load(getClass().getResource("/fxml/ProfileGeolocation.fxml")));
+        ProfileMenuNode timezoneNode = new TimezoneNodeContext().getNode();
+        ProfileMenuNode webRtcNode = new WebRtcNodeContext().getNode();
+        ProfileMenuNode geolocationNode = new GeolocationNodeContext().getNode();
 
         ProfileMenuNode mediaDevicesNode = new ProfileMenuNode(
                 "media devices",
@@ -152,7 +146,7 @@ public class ProfileMenuController {
         advancedMenuTitledPane.expandedProperty().bind(advancedMenuToggle.selectedProperty());
 
         goHomeButton.setOnAction(e -> {
-            new HomeNodeContext().refreshContext();
+            new HomeNodeContext().select();
             //Collapse the advanced menu when
             //the edit profile page is exited
             Platform.runLater(() -> advancedMenuToggle.setSelected(false));
