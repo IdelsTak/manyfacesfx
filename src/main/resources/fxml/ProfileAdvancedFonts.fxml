@@ -9,24 +9,28 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" styleClass="advanced-fonts-root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" styleClass="advanced-fonts-root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.idelstak.manyfacesfx.ui.controllers.ProfileAdvancedFontsController">
    <children>
       <VBox layoutX="-1.5" styleClass="advanced-fonts-content" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="104.0" AnchorPane.topAnchor="18.0">
          <children>
-            <JFXToggleButton styleClass="masking-toggle" text="Enable font list masking" />
-            <JFXToggleButton layoutX="10.0" layoutY="10.0" styleClass="glyphs-toggle" text="Enable Unicode glyphs and DOMRect fingerprinting protection" wrapText="true" />
-            <Label maxWidth="1.7976931348623157E308" styleClass="field-header-label" text="Browser profile fonts list:">
-               <VBox.margin>
-                  <Insets top="25.0" />
-               </VBox.margin>
-            </Label>
-            <VBox fx:id="fontsBox" styleClass="fonts-list-area" />
-            <Hyperlink fx:id="moreFontsHyperlink" maxWidth="1.7976931348623157E308" text="...and 151 more" />
-            <JFXButton fx:id="editButton" text="Edit">
-               <VBox.margin>
-                  <Insets top="19.0" />
-               </VBox.margin>
-            </JFXButton>
+            <JFXToggleButton fx:id="fontsMaskingToggle" styleClass="masking-toggle" text="Enable font list masking" />
+            <VBox fx:id="fontsMaskingBox">
+               <children>
+                  <JFXToggleButton styleClass="glyphs-toggle" text="Enable Unicode glyphs and DOMRect fingerprinting protection" wrapText="true" />
+                  <Label maxWidth="1.7976931348623157E308" styleClass="field-header-label" text="Browser profile fonts list:">
+                     <VBox.margin>
+                        <Insets top="25.0" />
+                     </VBox.margin>
+                  </Label>
+                  <VBox fx:id="fontsBox" styleClass="fonts-list-area" />
+                  <Hyperlink fx:id="moreFontsHyperlink" maxWidth="1.7976931348623157E308" text="...and 151 more" />
+                  <JFXButton fx:id="editButton" text="Edit">
+                     <VBox.margin>
+                        <Insets top="19.0" />
+                     </VBox.margin>
+                  </JFXButton>
+               </children>
+            </VBox>
          </children>
       </VBox>
    </children>
