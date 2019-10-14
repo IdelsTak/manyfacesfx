@@ -4,7 +4,10 @@
 package com.github.idelstak.manyfacesfx.ui.controllers;
 
 import com.github.idelstak.manyfacesfx.api.Stackable;
+import com.github.idelstak.manyfacesfx.ui.GeolocationNodeContext;
 import com.github.idelstak.manyfacesfx.ui.ProxyNodeContext;
+import com.github.idelstak.manyfacesfx.ui.TimezoneNodeContext;
+import com.github.idelstak.manyfacesfx.ui.WebRtcNodeContext;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
@@ -53,7 +56,10 @@ public class ProfileOverviewController {
     @FXML
     public void initialize() {
         editOsHyperlink.setOnAction(e -> showChooseOSDialog());
-        editProxyButton.setOnAction(e -> new ProxyNodeContext().refreshContext());
+        editProxyButton.setOnAction(e -> new ProxyNodeContext().select());
+        timezoneHyperlink.setOnAction(e -> new TimezoneNodeContext().select());
+        webRtcHyperlink.setOnAction(e -> new WebRtcNodeContext().select());
+        geolocationHyperlink.setOnAction(e -> new GeolocationNodeContext().select());
     }
 
     private void showChooseOSDialog() {
