@@ -1,0 +1,62 @@
+
+.advanced-fonts-root {
+    -fx-base: white;
+    -fx-background-color: white;
+    -fx-font-family: 'Roboto';
+}
+
+.advanced-fonts-content {
+    -fx-pref-width: 258px;
+    -fx-min-width: -fx-pref-width;
+}
+
+.jfx-toggle-button {
+    -fx-padding: 0;
+    -jfx-toggle-color: #174bc9;
+    -jfx-toggle-line-color: #8aa4e4;
+    -jfx-untoggle-color: white;
+    -jfx-untoggle-line-color: #9e9e9e;
+    -fx-alignment: center-left;
+}
+
+.masking-toggle {
+    -fx-pref-height: 26px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+}
+
+.glyphs-toggle {
+    -fx-pref-height: 41px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+}
+
+.field-header-label {
+    -fx-font-size: 12px;
+    -fx-pref-height: 34px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+    -fx-alignment: top-left;
+}
+
+.jfx-toggle-button,
+.fonts-list-area {
+    -fx-font-size: 14px;
+}
+
+.hyperlink {
+    -fx-text-fill: #1f53cf;
+    -fx-font-size: 11px;
+    -fx-pref-height: 17px;
+    -fx-min-height: -fx-pref-height;
+    -fx-focus-traversable: false;
+}
+
+.jfx-button {
+    -fx-text-fill: #1048cc;
+    -fx-background-color: #d2e0ff;
+    -fx-border-color: #b9c9ef;
+    -fx-pref-width: 88px;
+    -fx-pref-height: 38px;
+}
+
