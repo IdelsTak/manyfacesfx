@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<AnchorPane id="AnchorPane" fx:id="dialogPane" styleClass="dialog-pane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.idelstak.manyfacesfx.ui.controllers.EditGroupsDialogController">
+   <children>
+      <HBox fx:id="headerBox" styleClass="header-area" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="headerLabel" text="Edit groups" HBox.hgrow="NEVER">
+               <HBox.margin>
+                  <Insets left="33.0" top="20.0" />
+               </HBox.margin>
+            </Label>
+            <HBox prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+            <JFXButton fx:id="closeButton">
+               <graphic>
+                  <FontIcon fx:id="icon" />
+               </graphic>
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin>
+            </JFXButton>
+            <HBox layoutX="134.0" layoutY="10.0" maxHeight="-Infinity" minWidth="-Infinity" prefWidth="10.0" />
+         </children>
+      </HBox>
+      <VBox fx:id="contentBox" layoutY="55.0" prefHeight="545.0" prefWidth="600.0" styleClass="content-area" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <HBox fx:id="searchBox" prefHeight="100.0" prefWidth="200.0" styleClass="search-area">
+               <children>
+                  <JFXTextField fx:id="searchField" labelFloat="true" promptText="Search groups..." />
+               </children>
+               <padding>
+                  <Insets left="32.0" top="36.0" />
+               </padding>
+            </HBox>
+            <VBox fx:id="groupListBox" prefHeight="200.0" prefWidth="100.0" spacing="3.0" styleClass="list-area">
+               <children>
+                  <BorderPane styleClass="border-pane">
+                     <center>
+                        <StackPane BorderPane.alignment="CENTER">
+                           <children>
+                              <JFXListView fx:id="groupsListView" />
+                              <Text fx:id="noGroupsFoundText" strokeType="OUTSIDE" strokeWidth="0.0" text="No groups found." />
+                           </children>
+                        </StackPane>
+                     </center>
+                  </BorderPane>
+                  <StackPane fx:id="listActionsPane" styleClass="list-actions-area">
+                     <children>
+                        <JFXButton fx:id="addNewgroupButton" styleClass="add-group-button" text="Add new group" StackPane.alignment="TOP_LEFT">
+                           <graphic>
+                              <FontIcon />
+                           </graphic>
+                        </JFXButton>
+                        <JFXTextField fx:id="groupNameField" focusTraversable="false" labelFloat="true" promptText="New group name" visible="false" StackPane.alignment="BOTTOM_CENTER" />
+                        <JFXButton fx:id="applyGroupNameButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="18.0" styleClass="apply-group-name-button" visible="false" StackPane.alignment="BOTTOM_RIGHT">
+                           <graphic>
+                              <FontIcon iconColor="#828b93" />
+                           </graphic>
+                           <StackPane.margin>
+                              <Insets bottom="3.5" />
+                           </StackPane.margin>
+                        </JFXButton>
+                     </children>
+                  </StackPane>
+               </children>
+               <padding>
+                  <Insets left="32.0" top="2.0" />
+               </padding>
+            </VBox>
+            <HBox fx:id="buttonsBox" spacing="10.0" styleClass="buttons-area">
+               <children>
+                  <HBox prefHeight="44.0" HBox.hgrow="ALWAYS" />
+                  <JFXButton fx:id="saveButton" defaultButton="true" styleClass="save-button" text="Save new order" />
+                  <JFXButton fx:id="cancelButton" cancelButton="true" styleClass="cancel-button" text="Cancel" />
+                  <HBox layoutX="213.0" layoutY="26.0" prefHeight="44.0" HBox.hgrow="ALWAYS" />
+               </children>
+               <padding>
+                  <Insets top="16.0" />
+               </padding>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+   <stylesheets>
+      <URL value="@../styles/app.css" />
+      <URL value="@../styles/edit-groups-dialog.css" />
+   </stylesheets>
+</AnchorPane>

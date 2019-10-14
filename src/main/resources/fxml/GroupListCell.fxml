@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<HBox fx:id="cellBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="group-list-cell-box" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.idelstak.manyfacesfx.ui.controllers.GroupListCellController">
+   <children>
+      <FontIcon fx:id="folderIcon" styleClass="folder-icon" HBox.hgrow="NEVER">
+         <HBox.margin>
+            <Insets left="12.0" right="12.0" top="14.5" />
+         </HBox.margin>
+      </FontIcon>
+      <StackPane fx:id="groupNamePane" prefHeight="150.0" prefWidth="200.0" styleClass="group-name-area">
+         <children>
+            <Label fx:id="groupNameLabel" text="test group (2)" StackPane.alignment="CENTER_LEFT" />
+            <StackPane fx:id="editGroupNamePane" styleClass="edit-group-name-area" visible="false">
+               <children>
+                  <JFXTextField fx:id="editGroupNameField" />
+                  <HBox fx:id="editGroupNameActionsBox" prefHeight="100.0" prefWidth="200.0" styleClass="edit-actions-area" StackPane.alignment="CENTER_RIGHT">
+                     <children>
+                        <JFXButton fx:id="yesButton">
+                           <graphic>
+                              <FontIcon fx:id="yesIcon" styleClass="yes-icon" />
+                           </graphic>
+                        </JFXButton>
+                        <JFXButton fx:id="noButton" layoutX="10.0" layoutY="10.0">
+                           <graphic>
+                              <FontIcon fx:id="noIcon" styleClass="no-icon" />
+                           </graphic>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+               </children>
+            </StackPane>
+            <JFXButton fx:id="editNameButton" styleClass="edit-button" StackPane.alignment="CENTER_RIGHT">
+               <graphic>
+                  <FontIcon styleClass="edit-icon" />
+               </graphic>
+            </JFXButton>
+         </children>
+      </StackPane>
+      <StackPane fx:id="deleteGroupPane" prefHeight="150.0" prefWidth="200.0" styleClass="delete-group-area">
+         <children>
+            <JFXButton fx:id="deleteGroupButton" styleClass="delete-button" StackPane.alignment="CENTER">
+               <graphic>
+                  <FontIcon fx:id="deleteIcon" styleClass="delete-icon" />
+               </graphic>
+            </JFXButton>
+            <VBox fx:id="confirmDeleteBox" styleClass="confirm-delete-area" visible="false">
+               <children>
+                  <Label fx:id="confirmDeleteLabel" alignment="CENTER" text="Are you sure?" />
+                  <HBox fx:id="confirmDeleteActionsBox" styleClass="actions-area">
+                     <children>
+                        <JFXButton fx:id="doDeleteButton" styleClass="do-delete-button">
+                           <graphic>
+                              <FontIcon fx:id="doDeleteIcon" styleClass="do-delete-icon" />
+                           </graphic>
+                           <padding>
+                              <Insets left="1.0" right="-1.0" />
+                           </padding>
+                        </JFXButton>
+                        <JFXButton fx:id="dontDeleteButton" layoutX="10.0" layoutY="10.0" styleClass="dont-delete-button">
+                           <graphic>
+                              <FontIcon fx:id="dontDeleteIcon" styleClass="dont-delete-icon" />
+                           </graphic>
+                           <padding>
+                              <Insets left="1.0" right="-1.0" />
+                           </padding>
+                        </JFXButton>
+                     </children>
+                  </HBox>
+               </children>
+               <StackPane.margin>
+                  <Insets top="12.0" />
+               </StackPane.margin>
+            </VBox>
+         </children>
+      </StackPane>
+   </children>
+   <stylesheets>
+      <URL value="@../styles/app.css" />
+      <URL value="@../styles/group-list-cell.css" />
+   </stylesheets>
+</HBox>

@@ -1,0 +1,177 @@
+
+.group-list-cell-box {
+    -fx-base: white;
+    -fx-pref-width: 485px;
+    -fx-pref-height: 50px;
+    -fx-min-width: -fx-pref-width;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-width: -fx-pref-width;
+    -fx-max-height: -fx-pref-height;
+    -fx-font-family: 'Roboto';
+    -fx-background-color: white;
+    -fx-border-color: #e0e2e7;
+}
+
+.group-list-cell-box > .folder-icon {
+    -fx-icon-color: #828b93;
+    -fx-icon-code: mdi-folder;
+    -fx-icon-size: 21px;
+}
+
+.group-list-cell-box > .group-name-area {
+    -fx-pref-width: 380px;
+    -fx-pref-height: 50px;
+    -fx-min-width: -fx-pref-width;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-width: -fx-pref-width;
+    -fx-max-height: -fx-pref-height;
+}
+
+.group-list-cell-box > .group-name-area > .label {
+    -fx-text-fill: #858e95;
+}
+
+.group-list-cell-box > .group-name-area > .edit-button {
+    -fx-pref-width: 42px;
+    -fx-pref-height: 42px;
+    -fx-min-width: -fx-pref-width;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-width: -fx-pref-width;
+    -fx-max-height: -fx-pref-height;
+    -fx-background-radius: 21px;
+}
+
+.group-list-cell-box > .group-name-area > .edit-button > .edit-icon {
+    -fx-icon-color: #828b93;
+    -fx-icon-code: mdi-pencil;
+    -fx-icon-size: 21px;
+}
+
+.group-list-cell-box > .group-name-area > .edit-group-name-area {
+    -fx-pref-width: 360px;
+    -fx-pref-height: 24px;
+    -fx-min-width: -fx-pref-width;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-width: -fx-pref-width;
+    -fx-max-height: -fx-pref-height;
+}
+
+.group-list-cell-box > .group-name-area > .edit-group-name-area > .jfx-text-field {
+    -fx-background-color: #f9f9f9;
+}
+
+.group-list-cell-box > .group-name-area > .edit-group-name-area > .jfx-text-field > .input-line {
+    -fx-pref-height: 0px;
+    -fx-max-height: 0px;
+}
+
+.group-list-cell-box > .group-name-area > .edit-group-name-area > .jfx-text-field > .input-focused-line {
+    -fx-pref-height: 0px;
+    -fx-max-height: 0px;
+}
+
+.group-list-cell-box > .group-name-area > .edit-group-name-area > .edit-actions-area {
+    -fx-pref-width: 48px;
+    -fx-pref-height: 24px;
+    -fx-min-width: -fx-pref-width;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-width: -fx-pref-width;
+    -fx-max-height: -fx-pref-height;
+}
+
+.group-list-cell-box > .group-name-area > .edit-group-name-area > .edit-actions-area > .jfx-button {
+    -fx-pref-width: 28px;
+    -fx-pref-height: 28px;
+    -fx-min-width: -fx-pref-width;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-width: -fx-pref-width;
+    -fx-max-height: -fx-pref-height;
+    -fx-background-radius: 14px;
+    -fx-padding: 0 -1 0 1;
+}
+
+.group-list-cell-box > .group-name-area > .edit-group-name-area > .edit-actions-area > .jfx-button > .yes-icon {
+    -fx-icon-color: #828b93;
+    -fx-icon-code: mdi-checkbox-marked-circle;
+    -fx-icon-size: 15px;
+}    
+
+.group-list-cell-box > .group-name-area > .edit-group-name-area > .edit-actions-area > .jfx-button > .no-icon {
+    -fx-icon-color: #828b93;
+    -fx-icon-code: mdi-close-circle;
+    -fx-icon-size: 15px;
+}
+
+.group-list-cell-box > .delete-group-area {
+    -fx-pref-width: 60px;
+    -fx-pref-height: 50px;
+    -fx-min-width: -fx-pref-width;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-width: -fx-pref-width;
+    -fx-max-height: -fx-pref-height;
+}
+
+.group-list-cell-box > .delete-group-area > .delete-button {
+    -fx-pref-width: 42px;
+    -fx-pref-height: 42px;
+    -fx-min-width: -fx-pref-width;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-width: -fx-pref-width;
+    -fx-max-height: -fx-pref-height;
+    -fx-background-radius: 21px;
+    -fx-padding: 0 -1 0 1;
+}
+
+.group-list-cell-box > .delete-group-area > .delete-button > .delete-icon {
+    -fx-icon-color: #828b93;
+    -fx-icon-code: mdi-delete;
+    -fx-icon-size: 21px;
+}
+
+.group-list-cell-box > .delete-group-area > .confirm-delete-area {
+    -fx-pref-width: 60px;
+    -fx-pref-height: 50px;
+    -fx-min-width: -fx-pref-width;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-width: -fx-pref-width;
+    -fx-max-height: -fx-pref-height;
+}
+
+.group-list-cell-box > .delete-group-area > .confirm-delete-area > .label {
+    -fx-pref-width: 60px;
+    -fx-font-fill: #a5abb1;
+    -fx-font-size: 9px;
+}
+
+.group-list-cell-box > .delete-group-area > .confirm-delete-area > .actions-area {
+    -fx-pref-width: 60px;
+    -fx-pref-height: 39px;
+    -fx-min-width: -fx-pref-width;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-width: -fx-pref-width;
+    -fx-max-height: -fx-pref-height;
+}
+
+.group-list-cell-box > .delete-group-area > .confirm-delete-area > .actions-area > .do-delete-button,
+.group-list-cell-box > .delete-group-area > .confirm-delete-area > .actions-area > .dont-delete-button {
+    -fx-pref-width: 24px;
+    -fx-pref-height: 24px;
+    -fx-min-width: -fx-pref-width;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-width: -fx-pref-width;
+    -fx-max-height: -fx-pref-height;
+    -fx-background-radius: 21px;
+    -fx-padding: 0 -1 0 1;
+}
+
+.group-list-cell-box > .delete-group-area > .confirm-delete-area > .actions-area > .do-delete-button > .do-delete-icon {
+    -fx-icon-color: #828b93;
+    -fx-icon-code: mdi-checkbox-marked-circle;
+    -fx-icon-size: 21px;
+}
+
+.group-list-cell-box > .delete-group-area > .confirm-delete-area > .actions-area > .dont-delete-button > .dont-delete-icon {
+    -fx-icon-color: #828b93;
+    -fx-icon-code: mdi-close-circle;
+    -fx-icon-size: 21px;
+}
