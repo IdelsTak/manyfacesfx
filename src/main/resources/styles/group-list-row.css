@@ -17,7 +17,8 @@
 }
 
 .title-label {
-    -fx-font-family: 'Roboto'
+    -fx-font-family: 'Roboto';
+    -fx-font-size: 14px;
 }
 
 .title-box:hover > .title-label {  
