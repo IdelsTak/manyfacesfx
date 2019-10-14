@@ -83,10 +83,15 @@ public class ProfileMenuController {
                 "timezone",
                 timezoneToggle.getText(),
                 FXMLLoader.load(getClass().getResource("/fxml/ProfileTimezone.fxml")));
+        ProfileMenuNode webRtcNode = new ProfileMenuNode(
+                "webrtc",
+                webRtcToggle.getText(),
+                FXMLLoader.load(getClass().getResource("/fxml/ProfileWebRtc.fxml")));
 
         overviewToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, overviewNode));
         proxyToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, proxyNode));
         timezoneToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, timezoneNode));
+        webRtcToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, webRtcNode));
 
         //Ensure overview is selected
         Platform.runLater(() -> {
