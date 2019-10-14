@@ -72,6 +72,7 @@ public class AppViewController {
 
             if (it.hasNext()) {
                 Platform.runLater(() -> {
+                    titleLabel.textProperty().unbind();
                     titleLabel.textProperty().bind(it.next().displayNameProperty());
                 });
             }
@@ -89,6 +90,7 @@ public class AppViewController {
     }
 
     private void initComponents(MenuNode node) {
+        titleLabel.textProperty().unbind();
         titleLabel.textProperty().bind(node.displayNameProperty());
         notificationsToggle.setVisible(node.showsNotifications());
         detailPane.getChildren().setAll(node.getDetailsPane());
