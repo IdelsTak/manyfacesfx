@@ -83,7 +83,7 @@ public class HomeMenuController {
         newProfileToggle.setOnAction(e -> {
             CONTEXT.replace(MenuNode.class, newProfileNode);
             //Ensure the overview node context is added to lookup
-            Platform.runLater(() -> new OverViewNodeContext().refreshContext());
+            Platform.runLater(() -> new OverViewNodeContext().select());
         });
         myAccountToggle.setOnAction(e -> CONTEXT.replace(MenuNode.class, myAccountNode));
         pluginsToggle.setOnAction(e -> CONTEXT.replace(MenuNode.class, pluginsNode));
