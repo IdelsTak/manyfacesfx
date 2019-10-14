@@ -7,9 +7,11 @@ import com.github.idelstak.manyfacesfx.api.GlobalContext;
 import com.github.idelstak.manyfacesfx.ui.HomeNodeContext;
 import com.github.idelstak.manyfacesfx.ui.OverViewNodeContext;
 import com.github.idelstak.manyfacesfx.ui.ProfileMenuNode;
+import com.github.idelstak.manyfacesfx.ui.ProxyNodeContext;
 import com.github.idelstak.manyfacesfx.ui.util.TitledPaneInputEventBypass;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -17,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TitledPane;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.InputEvent;
 import org.openide.util.Lookup;
 
@@ -31,6 +34,8 @@ public class ProfileMenuController {
     private static final GlobalContext CONTEXT = GlobalContext.getDefault();
     @FXML
     private JFXButton goHomeButton;
+    @FXML
+    private ToggleGroup profileMenuGroup;
     @FXML
     private TitledPane advancedMenuTitledPane;
     @FXML
@@ -75,10 +80,7 @@ public class ProfileMenuController {
     @FXML
     public void initialize() throws IOException {
         ProfileMenuNode overviewNode = new OverViewNodeContext().getNode();
-        ProfileMenuNode proxyNode = new ProfileMenuNode(
-                "proxy",
-                proxyToggle.getText(),
-                FXMLLoader.load(getClass().getResource("/fxml/ProfileProxy.fxml")));
+        ProfileMenuNode proxyNode = new ProxyNodeContext().getNode();
         ProfileMenuNode timezoneNode = new ProfileMenuNode(
                 "timezone",
                 timezoneToggle.getText(),
@@ -91,7 +93,7 @@ public class ProfileMenuController {
                 "geolocation",
                 geolocationToggle.getText(),
                 FXMLLoader.load(getClass().getResource("/fxml/ProfileGeolocation.fxml")));
-        
+
         ProfileMenuNode mediaDevicesNode = new ProfileMenuNode(
                 "media devices",
                 mediaDevicesToggle.getText(),
@@ -130,7 +132,7 @@ public class ProfileMenuController {
         timezoneToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, timezoneNode));
         webRtcToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, webRtcNode));
         geolocationToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, geolocationNode));
-        
+
         mediaDevicesToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, mediaDevicesNode));
         extensionsToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, extensionsNode));
         fontsToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, fontsNode));
@@ -155,6 +157,27 @@ public class ProfileMenuController {
             //the edit profile page is exited
             Platform.runLater(() -> advancedMenuToggle.setSelected(false));
         });
+
+        lookupResult.addLookupListener(e -> manageToggleSelection());
+    }
+
+    private void manageToggleSelection() {
+        Iterator<? extends ProfileMenuNode> it = lookupResult.allInstances().iterator();
+
+        if (it.hasNext()) {
+            ProfileMenuNode node = it.next();
+
+            profileMenuGroup.getToggles()
+                    .stream()
+                    .map(RadioButton.class::cast)
+                    .filter(button -> button.getText().equals(node.getDisplayName()))
+                    .findFirst()
+                    .ifPresent(this::selectIfNotSelected);
+        }
+    }
+
+    private void selectIfNotSelected(RadioButton button) {
+        Platform.runLater(() -> button.setSelected(!button.isSelected()));
     }
 
 }
