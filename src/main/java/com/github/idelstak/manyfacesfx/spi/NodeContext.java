@@ -14,6 +14,6 @@ public interface NodeContext<T extends MenuNode> {
 
     T getNode();
 
-    void refreshContext();
+    void select();
 
 }

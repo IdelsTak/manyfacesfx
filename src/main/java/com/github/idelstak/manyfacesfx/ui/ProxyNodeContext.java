@@ -43,7 +43,7 @@ public class ProxyNodeContext implements NodeContext<ProfileMenuNode> {
     }
 
     @Override
-    public void refreshContext() {
+    public void select() {
         GlobalContext.getDefault().set(ProfileMenuNode.class, PROXY_NODE);
     }
 

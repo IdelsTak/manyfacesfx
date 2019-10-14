@@ -49,7 +49,7 @@ public class OverViewNodeContext implements NodeContext<ProfileMenuNode> {
     }
 
     @Override
-    public void refreshContext() {
+    public void select() {
         GlobalContext.getDefault().set(ProfileMenuNode.class, OVERVIEW_NODE);
     }
 

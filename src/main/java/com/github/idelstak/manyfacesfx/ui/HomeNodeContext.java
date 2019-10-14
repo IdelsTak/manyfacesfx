@@ -51,7 +51,7 @@ public class HomeNodeContext implements NodeContext<MenuNode> {
     }
 
     @Override
-    public void refreshContext() {
+    public void select() {
         GlobalContext.getDefault().replace(MenuNode.class, HOME_NODE);
     }
 }
