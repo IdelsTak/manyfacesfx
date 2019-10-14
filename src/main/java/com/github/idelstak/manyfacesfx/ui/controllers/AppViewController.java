@@ -19,6 +19,8 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.openide.util.Lookup;
@@ -57,7 +59,9 @@ public class AppViewController {
      */
     @FXML
     public void initialize() {
-        masterBox.getChildren().setAll(AppMenu.HOME.get());
+        Pane homeMenuPane = AppMenu.HOME.get();
+        masterBox.getChildren().setAll(homeMenuPane);
+        VBox.setVgrow(homeMenuPane, Priority.ALWAYS);
 
         menuNodeResult.addLookupListener(e -> {
             Iterator<? extends MenuNode> it = menuNodeResult.allInstances().iterator();
@@ -100,6 +104,7 @@ public class AppViewController {
         if (!nodes.isEmpty()
                 && !Objects.equals(nodes.get(0), node.getMenuPane())) {
             nodes.set(0, node.getMenuPane());
+            VBox.setVgrow(node.getMenuPane(), Priority.ALWAYS);
         }
     }
 }
