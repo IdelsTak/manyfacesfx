@@ -120,6 +120,10 @@ public class ProfileMenuController {
                 "browser plugins",
                 browserPluginsToggle.getText(),
                 FXMLLoader.load(getClass().getResource("/fxml/ProfileAdvancedPlugins.fxml")));
+        ProfileMenuNode storageOptionsNode = new ProfileMenuNode(
+                "storage options",
+                storageOptionsToggle.getText(),
+                FXMLLoader.load(getClass().getResource("/fxml/ProfileAdvancedStorage.fxml")));
 
         overviewToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, overviewNode));
         proxyToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, proxyNode));
@@ -134,6 +138,7 @@ public class ProfileMenuController {
         navigatorToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, navigatorNode));
         otherToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, otherNode));
         browserPluginsToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, browserPluginsNode));
+        storageOptionsToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, storageOptionsNode));
 
         //Ensure overview is selected
         Platform.runLater(() -> {
