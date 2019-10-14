@@ -3,8 +3,8 @@
  */
 package com.github.idelstak.manyfacesfx.ui;
 
-import com.github.idelstak.manyfacesfx.spi.NodeContext;
 import com.github.idelstak.manyfacesfx.api.GlobalContext;
+import com.github.idelstak.manyfacesfx.spi.NodeContext;
 import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Level;
