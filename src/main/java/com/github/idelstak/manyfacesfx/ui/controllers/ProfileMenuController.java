@@ -91,10 +91,15 @@ public class ProfileMenuController {
                 "geolocation",
                 geolocationToggle.getText(),
                 FXMLLoader.load(getClass().getResource("/fxml/ProfileGeolocation.fxml")));
+        
         ProfileMenuNode mediaDevicesNode = new ProfileMenuNode(
                 "media devices",
                 mediaDevicesToggle.getText(),
                 FXMLLoader.load(getClass().getResource("/fxml/ProfileAdvancedDevices.fxml")));
+        ProfileMenuNode extensionsNode = new ProfileMenuNode(
+                "extensions",
+                extensionsToggle.getText(),
+                FXMLLoader.load(getClass().getResource("/fxml/ProfileAdvancedExtensions.fxml")));
 
         overviewToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, overviewNode));
         proxyToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, proxyNode));
@@ -103,6 +108,7 @@ public class ProfileMenuController {
         geolocationToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, geolocationNode));
         
         mediaDevicesToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, mediaDevicesNode));
+        extensionsToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, extensionsNode));
 
         //Ensure overview is selected
         Platform.runLater(() -> {
