@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" styleClass="advanced-storage-root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox maxHeight="1.7976931348623157E308" styleClass="advanced-storage-content" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="18.0">
+         <children>
+            <JFXToggleButton text="Enable Local Storage and IndexedDB" />
+            <Label text="Local Storage and IndexedDB are special browser caches that websites may use for user tracking in a way similar to cookies. Having them enabled is generally advised but may increase browser profile loading times." />
+            <JFXToggleButton layoutX="10.0" layoutY="10.0" text="Enable Extension storage">
+               <VBox.margin>
+                  <Insets top="32.0" />
+               </VBox.margin>
+            </JFXToggleButton>
+            <Label layoutX="10.0" layoutY="39.0" text="Extension storage is a special container where a browser stores extensions and their parameter. Enable it if you need to install extensions from a browser interface." />
+            <JFXToggleButton layoutX="10.0" layoutY="54.0" text="Enable browser bookmarking saving">
+               <VBox.margin>
+                  <Insets top="32.0" />
+               </VBox.margin>
+            </JFXToggleButton>
+            <Label layoutX="10.0" layoutY="83.0" text="This option enables saving bookmarks in a browser interface." />
+            <JFXToggleButton layoutX="10.0" layoutY="98.0" text="Enable browser history saving">
+               <VBox.margin>
+                  <Insets top="32.0" />
+               </VBox.margin>
+            </JFXToggleButton>
+            <Label layoutX="10.0" layoutY="127.0" text="Warning! Enabling this option may increase the amount of data required to open/save a browser profile significantly. Since this option is not essential for your privacy, we recommend keeping it disabled." />
+            <JFXToggleButton layoutX="10.0" layoutY="142.0" text="Enable password saving">
+               <VBox.margin>
+                  <Insets top="32.0" />
+               </VBox.margin>
+            </JFXToggleButton>
+            <Label layoutX="10.0" layoutY="171.0" text="This option will save passwords stored in browsers. It is used for pre-filling login forms on websites. All passwords are securely encrypted alongside all your data." />
+         </children>
+      </VBox>
+   </children>
+   <stylesheets>
+      <URL value="@../styles/app.css" />
+      <URL value="@../styles/profile-advanced-storage.css" />
+   </stylesheets>
+</AnchorPane>
