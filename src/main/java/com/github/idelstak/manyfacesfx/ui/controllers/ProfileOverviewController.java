@@ -4,6 +4,7 @@
 package com.github.idelstak.manyfacesfx.ui.controllers;
 
 import com.github.idelstak.manyfacesfx.api.Stackable;
+import com.github.idelstak.manyfacesfx.ui.ProxyNodeContext;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
@@ -52,23 +53,8 @@ public class ProfileOverviewController {
     @FXML
     public void initialize() {
         editOsHyperlink.setOnAction(e -> showChooseOSDialog());
+        editProxyButton.setOnAction(e -> new ProxyNodeContext().refreshContext());
     }
-
-//    @Override
-//    public void setProfileMenuController(ProfileMenuController controller) {
-//        String message = "Profile menu controller should not be null";
-//        ProfileMenuController pmc = Objects.requireNonNull(controller, message);
-//
-//        editProxyButton.setOnAction(e -> pmc.showProxyContent());
-//        timezoneHyperlink.setOnAction(e -> pmc.showTimezoneContent());
-//        webRtcHyperlink.setOnAction(e -> pmc.showWebRtcContent());
-//        geolocationHyperlink.setOnAction(e -> pmc.showGeolocationContent());
-//    }
-//
-//    private void initBindings(Profile profile) {
-//        profileNameField.textProperty().bindBidirectional(profile.nameProperty());
-//        osLabel.textProperty().bindBidirectional(profile.osProperty());
-//    }
 
     private void showChooseOSDialog() {
         URL location = getClass().getResource("/fxml/ChooseOSDialog.fxml");
