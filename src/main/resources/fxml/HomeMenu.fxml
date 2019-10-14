@@ -53,14 +53,14 @@
             <Insets right="25.0" />
          </VBox.margin>
       </HBox>
-      <JFXListView fx:id="groupsList" maxHeight="1.7976931348623157E308" minHeight="-Infinity" VBox.vgrow="ALWAYS">
+      <JFXListView fx:id="groupsList" maxHeight="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" VBox.vgrow="ALWAYS">
          <VBox.margin>
-            <Insets right="25.0" />
+            <Insets left="-12.0" right="25.0" />
          </VBox.margin>
       </JFXListView>
       <VBox fx:id="statsBox" prefHeight="200.0" prefWidth="100.0" styleClass="stats-box">
          <children>
-            <HBox fx:id="paidStatusBox" prefHeight="100.0" prefWidth="200.0" styleClass="paid-status-box">
+            <HBox fx:id="paidStatusBox" prefHeight="100.0" prefWidth="200.0" spacing="6.0" styleClass="paid-status-box">
                <children>
                   <Label text="Free" />
                   <Hyperlink focusTraversable="false" text="Upgrade" />
@@ -79,7 +79,7 @@
             </HBox>
          </children>
          <VBox.margin>
-            <Insets bottom="35.0" right="25.0" />
+            <Insets bottom="35.0" right="25.0" top="6.0" />
          </VBox.margin>
       </VBox>
    </children>
