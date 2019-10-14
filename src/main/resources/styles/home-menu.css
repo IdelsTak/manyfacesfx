@@ -22,7 +22,7 @@ Copyright 2019.
 
 .menu-pane {
     -fx-max-width: infinity;
-    -fx-pref-height: 200px;
+    -fx-pref-height: 230px;
     -fx-min-height: -fx-pref-height;
     -fx-max-height: -fx-pref-height;
 }
@@ -74,25 +74,26 @@ Copyright 2019.
 }
 
 .jfx-list-view {
-    -fx-pref-height: 220px;
+    -fx-pref-height: 200px;
     -fx-min-height: -fx-pref-height;
     -fx-background-color: transparent;
-    -fx-font-size: 15px;
-    -fx-padding: 30px 0px 0 0;
-    /*-fx-background-color: #0d3fb9;*/
+    -fx-font-size: 14px;
     -fx-background-insets: 0;
+}
+
+.jfx-list-view .scroll-bar:vertical {
+    -fx-background-color: transparent;
 }
 
 .jfx-list-view .scroll-bar:vertical .track {
     -fx-background-color: transparent;
     -fx-border-color: transparent;
+    -fx-background-insets: 0;
 }
 
-jfx-list-view .scroll-bar:vertical .thumb {
-    /*-fx-background-color: #0c39a6;*/
-    -fx-background-color: yellow;
-    -fx-background-insets: 1, 0, 0;
+.jfx-list-view .scroll-bar:vertical .thumb {
     -fx-background-radius: 2em;
+    -fx-background-color: #0c39a6;
 }
 
 .jfx-list-cell:odd, 
