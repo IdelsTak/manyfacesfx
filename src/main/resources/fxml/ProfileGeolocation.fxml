@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXSlider?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" styleClass="profile-geolocation-root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="18.0">
+         <children>
+            <Label minHeight="-Infinity" prefHeight="16.0" styleClass="field-label" text="Behavior:" />
+            <HBox fx:id="buttonsBox" styleClass="buttons-area">
+               <children>
+                  <RadioButton fx:id="promptToggle" maxHeight="1.7976931348623157E308" mnemonicParsing="false" selected="true" styleClass="prompt-toggle" text="Prompt">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="behaviorGroup" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="allowToggle" layoutX="228.0" layoutY="10.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" styleClass="allow-toggle" text="Allow" toggleGroup="$behaviorGroup" />
+                  <RadioButton fx:id="blockToggle" layoutX="261.0" layoutY="10.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" styleClass="block-toggle" text="Block" toggleGroup="$behaviorGroup" />
+                  <HBox maxHeight="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+               </children>
+            </HBox>
+            <BorderPane fx:id="behaviorAlertPane">
+               <VBox.margin>
+                  <Insets bottom="37.0" top="9.0" />
+               </VBox.margin>
+            </BorderPane>
+            <VBox fx:id="locationSettingsBox">
+               <children>
+                  <JFXToggleButton fx:id="fillLocationToggle" text="Fill geolocation based on IP" />
+                  <Label styleClass="field-subtitle-label" text="Fill geolocation coordinates on browser profile start based on the external IP." />
+                  <VBox fx:id="locationValuesBox">
+                     <children>
+                        <Label styleClass="field-label" text="Latitude (Example: 40.6856954):">
+                           <VBox.margin>
+                              <Insets top="29.0" />
+                           </VBox.margin>
+                        </Label>
+                        <JFXTextField promptText="Latitude">
+                           <VBox.margin>
+                              <Insets top="2.0" />
+                           </VBox.margin>
+                        </JFXTextField>
+                        <Label styleClass="field-label" text="Longitude (Example: -74.0209128):">
+                           <VBox.margin>
+                              <Insets top="29.0" />
+                           </VBox.margin>
+                        </Label>
+                        <JFXTextField promptText="Longitude">
+                           <VBox.margin>
+                              <Insets top="2.0" />
+                           </VBox.margin>
+                        </JFXTextField>
+                        <Label styleClass="field-label" text="Accuracy (meters):">
+                           <VBox.margin>
+                              <Insets top="29.0" />
+                           </VBox.margin>
+                        </Label>
+                        <HBox spacing="12.0">
+                           <children>
+                              <JFXSlider fx:id="accuracySlider" majorTickUnit="10.0" minorTickCount="5" snapToTicks="true">
+                                 <HBox.margin>
+                                    <Insets top="17.0" />
+                                 </HBox.margin>
+                              </JFXSlider>
+                              <Label fx:id="accuracyValueLabel" text="6" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+   <stylesheets>
+      <URL value="@../styles/app.css" />
+      <URL value="@../styles/profile-geolocation.css" />
+   </stylesheets>
+</AnchorPane>

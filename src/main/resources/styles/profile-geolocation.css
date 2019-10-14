@@ -1,0 +1,150 @@
+
+.profile-geolocation-root {
+    -fx-base: white;
+    -fx-background-color: white;
+    -fx-font-family: 'Roboto';
+}
+
+.profile-geolocation-content {
+    -fx-pref-width: 335px;
+    -fx-min-width: -fx-pref-width;
+}
+
+.buttons-area {
+    -fx-pref-height: 38px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+}
+
+.buttons-area > .prompt-toggle {
+    -fx-border-color: #e0e2e7 transparent #e0e2e7 #e0e2e7;
+}
+
+.buttons-area > .allow-toggle {
+    -fx-border-color: #e0e2e7 transparent #e0e2e7 transparent;
+}
+
+.buttons-area > .block-toggle {
+    -fx-border-color: #e0e2e7 #e0e2e7 #e0e2e7 transparent;
+}
+
+.buttons-area > * {
+    -fx-padding: 0 16 0 16;
+}
+
+.radio-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #aaaaaa;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.radio-button:selected {
+    -fx-background-color: #0b37a4;
+    -fx-text-fill: #e0e0e0;
+}
+
+.radio-button > .radio {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0px;
+    -fx-padding: 0.0em;
+}
+
+.radio-button > .radio > .dot {
+    -fx-background-color: transparent;
+    /*This is important!*/
+    -fx-background-radius: 0;
+    -fx-padding: 0;
+}
+
+.radio-button:selected > .radio > .dot {
+    -fx-background-color: transparent;
+}
+
+.field-label {
+    -fx-font-size: 12px;
+    -fx-pref-height: 16px;
+    -fx-min-height: -fx-pref-height;
+    -fx-alignment: top-left;
+}
+
+.field-subtitle-label {
+    -fx-font-size: 11px;
+    -fx-text-fill: #939393;
+    -fx-min-height: 30px;
+    -fx-alignment: top-left;
+}
+
+.jfx-toggle-button {
+    -fx-pref-height: 25px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+    -fx-padding: 0;
+    -jfx-toggle-color: #174bc9;
+    -jfx-toggle-line-color: #8aa4e4;
+    -jfx-untoggle-color: white;
+    -jfx-untoggle-line-color: #9e9e9e;
+    -fx-font-size: 14px;
+}
+
+.jfx-text-field {
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: #7b7b7b;
+    -fx-border-color: #949494;
+    -fx-background-color: white;
+    -fx-pref-height: 27px;
+    -fx-max-height: -fx-pref-height;
+    -fx-min-height: -fx-pref-height;
+    -fx-pref-width: 334px;
+    -fx-max-width: -fx-pref-width;
+    -fx-min-width: -fx-pref-width;
+    -fx-padding: 1.7 0 4.7 0;
+}
+
+.jfx-text-field:focused {
+    -fx-border-color: #174bc9;
+}
+
+.jfx-text-field:disabled {
+    -fx-background-color: #f2f2f2;
+}
+
+.jfx-text-field > .input-line {
+    -fx-pref-height: 0px;
+    -fx-max-height: 0px;
+}
+
+.jfx-text-field > .input-focused-line {
+    -fx-pref-height: 0px;
+    -fx-max-height: 0px;
+}
+
+.jfx-slider {
+    -jfx-default-thumb: #174bc9;
+    -jfx-default-track: #CCCCCC;
+    -fx-pref-width: 145px;
+    -fx-min-width: -fx-pref-width;
+    -fx-max-width: -fx-pref-width;
+    -jfx-indicator-position: right;
+    -fx-cursor: hand;
+}
+
+.jfx-slider .animated-thumb {
+    -fx-pref-width: 0px;
+    -fx-min-width: -fx-pref-width;
+    -fx-max-width: -fx-pref-width;
+    -fx-pref-height: 0px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+    -fx-background-radius: 0%;
+    -fx-background-insets: 0;
+}
+
+.jfx-slider .slider-value {
+    -fx-font-size: 0.1;
+}
+
+#accuracyValueLabel {
+    -fx-font-size: 14px;
+}
