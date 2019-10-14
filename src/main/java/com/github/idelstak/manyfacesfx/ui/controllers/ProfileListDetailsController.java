@@ -5,6 +5,7 @@ package com.github.idelstak.manyfacesfx.ui.controllers;
 
 import com.github.idelstak.manyfacesfx.api.GlobalContext;
 import com.github.idelstak.manyfacesfx.api.ProfilesRepository;
+import com.github.idelstak.manyfacesfx.model.Group;
 import com.github.idelstak.manyfacesfx.model.Profile;
 import com.github.idelstak.manyfacesfx.ui.ProfileNode;
 import com.github.idelstak.manyfacesfx.ui.SelectProfiles;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
-import java.util.logging.Level;
+import java.util.Objects;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javafx.application.Platform;
@@ -30,9 +31,11 @@ import javafx.collections.SetChangeListener.Change;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Accordion;
+import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.InputEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import org.openide.util.Lookup;
 
 /**
@@ -45,6 +48,8 @@ public class ProfileListDetailsController {
     private static final Logger LOG = Logger.getLogger(ProfileListDetailsController.class.getName());
     private static final GlobalContext CONTEXT = GlobalContext.getDefault();
     private static final ProfilesRepository PROFILES_REPO = ProfilesRepository.getDefault();
+    @FXML
+    private VBox rootBox;
     @FXML
     private TitledPane actionsPane;
     @FXML
@@ -75,17 +80,20 @@ public class ProfileListDetailsController {
     private JFXToggleNode lastEditedToggle;
     @FXML
     private Accordion profileListAccordion;
+    @FXML
+    private Label groupNameLabel;
+    @FXML
+    private HBox groupNameBox;
     private final Collection<TitledPane> titledPanes;
     private final Lookup.Result<ProfileNode> lookupResult;
     private final SimpleBooleanProperty selectionAvailable;
-    private final ObservableSet<Profile> profiles;
     private final SelectProfiles selectProfiles = new SelectProfiles();
+    private Group group;
 
     {
         titledPanes = new ArrayList<>();
         lookupResult = CONTEXT.lookupResult(ProfileNode.class);
         selectionAvailable = new SimpleBooleanProperty(false);
-        profiles = PROFILES_REPO.findAll();
     }
 
     /**
@@ -109,63 +117,96 @@ public class ProfileListDetailsController {
 
         CONTEXT.add(selectProfiles);
 
-        profiles.addListener((Change<? extends Profile> change) -> {
-            LOG.log(Level.FINE, "change occured: {0}", change);
+        PROFILES_REPO.addListener((Change<? extends Profile> change) -> refreshProfilesList());
 
-            if (change.wasAdded()) {
-                ProfileNode node = new ProfileNode(change.getElementAdded());
-                TitledPane titledPane = node.getLookup().lookup(TitledPane.class);
-                titledPanes.add(titledPane);
-
-                Platform.runLater(() -> {
-                    profileListAccordion.getPanes().add(titledPane);
-                });
-            }
+        searchField.textProperty().addListener((ob, ov, name) -> filterBy(name));
+        nameToggle.selectedProperty().addListener((ob, ov, descending) -> {
+            sortByName(descending);
         });
-
-        searchField.textProperty().addListener((ob, ov, nv) -> {
-            if (nv == null || nv.trim().isEmpty()) {
-                Platform.runLater(() -> profileListAccordion.getPanes().setAll(titledPanes));
-            } else {
-                List<TitledPane> result = profileListAccordion.getPanes()
-                        .stream()
-                        .filter(tp -> {
-                            String name = tp.getId().split(":")[0];
-                            return name.toLowerCase().contains(nv.toLowerCase());
-                        })
-                        .collect(Collectors.toList());
-                Platform.runLater(() -> profileListAccordion.getPanes().setAll(result));
-            }
+        lastEditedToggle.selectedProperty().addListener((ob, ov, descending) -> {
+            sortByLastEdited(descending);
         });
-
-        nameToggle.selectedProperty()
-                .addListener((ob, ov, selected) -> {
-                    profileListAccordion.getPanes()
-                            .sort(selected
-                                  ? Comparator.comparing(
-                                            Node::getId,
-                                            this::compareNames).reversed()
-                                  : Comparator.comparing(
-                                            Node::getId,
-                                            this::compareNames));
-                });
-        lastEditedToggle.selectedProperty()
-                .addListener((ob, ov, selected) -> {
-                    profileListAccordion.getPanes()
-                            .sort(selected
-                                  ? Comparator.comparing(
-                                            Node::getId,
-                                            this::compareDates).reversed()
-                                  : Comparator.comparing(
-                                            Node::getId,
-                                            this::compareDates));
-                });
 
         deleteButton.disableProperty().bind(selectionAvailable.not());
         moveToGroupButton.disableProperty().bind(selectionAvailable.not());
         removeFromGroupButton.disableProperty().bind(selectionAvailable.not());
 
         lookupResult.addLookupListener(e -> listenToSelectedProfiles());
+
+//        groupNameBox.setVisible(false);
+        Platform.runLater(() -> rootBox.getChildren().remove(groupNameBox));
+    }
+
+    void setGroup(Group inst) {
+        String message = "Group should not be null";
+        group = Objects.requireNonNull(inst, message);
+
+        groupNameLabel.textProperty().bind(group.nameProperty());
+
+//        group.nameProperty().addListener((ob, ov, nv) -> {
+//            LOG.log(Level.INFO, "Group name change occured: nv = {0}", nv);
+//        });
+//        Platform.runLater(() -> groupNameBox.setVisible(true));
+        Platform.runLater(() -> rootBox.getChildren().add(2, groupNameBox));
+
+        refreshProfilesList();
+    }
+
+    private void sortByLastEdited(Boolean descending) {
+        profileListAccordion.getPanes().sort(
+                descending
+                ? Comparator.comparing(
+                                Node::getId,
+                                this::compareDates).reversed()
+                : Comparator.comparing(
+                                Node::getId,
+                                this::compareDates));
+    }
+
+    private void sortByName(boolean descending) {
+        profileListAccordion.getPanes().sort(
+                descending
+                ? Comparator.comparing(
+                                Node::getId,
+                                this::compareNames).reversed()
+                : Comparator.comparing(
+                                Node::getId,
+                                this::compareNames));
+    }
+
+    private void filterBy(String profileName) {
+        if (profileName == null || profileName.trim().isEmpty()) {
+            Platform.runLater(() -> profileListAccordion.getPanes().setAll(titledPanes));
+        } else {
+            List<TitledPane> result = profileListAccordion.getPanes()
+                    .stream()
+                    .filter(tp -> {
+                        String name = tp.getId().split(":")[0];
+                        return name.toLowerCase().contains(profileName.toLowerCase());
+                    })
+                    .collect(Collectors.toList());
+            Platform.runLater(() -> profileListAccordion.getPanes().setAll(result));
+        }
+    }
+
+    private void refreshProfilesList() {
+        ObservableSet<Profile> allProfiles = PROFILES_REPO.findAll();
+        Collection<Profile> profiles = new ArrayList<>(
+                group != null
+                ? allProfiles.stream()
+                                .filter(profile -> profile.getGroup().equals(group))
+                                .collect(Collectors.toList())
+                : allProfiles);
+
+        List<TitledPane> panes = profiles.stream()
+                .map(profile -> new ProfileNode(profile))
+                .map(node -> node.getLookup().lookup(TitledPane.class))
+                .collect(Collectors.toList());
+
+        titledPanes.clear();
+        titledPanes.addAll(panes);
+
+        Platform.runLater(() -> profileListAccordion.getPanes().setAll(panes));
     }
 
     private int compareDates(String id1, String id2) {
