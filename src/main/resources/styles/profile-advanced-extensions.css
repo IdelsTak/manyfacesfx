@@ -1,0 +1,46 @@
+
+.advanced-extensions-root {
+    -fx-base: white;
+    -fx-background-color: white;
+    -fx-font-family: 'Roboto';
+}
+
+.advanced-extensions-content {
+    -fx-pref-width: 335px;
+    -fx-min-width: -fx-pref-width;
+}
+
+.jfx-toggle-button {
+    -fx-font-size: 13px;
+    -fx-pref-height: 29px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+    -fx-padding: 0 0 7 0;
+    -jfx-toggle-color: #174bc9;
+    -jfx-toggle-line-color: #8aa4e4;
+    -jfx-untoggle-color: white;
+    -jfx-untoggle-line-color: #9e9e9e;
+    -fx-alignment: center-left;
+}
+
+.alert-box {
+    -fx-background-color: #fff6ea;
+    -fx-font-size: 12px;
+    -fx-padding: 17px;
+}
+
+.alert-box > .icon-label > .ikonli-font-icon {
+    -fx-icon-code: mdi-alert;
+    -fx-icon-size: 26px;
+    -fx-icon-color: #ff9300;
+}
+
+.jfx-button {
+    -fx-pref-width: 88px;
+    -fx-pref-height: 38px;
+    -fx-border-color: #b9c9ef;
+    -fx-background-color: #d1dfff;
+    -fx-text-fill: #0e46cc;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<AnchorPane id="AnchorPane" styleClass="advanced-extensions-root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox styleClass="advanced-extensions-content" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="18.0">
+         <children>
+            <JFXToggleButton fx:id="preloadExtensionsToggle" text="Pre-load custom extensions" />
+            <VBox fx:id="preloadExtensionsBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+               <children>
+                  <VBox>
+                     <children>
+                        <HBox styleClass="alert-box">
+                           <children>
+                              <Label maxHeight="1.7976931348623157E308" styleClass="icon-label">
+                                 <graphic>
+                                    <FontIcon />
+                                 </graphic>
+                                 <HBox.margin>
+                                    <Insets right="12.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <Label text="Extension must be placed in USER_HOME_DIRECTORY/.multilogin.com/custom-extension folder. For example, in Windows: C:/Users/YOUR_USER_HOME_DIRECTORY/.multilogin.com/custom-extensions.This way of loading extensions is only recommended for those building automated solutions.If you work without automation, please install browser extensions through a browser interface. An option to pre-load browser extensions might later be removed from the user interace." wrapText="true" />
+                           </children>
+                        </HBox>
+                        <JFXButton fx:id="selectButton" text="Select">
+                           <VBox.margin>
+                              <Insets top="17.0" />
+                           </VBox.margin>
+                        </JFXButton>
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+   <stylesheets>
+      <URL value="@../styles/app.css" />
+      <URL value="@../styles/profile-advanced-extensions.css" />
+   </stylesheets>
+</AnchorPane>
