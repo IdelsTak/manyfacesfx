@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import java.lang.String?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<AnchorPane id="AnchorPane" fx:id="rootPane" prefHeight="287.0" prefWidth="335.0" styleClass="profile-webrtc-root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox layoutX="-10.5" prefWidth="335.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox stylesheets="@../styles/alert-info.css">
+               <children>
+                  <Label maxHeight="1.7976931348623157E308" styleClass="icon-label">
+                     <graphic>
+                        <FontIcon iconLiteral="mdi-check" />
+                     </graphic>
+                  </Label>
+                  <Label maxHeight="1.7976931348623157E308" text="WebRTC plugin will be turned on and will leak your real IP. This mode is only recommended if you don't use proxies in your connection." wrapText="true" />
+               </children>
+               <styleClass>
+                  <String fx:value="alert-info-root" />
+                  <String fx:value="warning-box" />
+               </styleClass>
+               <VBox.margin>
+                  <Insets bottom="39.0" top="9.0" />
+               </VBox.margin>
+            </HBox>
+            <VBox>
+               <children>
+                  <VBox>
+                     <children>
+                        <Label styleClass="header-label" text="Local IP(s)">
+                           <VBox.margin>
+                              <Insets bottom="10.0" />
+                           </VBox.margin>
+                        </Label>
+                        <JFXToggleButton fx:id="enableMaskingToggle" alignment="CENTER_LEFT" maxWidth="1.7976931348623157E308" text="Enable Local IP masking">
+                           <VBox.margin>
+                              <Insets bottom="14.0" />
+                           </VBox.margin>
+                        </JFXToggleButton>
+                     </children>
+                  </VBox>
+                  <VBox fx:id="ipsBox">
+                     <children>
+                        <VBox styleClass="ip-details-box">
+                           <children>
+                              <Label styleClass="field-header-label" text="Local IP 1">
+                                 <VBox.margin>
+                                    <Insets bottom="6.0" />
+                                 </VBox.margin>
+                              </Label>
+                              <JFXTextField fx:id="ip1Field" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="28.0" />
+                           </VBox.margin>
+                        </VBox>
+                        <VBox fx:id="extraIpsBox" />
+                        <Hyperlink fx:id="addIpHyperlink" maxHeight="1.7976931348623157E308" text="Add new local IP" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+   <stylesheets>
+      <URL value="@../styles/app.css" />
+      <URL value="@../styles/profile-webrtc.css" />
+   </stylesheets>
+</AnchorPane>

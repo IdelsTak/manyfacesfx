@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" styleClass="profile-webrtc-root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox fx:id="contentBox" styleClass="profile-webrtc-content" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="18.0">
+         <children>
+            <Label text="Behavior:" />
+            <HBox fx:id="buttonsBox" styleClass="buttons-area">
+               <children>
+                  <RadioButton fx:id="alteredToggle" maxHeight="1.7976931348623157E308" mnemonicParsing="false" selected="true" styleClass="altered-toggle" text="Altered">
+                     <toggleGroup>
+                        <ToggleGroup fx:id="behaviorGroup" />
+                     </toggleGroup>
+                  </RadioButton>
+                  <RadioButton fx:id="disabledToggle" layoutX="228.0" layoutY="10.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" styleClass="disabled-toggle" text="Disabled" toggleGroup="$behaviorGroup" />
+                  <RadioButton fx:id="realToggle" layoutX="261.0" layoutY="10.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" styleClass="real-toggle" text="Real" toggleGroup="$behaviorGroup" />
+                  <HBox maxHeight="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+               </children>
+               <VBox.margin>
+                  <Insets top="7.0" />
+               </VBox.margin>
+            </HBox>
+            <VBox fx:id="settingsPane" VBox.vgrow="ALWAYS" />
+         </children>
+      </VBox>
+   </children>
+   <stylesheets>
+      <URL value="@../styles/app.css" />
+      <URL value="@../styles/profile-webrtc.css" />
+   </stylesheets>
+</AnchorPane>

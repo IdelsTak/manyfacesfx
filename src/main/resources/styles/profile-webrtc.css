@@ -1,0 +1,157 @@
+
+.profile-webrtc-root {
+    -fx-base: white;
+    -fx-background-color: white;
+    -fx-font-family: 'Roboto';
+}
+
+.profile-webrtc-content {
+    -fx-pref-width: 335px;
+    -fx-min-width: -fx-pref-width;
+}
+
+.buttons-area {
+    -fx-pref-height: 38px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+}
+
+.buttons-area > .altered-toggle {
+    -fx-border-color: #e0e2e7 transparent #e0e2e7 #e0e2e7;
+}
+
+.buttons-area > .disabled-toggle {
+    -fx-border-color: #e0e2e7 transparent #e0e2e7 transparent;
+}
+
+.buttons-area > .real-toggle {
+    -fx-border-color: #e0e2e7 #e0e2e7 #e0e2e7 transparent;
+}
+
+.buttons-area > * {
+    -fx-padding: 0 16 0 16;
+}
+
+.radio-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #aaaaaa;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.radio-button:selected {
+    -fx-background-color: #0b37a4;
+    -fx-text-fill: #e0e0e0;
+}
+
+.radio-button > .radio {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0px;
+    -fx-padding: 0.0em;
+}
+
+.radio-button > .radio > .dot {
+    -fx-background-color: transparent;
+    /*This is important!*/
+    -fx-background-radius: 0;
+    -fx-padding: 0;
+}
+
+.radio-button:selected > .radio > .dot {
+    -fx-background-color: transparent;
+}
+
+.delete-button {
+    -fx-pref-width: 24px;
+    -fx-pref-height: 24px;
+    -fx-min-width: -fx-pref-width;
+    -fx-min-height: -fx-pref-width;
+    -fx-max-width: -fx-pref-width;
+    -fx-max-height: -fx-pref-width;
+    -fx-padding: 0 1 0 0;
+    -fx-background-radius: 12px;
+}
+
+.delete-button .ikonli-font-icon {
+    -fx-icon-code: mdi-delete;
+    -fx-icon-size: 24px;
+    -fx-icon-color: #c2c6ce;
+}
+
+.header-label {
+    -fx-pref-height: 20px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.jfx-text-field {
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: #7b7b7b;
+    -fx-border-color: #949494;
+    -fx-background-color: white;
+    -fx-pref-height: 27px;
+    -fx-max-height: -fx-pref-height;
+    -fx-min-height: -fx-pref-height;
+    -fx-pref-width: 199px;
+    -fx-max-width: -fx-pref-width;
+    -fx-min-width: -fx-pref-width;
+    -fx-padding: 1.7 0 4.7 0;
+}
+
+.jfx-text-field:focused {
+    -fx-border-color: #174bc9;
+}
+
+.jfx-text-field:disabled {
+    -fx-background-color: #f2f2f2;
+}
+
+.jfx-text-field > .input-line {
+    -fx-pref-height: 0px;
+    -fx-max-height: 0px;
+}
+
+.jfx-text-field > .input-focused-line {
+    -fx-pref-height: 0px;
+    -fx-max-height: 0px;
+}
+
+.field-header-label {
+    -fx-font-size: 11px;
+    -fx-text-fill: #939393;
+}
+
+.public-ip-header-label {
+    -fx-pref-height: 38px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+    -fx-alignment: top-left;
+}
+
+.public-ip-box {
+    -fx-border-color: #e0e2e7 transparent #e0e2e7 transparent;
+}
+
+.jfx-toggle-button {
+    -fx-pref-height: 25px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+    -fx-padding: 0;
+    -jfx-toggle-color: #174bc9;
+    -jfx-toggle-line-color: #8aa4e4;
+    -jfx-untoggle-color: white;
+    -jfx-untoggle-line-color: #9e9e9e;
+    -fx-font-size: 14px;
+}
+
+.hyperlink {
+    -fx-text-fill: #0e46cc;
+    -fx-focus-traversable: false;
+    -fx-font-size: 13px;
+    -fx-padding: -1px;
+}
+
+

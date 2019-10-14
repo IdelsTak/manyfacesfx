@@ -1,0 +1,48 @@
+
+.alert-info-root {
+    -fx-font-family: 'Roboto';
+}
+
+.alert-box {
+    -fx-background-color: #dff0d8;
+    -fx-padding: 15px;
+}
+
+.warning-box > .label,
+.alert-box > .label {
+    -fx-font-size: 12px;
+    -fx-line-spacing: 2px;
+}
+
+.alert-box > .label {
+    -fx-text-fill: #487f48;
+}
+
+.warning-box > .label {
+    -fx-text-fill: #303542;
+}
+
+.warning-box > .icon-label,
+.alert-box > .icon-label {
+    -fx-padding: 0 15 0 0;
+}
+
+.warning-box > .icon-label > .ikonli-font-icon,
+.alert-box > .icon-label > .ikonli-font-icon {
+    -fx-icon-size: 26px;
+}
+
+.alert-box > .icon-label > .ikonli-font-icon {
+    -fx-icon-color: #487f48;
+    -fx-icon-code: mdi-check;
+}
+
+.warning-box > .icon-label > .ikonli-font-icon {
+    -fx-icon-color: #ff9300;
+    -fx-icon-code: mdi-alert;
+}
+
+.warning-box {
+    -fx-background-color: #fff6ea;
+    -fx-padding: 15px;
+}
