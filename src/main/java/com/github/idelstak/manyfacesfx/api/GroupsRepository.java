@@ -39,6 +39,8 @@ public abstract class GroupsRepository {
 
     public abstract void delete(Group group);
 
+    public abstract void addListener(ListChangeListener<? super Group> listener);
+
     private static class SimpleGroupsRepository extends GroupsRepository {
 
         private static final Logger LOG;
@@ -114,6 +116,11 @@ public abstract class GroupsRepository {
         @Override
         public synchronized ObservableList<Group> findAll() {
             return FXCollections.unmodifiableObservableList(groups);
+        }
+
+        @Override
+        public synchronized void addListener(ListChangeListener<? super Group> listener) {
+            groups.addListener(listener);
         }
 
         @Override
