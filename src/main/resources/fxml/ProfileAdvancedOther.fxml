@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" fx:id="advancedOtherPane" styleClass="advanced-other-root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox maxHeight="1.7976931348623157E308" styleClass="advanced-other-content" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="18.0">
+         <children>
+            <JFXToggleButton fx:id="sessionLockToggle" maxWidth="1.7976931348623157E308" text="Active session lock">
+               <VBox.margin>
+                  <Insets bottom="7.0" />
+               </VBox.margin>
+            </JFXToggleButton>
+            <Label styleClass="active-session-subtitle" text="This option prevents launching this browser profile on multiple computers at the same time." wrapText="true" />
+            <JFXToggleButton fx:id="googleServicesToggle" layoutX="10.0" layoutY="10.0" maxWidth="1.7976931348623157E308" text="Enable Google services">
+               <VBox.margin>
+                  <Insets bottom="7.0" top="26.0" />
+               </VBox.margin>
+            </JFXToggleButton>
+            <Label layoutX="10.0" layoutY="70.0" styleClass="google-services-subtitle" text="Enable support of Google services whenever possible. This emulates normal browser behavior to the maximum possible extent." wrapText="true" />
+            <Label layoutX="10.0" layoutY="145.0" maxWidth="1.7976931348623157E308" styleClass="custom-dns-title" text="Custom DNS:">
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin></Label>
+            <Label layoutX="10.0" layoutY="145.0" styleClass="custom-dns-subtitle" text="You can use a custom DNS server for this browser profile. This option works with SOCKS proxies, VPN, and direct connection only. It won't work with http(s) proxies." wrapText="true" />
+            <JFXTextField promptText="Custom DNS">
+               <VBox.margin>
+                  <Insets top="7.0" />
+               </VBox.margin></JFXTextField>
+         </children>
+      </VBox>
+   </children>
+   <stylesheets>
+      <URL value="@../styles/app.css" />
+      <URL value="@../styles/profile-advanced-other.css" />
+   </stylesheets>
+</AnchorPane>

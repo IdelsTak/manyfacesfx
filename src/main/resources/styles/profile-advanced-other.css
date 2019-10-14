@@ -1,0 +1,71 @@
+
+.advanced-other-root {
+    -fx-base: white;
+    -fx-background-color: white;
+    -fx-font-family: 'Roboto';
+}
+
+.advanced-other-content {
+    -fx-pref-width: 335px;
+    -fx-min-width: -fx-pref-width;
+}
+
+.custom-dns-title {
+    -fx-pref-height: 20px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+}
+
+.custom-dns-title,
+.active-session-subtitle,
+.custom-dns-subtitle,
+.google-services-subtitle {
+    -fx-alignment: top-left;
+    -fx-font-size: 12px;
+    -fx-line-spacing: 2;
+}
+
+.active-session-subtitle {
+    -fx-max-height: 57px;
+}
+
+.custom-dns-subtitle,
+.google-services-subtitle {
+    -fx-max-height: 61px;
+}
+
+.jfx-toggle-button {
+    -fx-font-size: 14px;
+    -fx-pref-height: 29px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+    -fx-padding: 0;
+    -jfx-toggle-color: #174bc9;
+    -jfx-toggle-line-color: #8aa4e4;
+    -jfx-untoggle-color: white;
+    -jfx-untoggle-line-color: #9e9e9e;
+    -fx-alignment: center-left;
+}
+
+.jfx-text-field {
+    -fx-font-size: 14px;
+    -fx-prompt-text-fill: #7b7b7b;
+    -fx-border-color: #949494;
+    -fx-pref-width: 290px;
+    -fx-max-width: -fx-pref-width;
+    -fx-min-width: -fx-pref-width;
+}
+
+.jfx-text-field:focused {
+    -fx-border-color: #174bc9;
+}
+
+.jfx-text-field > .input-line {
+    -fx-pref-height: 0px;
+    -fx-max-height: 0px;
+}
+
+.jfx-text-field > .input-focused-line {
+    -fx-pref-height: 0px;
+    -fx-max-height: 0px;
+}
