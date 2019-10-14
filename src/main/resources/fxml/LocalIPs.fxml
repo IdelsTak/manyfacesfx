@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<AnchorPane id="AnchorPane" fx:id="ipRootPane" minHeight="78.0" prefHeight="78.0" prefWidth="600.0" styleClass="local-ips-root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.idelstak.manyfacesfx.ui.controllers.LocalIPsController">
+    <children>
+          <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <children>
+                  <Label fx:id="ipPaneCountLabel" styleClass="field-header-label" text="Local IP 2" />
+                  <HBox>
+                      <children>
+                          <JFXTextField fx:id="ipField">
+                              <HBox.margin>
+                                  <Insets right="9.0" />
+                              </HBox.margin>
+                          </JFXTextField>
+                          <JFXButton fx:id="deleteButton" styleClass="delete-button">
+                              <graphic>
+                                  <FontIcon />
+                              </graphic>
+                          </JFXButton>
+                      </children>
+                  </HBox>
+              </children>
+          </VBox>
+    </children>
+   <stylesheets>
+      <URL value="@../styles/app.css" />
+      <URL value="@../styles/local-ips.css" />
+   </stylesheets>
+</AnchorPane>
