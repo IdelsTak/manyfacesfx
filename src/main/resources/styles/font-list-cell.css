@@ -1,0 +1,18 @@
+/*
+Copyright 2019.
+*/
+/* 
+    Created on : Sep 28, 2019, 1:01:50 PM
+    Author     : Hiram K <hiram.kamau@outlook.com>
+*/
+
+.font-list-cell-root {
+    -fx-font-family: 'Roboto';
+    -fx-border-color: transparent transparent #e0e2e7 transparent;
+}
+
+.label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #828b93;
+}
+
