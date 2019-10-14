@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableSet;
+import javafx.collections.SetChangeListener;
 import javafx.concurrent.Service;
 import javafx.concurrent.Task;
 import org.openide.util.Lookup;
@@ -54,6 +55,8 @@ public abstract class ProfilesRepository {
     public abstract ObservableSet<Profile> findAll();
 
     public abstract Optional<Profile> findById(String id);
+
+    public abstract void addListener(SetChangeListener<? super Profile> listener);
 
     private static final class BasicProfilesRepository extends ProfilesRepository {
 
@@ -136,6 +139,11 @@ public abstract class ProfilesRepository {
         @Override
         public synchronized ObservableSet<Profile> findAll() {
             return FXCollections.unmodifiableObservableSet(profiles);
+        }
+
+        @Override
+        public synchronized void addListener(SetChangeListener<? super Profile> listener) {
+            profiles.addListener(listener);
         }
 
         @Override
