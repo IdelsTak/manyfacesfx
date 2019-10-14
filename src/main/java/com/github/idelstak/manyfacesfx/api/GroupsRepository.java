@@ -53,13 +53,13 @@ public abstract class GroupsRepository {
             this.groups = FXCollections.observableArrayList();
 
             groups.addListener((ListChangeListener.Change<? extends Group> change) -> {
-                LOG.log(Level.INFO, "Groups list change occured: {0}", change);
+                LOG.log(Level.FINE, "Groups list change occured: {0}", change);
             });
         }
 
         @Override
         public synchronized Group add(String groupName) {
-            LOG.log(Level.INFO, "Adding group with name: {0}", groupName);
+            LOG.log(Level.FINE, "Adding group with name: {0}", groupName);
 
             id += 1;
             Group newGroup = new Group(id, groupName);
