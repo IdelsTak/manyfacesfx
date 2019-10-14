@@ -87,11 +87,16 @@ public class ProfileMenuController {
                 "webrtc",
                 webRtcToggle.getText(),
                 FXMLLoader.load(getClass().getResource("/fxml/ProfileWebRtc.fxml")));
+        ProfileMenuNode geolocationNode = new ProfileMenuNode(
+                "geolocation",
+                geolocationToggle.getText(),
+                FXMLLoader.load(getClass().getResource("/fxml/ProfileGeolocation.fxml")));
 
         overviewToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, overviewNode));
         proxyToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, proxyNode));
         timezoneToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, timezoneNode));
         webRtcToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, webRtcNode));
+        geolocationToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, geolocationNode));
 
         //Ensure overview is selected
         Platform.runLater(() -> {
