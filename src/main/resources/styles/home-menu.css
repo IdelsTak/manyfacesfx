@@ -131,13 +131,13 @@ Copyright 2019.
 
 .stats-box > .paid-status-box > * {
     -fx-pref-height: 30px;
-    -fx-font-size: 15px;
 }
 
 .stats-box > .paid-status-box > .label {
     -fx-pref-width: 80px;
-    -fx-alignment: center-right;
+    -fx-alignment: bottom-right;
     -fx-text-fill: white;
+    -fx-font-size: 14px;
 }
 
 .stats-box > .paid-status-box > .hyperlink {
@@ -145,6 +145,8 @@ Copyright 2019.
     -fx-pref-height: 30px;
     -fx-underline: true;
     -fx-text-fill: #ffdc00;
+    -fx-alignment: bottom-left;
+    -fx-font-size: 13px;
 }
 
 .stats-box > .profiles-number-box {
