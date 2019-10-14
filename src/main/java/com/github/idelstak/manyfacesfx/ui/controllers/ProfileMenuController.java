@@ -171,7 +171,11 @@ public class ProfileMenuController {
     }
 
     private void selectIfNotSelected(RadioButton button) {
-        Platform.runLater(() -> button.setSelected(!button.isSelected()));
+        Platform.runLater(() -> {
+            if (!button.isSelected()) {
+                button.setSelected(true);
+            }
+        });
     }
 
 }
