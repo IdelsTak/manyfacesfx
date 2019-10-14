@@ -116,6 +116,10 @@ public class ProfileMenuController {
                 "other",
                 otherToggle.getText(),
                 FXMLLoader.load(getClass().getResource("/fxml/ProfileAdvancedOther.fxml")));
+        ProfileMenuNode browserPluginsNode = new ProfileMenuNode(
+                "browser plugins",
+                browserPluginsToggle.getText(),
+                FXMLLoader.load(getClass().getResource("/fxml/ProfileAdvancedPlugins.fxml")));
 
         overviewToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, overviewNode));
         proxyToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, proxyNode));
@@ -129,6 +133,7 @@ public class ProfileMenuController {
         hardwareToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, hardwareNode));
         navigatorToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, navigatorNode));
         otherToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, otherNode));
+        browserPluginsToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, browserPluginsNode));
 
         //Ensure overview is selected
         Platform.runLater(() -> {
