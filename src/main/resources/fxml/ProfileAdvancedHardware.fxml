@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" minHeight="-Infinity" styleClass="advanced-hardware-root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <VBox prefWidth="100.0" styleClass="advanced-hardware-content" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="35.0" AnchorPane.rightAnchor="36.0" AnchorPane.topAnchor="18.0">
+         <children>
+            <VBox>
+               <children>
+                  <Label styleClass="field-header-label" text="Canvas" />
+                  <HBox styleClass="buttons-area">
+                     <children>
+                        <RadioButton fx:id="canvasNoiseToggle" maxHeight="1.7976931348623157E308" mnemonicParsing="false" selected="true" styleClass="left-toggle" text="Noise">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="canvasGroup" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="canvasOffToggle" layoutX="261.0" layoutY="10.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" styleClass="center-toggle" text="Off" toggleGroup="$canvasGroup" />
+                        <RadioButton fx:id="canvasBlockToggle" layoutX="87.0" layoutY="10.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" styleClass="right-toggle" text="Block" toggleGroup="$canvasGroup" />
+                        <HBox maxHeight="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="9.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <BorderPane fx:id="canvasAlertPane" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets bottom="11.0" />
+                     </VBox.margin>
+                  </BorderPane>
+                  <Label styleClass="field-header-label" text="Canvas hash:" />
+                  <Label fx:id="canvasHashLabel" styleClass="hash-label" text="&lt;hash&gt;" />
+               </children>
+            </VBox>
+            <VBox layoutX="10.0" layoutY="10.0" styleClass="audio-context-box">
+               <children>
+                  <Label styleClass="field-header-label" text="AudioContext">
+                     <VBox.margin>
+                        <Insets top="17.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox styleClass="buttons-area">
+                     <children>
+                        <RadioButton fx:id="audioContextNoiseToggle" maxHeight="1.7976931348623157E308" mnemonicParsing="false" selected="true" styleClass="left-toggle" text="Noise">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="audioContextGroup" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="audioContextOffToggle" layoutX="261.0" layoutY="10.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" styleClass="right-toggle" text="Off" toggleGroup="$audioContextGroup" />
+                        <HBox maxHeight="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="9.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <BorderPane fx:id="audioContextAlertPane" VBox.vgrow="ALWAYS">
+                     <VBox.margin>
+                        <Insets bottom="11.0" />
+                     </VBox.margin>
+                  </BorderPane>
+                  <Label styleClass="field-header-label" text="Audio hash:" />
+                  <Label fx:id="audioContextHashLabel" styleClass="hash-label" text="&lt;hash&gt;">
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets top="20.0" />
+               </VBox.margin>
+            </VBox>
+            <VBox layoutX="10.0" layoutY="10.0">
+               <children>
+                  <Label styleClass="field-header-label" text="WebGL image">
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </Label>
+                  <HBox styleClass="buttons-area">
+                     <children>
+                        <RadioButton fx:id="webGLImageNoiseToggle" maxHeight="1.7976931348623157E308" mnemonicParsing="false" selected="true" styleClass="left-toggle" text="Noise">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="webGLImageGroup" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="webGLImageOffToggle" layoutX="261.0" layoutY="10.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" styleClass="right-toggle" text="Off" toggleGroup="$webGLImageGroup" />
+                        <HBox maxHeight="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="9.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <BorderPane fx:id="webGLImageAlertPane">
+                     <VBox.margin>
+                        <Insets bottom="11.0" />
+                     </VBox.margin>
+                  </BorderPane>
+               </children>
+            </VBox>
+            <VBox layoutX="10.0" layoutY="275.0">
+               <children>
+                  <Label styleClass="field-header-label" text="WebGL metadata" />
+                  <HBox styleClass="buttons-area">
+                     <children>
+                        <RadioButton fx:id="webGLMetadataMaskToggle" maxHeight="1.7976931348623157E308" mnemonicParsing="false" selected="true" styleClass="left-toggle" text="Mask">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="webGLMetadataGroup" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="webGLMetadataOffToggle" layoutX="261.0" layoutY="10.0" maxHeight="1.7976931348623157E308" mnemonicParsing="false" styleClass="right-toggle" text="Off" toggleGroup="$webGLMetadataGroup" />
+                        <HBox maxHeight="1.7976931348623157E308" HBox.hgrow="ALWAYS" />
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="9.0" />
+                     </VBox.margin>
+                  </HBox>
+                  <BorderPane fx:id="webGLMetadataAlertPane">
+                     <VBox.margin>
+                        <Insets bottom="11.0" />
+                     </VBox.margin>
+                  </BorderPane>
+                  <Label styleClass="field-header-label" text="WebGL image hash:" />
+                  <Label fx:id="webGLMetadataHashLabel" styleClass="hash-label" text="&lt;hash&gt;" />
+               </children>
+            </VBox>
+            <VBox fx:id="otherParametersBox">
+               <children>
+                  <Label styleClass="field-header-label" text="WebGL vendor:" />
+                  <JFXTextField>
+                     <VBox.margin>
+                        <Insets bottom="25.0" />
+                     </VBox.margin>
+                  </JFXTextField>
+                  <Label layoutX="10.0" layoutY="10.0" styleClass="field-header-label" text="WebGL renderer:" />
+                  <JFXTextField layoutX="10.0" layoutY="25.0" />
+                  <Hyperlink fx:id="otherParametersHyperlink" text="Other WebGL parameters">
+                     <VBox.margin>
+                        <Insets top="30.0" />
+                     </VBox.margin>
+                  </Hyperlink>
+               </children>
+               <VBox.margin>
+                  <Insets top="21.0" />
+               </VBox.margin>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+   <stylesheets>
+      <URL value="@../styles/app.css" />
+      <URL value="@../styles/profile-advanced-hardware.css" />
+   </stylesheets>
+</AnchorPane>

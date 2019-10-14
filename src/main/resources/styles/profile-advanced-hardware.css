@@ -1,0 +1,111 @@
+
+.advanced-hardware-root {
+    -fx-base: white;
+    -fx-background-color: white;
+    -fx-font-family: 'Roboto';
+}
+
+.advanced-hardware-content {
+    -fx-pref-width: 335px;
+    -fx-min-width: -fx-pref-width;
+}
+
+.field-header-label {
+    -fx-font-size: 12px;
+}
+
+.hash-label {
+    -fx-font-size: 14px;
+}
+
+.field-header-label,
+.hash-label {
+    -fx-pref-height: 21px;
+    -fx-min-height: -fx-pref-height;
+    -fx-alignment: top-left;
+}
+
+.buttons-area {
+    -fx-pref-height: 38px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+}
+
+.buttons-area > .left-toggle {
+    -fx-border-color: #e0e2e7 transparent #e0e2e7 #e0e2e7;
+}
+
+.buttons-area > .center-toggle {
+    -fx-border-color: #e0e2e7 transparent #e0e2e7 transparent;
+}
+
+.buttons-area > .right-toggle {
+    -fx-border-color: #e0e2e7 #e0e2e7 #e0e2e7 transparent;
+}
+
+.buttons-area > * {
+    -fx-padding: 0 16 0 16;
+}
+
+.radio-button {
+    -fx-font-size: 14px;
+    -fx-background-color: transparent;
+    -fx-text-fill: #aaaaaa;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+.radio-button:selected {
+    -fx-background-color: #0b37a4;
+    -fx-text-fill: #e0e0e0;
+}
+
+.radio-button > .radio {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0px;
+    -fx-padding: 0.0em;
+}
+
+.radio-button > .radio > .dot {
+    -fx-background-color: transparent;
+    /*This is important!*/
+    -fx-background-radius: 0;
+    -fx-padding: 0;
+}
+
+.radio-button:selected > .radio > .dot {
+    -fx-background-color: transparent;
+}
+
+.audio-context-box {
+    -fx-border-color: #e0e0e0 transparent #e0e0e0 transparent;
+}
+
+.jfx-text-field {
+    -fx-border-color: #949494;
+    -fx-pref-width: 335px;
+    -fx-max-width: -fx-pref-width;
+    -fx-font-size: 14px;
+    -fx-padding: 1.7 0 4.7 0;
+}
+
+.jfx-text-field > .input-line {
+    -fx-pref-height: 0px;
+    -fx-max-height: 0px;
+}
+
+.jfx-text-field > .input-focused-line {
+    -fx-pref-height: 0px;
+    -fx-max-height: 0px;
+}
+
+.jfx-text-field:focused {
+    -fx-border-color: #174bc9;
+}
+
+.hyperlink {
+    -fx-text-fill: #315fcf;
+    -fx-padding: 0;
+    -fx-focus-traversable: false;
+}
