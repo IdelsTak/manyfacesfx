@@ -39,3 +39,144 @@ Copyright 2019.
 .menu-pane > .radio-button:selected {
     -fx-text-fill: white;
 }
+
+.groups-header-box {
+    -fx-font-family: 'Roboto';
+    -fx-font-size: 16px;
+    -fx-pref-height: 26px;
+    -fx-min-height: -fx-pref-height;
+    -fx-border-color: transparent transparent #436cfe transparent;
+    -fx-border-insets: 0 0 2 0;
+}
+
+.groups-header-box > .label {
+    -fx-text-fill: #94c0fe;
+}
+
+.groups-header-box > .jfx-button {
+    -fx-pref-width: 16px;
+    -fx-pref-height: 16px;
+    -fx-min-width: -fx-pref-width;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-width: -fx-pref-width;
+    -fx-max-height: -fx-pref-height;
+    -fx-background: #0d3fb9;
+    -fx-cursor: hand;
+}
+
+.groups-header-box > .jfx-button .jfx-rippler {
+    -jfx-rippler-fill: #0d3fb9;
+}
+
+.groups-header-box > .jfx-button > .ikonli-font-icon {
+    -fx-icon-size: 16px;
+    -fx-icon-color: #94c0fe;
+}
+
+.jfx-list-view {
+    -fx-pref-height: 220px;
+    -fx-min-height: -fx-pref-height;
+    -fx-background-color: transparent;
+    -fx-font-size: 15px;
+    -fx-padding: 30px 0px 0 0;
+    /*-fx-background-color: #0d3fb9;*/
+    -fx-background-insets: 0;
+}
+
+.jfx-list-view .scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+jfx-list-view .scroll-bar:vertical .thumb {
+    /*-fx-background-color: #0c39a6;*/
+    -fx-background-color: yellow;
+    -fx-background-insets: 1, 0, 0;
+    -fx-background-radius: 2em;
+}
+
+.jfx-list-cell:odd, 
+.jfx-list-cell:even {
+    -fx-background-color: #0d3fb9;
+}
+
+.jfx-list-cell {
+    -fx-text-fill: #a7d0ff;
+    -fx-cursor: hand;
+}
+
+.jfx-list-cell:selected {
+    -fx-text-fill: white;
+}
+
+.jfx-list-cell .jfx-rippler {
+    -jfx-rippler-fill: #0d3fb9;
+}
+
+.stats-box {
+    -fx-font-family: 'Roboto';
+    -fx-pref-width: 190px;
+    -fx-pref-height: 75px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+    -fx-background-color: #2258d7;
+}
+
+.stats-box > .paid-status-box {
+    -fx-pref-height: 30px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+}
+
+.stats-box > .paid-status-box > * {
+    -fx-pref-height: 30px;
+    -fx-font-size: 15px;
+}
+
+.stats-box > .paid-status-box > .label {
+    -fx-pref-width: 80px;
+    -fx-alignment: center-right;
+    -fx-text-fill: white;
+}
+
+.stats-box > .paid-status-box > .hyperlink {
+    -fx-pref-width: 95px;
+    -fx-pref-height: 30px;
+    -fx-underline: true;
+    -fx-text-fill: #ffdc00;
+}
+
+.stats-box > .profiles-number-box {
+    -fx-pref-height: 20px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+}
+
+.stats-box > .profiles-number-box > .label {
+    -fx-pref-width: 95px;
+    -fx-font-size: 15px;
+}
+
+.stats-box > .profiles-number-box > .number-in-use-label {
+    -fx-alignment: center-right;
+    -fx-text-fill: white;
+}
+
+.stats-box > .profiles-number-box > .total-allowed-label {
+    -fx-alignment: center-left;
+    -fx-text-fill: #96c3ff;
+}
+
+.stats-box > .profiles-label-box {
+    -fx-pref-height: 25px;
+    -fx-min-height: -fx-pref-height;
+    -fx-max-height: -fx-pref-height;
+}
+
+.stats-box > .profiles-label-box > .label {
+    -fx-pref-width: 190px;
+    -fx-alignment: center;
+    -fx-text-fill: #87b6fa;
+    -fx-font-size: 12px;
+}
+
