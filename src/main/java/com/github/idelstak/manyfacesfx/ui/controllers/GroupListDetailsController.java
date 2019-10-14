@@ -11,7 +11,9 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javafx.application.Platform;
+import javafx.collections.ListChangeListener.Change;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Accordion;
@@ -25,6 +27,7 @@ import javafx.scene.control.TitledPane;
 public class GroupListDetailsController {
 
     private static final Logger LOG = Logger.getLogger(GroupListDetailsController.class.getName());
+    private static final GroupsRepository GROUPS_REPO = GroupsRepository.getDefault();
     @FXML
     private JFXTextField searchField;
     @FXML
@@ -39,13 +42,18 @@ public class GroupListDetailsController {
      */
     @FXML
     public void initialize() {
-        Platform.runLater(() -> {
-            GroupsRepository.getDefault()
-                    .findAll()
-                    .stream()
-                    .map(this::getPane)
-                    .forEach(o -> o.ifPresent(groupListAccordion.getPanes()::add));
-        });
+        refreshGroupsList();
+        GROUPS_REPO.addListener((Change<? extends Group> c) -> refreshGroupsList());
+    }
+
+    private void refreshGroupsList() {
+        Platform.runLater(() -> groupListAccordion.getPanes()
+                .setAll(GROUPS_REPO.findAll()
+                        .stream()
+                        .map(this::getPane)
+                        .filter(Optional::isPresent)
+                        .map(Optional::get)
+                        .collect(Collectors.toList())));
     }
 
     private Optional<TitledPane> getPane(Group group) {
