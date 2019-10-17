@@ -9,12 +9,16 @@ import com.github.idelstak.manyfacesfx.model.Group;
 import com.github.idelstak.manyfacesfx.model.Profile;
 import com.github.idelstak.manyfacesfx.ui.ProfileNode;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -67,6 +71,7 @@ public class MoveProfilesDialogController {
     private final ToggleGroup toggleGroup = new ToggleGroup();
     private final ObservableSet<CheckBox> selectGroupCheckBoxes;
     private final Lookup.Result<ProfileNode> profileNodeResult;
+    private final Map<CheckBox, Group> groupsMap = new HashMap<>();
 
     {
         selectGroupCheckBoxes = FXCollections.observableSet(new HashSet<>());
@@ -88,6 +93,10 @@ public class MoveProfilesDialogController {
 
         closeButton.setOnAction(e -> dialog.close());
         cancelButton.setOnAction(e -> dialog.close());
+        moveButton.setOnAction(e -> {
+            moveProfilesToSomeSelectedGroup();
+            Platform.runLater(dialog::close);
+        });
 
         updateSelectedProfileLabels();
         refreshGroupsList();
@@ -120,7 +129,19 @@ public class MoveProfilesDialogController {
             MoveProfileCellController controller = loader.getController();
 
             controller.setGroup(group);
-            selectGroupCheckBoxes.add(controller.getSelectGroupCheckBox());
+            JFXCheckBox selectGroupCheckBox = controller.getSelectGroupCheckBox();
+
+            selectGroupCheckBoxes.add(selectGroupCheckBox);
+            selectGroupCheckBox.selectedProperty()
+                    .addListener((ob, deselected, selected) -> {
+                        if (selected) {
+                            selectGroupCheckBoxes.stream()
+                                    .filter(checkBox -> !Objects.equals(checkBox, selectGroupCheckBox))
+                                    .forEach(checkBox -> checkBox.setSelected(deselected));
+                        }
+                    });
+            
+            groupsMap.put(selectGroupCheckBox, group);
         });
 
         return paneOptional;
@@ -163,5 +184,22 @@ public class MoveProfilesDialogController {
 
     private Profile getProfile(Lookup lookup) {
         return lookup.lookup(Profile.class);
+    }
+
+    private void moveProfilesToSomeSelectedGroup() {
+        groupsMap.keySet()
+                .stream()
+                .filter(CheckBox::isSelected)
+                .findFirst()
+                .map(groupsMap::get)
+                .ifPresent(this::moveProfilesToGroup);
+    }
+
+    private void moveProfilesToGroup(Group group) {
+        profileNodeResult.allInstances()
+                .stream()
+                .map(ProfileNode::getLookup)
+                .map(this::getProfile)
+                .forEach(profile -> profile.setGroup(group));
     }
 }
