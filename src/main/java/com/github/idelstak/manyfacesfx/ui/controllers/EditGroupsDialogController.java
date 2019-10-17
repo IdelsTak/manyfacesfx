@@ -84,14 +84,14 @@ public class EditGroupsDialogController {
         groups = GROUPS_REPO.findAll();
 
         GROUPS_REPO.addListener((Change<? extends Group> change) -> {
-            noGroupsFoundText.setVisible(change.getList().isEmpty());
-            groupsListView.setVisible(!change.getList().isEmpty());
+            noGroupsFoundText.setVisible(change.getList().size() <= 1);
+            groupsListView.setVisible(change.getList().size() > 1);
 
             Platform.runLater(() -> updateListView());
         });
 
-        noGroupsFoundText.setVisible(groups.isEmpty());
-        groupsListView.setVisible(!groups.isEmpty());
+        noGroupsFoundText.setVisible(groups.size() <= 1);
+        groupsListView.setVisible(groups.size() > 1);
 
         updateListView();
     }
@@ -126,8 +126,6 @@ public class EditGroupsDialogController {
 
             if (group != null && !empty) {
                 setGraphic(getHBox(group));
-            } else {
-                setGraphic(new HBox());
             }
         }
 
@@ -146,6 +144,10 @@ public class EditGroupsDialogController {
         }
 
         private void acceptMoveTransferMode(DragEvent event) {
+            if (getItem() == null || getItem().getName().equals("Unassigned")) {
+                return;
+            }
+
             if (event.getGestureSource() != this
                     && event.getDragboard().hasString()) {
                 event.acceptTransferModes(TransferMode.MOVE);
@@ -155,7 +157,7 @@ public class EditGroupsDialogController {
         }
 
         private void initDragContent(MouseEvent event) {
-            if (getItem() == null) {
+            if (getItem() == null || getItem().getName().equals("Unassigned")) {
                 return;
             }
 
@@ -172,7 +174,7 @@ public class EditGroupsDialogController {
         }
 
         private void consumeDragDrop(DragEvent event) {
-            if (getItem() == null) {
+            if (getItem() == null || getItem().getName().equals("Unassigned")) {
                 return;
             }
 
@@ -202,13 +204,23 @@ public class EditGroupsDialogController {
             URL location = getClass().getResource("/fxml/GroupListCell.fxml");
             FXMLLoader loader = new FXMLLoader(location);
             HBox hBox = null;
+
             try {
-                hBox = loader.load();
-                GroupListCellController controller = loader.getController();
-                controller.setGroup(group);
+                if (!group.getName().equals("Unassigned")) {
+                    hBox = loader.load();
+                    GroupListCellController controller = loader.getController();
+                    controller.setGroup(group);
+                }
             } catch (IOException ex) {
                 LOG.log(Level.SEVERE, null, ex);
             }
+
+            if (hBox == null) {
+                hBox = new HBox();
+                hBox.setPrefSize(485, 20);
+                hBox.getStyleClass().add("-fx-background-color: transparent");
+            }
+
             return hBox;
         }
 
