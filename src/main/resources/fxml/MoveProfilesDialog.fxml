@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<AnchorPane id="AnchorPane" fx:id="dialogPane" styleClass="dialog-pane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.idelstak.manyfacesfx.ui.controllers.MoveProfilesDialogController">
+   <children>
+      <HBox styleClass="header-area" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label fx:id="headerLabel" text="Move browser profiles" HBox.hgrow="NEVER">
+               <HBox.margin>
+                  <Insets left="33.0" top="20.0" />
+               </HBox.margin>
+            </Label>
+            <HBox prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+            <JFXButton fx:id="closeButton">
+               <graphic>
+                  <FontIcon fx:id="icon" />
+               </graphic>
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin>
+            </JFXButton>
+            <HBox layoutX="134.0" layoutY="10.0" maxHeight="-Infinity" minWidth="-Infinity" prefWidth="10.0" />
+         </children>
+      </HBox>
+      <VBox layoutY="55.0" prefHeight="545.0" styleClass="content-area" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <Label maxWidth="1.7976931348623157E308" styleClass="small-label" text="Browser profiles:">
+               <VBox.margin>
+                  <Insets left="35.0" right="32.0" top="19.0" />
+               </VBox.margin>
+            </Label>
+            <HBox prefHeight="46.0">
+               <VBox.margin>
+                  <Insets left="35.0" right="32.0" top="15.0" />
+               </VBox.margin>
+               <children>
+                  <VBox maxWidth="1.7976931348623157E308" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label fx:id="profile1Label" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" styleClass="large-label" text="&lt;profile name&gt;" wrapText="true" VBox.vgrow="ALWAYS">
+                           <graphic>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/fox.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Label>
+                        <Label fx:id="profile2Label" layoutX="10.0" layoutY="10.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" styleClass="large-label" text="&lt;profile name&gt;" visible="false" wrapText="true" VBox.vgrow="ALWAYS">
+                           <graphic>
+                              <ImageView fitHeight="16.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../images/fox.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <Label fx:id="extraProfilesLabel" maxHeight="1.7976931348623157E308" minWidth="-Infinity" styleClass="small-label" text="...and 5 more" visible="false" />
+               </children>
+            </HBox>
+            <Label maxWidth="1.7976931348623157E308" styleClass="small-label" text="Select a group:">
+               <VBox.margin>
+                  <Insets left="35.0" right="32.0" top="17.0" />
+               </VBox.margin>
+            </Label>
+            <VBox spacing="3.0" styleClass="list-area">
+               <children>
+                  <ScrollPane fitToWidth="true" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="187.0" style="-fx-border-color: #E0E2E7; -fx-background-color: #F9F9F9;" vbarPolicy="ALWAYS">
+                     <content>
+                        <VBox fx:id="groupsBox" minHeight="-Infinity" style="-fx-border-color: #E0E2E7 #E0E2E7 transparent #E0E2E7; -fx-background-color: white;" />
+                     </content>
+                     <padding>
+                        <Insets left="18.0" right="18.0" top="27.0" />
+                     </padding>
+                  </ScrollPane>
+                  <StackPane fx:id="listActionsPane" styleClass="list-actions-area">
+                     <children>
+                        <JFXButton fx:id="addNewgroupButton" styleClass="add-group-button" text="Add new group" StackPane.alignment="TOP_LEFT">
+                           <graphic>
+                              <FontIcon />
+                           </graphic>
+                        </JFXButton>
+                        <JFXTextField fx:id="groupNameField" focusTraversable="false" labelFloat="true" promptText="New group name" visible="false" StackPane.alignment="BOTTOM_CENTER" />
+                        <JFXButton fx:id="applyGroupNameButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="18.0" prefWidth="18.0" styleClass="apply-group-name-button" visible="false" StackPane.alignment="BOTTOM_RIGHT">
+                           <graphic>
+                              <FontIcon iconColor="#828b93" />
+                           </graphic>
+                           <StackPane.margin>
+                              <Insets bottom="3.5" />
+                           </StackPane.margin>
+                        </JFXButton>
+                     </children>
+                     <padding>
+                        <Insets right="32.0" />
+                     </padding>
+                  </StackPane>
+               </children>
+               <padding>
+                  <Insets left="35.0" right="32.0" top="2.0" />
+               </padding>
+            </VBox>
+            <VBox VBox.vgrow="ALWAYS" />
+            <HBox fx:id="buttonsBox" spacing="10.0" styleClass="buttons-area">
+               <children>
+                  <HBox prefHeight="44.0" HBox.hgrow="ALWAYS" />
+                  <JFXButton fx:id="moveButton" defaultButton="true" styleClass="save-button" text="Move" />
+                  <JFXButton fx:id="cancelButton" cancelButton="true" styleClass="cancel-button" text="Cancel" />
+                  <HBox layoutX="213.0" layoutY="26.0" prefHeight="44.0" HBox.hgrow="ALWAYS" />
+               </children>
+               <padding>
+                  <Insets top="16.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="41.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+   <stylesheets>
+      <URL value="@../styles/app.css" />
+      <URL value="@../styles/move-profiles-dialog.css" />
+   </stylesheets>
+</AnchorPane>

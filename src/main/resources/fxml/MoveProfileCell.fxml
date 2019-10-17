@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<HBox maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="49.0" style="-fx-background-color: white; -fx-border-color: transparent transparent #E0E2E7 transparent; -fx-border-width: 1;" stylesheets="@../styles/app.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.idelstak.manyfacesfx.ui.controllers.MoveProfileCellController">
+   <children>
+      <Label fx:id="groupNameLabel" graphicTextGap="7.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" style="-fx-text-fill: #8C959C; -fx-font-size: 14;" text="&lt;group name&gt;" wrapText="true" HBox.hgrow="ALWAYS">
+         <graphic>
+            <FontIcon iconColor="#828b93" iconLiteral="mdi-folder" iconSize="20" />
+         </graphic>
+         <HBox.margin>
+            <Insets left="14.0" />
+         </HBox.margin>
+      </Label>
+      <JFXCheckBox fx:id="selectGroupCheckBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="19.0" prefWidth="19.0">
+         <HBox.margin>
+            <Insets left="8.0" right="8.0" top="15.0" />
+         </HBox.margin>
+      </JFXCheckBox>
+   </children>
+</HBox>

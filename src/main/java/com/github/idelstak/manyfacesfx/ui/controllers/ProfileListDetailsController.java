@@ -139,8 +139,9 @@ public class ProfileListDetailsController {
         profileNodeResult.addLookupListener(e -> listenToSelectedProfiles());
 
         Platform.runLater(() -> rootBox.getChildren().remove(groupNameBox));
-        
+
         deleteButton.setOnAction(e -> showDeleteProfilesDialog());
+        moveToGroupButton.setOnAction(e -> showMoveProfilesDialog());
     }
 
     void setGroup(Group inst) {
@@ -148,7 +149,7 @@ public class ProfileListDetailsController {
         group = Objects.requireNonNull(inst, message);
 
         groupNameLabel.textProperty().bind(group.nameProperty());
-        
+
         Platform.runLater(() -> rootBox.getChildren().add(2, groupNameBox));
 
         refreshProfilesList();
@@ -241,23 +242,44 @@ public class ProfileListDetailsController {
 
     private void showDeleteProfilesDialog() {
         URL location = getClass().getResource("/fxml/DeleteProfileDialog.fxml");
-            FXMLLoader loader = new FXMLLoader(location);
-            Pane pane = null;
-            DeleteProfileDialogController controller = null;
+        FXMLLoader loader = new FXMLLoader(location);
+        Pane pane = null;
+        DeleteProfileDialogController controller = null;
 
-            try {
-                pane = loader.load();
-                controller = loader.getController();
-            } catch (IOException ex) {
-                LOG.log(Level.SEVERE, null, ex);
-            }
+        try {
+            pane = loader.load();
+            controller = loader.getController();
+        } catch (IOException ex) {
+            LOG.log(Level.SEVERE, null, ex);
+        }
 
-            if (pane != null && controller != null) {
-                JFXDialog dialog = new JFXDialog();
-                dialog.setContent(pane);
-                controller.setDialog(dialog);
-                dialog.show(Stackable.getDefault().getStackPane());
-            }
+        if (pane != null && controller != null) {
+            JFXDialog dialog = new JFXDialog();
+            dialog.setContent(pane);
+            controller.setDialog(dialog);
+            dialog.show(Stackable.getDefault().getStackPane());
+        }
+    }
+
+    private void showMoveProfilesDialog() {
+        URL location = getClass().getResource("/fxml/MoveProfilesDialog.fxml");
+        FXMLLoader loader = new FXMLLoader(location);
+        Pane pane = null;
+        MoveProfilesDialogController controller = null;
+
+        try {
+            pane = loader.load();
+            controller = loader.getController();
+        } catch (IOException ex) {
+            LOG.log(Level.SEVERE, null, ex);
+        }
+
+        if (pane != null && controller != null) {
+            JFXDialog dialog = new JFXDialog();
+            dialog.setContent(pane);
+            controller.setDialog(dialog);
+            dialog.show(Stackable.getDefault().getStackPane());
+        }
     }
 
 }
