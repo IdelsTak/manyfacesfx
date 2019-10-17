@@ -110,11 +110,10 @@ public class HomeDetailsController {
         Iterator<? extends Group> it = groupResult.allInstances().iterator();
 
         if (it.hasNext()) {
-
-            getProfilesListByGroupContent(it.next())
-                    .ifPresent(node -> {
-                        Platform.runLater(() -> groupsTab.setContent(node));
-                    });
+            Platform.runLater(() -> {
+                detailsTabPane.getSelectionModel().select(groupsTab);
+                getProfilesListByGroupContent(it.next()).ifPresent(groupsTab::setContent);
+            });
         }
     }
 }

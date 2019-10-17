@@ -3,8 +3,8 @@
  */
 package com.github.idelstak.manyfacesfx.ui;
 
-import com.github.idelstak.manyfacesfx.spi.NodeContext;
 import com.github.idelstak.manyfacesfx.api.GlobalContext;
+import com.github.idelstak.manyfacesfx.spi.NodeContext;
 import java.io.IOException;
 import java.net.URL;
 import java.util.logging.Level;
@@ -52,6 +52,6 @@ public class HomeNodeContext implements NodeContext<MenuNode> {
 
     @Override
     public void select() {
-        GlobalContext.getDefault().replace(MenuNode.class, HOME_NODE);
+        GlobalContext.getDefault().set(MenuNode.class, HOME_NODE);
     }
 }

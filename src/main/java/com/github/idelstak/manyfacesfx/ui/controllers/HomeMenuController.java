@@ -104,7 +104,7 @@ public class HomeMenuController {
 
         homeToggle.setOnAction(e -> CONTEXT.replace(MenuNode.class, homeNode));
         newProfileToggle.setOnAction(e -> {
-            CONTEXT.replace(MenuNode.class, newProfileNode);
+            CONTEXT.set(MenuNode.class, newProfileNode);
             //Ensure the overview node context is added to lookup
             Platform.runLater(() -> new OverViewNodeContext().select());
         });
@@ -122,15 +122,19 @@ public class HomeMenuController {
                             .getName()
                             .equals(newProfileNode.getName())) {
                 Platform.runLater(() -> homeToggle.setSelected(true));
+            } else {
+                Platform.runLater(groupsList.getSelectionModel()::clearSelection);
             }
         });
 
-        numberInUseLabel.textProperty().bind(Bindings.createStringBinding(() -> {
-            int numberOfProfiles = PROFILES_REPO.findAll().size();
-            return numberOfProfiles < 1
-                   ? "-/"
-                   : numberOfProfiles + "/";
-        }, PROFILES_REPO.findAll()));
+        numberInUseLabel.textProperty().bind(Bindings.createStringBinding(
+                () -> {
+                    int numberOfProfiles = PROFILES_REPO.findAll().size();
+                    return numberOfProfiles < 1
+                           ? "-/"
+                           : numberOfProfiles + "/";
+                },
+                PROFILES_REPO.findAll()));
 
         groups = GROUPS_REPO.findAll();
 
@@ -147,6 +151,15 @@ public class HomeMenuController {
         });
 
         groupsList.getItems().setAll(groups);
+
+        groupsList.getSelectionModel()
+                .selectedItemProperty()
+                .addListener((ob, ov, selectedGroup) -> {
+                    if (selectedGroup != null) {
+                        new HomeNodeContext().select();
+                        CONTEXT.set(Group.class, selectedGroup);
+                    }
+                });
 
         groupSettingsButton.setOnAction(e -> {
 
