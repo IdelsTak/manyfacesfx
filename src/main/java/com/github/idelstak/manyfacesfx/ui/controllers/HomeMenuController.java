@@ -137,6 +137,17 @@ public class HomeMenuController {
         GROUPS_REPO.addListener((ListChangeListener.Change<? extends Group> change) -> {
             Platform.runLater(() -> groupsList.getItems().setAll(groups));
         });
+        //Ensure that the number of profiles is
+        //updated in the display name of the group
+        groups.forEach(group -> {
+            group.numberOfProfilesProperty()
+                    .addListener((ob, ov, nv) -> {
+                        Platform.runLater(() -> {
+                            int idx = groupsList.getItems().indexOf(group);
+                            groupsList.getItems().set(idx, group);
+                        });
+                    });
+        });
 
         groupsList.getItems().setAll(groups);
 
