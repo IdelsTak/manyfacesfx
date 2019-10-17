@@ -20,6 +20,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javafx.application.Platform;
@@ -138,31 +139,36 @@ public class ProfileListDetailsController {
         String message = "Group should not be null";
         group = Objects.requireNonNull(inst, message);
 
-        groupNameLabel.textProperty().bind(group.nameProperty());
-
-        Platform.runLater(() -> rootBox.getChildren().add(2, groupNameBox));
+        Platform.runLater(() -> {
+            rootBox.getChildren().add(2, groupNameBox);
+            groupNameLabel.textProperty().bind(group.nameProperty());
+            
+            group.nameProperty().addListener((ob, ov, nv) -> {
+                LOG.log(Level.INFO, "Old group name: {0}", ov);
+            });
+        });
 
         refreshProfilesList();
     }
 
     private void sortByLastEdited(Boolean descending) {
-        profileListAccordion.getPanes().sort(
-                descending
-                ? Comparator.comparing(
+        profileListAccordion.getPanes()
+                .sort(descending
+                      ? Comparator.comparing(
                                 Node::getId,
                                 this::compareDates).reversed()
-                : Comparator.comparing(
+                      : Comparator.comparing(
                                 Node::getId,
                                 this::compareDates));
     }
 
     private void sortByName(boolean descending) {
-        profileListAccordion.getPanes().sort(
-                descending
-                ? Comparator.comparing(
+        profileListAccordion.getPanes()
+                .sort(descending
+                      ? Comparator.comparing(
                                 Node::getId,
                                 this::compareNames).reversed()
-                : Comparator.comparing(
+                      : Comparator.comparing(
                                 Node::getId,
                                 this::compareNames));
     }

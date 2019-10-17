@@ -141,12 +141,9 @@ public class HomeMenuController {
         //updated in the display name of the group
         groups.forEach(group -> {
             group.numberOfProfilesProperty()
-                    .addListener((ob, ov, nv) -> {
-                        Platform.runLater(() -> {
-                            int idx = groupsList.getItems().indexOf(group);
-                            groupsList.getItems().set(idx, group);
-                        });
-                    });
+                    .addListener((ob, ov, nv) -> updateDisplayName(group));
+            group.nameProperty()
+                    .addListener((ob, ov, nv) -> updateDisplayName(group));
         });
 
         groupsList.getItems().setAll(groups);
@@ -173,6 +170,13 @@ public class HomeMenuController {
                 dialog.show(Stackable.getDefault().getStackPane());
             }
 
+        });
+    }
+
+    public void updateDisplayName(Group group) {
+        Platform.runLater(() -> {
+            int idx = groupsList.getItems().indexOf(group);
+            groupsList.getItems().set(idx, group);
         });
     }
 

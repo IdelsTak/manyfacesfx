@@ -6,9 +6,9 @@ package com.github.idelstak.manyfacesfx.model;
 import com.github.idelstak.manyfacesfx.api.ProfilesRepository;
 import java.util.Objects;
 import java.util.concurrent.Callable;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.binding.Bindings;
-import javafx.beans.binding.IntegerBinding;
 import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.ReadOnlyIntegerWrapper;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -21,7 +21,7 @@ import javafx.beans.property.SimpleStringProperty;
 public class Group {
 
     private static final Logger LOG = Logger.getLogger(Group.class.getName());
-    private static final ProfilesRepository PROFILES_REPOSITORY = ProfilesRepository.getDefault();
+    private static final ProfilesRepository PROFILES_REPO = ProfilesRepository.getDefault();
     private final SimpleStringProperty nameProperty;
     private final ReadOnlyIntegerWrapper idProperty;
     private SimpleIntegerProperty numberOfProfilesProperty;
@@ -29,6 +29,10 @@ public class Group {
     public Group(int id, String name) {
         this.idProperty = new ReadOnlyIntegerWrapper(id);
         this.nameProperty = new SimpleStringProperty(name);
+        
+        nameProperty.addListener((ob, ov, nv) -> {
+            LOG.log(Level.INFO, "New group name: {0}", nv);
+        });
     }
 
     public ReadOnlyIntegerProperty idProperty() {
@@ -56,14 +60,15 @@ public class Group {
     }
 
     public void setName(String groupName) {
+        LOG.log(Level.INFO, "Setting group name to: {0}", groupName);
+        
         nameProperty.set(groupName);
     }
 
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 97 * hash + getId();
-        hash = 97 * hash + Objects.hashCode(getName());
+        hash = 59 * hash + Objects.hashCode(getId());
         return hash;
     }
 
@@ -79,11 +84,12 @@ public class Group {
             return false;
         }
         final Group other = (Group) obj;
-        if (getId() != other.getId()) {
+        if (!Objects.equals(this.getId(), other.getId())) {
             return false;
         }
-        return Objects.equals(getName(), other.getName());
+        return true;
     }
+
 
     @Override
     public String toString() {
@@ -96,7 +102,7 @@ public class Group {
 
             numberOfProfilesProperty.bind(Bindings.createIntegerBinding(
                     new ProfilesCount(this),
-                    PROFILES_REPOSITORY.findAll()));
+                    PROFILES_REPO.findAll()));
         }
         return numberOfProfilesProperty;
     }
@@ -111,7 +117,7 @@ public class Group {
 
         @Override
         public Integer call() throws Exception {
-            long count = PROFILES_REPOSITORY.findAll()
+            long count = PROFILES_REPO.findAll()
                     .stream()
                     .map(Profile::getGroup)
                     .filter(this::equalTo)

@@ -107,8 +107,8 @@ public class Profile {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash = 97 * hash + Objects.hashCode(this.idProperty);
-        hash = 97 * hash + Objects.hashCode(this.nameProperty);
+        hash = 97 * hash + Objects.hashCode(getId());
+        hash = 97 * hash + Objects.hashCode(getName());
         return hash;
     }
 
@@ -124,10 +124,10 @@ public class Profile {
             return false;
         }
         final Profile other = (Profile) obj;
-        if (!Objects.equals(this.idProperty.get(), other.idProperty.get())) {
+        if (!Objects.equals(this.getId(), other.getId())) {
             return false;
         }
-        return Objects.equals(this.nameProperty.get(), other.nameProperty.get());
+        return Objects.equals(this.getName(), other.getName());
     }
 
     @Override
@@ -141,10 +141,9 @@ public class Profile {
         }
 
         private Group find(String name) {
-
-            Group group = GroupsRepository.getDefault()
-                    .findByName(name)
-                    .orElseGet(() -> GroupsRepository.getDefault().add(name));
+            GroupsRepository groupsRepo = GroupsRepository.getDefault();
+            Group group = groupsRepo.findByName(name)
+                    .orElseGet(() -> groupsRepo.add(name));
 
             LOG.log(Level.FINE, "Found group: " + group);
 
