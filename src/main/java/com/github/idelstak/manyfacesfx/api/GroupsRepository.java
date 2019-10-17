@@ -4,12 +4,17 @@
 package com.github.idelstak.manyfacesfx.api;
 
 import com.github.idelstak.manyfacesfx.model.Group;
+import com.github.idelstak.manyfacesfx.model.Profile;
+import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
 import org.openide.util.Lookup;
 
 /**
@@ -125,7 +130,23 @@ public abstract class GroupsRepository {
 
         @Override
         public synchronized void delete(Group group) {
-            groups.remove(group);
+            if (!group.getName().equals("Unassigned")) {
+                ProfilesRepository profilesRepo = ProfilesRepository.getDefault();
+                ObservableSet<Profile> allProfiles = profilesRepo.findAll();
+
+                List<Profile> groupProfiles = allProfiles.stream()
+                        .filter(profile -> Objects.equals(profile.getGroup(), group))
+                        .collect(Collectors.toList());
+
+                groupProfiles.forEach(profile -> {
+                    profile.setGroup(findByName("Unassigned")
+                            .orElseGet(() -> add("Unassigned")));
+                });
+
+                groupProfiles.forEach(profile -> profilesRepo.update(profile));
+
+                groups.remove(group);
+            }
         }
 
         @Override
