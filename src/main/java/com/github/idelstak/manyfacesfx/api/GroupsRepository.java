@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableSet;
 import org.openide.util.Lookup;
 
 /**
@@ -130,20 +129,20 @@ public abstract class GroupsRepository {
 
         @Override
         public synchronized void delete(Group group) {
-            if (!group.getName().equals("Unassigned")) {
+            if (!group.getName().equals(Group.DEFAULT_NAME)) {
                 ProfilesRepository profilesRepo = ProfilesRepository.getDefault();
-                ObservableSet<Profile> allProfiles = profilesRepo.findAll();
 
-                List<Profile> groupProfiles = allProfiles.stream()
+                List<Profile> profilesToBeOrphaned = profilesRepo.findAll()
+                        .stream()
                         .filter(profile -> Objects.equals(profile.getGroup(), group))
                         .collect(Collectors.toList());
 
-                groupProfiles.forEach(profile -> {
-                    profile.setGroup(findByName("Unassigned")
-                            .orElseGet(() -> add("Unassigned")));
+                profilesToBeOrphaned.forEach(profile -> {
+                    profile.setGroup(findByName(Group.DEFAULT_NAME)
+                            .orElseGet(() -> add(Group.DEFAULT_NAME)));
                 });
 
-                groupProfiles.forEach(profile -> profilesRepo.update(profile));
+                profilesToBeOrphaned.forEach(profilesRepo::update);
 
                 groups.remove(group);
             }

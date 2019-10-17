@@ -19,6 +19,7 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class Group {
 
+    public static final String DEFAULT_NAME = "Unassigned";
     private static final Logger LOG = Logger.getLogger(Group.class.getName());
     private static final ProfilesRepository PROFILES_REPO = ProfilesRepository.getDefault();
     private final SimpleStringProperty nameProperty;
@@ -78,10 +79,7 @@ public class Group {
             return false;
         }
         final Group other = (Group) obj;
-        if (!Objects.equals(this.getId(), other.getId())) {
-            return false;
-        }
-        return true;
+        return Objects.equals(this.getId(), other.getId());
     }
 
 

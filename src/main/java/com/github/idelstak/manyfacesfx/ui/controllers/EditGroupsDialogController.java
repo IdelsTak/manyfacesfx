@@ -144,7 +144,7 @@ public class EditGroupsDialogController {
         }
 
         private void acceptMoveTransferMode(DragEvent event) {
-            if (getItem() == null || getItem().getName().equals("Unassigned")) {
+            if (getItem() == null || getItem().getName().equals(Group.DEFAULT_NAME)) {
                 return;
             }
 
@@ -157,7 +157,7 @@ public class EditGroupsDialogController {
         }
 
         private void initDragContent(MouseEvent event) {
-            if (getItem() == null || getItem().getName().equals("Unassigned")) {
+            if (getItem() == null || getItem().getName().equals(Group.DEFAULT_NAME)) {
                 return;
             }
 
@@ -174,7 +174,7 @@ public class EditGroupsDialogController {
         }
 
         private void consumeDragDrop(DragEvent event) {
-            if (getItem() == null || getItem().getName().equals("Unassigned")) {
+            if (getItem() == null || getItem().getName().equals(Group.DEFAULT_NAME)) {
                 return;
             }
 
@@ -206,7 +206,7 @@ public class EditGroupsDialogController {
             HBox hBox = null;
 
             try {
-                if (!group.getName().equals("Unassigned")) {
+                if (!group.getName().equals(Group.DEFAULT_NAME)) {
                     hBox = loader.load();
                     GroupListCellController controller = loader.getController();
                     controller.setGroup(group);

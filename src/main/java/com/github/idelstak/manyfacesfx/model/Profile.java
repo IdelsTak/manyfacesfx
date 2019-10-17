@@ -32,7 +32,7 @@ public class Profile {
                 name,
                 notes,
                 lastEdited,
-                new FindGroup().find("Unassigned"));
+                new FindGroup().find(Group.DEFAULT_NAME));
     }
 
     public Profile(
