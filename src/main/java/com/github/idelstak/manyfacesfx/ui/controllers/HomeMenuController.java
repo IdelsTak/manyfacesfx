@@ -25,7 +25,7 @@ import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.collections.SetChangeListener.Change;
+import javafx.collections.SetChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -104,17 +104,17 @@ public class HomeMenuController {
                 FXMLLoader.load(getClass().getResource("/fxml/ProfileAttributes.fxml")),
                 AppMenu.PROFILE);
 
-        homeToggle.setOnAction(e -> CONTEXT.replace(MenuNode.class, homeNode));
+        homeToggle.setOnAction(e -> CONTEXT.set(MenuNode.class, homeNode));
         newProfileToggle.setOnAction(e -> {
             CONTEXT.set(MenuNode.class, newProfileNode);
             //Ensure the overview node context is added to lookup
             Platform.runLater(() -> new OverViewNodeContext().select());
         });
-        myAccountToggle.setOnAction(e -> CONTEXT.replace(MenuNode.class, myAccountNode));
-        pluginsToggle.setOnAction(e -> CONTEXT.replace(MenuNode.class, pluginsNode));
-        helpToggle.setOnAction(e -> CONTEXT.replace(MenuNode.class, helpNode));
+        myAccountToggle.setOnAction(e -> CONTEXT.set(MenuNode.class, myAccountNode));
+        pluginsToggle.setOnAction(e -> CONTEXT.set(MenuNode.class, pluginsNode));
+        helpToggle.setOnAction(e -> CONTEXT.set(MenuNode.class, helpNode));
 
-        ensureHomeSelected();
+        selectHome();
 
         lookupResult.addLookupListener(e -> {
             Iterator<? extends MenuNode> it = lookupResult.allInstances().iterator();
@@ -133,7 +133,7 @@ public class HomeMenuController {
                 () -> {
                     int numberOfProfiles = PROFILES_REPO.findAll().size();
                     return numberOfProfiles < 1
-                           ? "-/"
+                           ? "- /"
                            : numberOfProfiles + "/";
                 },
                 PROFILES_REPO.findAll()));
@@ -141,16 +141,12 @@ public class HomeMenuController {
         groups = GROUPS_REPO.findAll();
 
         GROUPS_REPO.addListener((ListChangeListener.Change<? extends Group> change) -> {
-            Platform.runLater(() -> {
-                //Ensure that the number of profiles is
-                //updated in the display name of the group
-                groups.forEach(this::updateDisplayName);
-
-                groupsList.getItems().setAll(groups);
-            });
+            Platform.runLater(() -> groupsList.getItems().setAll(groups));
         });
 
-        PROFILES_REPO.addListener((Change<? extends Profile> change) -> {
+        PROFILES_REPO.addListener((SetChangeListener.Change<? extends Profile> change) -> {
+            //Ensure that the number of profiles is
+            //updated in the display name of the group
             PROFILES_REPO.findAll()
                     .stream()
                     .map(Profile::getGroup)
@@ -179,7 +175,6 @@ public class HomeMenuController {
                 });
 
         groupSettingsButton.setOnAction(e -> {
-
             URL location = getClass().getResource("/fxml/EditGroupsDialog.fxml");
             FXMLLoader loader = new FXMLLoader(location);
             Pane pane = null;
@@ -205,14 +200,14 @@ public class HomeMenuController {
 
     public void updateDisplayName(Group group) {
         Platform.runLater(() -> {
-            int idx = groupsList.getItems().indexOf(group);
-            if (idx > 0) {
-                groupsList.getItems().set(idx, group);
+            ObservableList<Group> groupItems = groupsList.getItems();
+            if (groupItems.indexOf(group) >= 0) {
+                groupItems.set(groupItems.indexOf(group), group);
             }
         });
     }
 
-    private void ensureHomeSelected() {
+    private void selectHome() {
         Platform.runLater(() -> {
             homeToggle.fireEvent(new ActionEvent());
             homeToggle.setSelected(true);
