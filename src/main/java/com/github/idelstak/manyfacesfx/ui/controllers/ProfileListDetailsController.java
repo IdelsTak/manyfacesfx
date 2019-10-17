@@ -115,8 +115,6 @@ public class ProfileListDetailsController {
         selectProfiles.selectProperty().bind(checkBoxSelected);
         selectProfiles.visibleProperty().bind(showActionsToggle.selectedProperty());
 
-        CONTEXT.set(SelectProfiles.class, selectProfiles);
-
         PROFILES_REPO.addListener((Change<? extends Profile> change) -> refreshProfilesList());
 
         searchField.textProperty().addListener((ob, ov, name) -> filterBy(name));
@@ -133,7 +131,6 @@ public class ProfileListDetailsController {
 
         lookupResult.addLookupListener(e -> listenToSelectedProfiles());
 
-//        groupNameBox.setVisible(false);
         Platform.runLater(() -> rootBox.getChildren().remove(groupNameBox));
     }
 
@@ -143,10 +140,6 @@ public class ProfileListDetailsController {
 
         groupNameLabel.textProperty().bind(group.nameProperty());
 
-//        group.nameProperty().addListener((ob, ov, nv) -> {
-//            LOG.log(Level.INFO, "Group name change occured: nv = {0}", nv);
-//        });
-//        Platform.runLater(() -> groupNameBox.setVisible(true));
         Platform.runLater(() -> rootBox.getChildren().add(2, groupNameBox));
 
         refreshProfilesList();
@@ -174,19 +167,24 @@ public class ProfileListDetailsController {
                                 this::compareNames));
     }
 
-    private void filterBy(String profileName) {
-        if (profileName == null || profileName.trim().isEmpty()) {
-            Platform.runLater(() -> profileListAccordion.getPanes().setAll(titledPanes));
+    private void filterBy(String filter) {
+        Collection<TitledPane> filteredCollection = new ArrayList<>();
+
+        if (filter == null || filter.trim().isEmpty()) {
+            filteredCollection.addAll(titledPanes);
         } else {
-            List<TitledPane> result = profileListAccordion.getPanes()
+            filteredCollection.addAll(profileListAccordion.getPanes()
                     .stream()
                     .filter(tp -> {
                         String name = tp.getId().split(":")[0];
-                        return name.toLowerCase().contains(profileName.toLowerCase());
+                        return name.toLowerCase().contains(filter.toLowerCase());
                     })
-                    .collect(Collectors.toList());
-            Platform.runLater(() -> profileListAccordion.getPanes().setAll(result));
+                    .collect(Collectors.toList()));
         }
+
+        Platform.runLater(() -> {
+            profileListAccordion.getPanes().setAll(filteredCollection);
+        });
     }
 
     private void refreshProfilesList() {
@@ -199,7 +197,7 @@ public class ProfileListDetailsController {
                 : allProfiles);
 
         List<TitledPane> panes = profiles.stream()
-                .map(profile -> new ProfileNode(profile))
+                .map(profile -> new ProfileNode(profile, selectProfiles))
                 .map(node -> node.getLookup().lookup(TitledPane.class))
                 .collect(Collectors.toList());
 

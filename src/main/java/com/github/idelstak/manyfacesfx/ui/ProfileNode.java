@@ -21,21 +21,18 @@ import org.openide.util.lookup.InstanceContent;
 public class ProfileNode implements Lookup.Provider {
 
     private static final Logger LOG = Logger.getLogger(ProfileNode.class.getName());
-    private final Profile profile;
-    private final InstanceContent content;
     private final Lookup lookup;
 
-    public ProfileNode(Profile profile) {
-        this(profile, new InstanceContent());
+    public ProfileNode(Profile profile, SelectProfiles selectProfiles) {
+        this(profile, selectProfiles, new InstanceContent());
     }
 
-    private ProfileNode(Profile profile, InstanceContent content) {
-        this.profile = profile;
-        this.content = content;
-        this.lookup = new AbstractLookup(this.content);
+    private ProfileNode(Profile profile, SelectProfiles selectProfiles, InstanceContent content) {
+        this.lookup = new AbstractLookup(content);
         
-        this.content.add(this.profile);
-        this.content.add(getPane());
+        content.add(profile);
+        content.add(selectProfiles);
+        content.add(getPane());
     }
 
     @Override
@@ -45,7 +42,10 @@ public class ProfileNode implements Lookup.Provider {
 
     @Override
     public String toString() {
-        return "ProfileNode{" + "profile=" + profile.getName() + '}';
+        return "ProfileNode{" 
+                + "profile=" 
+                + lookup.lookup(Profile.class).getName() 
+                + '}';
     }
 
     private TitledPane getPane() {

@@ -35,11 +35,19 @@ public class SelectProfiles {
         selectProperty.set(selected);
     }
 
-    public boolean isVisible(){
+    public boolean isVisible() {
         return visibleProperty.get();
     }
-    
-    public void setVisible(boolean visible){
+
+    public void setVisible(boolean visible) {
         visibleProperty.set(visible);
     }
+
+    @Override
+    public String toString() {
+        return "SelectProfiles{"
+                + "selected=" + isSelected()
+                + ", visible=" + isVisible() + '}';
+    }
+
 }

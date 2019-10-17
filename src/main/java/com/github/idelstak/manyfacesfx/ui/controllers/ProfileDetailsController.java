@@ -12,11 +12,12 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextArea;
 import java.time.LocalDate;
 import java.time.format.FormatStyle;
-import java.util.Iterator;
 import java.util.Objects;
 import java.util.concurrent.Callable;
+import java.util.logging.Logger;
+import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
-import javafx.beans.binding.StringBinding;
+import javafx.beans.binding.DoubleBinding;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
@@ -31,6 +32,7 @@ import org.openide.util.Lookup;
  */
 public class ProfileDetailsController {
 
+    private static final Logger LOG = Logger.getLogger(ProfileDetailsController.class.getName());
     private static final GlobalContext CONTEXT = GlobalContext.getDefault();
 
     @FXML
@@ -79,30 +81,28 @@ public class ProfileDetailsController {
     public void setProfileNode(ProfileNode profileNode) {
         String message = "Profile node should not be null";
         ProfileNode node = Objects.requireNonNull(profileNode, message);
-        Profile profile = node.getLookup().lookup(Profile.class);
 
-        titlePane.setId(profile.getName() + ":" + profile.getLastEdited());
+        message = "Profile should not be null";
+        Profile profile = Objects.requireNonNull(node.getLookup().lookup(Profile.class), message);
+
+        titlePane.idProperty()
+                .bind(Bindings.createStringBinding(
+                        () -> profile.getName() + ":" + profile.getLastEdited(),
+                        new Observable[]{
+                            profile.nameProperty(),
+                            profile.lastEditedProperty()}));
 
         nameLabel.textProperty().bind(profile.nameProperty());
         idLabel.textProperty().bind(profile.idProperty());
         notesTextArea.textProperty().bindBidirectional(profile.notesProperty());
-
-        StringBinding lastEditedStringProp = Bindings.createStringBinding(
+        lastEditedLabel.textProperty().bind(Bindings.createStringBinding(
                 new LastEditedAsString(profile.getLastEdited()),
-                profile.lastEditedProperty());
-        lastEditedLabel.textProperty().bind(lastEditedStringProp);
+                profile.lastEditedProperty()));
 
-        selectProfiles = CONTEXT.lookup(SelectProfiles.class);
+        message = "Select profiles should not be null";
+        selectProfiles = Objects.requireNonNull(node.getLookup().lookup(SelectProfiles.class), message);
+
         updateSelection();
-
-        lookupResult.addLookupListener(e -> {
-            Iterator<? extends SelectProfiles> it = lookupResult.allInstances().iterator();
-
-            if (it.hasNext()) {
-                selectProfiles = it.next();
-                updateSelection();
-            }
-        });
 
         selectCheckBox.selectedProperty().addListener((ob, ov, selected) -> {
             if (selected) {
@@ -114,16 +114,16 @@ public class ProfileDetailsController {
     }
 
     private void updateSelection() {
-        selectCheckBoxPane.prefWidthProperty().bind(
-                Bindings.createDoubleBinding(
-                        () -> selectProfiles.isVisible()
-                              ? 25.0
-                              : 0.0,
-                        selectProfiles.visibleProperty()));
+        Callable<Double> widthCalculator = () -> selectProfiles.isVisible()
+                                                 ? 25.0
+                                                 : 0.0;
+        DoubleBinding widthBinding = Bindings.createDoubleBinding(
+                widthCalculator,
+                selectProfiles.visibleProperty());
 
-        selectProfiles.selectProperty().addListener((ob, ov, selected) -> {
-            selectCheckBox.setSelected(selected);
-        });
+        selectCheckBoxPane.prefWidthProperty().bind(widthBinding);
+        selectProfiles.selectProperty()
+                .addListener((ob, ov, nv) -> selectCheckBox.setSelected(nv));
     }
 
     private static class LastEditedAsString implements Callable<String> {
