@@ -8,6 +8,7 @@ import com.github.idelstak.manyfacesfx.api.GroupsRepository;
 import com.github.idelstak.manyfacesfx.api.ProfilesRepository;
 import com.github.idelstak.manyfacesfx.api.Stackable;
 import com.github.idelstak.manyfacesfx.model.Group;
+import com.github.idelstak.manyfacesfx.model.Profile;
 import com.github.idelstak.manyfacesfx.ui.AppMenu;
 import com.github.idelstak.manyfacesfx.ui.HomeNodeContext;
 import com.github.idelstak.manyfacesfx.ui.MenuNode;
@@ -24,6 +25,7 @@ import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.collections.SetChangeListener.Change;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -139,8 +141,23 @@ public class HomeMenuController {
         groups = GROUPS_REPO.findAll();
 
         GROUPS_REPO.addListener((ListChangeListener.Change<? extends Group> change) -> {
-            Platform.runLater(() -> groupsList.getItems().setAll(groups));
+            Platform.runLater(() -> {
+                //Ensure that the number of profiles is
+                //updated in the display name of the group
+                groups.forEach(this::updateDisplayName);
+
+                groupsList.getItems().setAll(groups);
+            });
         });
+
+        PROFILES_REPO.addListener((Change<? extends Profile> change) -> {
+            PROFILES_REPO.findAll()
+                    .stream()
+                    .map(Profile::getGroup)
+                    .forEach(this::updateDisplayName);
+
+        });
+
         //Ensure that the number of profiles is
         //updated in the display name of the group
         groups.forEach(group -> {

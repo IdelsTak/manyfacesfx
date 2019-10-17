@@ -75,6 +75,7 @@ public class DeleteProfileDialogController {
         Profile profile = node.getLookup().lookup(Profile.class);
         if (profile != null) {
             PROFILES_REPO.delete(profile);
+            CONTEXT.remove(node);
         }
     }
 

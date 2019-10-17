@@ -92,14 +92,14 @@ public class ProfileListDetailsController {
     @FXML
     private HBox groupNameBox;
     private final Collection<TitledPane> titledPanes;
-    private final Lookup.Result<ProfileNode> lookupResult;
+    private final Lookup.Result<ProfileNode> profileNodeResult;
     private final SimpleBooleanProperty selectionAvailable;
     private final SelectProfiles selectProfiles = new SelectProfiles();
     private Group group;
 
     {
         titledPanes = new ArrayList<>();
-        lookupResult = CONTEXT.lookupResult(ProfileNode.class);
+        profileNodeResult = CONTEXT.lookupResult(ProfileNode.class);
         selectionAvailable = new SimpleBooleanProperty(false);
     }
 
@@ -136,7 +136,7 @@ public class ProfileListDetailsController {
         moveToGroupButton.disableProperty().bind(selectionAvailable.not());
         removeFromGroupButton.disableProperty().bind(selectionAvailable.not());
 
-        lookupResult.addLookupListener(e -> listenToSelectedProfiles());
+        profileNodeResult.addLookupListener(e -> listenToSelectedProfiles());
 
         Platform.runLater(() -> rootBox.getChildren().remove(groupNameBox));
         
@@ -231,7 +231,7 @@ public class ProfileListDetailsController {
     }
 
     private void listenToSelectedProfiles() {
-        List<Profile> selectedProfiles = lookupResult.allInstances()
+        List<Profile> selectedProfiles = profileNodeResult.allInstances()
                 .stream()
                 .map(node -> node.getLookup().lookup(Profile.class))
                 .collect(Collectors.toList());

@@ -4,6 +4,7 @@
 package com.github.idelstak.manyfacesfx.ui.controllers;
 
 import com.github.idelstak.manyfacesfx.api.GlobalContext;
+import com.github.idelstak.manyfacesfx.api.ProfilesRepository;
 import com.github.idelstak.manyfacesfx.model.Profile;
 import com.github.idelstak.manyfacesfx.ui.ProfileNode;
 import com.github.idelstak.manyfacesfx.ui.SelectProfiles;
@@ -15,6 +16,7 @@ import java.time.format.FormatStyle;
 import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
@@ -23,7 +25,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
 import javafx.util.converter.LocalDateStringConverter;
-import org.openide.util.Lookup;
 
 /**
  FXML Controller class
@@ -63,12 +64,8 @@ public class ProfileDetailsController {
     private Label idLabel;
     @FXML
     private JFXTextArea notesTextArea;
-    private final Lookup.Result<SelectProfiles> lookupResult;
     private SelectProfiles selectProfiles;
-
-    {
-        lookupResult = CONTEXT.lookupResult(SelectProfiles.class);
-    }
+    private Profile profile;
 
     /**
      Initializes the controller class.
@@ -83,7 +80,7 @@ public class ProfileDetailsController {
         ProfileNode node = Objects.requireNonNull(profileNode, message);
 
         message = "Profile should not be null";
-        Profile profile = Objects.requireNonNull(node.getLookup().lookup(Profile.class), message);
+        profile = Objects.requireNonNull(node.getLookup().lookup(Profile.class), message);
 
         titlePane.idProperty()
                 .bind(Bindings.createStringBinding(
@@ -122,8 +119,15 @@ public class ProfileDetailsController {
                 selectProfiles.visibleProperty());
 
         selectCheckBoxPane.prefWidthProperty().bind(widthBinding);
-        selectProfiles.selectProperty()
-                .addListener((ob, ov, nv) -> selectCheckBox.setSelected(nv));
+        selectProfiles.selectProperty().addListener((ob, ov, nv) -> {
+            Platform.runLater(() -> selectCheckBox.setSelected(false));
+            
+            if (profile != null) {
+                ProfilesRepository.getDefault()
+                        .findById(profile.getId())
+                        .ifPresent(p -> Platform.runLater(() -> selectCheckBox.setSelected(nv)));
+            }
+        });
     }
 
     private static class LastEditedAsString implements Callable<String> {
