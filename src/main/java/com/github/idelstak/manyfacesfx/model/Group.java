@@ -5,13 +5,14 @@ package com.github.idelstak.manyfacesfx.model;
 
 import com.github.idelstak.manyfacesfx.api.ProfilesRepository;
 import java.util.Objects;
+import java.util.concurrent.Callable;
 import java.util.logging.Logger;
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.IntegerBinding;
 import javafx.beans.property.ReadOnlyIntegerProperty;
 import javafx.beans.property.ReadOnlyIntegerWrapper;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.ObservableSet;
 
 /**
 
@@ -58,26 +59,6 @@ public class Group {
         nameProperty.set(groupName);
     }
 
-    /**
-     @return the numberOfProfilesProperty
-     */
-    private SimpleIntegerProperty getNumberOfProfilesProperty() {
-        if (numberOfProfilesProperty == null) {
-            numberOfProfilesProperty = new SimpleIntegerProperty();
-            ObservableSet<Profile> profiles = PROFILES_REPOSITORY.findAll();
-
-            numberOfProfilesProperty.bind(Bindings.createIntegerBinding(()
-                    -> Integer.parseInt(
-                            Long.toString(
-                                    profiles.stream()
-                                            .map(p -> p.getGroup())
-                                            .filter(otherGroup -> Objects.equals(Group.this, otherGroup))
-                                            .count())),
-                    profiles));
-        }
-        return numberOfProfilesProperty;
-    }
-
     @Override
     public int hashCode() {
         int hash = 3;
@@ -107,6 +88,40 @@ public class Group {
     @Override
     public String toString() {
         return getName() + " (" + getNumberOfProfiles() + ")";
+    }
+
+    private SimpleIntegerProperty getNumberOfProfilesProperty() {
+        if (numberOfProfilesProperty == null) {
+            numberOfProfilesProperty = new SimpleIntegerProperty();
+
+            numberOfProfilesProperty.bind(Bindings.createIntegerBinding(
+                    new ProfilesCount(this),
+                    PROFILES_REPOSITORY.findAll()));
+        }
+        return numberOfProfilesProperty;
+    }
+
+    private static class ProfilesCount implements Callable<Integer> {
+
+        private final Group group;
+
+        private ProfilesCount(Group group) {
+            this.group = group;
+        }
+
+        @Override
+        public Integer call() throws Exception {
+            long count = PROFILES_REPOSITORY.findAll()
+                    .stream()
+                    .map(Profile::getGroup)
+                    .filter(this::equalTo)
+                    .count();
+            return Integer.parseInt(Long.toString(count));
+        }
+
+        public boolean equalTo(Group otherGroup) {
+            return Objects.equals(group, otherGroup);
+        }
     }
 
 }
