@@ -115,7 +115,7 @@ public class ProfileListDetailsController {
         selectProfiles.selectProperty().bind(checkBoxSelected);
         selectProfiles.visibleProperty().bind(showActionsToggle.selectedProperty());
 
-        CONTEXT.add(selectProfiles);
+        CONTEXT.set(SelectProfiles.class, selectProfiles);
 
         PROFILES_REPO.addListener((Change<? extends Profile> change) -> refreshProfilesList());
 
