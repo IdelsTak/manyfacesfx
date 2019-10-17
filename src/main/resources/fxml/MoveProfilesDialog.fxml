@@ -104,9 +104,6 @@
                            </StackPane.margin>
                         </JFXButton>
                      </children>
-                     <padding>
-                        <Insets right="32.0" />
-                     </padding>
                   </StackPane>
                </children>
                <padding>

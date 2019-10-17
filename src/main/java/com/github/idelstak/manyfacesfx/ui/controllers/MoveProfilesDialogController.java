@@ -25,7 +25,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javafx.application.Platform;
+import javafx.beans.binding.BooleanBinding;
+import javafx.beans.property.BooleanProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableSet;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -84,7 +87,22 @@ public class MoveProfilesDialogController {
      */
     @FXML
     public void initialize() {
-//        profileNodeResult.addLookupListener(e -> updateSelectedProfileLabels());
+        BooleanProperty nameFieldprop = groupNameField.visibleProperty();
+        BooleanBinding nameFieldNotProp = nameFieldprop.not();
+
+        addNewgroupButton.visibleProperty().bind(nameFieldNotProp);
+        applyGroupNameButton.visibleProperty().bind(nameFieldprop);
+
+        addNewgroupButton.setOnAction(e -> groupNameField.setVisible(true));
+        applyGroupNameButton.setOnAction(e -> {
+            GROUPS_REPO.add(groupNameField.getText());
+            groupNameField.setText(null);
+            groupNameField.setVisible(false);
+        });
+
+        GROUPS_REPO.addListener((ListChangeListener.Change<? extends Group> change) -> {
+            refreshGroupsList();
+        });
     }
 
     void setDialog(JFXDialog dialog) {
@@ -108,6 +126,8 @@ public class MoveProfilesDialogController {
                 .stream()
                 .map(this::getGroupCell)
                 .collect(Collectors.toList());
+        
+        groupsBox.getChildren().clear();
 
         Platform.runLater(() -> panesOptionals.stream()
                 .filter(Optional::isPresent)
@@ -205,7 +225,7 @@ public class MoveProfilesDialogController {
                     profile.setGroup(group);
                     ProfilesRepository.getDefault().update(profile);
                 });
-        
+
         profileNodeResult.allInstances()
                 .stream()
                 .forEach(node -> CONTEXT.remove(node));
