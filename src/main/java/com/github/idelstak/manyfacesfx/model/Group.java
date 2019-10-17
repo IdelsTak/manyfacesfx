@@ -6,7 +6,6 @@ package com.github.idelstak.manyfacesfx.model;
 import com.github.idelstak.manyfacesfx.api.ProfilesRepository;
 import java.util.Objects;
 import java.util.concurrent.Callable;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.ReadOnlyIntegerProperty;
@@ -29,10 +28,6 @@ public class Group {
     public Group(int id, String name) {
         this.idProperty = new ReadOnlyIntegerWrapper(id);
         this.nameProperty = new SimpleStringProperty(name);
-        
-        nameProperty.addListener((ob, ov, nv) -> {
-            LOG.log(Level.INFO, "New group name: {0}", nv);
-        });
     }
 
     public ReadOnlyIntegerProperty idProperty() {
@@ -60,10 +55,9 @@ public class Group {
     }
 
     public void setName(String groupName) {
-        LOG.log(Level.INFO, "Setting group name to: {0}", groupName);
-        
         nameProperty.set(groupName);
     }
+    
 
     @Override
     public int hashCode() {
