@@ -74,7 +74,15 @@ public class HomeDetailsController {
             }
         });
 
-        groupResult.addLookupListener(e -> showProfilesByGroup());
+        groupResult.addLookupListener(e -> {
+            showProfilesByGroup();
+
+            String profilesByGroupTitle = "Profile list by group";
+
+            Platform.runLater(() -> {
+                homeNode.setDisplayName(profilesByGroupTitle);
+            });
+        });
 
         profileListTab.setContent(AbstractProfileListDetails.getDefault().getPane());
         groupsTab.setContent(getGroupsTab());
@@ -83,7 +91,9 @@ public class HomeDetailsController {
     private String from(Tab tab) {
         return tab.equals(profileListTab)
                ? "Browser profile list"
-               : tab.getText();
+               : groupResult.allInstances().size() > 0
+                 ? "Profile list by group"
+                 : tab.getText();
     }
 
     private Node getGroupsTab() throws IOException {
