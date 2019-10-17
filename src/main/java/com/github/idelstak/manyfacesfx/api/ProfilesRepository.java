@@ -58,6 +58,8 @@ public abstract class ProfilesRepository {
 
     public abstract void addListener(SetChangeListener<? super Profile> listener);
 
+    public abstract boolean update(Profile profile);
+
     private static final class BasicProfilesRepository extends ProfilesRepository {
 
         private final ObservableSet<Profile> profiles;
@@ -84,7 +86,7 @@ public abstract class ProfilesRepository {
                                 String notes = lorem.paragraph();
                                 Date d = dat.past(1000, TimeUnit.DAYS);
                                 LocalDate ldt = new java.sql.Timestamp(d.getTime()).toLocalDateTime().toLocalDate();
-                                
+
                                 result.add(new Profile(id, name, notes, ldt));
                             }
 
@@ -120,8 +122,21 @@ public abstract class ProfilesRepository {
         @Override
         public synchronized boolean add(Profile profile) {
             LOG.log(Level.FINE, "Adding {0} to list", profile);
-            
+
             return profiles.add(profile);
+        }
+
+        @Override
+        public synchronized boolean update(Profile profile) {
+            Optional<Boolean> added = profiles.stream()
+                    .filter(aProfile -> aProfile.getId().equals(profile.getId()))
+                    .findFirst()
+                    .map(profiles::remove)
+                    .map(wasRemoved -> wasRemoved
+                                       ? profiles.add(profile)
+                                       : false);
+
+            return added.orElse(false);
         }
 
         @Override

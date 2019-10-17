@@ -151,7 +151,6 @@ public class HomeMenuController {
                     .stream()
                     .map(Profile::getGroup)
                     .forEach(this::updateDisplayName);
-
         });
 
         //Ensure that the number of profiles is

@@ -5,6 +5,7 @@ package com.github.idelstak.manyfacesfx.ui.controllers;
 
 import com.github.idelstak.manyfacesfx.api.GlobalContext;
 import com.github.idelstak.manyfacesfx.api.GroupsRepository;
+import com.github.idelstak.manyfacesfx.api.ProfilesRepository;
 import com.github.idelstak.manyfacesfx.model.Group;
 import com.github.idelstak.manyfacesfx.model.Profile;
 import com.github.idelstak.manyfacesfx.ui.ProfileNode;
@@ -83,7 +84,7 @@ public class MoveProfilesDialogController {
      */
     @FXML
     public void initialize() {
-        profileNodeResult.addLookupListener(e -> updateSelectedProfileLabels());
+//        profileNodeResult.addLookupListener(e -> updateSelectedProfileLabels());
     }
 
     void setDialog(JFXDialog dialog) {
@@ -140,7 +141,7 @@ public class MoveProfilesDialogController {
                                     .forEach(checkBox -> checkBox.setSelected(deselected));
                         }
                     });
-            
+
             groupsMap.put(selectGroupCheckBox, group);
         });
 
@@ -200,6 +201,13 @@ public class MoveProfilesDialogController {
                 .stream()
                 .map(ProfileNode::getLookup)
                 .map(this::getProfile)
-                .forEach(profile -> profile.setGroup(group));
+                .forEach(profile -> {
+                    profile.setGroup(group);
+                    ProfilesRepository.getDefault().update(profile);
+                });
+        
+        profileNodeResult.allInstances()
+                .stream()
+                .forEach(node -> CONTEXT.remove(node));
     }
 }
