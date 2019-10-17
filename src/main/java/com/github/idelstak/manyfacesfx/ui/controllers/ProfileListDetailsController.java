@@ -5,6 +5,7 @@ package com.github.idelstak.manyfacesfx.ui.controllers;
 
 import com.github.idelstak.manyfacesfx.api.GlobalContext;
 import com.github.idelstak.manyfacesfx.api.ProfilesRepository;
+import com.github.idelstak.manyfacesfx.api.Stackable;
 import com.github.idelstak.manyfacesfx.model.Group;
 import com.github.idelstak.manyfacesfx.model.Profile;
 import com.github.idelstak.manyfacesfx.ui.ProfileNode;
@@ -12,14 +13,18 @@ import com.github.idelstak.manyfacesfx.ui.SelectProfiles;
 import com.github.idelstak.manyfacesfx.ui.util.TitledPaneInputEventBypass;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleNode;
+import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javafx.application.Platform;
@@ -29,12 +34,14 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableSet;
 import javafx.collections.SetChangeListener.Change;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.InputEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import org.openide.util.Lookup;
 
@@ -132,6 +139,8 @@ public class ProfileListDetailsController {
         lookupResult.addLookupListener(e -> listenToSelectedProfiles());
 
         Platform.runLater(() -> rootBox.getChildren().remove(groupNameBox));
+        
+        deleteButton.setOnAction(e -> showDeleteProfilesDialog());
     }
 
     void setGroup(Group inst) {
@@ -228,6 +237,27 @@ public class ProfileListDetailsController {
                 .collect(Collectors.toList());
 
         selectionAvailable.set(!selectedProfiles.isEmpty());
+    }
+
+    private void showDeleteProfilesDialog() {
+        URL location = getClass().getResource("/fxml/DeleteProfileDialog.fxml");
+            FXMLLoader loader = new FXMLLoader(location);
+            Pane pane = null;
+            DeleteProfileDialogController controller = null;
+
+            try {
+                pane = loader.load();
+                controller = loader.getController();
+            } catch (IOException ex) {
+                LOG.log(Level.SEVERE, null, ex);
+            }
+
+            if (pane != null && controller != null) {
+                JFXDialog dialog = new JFXDialog();
+                dialog.setContent(pane);
+                controller.setDialog(dialog);
+                dialog.show(Stackable.getDefault().getStackPane());
+            }
     }
 
 }

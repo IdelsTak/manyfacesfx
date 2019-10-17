@@ -189,7 +189,9 @@ public class HomeMenuController {
     public void updateDisplayName(Group group) {
         Platform.runLater(() -> {
             int idx = groupsList.getItems().indexOf(group);
-            groupsList.getItems().set(idx, group);
+            if (idx > 0) {
+                groupsList.getItems().set(idx, group);
+            }
         });
     }
 
