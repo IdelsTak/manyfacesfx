@@ -9,12 +9,12 @@ import javafx.beans.property.SimpleBooleanProperty;
 
  @author Hiram K <hiram.kamau@outlook.com>
  */
-public class SelectProfiles {
+public class BulkProfilesSelect {
 
     private final SimpleBooleanProperty selectProperty;
     private final SimpleBooleanProperty visibleProperty;
 
-    public SelectProfiles() {
+    public BulkProfilesSelect() {
         this.selectProperty = new SimpleBooleanProperty(false);
         this.visibleProperty = new SimpleBooleanProperty(false);
     }

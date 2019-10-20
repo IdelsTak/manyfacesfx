@@ -8,8 +8,8 @@ import com.github.idelstak.manyfacesfx.api.ProfilesRepository;
 import com.github.idelstak.manyfacesfx.api.Stackable;
 import com.github.idelstak.manyfacesfx.model.Group;
 import com.github.idelstak.manyfacesfx.model.Profile;
+import com.github.idelstak.manyfacesfx.ui.BulkProfilesSelect;
 import com.github.idelstak.manyfacesfx.ui.ProfileNode;
-import com.github.idelstak.manyfacesfx.ui.SelectProfiles;
 import com.github.idelstak.manyfacesfx.ui.util.TitledPaneInputEventBypass;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
@@ -94,7 +94,7 @@ public class ProfileListDetailsController {
     private final Collection<TitledPane> titledPanes;
     private final Lookup.Result<ProfileNode> profileNodeResult;
     private final SimpleBooleanProperty selectionAvailable;
-    private final SelectProfiles selectProfiles = new SelectProfiles();
+    private final BulkProfilesSelect bulkProfilesSelect = new BulkProfilesSelect();
     private Group group;
 
     {
@@ -119,19 +119,18 @@ public class ProfileListDetailsController {
 
         selectButton.setOnAction(e -> selectCheckBox.setSelected(!selectCheckBox.isSelected()));
 
-        selectProfiles.selectProperty().bind(checkBoxSelected);
-        selectProfiles.visibleProperty().bind(showActionsToggle.selectedProperty());
+        bulkProfilesSelect.selectProperty().bind(checkBoxSelected);
+        bulkProfilesSelect.visibleProperty().bind(showActionsToggle.selectedProperty());
 
         PROFILES_REPO.addListener((Change<? extends Profile> change) -> refreshProfilesList());
 
-        searchField.textProperty().addListener((ob, ov, name) -> filterBy(name));
-        nameToggle.selectedProperty().addListener((ob, ov, descending) -> {
-            sortByName(descending);
-        });
-        lastEditedToggle.selectedProperty().addListener((ob, ov, descending) -> {
-            sortByLastEdited(descending);
-        });
-
+        searchField.textProperty()
+                .addListener((ob, ov, name) -> filterBy(name));
+        nameToggle.selectedProperty()
+                .addListener((ob, ov, descending) -> sortByName(descending));
+        lastEditedToggle.selectedProperty()
+                .addListener((ob, ov, descending) -> sortByLastEdited(descending));
+        
         deleteButton.disableProperty().bind(selectionAvailable.not());
         moveToGroupButton.disableProperty().bind(selectionAvailable.not());
         removeFromGroupButton.disableProperty().bind(selectionAvailable.not());
@@ -208,7 +207,7 @@ public class ProfileListDetailsController {
                 : allProfiles);
 
         List<TitledPane> panes = profiles.stream()
-                .map(profile -> new ProfileNode(profile, selectProfiles))
+                .map(profile -> new ProfileNode(profile, bulkProfilesSelect))
                 .map(node -> node.getLookup().lookup(TitledPane.class))
                 .collect(Collectors.toList());
 
@@ -236,9 +235,11 @@ public class ProfileListDetailsController {
         List<Profile> selectedProfiles = profileNodeResult.allInstances()
                 .stream()
                 .map(node -> node.getLookup().lookup(Profile.class))
+                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
+        boolean selectedProfilesAvailable = !selectedProfiles.isEmpty();
 
-        selectionAvailable.set(!selectedProfiles.isEmpty());
+        selectionAvailable.set(selectedProfilesAvailable);
     }
 
     private void showDeleteProfilesDialog() {

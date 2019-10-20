@@ -46,13 +46,13 @@ public class RemoveProfileFromGroupDialogController {
      */
     @FXML
     public void initialize() {
-        contentText.setText(resolveMessageFrom(profileNodeResult.allInstances()));
-
-        profileNodeResult.addLookupListener(e -> {
-            Collection<? extends ProfileNode> profiles = profileNodeResult.allInstances();
-
-            contentText.setText(resolveMessageFrom(profiles));
-        });
+//        contentText.setText(resolveMessageFrom(profileNodeResult.allInstances()));
+//
+//        profileNodeResult.addLookupListener(e -> {
+//            Collection<? extends ProfileNode> profiles = profileNodeResult.allInstances();
+//
+//            contentText.setText(resolveMessageFrom(profiles));
+//        });
     }
 
     void setDialog(JFXDialog dialog) {
@@ -67,6 +67,10 @@ public class RemoveProfileFromGroupDialogController {
                     .forEach(this::removeProfileFromGroup);
 
             Platform.runLater(nonNullDialog::close);
+        });
+
+        Platform.runLater(() -> {
+            contentText.setText(resolveMessageFrom(profileNodeResult.allInstances()));
         });
     }
 
@@ -91,15 +95,22 @@ public class RemoveProfileFromGroupDialogController {
     private String resolveMessageFrom(Collection<? extends ProfileNode> nodes) {
         String message;
 
-        if (nodes.size() == 1) {
-            ProfileNode node = nodes.iterator().next();
-            Profile profile = node.getLookup().lookup(Profile.class);
+        ProfileNode node = nodes.iterator().next();
+        Profile profile = node.getLookup().lookup(Profile.class);
+
+        if (nodes.size() == 1 && Objects.nonNull(profile)) {
             message = String.format("Do you really want to remove \"%s\" from a group?",
                     profile.getName());
         } else {
+            long count = nodes.stream()
+                    .map(ProfileNode::getLookup)
+                    .map(lookup -> lookup.lookup(Profile.class))
+                    .filter(Objects::nonNull)
+                    .count();
+
             message = String.format(
                     "Do you really want to remove %d browser profiles from a group?",
-                    nodes.size());
+                    count);
         }
 
         return message;

@@ -47,50 +47,57 @@ public class DeleteProfileDialogController {
      */
     @FXML
     public void initialize() {
-        contentText.setText(resolveMessageFrom(profileNodeResult.allInstances()));
-
-        profileNodeResult.addLookupListener(e -> {
-            Collection<? extends ProfileNode> profiles = profileNodeResult.allInstances();
-
-            contentText.setText(resolveMessageFrom(profiles));
-        });
     }
 
     void setDialog(JFXDialog dialog) {
         String message = "Dialog should not be null";
-        JFXDialog dlg = Objects.requireNonNull(dialog, message);
+        JFXDialog nonNullDialog = Objects.requireNonNull(dialog, message);
 
-        closeButton.setOnAction(e -> dlg.close());
-        noButton.setOnAction(e -> dlg.close());
+        closeButton.setOnAction(e -> nonNullDialog.close());
+        noButton.setOnAction(e -> nonNullDialog.close());
         yesButton.setOnAction(e -> {
             profileNodeResult.allInstances()
                     .stream()
                     .forEach(this::deleteProfile);
-            
-            Platform.runLater(dlg::close);
+
+            Platform.runLater(nonNullDialog::close);
+        });
+
+        nonNullDialog.setOnDialogClosed(e -> profileNodeResult.allInstances()
+                .stream()
+                .forEach(CONTEXT::remove));
+
+        Platform.runLater(() -> {
+            contentText.setText(resolveMessageFrom(profileNodeResult.allInstances()));
         });
     }
 
     private void deleteProfile(ProfileNode node) {
-        Profile profile = node.getLookup().lookup(Profile.class);
-        if (profile != null) {
-            PROFILES_REPO.delete(profile);
-            CONTEXT.remove(node);
+        Profile aProfile = node.getLookup().lookup(Profile.class);
+        if (aProfile != null) {
+            PROFILES_REPO.delete(aProfile);
         }
     }
 
     private String resolveMessageFrom(Collection<? extends ProfileNode> nodes) {
         String message;
 
-        if (nodes.size() == 1) {
-            ProfileNode node = nodes.iterator().next();
-            Profile profile = node.getLookup().lookup(Profile.class);
+        ProfileNode node = nodes.iterator().next();
+        Profile profile = node.getLookup().lookup(Profile.class);
+
+        if (nodes.size() == 1 && Objects.nonNull(profile)) {
             message = String.format("Do you really want to delete \"%s\" browser profile?",
                     profile.getName());
         } else {
+            long count = nodes.stream()
+                    .map(ProfileNode::getLookup)
+                    .map(lookup -> lookup.lookup(Profile.class))
+                    .filter(Objects::nonNull)
+                    .count();
+
             message = String.format(
                     "Do you really want to delete %d browser profiles?",
-                    nodes.size());
+                    count);
         }
 
         return message;

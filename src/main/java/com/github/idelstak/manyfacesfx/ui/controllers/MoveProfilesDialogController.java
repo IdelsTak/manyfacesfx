@@ -103,12 +103,20 @@ public class MoveProfilesDialogController {
         GROUPS_REPO.addListener((ListChangeListener.Change<? extends Group> change) -> {
             refreshGroupsList();
         });
+
+        profileNodeResult.addLookupListener(e -> {
+            updateSelectedProfileLabels();
+        });
     }
 
     void setDialog(JFXDialog dialog) {
         if (dialog == null) {
             throw new IllegalArgumentException("Dialog should not be null");
         }
+
+        dialog.setOnDialogClosed(e -> profileNodeResult.allInstances()
+                .stream()
+                .forEach(CONTEXT::remove));
 
         closeButton.setOnAction(e -> dialog.close());
         cancelButton.setOnAction(e -> dialog.close());
@@ -126,7 +134,7 @@ public class MoveProfilesDialogController {
                 .stream()
                 .map(this::getGroupCell)
                 .collect(Collectors.toList());
-        
+
         groupsBox.getChildren().clear();
 
         Platform.runLater(() -> panesOptionals.stream()
@@ -173,6 +181,7 @@ public class MoveProfilesDialogController {
                 .stream()
                 .map(ProfileNode::getLookup)
                 .map(this::getProfile)
+                .filter(Objects::nonNull)
                 .toArray(Profile[]::new);
 
         Platform.runLater(() -> {
@@ -221,13 +230,14 @@ public class MoveProfilesDialogController {
                 .stream()
                 .map(ProfileNode::getLookup)
                 .map(this::getProfile)
+                .filter(Objects::nonNull)
                 .forEach(profile -> {
                     profile.setGroup(group);
                     ProfilesRepository.getDefault().update(profile);
                 });
 
-        profileNodeResult.allInstances()
-                .stream()
-                .forEach(node -> CONTEXT.remove(node));
+//        profileNodeResult.allInstances()
+//                .stream()
+//                .forEach(node -> CONTEXT.remove(node));
     }
 }
