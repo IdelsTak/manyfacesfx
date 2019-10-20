@@ -12,7 +12,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextArea;
 import java.time.LocalDate;
-import java.time.format.FormatStyle;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.logging.Logger;
@@ -24,7 +24,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
-import javafx.util.converter.LocalDateStringConverter;
 
 /**
  FXML Controller class
@@ -140,8 +139,7 @@ public class ProfileDetailsController {
 
         @Override
         public String call() throws Exception {
-            LocalDateStringConverter ldsc = new LocalDateStringConverter(FormatStyle.SHORT);
-            return ldsc.toString(lastEdited);
+            return lastEdited.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
         }
     }
 
