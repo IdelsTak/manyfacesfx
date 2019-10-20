@@ -3,6 +3,7 @@
  */
 package com.github.idelstak.manyfacesfx.model;
 
+import com.github.idelstak.manyfacesfx.api.GroupsRepository;
 import com.github.idelstak.manyfacesfx.api.ProfilesRepository;
 import java.util.Objects;
 import java.util.concurrent.Callable;
@@ -20,11 +21,19 @@ import javafx.beans.property.SimpleStringProperty;
 public class Group {
 
     public static final String DEFAULT_NAME = "Unassigned";
+    public static final Group DEFAULT;
+    private static final GroupsRepository GROUPS_REPO = GroupsRepository.getDefault();
     private static final Logger LOG = Logger.getLogger(Group.class.getName());
     private static final ProfilesRepository PROFILES_REPO = ProfilesRepository.getDefault();
     private final SimpleStringProperty nameProperty;
     private final ReadOnlyIntegerWrapper idProperty;
     private SimpleIntegerProperty numberOfProfilesProperty;
+
+    static {
+        DEFAULT = GROUPS_REPO.findByName(DEFAULT_NAME).orElseGet(() -> {
+            return GROUPS_REPO.add(DEFAULT_NAME);
+        });
+    }
 
     public Group(int id, String name) {
         this.idProperty = new ReadOnlyIntegerWrapper(id);
@@ -58,7 +67,6 @@ public class Group {
     public void setName(String groupName) {
         nameProperty.set(groupName);
     }
-    
 
     @Override
     public int hashCode() {
@@ -81,7 +89,6 @@ public class Group {
         final Group other = (Group) obj;
         return Objects.equals(this.getId(), other.getId());
     }
-
 
     @Override
     public String toString() {

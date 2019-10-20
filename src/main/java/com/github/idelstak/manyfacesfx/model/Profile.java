@@ -3,10 +3,8 @@
  */
 package com.github.idelstak.manyfacesfx.model;
 
-import com.github.idelstak.manyfacesfx.api.GroupsRepository;
 import java.time.LocalDate;
 import java.util.Objects;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.property.ReadOnlyStringWrapper;
@@ -27,20 +25,10 @@ public class Profile {
     private final SimpleObjectProperty<Group> groupProperty;
 
     public Profile(String id, String name, String notes, LocalDate lastEdited) {
-        this(
-                id,
-                name,
-                notes,
-                lastEdited,
-                new FindGroup().find(Group.DEFAULT_NAME));
+        this(id, name, notes, lastEdited, Group.DEFAULT);
     }
 
-    public Profile(
-            String id,
-            String name,
-            String notes,
-            LocalDate lastEdited,
-            Group group) {
+    public Profile(String id, String name, String notes, LocalDate lastEdited, Group group) {
         this.idProperty = new ReadOnlyStringWrapper(id);
         this.nameProperty = new SimpleStringProperty(name);
         this.notesProperty = new SimpleStringProperty(notes);
@@ -133,22 +121,6 @@ public class Profile {
     @Override
     public String toString() {
         return getName();
-    }
-
-    private static class FindGroup {
-
-        private FindGroup() {
-        }
-
-        private Group find(String name) {
-            GroupsRepository groupsRepo = GroupsRepository.getDefault();
-            Group group = groupsRepo.findByName(name)
-                    .orElseGet(() -> groupsRepo.add(name));
-
-            LOG.log(Level.FINE, "Found group: " + group);
-
-            return group;
-        }
     }
 
 }

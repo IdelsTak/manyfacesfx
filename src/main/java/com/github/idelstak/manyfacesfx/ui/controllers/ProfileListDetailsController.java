@@ -11,6 +11,7 @@ import com.github.idelstak.manyfacesfx.model.Profile;
 import com.github.idelstak.manyfacesfx.ui.BulkProfilesSelect;
 import com.github.idelstak.manyfacesfx.ui.DeleteProfileDialog;
 import com.github.idelstak.manyfacesfx.ui.ProfileNode;
+import com.github.idelstak.manyfacesfx.ui.UngroupProfileDialog;
 import com.github.idelstak.manyfacesfx.ui.util.TitledPaneInputEventBypass;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
@@ -131,7 +132,7 @@ public class ProfileListDetailsController {
 
         deleteButton.setOnAction(e -> deleteSelectedProfiles());
         moveToGroupButton.setOnAction(e -> showMoveProfilesDialog());
-        removeFromGroupButton.setOnAction(e -> showRemoveProfilesFromGroupDialog());
+        removeFromGroupButton.setOnAction(e -> ungroupSelectedProfiles());
 
         Platform.runLater(() -> rootBox.getChildren().remove(groupNameBox));
 
@@ -155,6 +156,16 @@ public class ProfileListDetailsController {
         boolean deleteSuccessful = new DeleteProfileDialog().delete(profiles);
 
         if (deleteSuccessful) {
+            removeAllProfileNodesFromContext();
+        }
+    }
+    
+    private void ungroupSelectedProfiles() {
+        Profile[] profiles = getNonNullProfiles();
+
+        boolean ungroupSuccessful = new UngroupProfileDialog().ungroup(profiles);
+
+        if (ungroupSuccessful) {
             removeAllProfileNodesFromContext();
         }
     }
@@ -264,27 +275,6 @@ public class ProfileListDetailsController {
         FXMLLoader loader = new FXMLLoader(location);
         Pane pane = null;
         MoveProfilesDialogController controller = null;
-
-        try {
-            pane = loader.load();
-            controller = loader.getController();
-        } catch (IOException ex) {
-            LOG.log(Level.SEVERE, null, ex);
-        }
-
-        if (pane != null && controller != null) {
-            JFXDialog dialog = new JFXDialog();
-            dialog.setContent(pane);
-            controller.setDialog(dialog);
-            dialog.show(Stackable.getDefault().getStackPane());
-        }
-    }
-
-    private void showRemoveProfilesFromGroupDialog() {
-        URL location = getClass().getResource("/fxml/RemoveProfileFromGroupDialog.fxml");
-        FXMLLoader loader = new FXMLLoader(location);
-        Pane pane = null;
-        RemoveProfileFromGroupDialogController controller = null;
 
         try {
             pane = loader.load();
