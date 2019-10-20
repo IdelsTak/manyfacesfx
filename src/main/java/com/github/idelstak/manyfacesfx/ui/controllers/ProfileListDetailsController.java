@@ -142,6 +142,7 @@ public class ProfileListDetailsController {
 
         deleteButton.setOnAction(e -> showDeleteProfilesDialog());
         moveToGroupButton.setOnAction(e -> showMoveProfilesDialog());
+        removeFromGroupButton.setOnAction(e -> showRemoveProfilesFromGroupDialog());
     }
 
     void setGroup(Group inst) {
@@ -266,6 +267,27 @@ public class ProfileListDetailsController {
         FXMLLoader loader = new FXMLLoader(location);
         Pane pane = null;
         MoveProfilesDialogController controller = null;
+
+        try {
+            pane = loader.load();
+            controller = loader.getController();
+        } catch (IOException ex) {
+            LOG.log(Level.SEVERE, null, ex);
+        }
+
+        if (pane != null && controller != null) {
+            JFXDialog dialog = new JFXDialog();
+            dialog.setContent(pane);
+            controller.setDialog(dialog);
+            dialog.show(Stackable.getDefault().getStackPane());
+        }
+    }
+    
+    private void showRemoveProfilesFromGroupDialog() {
+        URL location = getClass().getResource("/fxml/RemoveProfileFromGroupDialog.fxml");
+        FXMLLoader loader = new FXMLLoader(location);
+        Pane pane = null;
+        RemoveProfileFromGroupDialogController controller = null;
 
         try {
             pane = loader.load();
