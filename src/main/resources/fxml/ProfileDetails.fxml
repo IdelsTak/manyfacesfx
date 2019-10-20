@@ -75,5 +75,6 @@
    <stylesheets>
       <URL value="@../styles/app.css" />
       <URL value="@../styles/profile-details.css" />
+      <URL value="@../styles/profile-context-menu.css" />
    </stylesheets>
 </TitledPane>

@@ -1,0 +1,35 @@
+/*
+Copyright 2019.
+*/
+/* 
+    Created on : Oct 20, 2019, 4:15:11 PM
+    Author     : Hiram K <hiram.kamau@outlook.com>
+*/
+
+.context-menu-root {
+    -fx-base: white;
+    -fx-background-color: white;
+    -fx-border-color: #F6F6F6;
+}
+
+.menu-item {
+    -fx-cursor: hand;
+}
+
+.menu-item:focused {
+    -fx-background-color: #dcdcdc;
+}
+
+.menu-item > .label {
+    -fx-font-family: 'Roboto Medium';
+    -fx-padding: 4px 10px 4px 10px;
+    -fx-font-size: 14px;
+}
+
+.menu-item > .label,
+.menu-item:focused > .label {
+    -fx-text-fill: #676767;
+}
+
+
+

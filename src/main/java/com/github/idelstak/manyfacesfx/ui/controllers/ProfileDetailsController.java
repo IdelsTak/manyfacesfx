@@ -89,6 +89,8 @@ public class ProfileDetailsController {
         editProfileItem = new MenuItem("Edit");
 
         profileMenu = new ContextMenu(editProfileItem, moveProfileToAGroupItem, deleteProfileItem);
+        
+        profileMenu.getStyleClass().add("context-menu-root");
     }
 
     /**
