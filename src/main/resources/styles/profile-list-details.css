@@ -56,6 +56,7 @@ Copyright 2019.
 }
 
 .search-pane > .actions-button:selected > .ikonli-font-icon,
+.search-pane > .actions-button:hover > .ikonli-font-icon,
 .search-pane > .refresh-button:hover > .ikonli-font-icon {
     -fx-icon-color: #0e46cc;
 }
@@ -72,7 +73,7 @@ Copyright 2019.
 
 .search-pane > .actions-button,
 .search-pane > .refresh-button {
-    -fx-pref-width: 25px;
+    -fx-pref-width: 41px;
     -fx-pref-height: -fx-pref-width;
     -fx-min-width: -fx-pref-width;
     -fx-min-height: -fx-pref-width;
@@ -80,19 +81,12 @@ Copyright 2019.
     -fx-max-height: -fx-pref-width;
     -fx-background-radius: 25px;
     -jfx-toggle-color: #dadada;
-}
-
-.search-pane > .actions-button {
     -fx-padding: 8px;
-}
-
-.search-pane > .refresh-button {
-    -fx-padding: 0px;
 }
 
 .search-pane > .actions-button > .jfx-rippler,
 .search-pane > .refresh-button > .jfx-rippler {
-    -jfx-rippler-fill: white;
+    -jfx-rippler-fill: #dadada;
 }
 
 .headers-pane {

@@ -53,6 +53,7 @@ Copyright 2019.
     -fx-icon-color: #cdd2d6;
 }
 
+.detail-view > .title-pane > .jfx-toggle-node:hover  .ikonli-font-icon,
 .detail-view > .title-pane > .jfx-toggle-node:selected  .ikonli-font-icon {
     -fx-icon-color: #0e46cc;
 }
