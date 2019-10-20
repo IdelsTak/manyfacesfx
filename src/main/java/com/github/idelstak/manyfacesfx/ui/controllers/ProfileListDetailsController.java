@@ -9,6 +9,7 @@ import com.github.idelstak.manyfacesfx.api.Stackable;
 import com.github.idelstak.manyfacesfx.model.Group;
 import com.github.idelstak.manyfacesfx.model.Profile;
 import com.github.idelstak.manyfacesfx.ui.BulkProfilesSelect;
+import com.github.idelstak.manyfacesfx.ui.DeleteProfileDialog;
 import com.github.idelstak.manyfacesfx.ui.ProfileNode;
 import com.github.idelstak.manyfacesfx.ui.util.TitledPaneInputEventBypass;
 import com.jfoenix.controls.JFXButton;
@@ -29,7 +30,6 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableSet;
 import javafx.collections.SetChangeListener.Change;
@@ -58,7 +58,7 @@ public class ProfileListDetailsController {
     @FXML
     private VBox rootBox;
     @FXML
-    private TitledPane actionsPane;
+    private TitledPane bulkActionsPane;
     @FXML
     private JFXCheckBox selectCheckBox;
     @FXML
@@ -70,17 +70,11 @@ public class ProfileListDetailsController {
     @FXML
     private JFXButton removeFromGroupButton;
     @FXML
-    private HBox searchPane;
-    @FXML
     private JFXTextField searchField;
     @FXML
-    private HBox spacerBox;
-    @FXML
-    private JFXToggleNode showActionsToggle;
+    private JFXToggleNode bulkProfileActionsToggle;
     @FXML
     private JFXButton refreshButton;
-    @FXML
-    private HBox headersBox;
     @FXML
     private JFXToggleNode nameToggle;
     @FXML
@@ -108,21 +102,19 @@ public class ProfileListDetailsController {
      */
     @FXML
     public void initialize() {
-        actionsPane.addEventFilter(InputEvent.ANY, new TitledPaneInputEventBypass());
-        actionsPane.expandedProperty().bind(showActionsToggle.selectedProperty());
-        BooleanProperty checkBoxSelected = selectCheckBox.selectedProperty();
+        bulkActionsPane.addEventFilter(InputEvent.ANY, new TitledPaneInputEventBypass());
+        bulkActionsPane.expandedProperty().bind(bulkProfileActionsToggle.selectedProperty());
 
-        selectButton.textProperty().bind(
-                Bindings.createStringBinding(() -> selectCheckBox.isSelected()
-                                                   ? "Deselect all"
-                                                   : "Select all", checkBoxSelected));
+        selectButton.textProperty().bind(Bindings.createStringBinding(
+                () -> selectCheckBox.isSelected()
+                      ? "Deselect all"
+                      : "Select all",
+                selectCheckBox.selectedProperty()));
 
         selectButton.setOnAction(e -> selectCheckBox.setSelected(!selectCheckBox.isSelected()));
 
-        bulkProfilesSelect.selectProperty().bind(checkBoxSelected);
-        bulkProfilesSelect.visibleProperty().bind(showActionsToggle.selectedProperty());
-
-        PROFILES_REPO.addListener((Change<? extends Profile> change) -> refreshProfilesList());
+        bulkProfilesSelect.selectProperty().bind(selectCheckBox.selectedProperty());
+        bulkProfilesSelect.visibleProperty().bind(bulkProfileActionsToggle.selectedProperty());
 
         searchField.textProperty()
                 .addListener((ob, ov, name) -> filterBy(name));
@@ -130,18 +122,20 @@ public class ProfileListDetailsController {
                 .addListener((ob, ov, descending) -> sortByName(descending));
         lastEditedToggle.selectedProperty()
                 .addListener((ob, ov, descending) -> sortByLastEdited(descending));
-        
+
         deleteButton.disableProperty().bind(selectionAvailable.not());
         moveToGroupButton.disableProperty().bind(selectionAvailable.not());
         removeFromGroupButton.disableProperty().bind(selectionAvailable.not());
 
         profileNodeResult.addLookupListener(e -> listenToSelectedProfiles());
 
-        Platform.runLater(() -> rootBox.getChildren().remove(groupNameBox));
-
-        deleteButton.setOnAction(e -> showDeleteProfilesDialog());
+        deleteButton.setOnAction(e -> deleteSelectedProfiles());
         moveToGroupButton.setOnAction(e -> showMoveProfilesDialog());
         removeFromGroupButton.setOnAction(e -> showRemoveProfilesFromGroupDialog());
+
+        Platform.runLater(() -> rootBox.getChildren().remove(groupNameBox));
+
+        PROFILES_REPO.addListener((Change<? extends Profile> change) -> refreshProfilesList());
     }
 
     void setGroup(Group inst) {
@@ -153,6 +147,29 @@ public class ProfileListDetailsController {
         Platform.runLater(() -> rootBox.getChildren().add(2, groupNameBox));
 
         refreshProfilesList();
+    }
+
+    private void deleteSelectedProfiles() {
+        Profile[] profiles = getNonNullProfiles();
+
+        boolean deleteSuccessful = new DeleteProfileDialog().delete(profiles);
+
+        if (deleteSuccessful) {
+            removeAllProfileNodesFromContext();
+        }
+    }
+
+    private Profile[] getNonNullProfiles() {
+        return profileNodeResult.allInstances()
+                .stream()
+                .map(ProfileNode::getLookup)
+                .map(lookup -> lookup.lookup(Profile.class))
+                .filter(Objects::nonNull)
+                .toArray(Profile[]::new);
+    }
+
+    private void removeAllProfileNodesFromContext() {
+        profileNodeResult.allInstances().forEach(CONTEXT::remove);
     }
 
     private void sortByLastEdited(Boolean descending) {
@@ -242,27 +259,6 @@ public class ProfileListDetailsController {
         selectionAvailable.set(selectedProfilesAvailable);
     }
 
-    private void showDeleteProfilesDialog() {
-        URL location = getClass().getResource("/fxml/DeleteProfileDialog.fxml");
-        FXMLLoader loader = new FXMLLoader(location);
-        Pane pane = null;
-        DeleteProfileDialogController controller = null;
-
-        try {
-            pane = loader.load();
-            controller = loader.getController();
-        } catch (IOException ex) {
-            LOG.log(Level.SEVERE, null, ex);
-        }
-
-        if (pane != null && controller != null) {
-            JFXDialog dialog = new JFXDialog();
-            dialog.setContent(pane);
-            controller.setDialog(dialog);
-            dialog.show(Stackable.getDefault().getStackPane());
-        }
-    }
-
     private void showMoveProfilesDialog() {
         URL location = getClass().getResource("/fxml/MoveProfilesDialog.fxml");
         FXMLLoader loader = new FXMLLoader(location);
@@ -283,7 +279,7 @@ public class ProfileListDetailsController {
             dialog.show(Stackable.getDefault().getStackPane());
         }
     }
-    
+
     private void showRemoveProfilesFromGroupDialog() {
         URL location = getClass().getResource("/fxml/RemoveProfileFromGroupDialog.fxml");
         FXMLLoader loader = new FXMLLoader(location);

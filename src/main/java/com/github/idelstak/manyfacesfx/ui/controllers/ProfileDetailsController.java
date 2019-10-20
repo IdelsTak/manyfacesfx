@@ -6,8 +6,9 @@ package com.github.idelstak.manyfacesfx.ui.controllers;
 import com.github.idelstak.manyfacesfx.api.GlobalContext;
 import com.github.idelstak.manyfacesfx.api.Stackable;
 import com.github.idelstak.manyfacesfx.model.Profile;
-import com.github.idelstak.manyfacesfx.ui.ProfileNode;
 import com.github.idelstak.manyfacesfx.ui.BulkProfilesSelect;
+import com.github.idelstak.manyfacesfx.ui.DeleteProfileDialog;
+import com.github.idelstak.manyfacesfx.ui.ProfileNode;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDialog;
@@ -17,16 +18,12 @@ import java.net.URL;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.concurrent.Callable;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
-import javafx.beans.binding.DoubleBinding;
 import javafx.beans.binding.StringBinding;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -80,10 +77,9 @@ public class ProfileDetailsController {
     private final MenuItem moveProfileToAGroupItem;
     private final MenuItem deleteProfileItem;
     private final ContextMenu profileMenu;
-    private BulkProfilesSelect selectProfiles;
+    private BulkProfilesSelect bulkProfilesSelect;
     private Profile profile;
     private final Lookup.Result<ProfileNode> profileNodeResult;
-    private final ChangeListener<Boolean> selectionListener = new SelectionListener();
 
     {
         profileNodeResult = CONTEXT.lookupResult(ProfileNode.class);
@@ -105,46 +101,45 @@ public class ProfileDetailsController {
         profileNodeResult.addLookupListener(e -> {
             Optional<Profile> optionalProfile = profileNodeResult.allInstances()
                     .stream()
-                    .map(node -> node.getLookup())
+                    .map(ProfileNode::getLookup)
                     .map(lookup -> lookup.lookup(Profile.class))
-                    .filter(aProfile -> Objects.equals(aProfile, profile))
+                    .filter(Objects::nonNull)
+                    .filter(profile::equals)
                     .findFirst();
 
             Platform.runLater(() -> {
                 selectCheckBox.setSelected(optionalProfile.isPresent());
+//                selectCheckBox.fireEvent(new ActionEvent());
             });
         });
     }
 
     public void setProfileNode(ProfileNode profileNode) {
-        String message = "Profile node should not be null";
-        ProfileNode node = Objects.requireNonNull(profileNode, message);
+        ProfileNode node = Objects.requireNonNull(
+                profileNode,
+                "Profile node should not be null");
+        Lookup nodeLookup = node.getLookup();
 
-        message = "Profile should not be null";
-        profile = Objects.requireNonNull(node.getLookup().lookup(Profile.class), message);
+        profile = Objects.requireNonNull(
+                nodeLookup.lookup(Profile.class),
+                "Profile should not be null");
+        bulkProfilesSelect = Objects.requireNonNull(
+                nodeLookup.lookup(BulkProfilesSelect.class),
+                "Bulk profiles select should not be null");
 
-        titlePane.idProperty()
-                .bind(Bindings.createStringBinding(
-                        () -> profile.getName() + ":" + profile.getLastEdited(),
-                        new Observable[]{
-                            profile.nameProperty(),
-                            profile.lastEditedProperty()}));
+        initTitledPaneIdBinding();
+        initSelectCheckBoxVisibileBinding();
+        initProfileAttributesBinding();
 
-        nameLabel.textProperty().bind(profile.nameProperty());
-        idLabel.textProperty().bind(profile.idProperty());
-        notesTextArea.textProperty().bindBidirectional(profile.notesProperty());
-
-        StringBinding lastEditedDatePropertyAsFormattedDate = Bindings.createStringBinding(
-                () -> profile.getLastEdited()
-                        .format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
-                profile.lastEditedProperty());
-        lastEditedLabel.textProperty().bind(lastEditedDatePropertyAsFormattedDate);
-
-        message = "Select profiles should not be null";
-        selectProfiles = Objects.requireNonNull(node.getLookup().lookup(BulkProfilesSelect.class), message);
-
-        updateSelection();
-        selectProfiles.selectProperty().addListener(selectionListener);
+        bulkProfilesSelect.selectProperty()
+                .addListener((ob, ov, nv) -> {
+                    if (nodeLookup.lookup(Profile.class) != null) {
+                        Platform.runLater(() -> {
+                            selectCheckBox.setSelected(nv);
+                            selectCheckBox.fireEvent(new ActionEvent());
+                        });
+                    }
+                });
 
         selectCheckBox.setOnAction(e -> {
             if (selectCheckBox.isSelected()) {
@@ -156,28 +151,41 @@ public class ProfileDetailsController {
 
         menuButton.setOnAction(e -> showProfileContextMenu());
         moveProfileToAGroupItem.setOnAction(e -> showMoveProfileDialog(node));
-        deleteProfileItem.setOnAction(e -> showDeleteProfileDialog(node));
+        deleteProfileItem.setOnAction(e -> {
+            boolean deleteSuccessful = new DeleteProfileDialog().delete(profile);
+            if (deleteSuccessful) {
+                CONTEXT.remove(node);
+            }
+        });
     }
 
-    private void updateSelection() {
-        Callable<Double> widthCalculator = () -> selectProfiles.isVisible()
-                                                 ? 25.0
-                                                 : 0.0;
-        DoubleBinding widthBinding = Bindings.createDoubleBinding(
-                widthCalculator,
-                selectProfiles.visibleProperty());
+    private void initTitledPaneIdBinding() {
+        titlePane.idProperty()
+                .bind(Bindings.createStringBinding(
+                        () -> profile.getName() + ":" + profile.getLastEdited(),
+                        new Observable[]{
+                            profile.nameProperty(),
+                            profile.lastEditedProperty()}));
+    }
 
-        selectCheckBoxPane.prefWidthProperty().bind(widthBinding);
-//        selectProfiles.selectProperty().addListener((ob, ov, nv) -> {
-//            Platform.runLater(() -> selectCheckBox.setSelected(false));
-//
-//            if (profile != null) {
-//                ProfilesRepository.getDefault()
-//                        .findById(profile.getId())
-//                        .ifPresent(p -> Platform.runLater(() -> selectCheckBox.setSelected(nv)));
-//            }
-//        });
-//        selectProfiles.selectProperty().addListener(selectionListener);
+    private void initProfileAttributesBinding() {
+        nameLabel.textProperty().bind(profile.nameProperty());
+        idLabel.textProperty().bind(profile.idProperty());
+        notesTextArea.textProperty().bindBidirectional(profile.notesProperty());
+
+        StringBinding lastEditedDatePropertyAsFormattedDate = Bindings.createStringBinding(
+                () -> profile.getLastEdited()
+                        .format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+                profile.lastEditedProperty());
+        lastEditedLabel.textProperty().bind(lastEditedDatePropertyAsFormattedDate);
+    }
+
+    private void initSelectCheckBoxVisibileBinding() {
+        selectCheckBoxPane.prefWidthProperty().bind(Bindings.createDoubleBinding(
+                () -> bulkProfilesSelect.isVisible()
+                      ? 25.0
+                      : 0.0,
+                bulkProfilesSelect.visibleProperty()));
     }
 
     private void showProfileContextMenu() {
@@ -185,29 +193,6 @@ public class ProfileDetailsController {
         double yOffset = 0;
 
         profileMenu.show(menuButton, Side.LEFT, xOffset, yOffset);
-    }
-
-    private void showDeleteProfileDialog(ProfileNode node) {
-        URL location = getClass().getResource("/fxml/DeleteProfileDialog.fxml");
-        FXMLLoader loader = new FXMLLoader(location);
-        Pane pane = null;
-        DeleteProfileDialogController controller = null;
-
-        try {
-            pane = loader.load();
-            controller = loader.getController();
-        } catch (IOException ex) {
-            LOG.log(Level.SEVERE, null, ex);
-        }
-
-        if (pane != null && controller != null) {
-            JFXDialog dialog = new JFXDialog();
-            dialog.setContent(pane);
-            controller.setDialog(dialog);
-
-            CONTEXT.set(ProfileNode.class, node);
-            Platform.runLater(() -> dialog.show(Stackable.getDefault().getStackPane()));
-        }
     }
 
     private void showMoveProfileDialog(ProfileNode node) {
@@ -230,23 +215,6 @@ public class ProfileDetailsController {
 
             CONTEXT.set(ProfileNode.class, node);
             Platform.runLater(() -> dialog.show(Stackable.getDefault().getStackPane()));
-        }
-    }
-
-    private class SelectionListener implements ChangeListener<Boolean> {
-
-        private SelectionListener() {
-        }
-
-        @Override
-        public void changed(
-                ObservableValue<? extends Boolean> observableValue,
-                Boolean oldValue,
-                Boolean newValue) {
-            Platform.runLater(() -> {
-                selectCheckBox.setSelected(newValue);
-                selectCheckBox.fireEvent(new ActionEvent());
-            });
         }
     }
 }
