@@ -11,7 +11,6 @@ import com.github.idelstak.manyfacesfx.ui.SelectProfiles;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextArea;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.concurrent.Callable;
@@ -20,6 +19,7 @@ import javafx.application.Platform;
 import javafx.beans.Observable;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.DoubleBinding;
+import javafx.beans.binding.StringBinding;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
@@ -91,9 +91,12 @@ public class ProfileDetailsController {
         nameLabel.textProperty().bind(profile.nameProperty());
         idLabel.textProperty().bind(profile.idProperty());
         notesTextArea.textProperty().bindBidirectional(profile.notesProperty());
-        lastEditedLabel.textProperty().bind(Bindings.createStringBinding(
-                new LastEditedAsString(profile.getLastEdited()),
-                profile.lastEditedProperty()));
+
+        StringBinding lastEditedDatePropertyAsFormattedDate = Bindings.createStringBinding(
+                () -> profile.getLastEdited()
+                        .format(DateTimeFormatter.ofPattern("dd/MM/yyyy")),
+                profile.lastEditedProperty());
+        lastEditedLabel.textProperty().bind(lastEditedDatePropertyAsFormattedDate);
 
         message = "Select profiles should not be null";
         selectProfiles = Objects.requireNonNull(node.getLookup().lookup(SelectProfiles.class), message);
@@ -120,7 +123,7 @@ public class ProfileDetailsController {
         selectCheckBoxPane.prefWidthProperty().bind(widthBinding);
         selectProfiles.selectProperty().addListener((ob, ov, nv) -> {
             Platform.runLater(() -> selectCheckBox.setSelected(false));
-            
+
             if (profile != null) {
                 ProfilesRepository.getDefault()
                         .findById(profile.getId())
@@ -128,19 +131,4 @@ public class ProfileDetailsController {
             }
         });
     }
-
-    private static class LastEditedAsString implements Callable<String> {
-
-        private final LocalDate lastEdited;
-
-        private LastEditedAsString(LocalDate lastEdited) {
-            this.lastEdited = lastEdited;
-        }
-
-        @Override
-        public String call() throws Exception {
-            return lastEdited.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        }
-    }
-
 }
