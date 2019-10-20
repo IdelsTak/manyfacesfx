@@ -87,7 +87,7 @@ Copyright 2019.
 .title-box > .last-edited-label {
     -fx-font-size: 12px;
     -fx-text-fill: black;
-    -fx-padding: 0px 0px 0px -6px;
+    -fx-padding: 0px 0px 0px 15px;
 }
 
 .title-box > .action-box {
@@ -107,19 +107,26 @@ Copyright 2019.
     -fx-border-radius: 2px;
 }
 
-.title-box > .menu-box {
-    -fx-pref-width: 25px;
+.title-box > .jfx-button {
+    -fx-pref-width: 41px;
     -fx-min-width: -fx-pref-width;
+    -fx-max-width: -fx-pref-width;
+    -fx-background-radius: 20px;
+    -fx-padding: 8px;
 }
 
-.title-box > .menu-box > .jfx-button {
-    -fx-max-height: infinity;
+.title-box > .jfx-button > .jfx-rippler {
+    -jfx-rippler-fill: #dadada;
 }
 
-.title-box > .menu-box > .jfx-button > .ikonli-font-icon {
+.title-box > .jfx-button > .ikonli-font-icon {
     -fx-icon-code: mdi-dots-vertical;
     -fx-icon-size: 25px;
     -fx-icon-color: #cdd2d6;
+}
+
+.title-box > .jfx-button:hover > .ikonli-font-icon {
+    -fx-icon-color: black;
 }
 
 .field-title {
@@ -128,7 +135,6 @@ Copyright 2019.
     -fx-min-width: -fx-pref-width;
     -fx-max-width: -fx-pref-width;
     -fx-alignment: center-right;
-
 }
 
 .details-box {

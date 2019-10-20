@@ -44,6 +44,9 @@
                </graphic>
             </JFXButton>
          </children>
+         <VBox.margin>
+            <Insets right="6.0" />
+         </VBox.margin>
       </HBox>
       <HBox fx:id="groupNameBox" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" spacing="6.0">
          <children>

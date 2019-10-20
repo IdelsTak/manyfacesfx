@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.image.ImageView?>
@@ -55,21 +56,20 @@
             <Label fx:id="statusLabel" layoutX="85.0" layoutY="10.0" styleClass="status-label" />
             <Label fx:id="membersLabel" layoutX="283.0" layoutY="10.0" styleClass="members-label" />
             <Label fx:id="lastEditedLabel" layoutX="481.0" layoutY="10.0" styleClass="last-edited-label" />
-            <HBox fx:id="actionBox" prefHeight="100.0" prefWidth="200.0" styleClass="action-box">
+            <HBox fx:id="actionBox" prefWidth="200.0" styleClass="action-box">
                <children>
                   <JFXButton fx:id="actionButton" text="Start" />
                </children>
             </HBox>
-            <HBox fx:id="menuBox" layoutX="554.0" layoutY="10.0" prefHeight="100.0" prefWidth="200.0" styleClass="menu-box">
-               <children>
-                  <JFXButton fx:id="menuButton">
-                     <graphic>
-                        <FontIcon />
-                     </graphic>
-                  </JFXButton>
-               </children>
-            </HBox>
+            <JFXButton fx:id="menuButton" maxWidth="1.7976931348623157E308">
+               <graphic>
+                  <FontIcon />
+               </graphic>
+            </JFXButton>
          </children>
+         <padding>
+            <Insets right="6.0" />
+         </padding>
       </HBox>
    </graphic>
    <stylesheets>
