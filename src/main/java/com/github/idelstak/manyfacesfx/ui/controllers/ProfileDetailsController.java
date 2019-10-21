@@ -4,21 +4,17 @@
 package com.github.idelstak.manyfacesfx.ui.controllers;
 
 import com.github.idelstak.manyfacesfx.api.GlobalContext;
-import com.github.idelstak.manyfacesfx.api.Stackable;
 import com.github.idelstak.manyfacesfx.model.Profile;
 import com.github.idelstak.manyfacesfx.ui.BulkProfilesSelect;
 import com.github.idelstak.manyfacesfx.ui.DeleteProfileDialog;
+import com.github.idelstak.manyfacesfx.ui.MoveProfileToGroupDialog;
 import com.github.idelstak.manyfacesfx.ui.ProfileNode;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
-import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextArea;
-import java.io.IOException;
-import java.net.URL;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.beans.Observable;
@@ -26,14 +22,12 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.StringBinding;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Side;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TitledPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import org.openide.util.Lookup;
 
 /**
@@ -89,7 +83,7 @@ public class ProfileDetailsController {
         editProfileItem = new MenuItem("Edit");
 
         profileMenu = new ContextMenu(editProfileItem, moveProfileToAGroupItem, deleteProfileItem);
-        
+
         profileMenu.getStyleClass().add("context-menu-root");
     }
 
@@ -152,12 +146,15 @@ public class ProfileDetailsController {
         });
 
         menuButton.setOnAction(e -> showProfileContextMenu());
-        moveProfileToAGroupItem.setOnAction(e -> showMoveProfileDialog(node));
+        moveProfileToAGroupItem.setOnAction(e -> {
+            MoveProfileToGroupDialog dialog = new MoveProfileToGroupDialog();
+            dialog.setProfile(profile);
+            dialog.show();
+        });
         deleteProfileItem.setOnAction(e -> {
-            boolean deleteSuccessful = new DeleteProfileDialog().delete(profile);
-            if (deleteSuccessful) {
-                CONTEXT.remove(node);
-            }
+            DeleteProfileDialog dialog = new DeleteProfileDialog();
+            dialog.setProfile(profile);
+            dialog.show();
         });
     }
 
@@ -197,26 +194,26 @@ public class ProfileDetailsController {
         profileMenu.show(menuButton, Side.LEFT, xOffset, yOffset);
     }
 
-    private void showMoveProfileDialog(ProfileNode node) {
-        URL location = getClass().getResource("/fxml/MoveProfilesDialog.fxml");
-        FXMLLoader loader = new FXMLLoader(location);
-        Pane pane = null;
-        MoveProfilesDialogController controller = null;
-
-        try {
-            pane = loader.load();
-            controller = loader.getController();
-        } catch (IOException ex) {
-            LOG.log(Level.SEVERE, null, ex);
-        }
-
-        if (pane != null && controller != null) {
-            JFXDialog dialog = new JFXDialog();
-            dialog.setContent(pane);
-            controller.setDialog(dialog);
-
-            CONTEXT.set(ProfileNode.class, node);
-            Platform.runLater(() -> dialog.show(Stackable.getDefault().getStackPane()));
-        }
-    }
+//    private void showMoveProfileDialog(ProfileNode node) {
+//        URL location = getClass().getResource("/fxml/MoveProfilesDialog.fxml");
+//        FXMLLoader loader = new FXMLLoader(location);
+//        Pane pane = null;
+//        MoveProfilesDialogController controller = null;
+//
+//        try {
+//            pane = loader.load();
+//            controller = loader.getController();
+//        } catch (IOException ex) {
+//            LOG.log(Level.SEVERE, null, ex);
+//        }
+//
+//        if (pane != null && controller != null) {
+//            JFXDialog dialog = new JFXDialog();
+//            dialog.setContent(pane);
+//            controller.setDialog(dialog);
+//
+//            CONTEXT.set(ProfileNode.class, node);
+//            Platform.runLater(() -> dialog.show(Stackable.getDefault().getStackPane()));
+//        }
+//    }
 }

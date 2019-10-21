@@ -3,15 +3,10 @@
  */
 package com.github.idelstak.manyfacesfx.ui.controllers;
 
-import com.github.idelstak.manyfacesfx.api.GlobalContext;
 import com.github.idelstak.manyfacesfx.api.GroupsRepository;
-import com.github.idelstak.manyfacesfx.api.ProfilesRepository;
 import com.github.idelstak.manyfacesfx.model.Group;
-import com.github.idelstak.manyfacesfx.model.Profile;
-import com.github.idelstak.manyfacesfx.ui.ProfileNode;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
-import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
@@ -34,11 +29,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import org.openide.util.Lookup;
 
 /**
  FXML Controller class
@@ -48,20 +40,17 @@ import org.openide.util.Lookup;
 public class MoveProfilesDialogController {
 
     private static final Logger LOG = Logger.getLogger(MoveProfilesDialogController.class.getName());
-    private static final GlobalContext CONTEXT = GlobalContext.getDefault();
     private static final GroupsRepository GROUPS_REPO = GroupsRepository.getDefault();
     @FXML
     private JFXButton closeButton;
     @FXML
-    private Label profile1Label;
+    private Label firstProfileToMoveLabel;
     @FXML
-    private Label profile2Label;
+    private Label secondProfileToMoveLabel;
     @FXML
-    private Label extraProfilesLabel;
+    private Label otherProfilesToMoveLabel;
     @FXML
     private VBox groupsBox;
-    @FXML
-    private StackPane listActionsPane;
     @FXML
     private JFXButton addNewgroupButton;
     @FXML
@@ -72,14 +61,11 @@ public class MoveProfilesDialogController {
     private JFXButton moveButton;
     @FXML
     private JFXButton cancelButton;
-    private final ToggleGroup toggleGroup = new ToggleGroup();
     private final ObservableSet<CheckBox> selectGroupCheckBoxes;
-    private final Lookup.Result<ProfileNode> profileNodeResult;
     private final Map<CheckBox, Group> groupsMap = new HashMap<>();
 
     {
         selectGroupCheckBoxes = FXCollections.observableSet(new HashSet<>());
-        profileNodeResult = CONTEXT.lookupResult(ProfileNode.class);
     }
 
     /**
@@ -104,29 +90,39 @@ public class MoveProfilesDialogController {
             refreshGroupsList();
         });
 
-        profileNodeResult.addLookupListener(e -> {
-            updateSelectedProfileLabels();
-        });
+        refreshGroupsList();
     }
 
-    void setDialog(JFXDialog dialog) {
-        if (dialog == null) {
-            throw new IllegalArgumentException("Dialog should not be null");
-        }
+    public JFXButton getCloseButton() {
+        return closeButton;
+    }
 
-        dialog.setOnDialogClosed(e -> profileNodeResult.allInstances()
+    public JFXButton getMoveButton() {
+        return moveButton;
+    }
+
+    public JFXButton getCancelButton() {
+        return cancelButton;
+    }
+
+    public Label getFirstProfileToMoveLabel() {
+        return firstProfileToMoveLabel;
+    }
+
+    public Label getSecondProfileToMoveLabel() {
+        return secondProfileToMoveLabel;
+    }
+
+    public Label getOtherProfilesToMoveLabel() {
+        return otherProfilesToMoveLabel;
+    }
+
+    public Optional<Group> getSelectedGroup() {
+        return groupsMap.keySet()
                 .stream()
-                .forEach(CONTEXT::remove));
-
-        closeButton.setOnAction(e -> dialog.close());
-        cancelButton.setOnAction(e -> dialog.close());
-        moveButton.setOnAction(e -> {
-            moveProfilesToSomeSelectedGroup();
-            Platform.runLater(dialog::close);
-        });
-
-        updateSelectedProfileLabels();
-        refreshGroupsList();
+                .filter(CheckBox::isSelected)
+                .findFirst()
+                .map(groupsMap::get);
     }
 
     private void refreshGroupsList() {
@@ -176,68 +172,67 @@ public class MoveProfilesDialogController {
         return paneOptional;
     }
 
-    private void updateSelectedProfileLabels() {
-        Profile[] profiles = profileNodeResult.allInstances()
-                .stream()
-                .map(ProfileNode::getLookup)
-                .map(this::getProfile)
-                .filter(Objects::nonNull)
-                .toArray(Profile[]::new);
-
-        Platform.runLater(() -> {
-            int numberOfExtraProfiles = 0;
-
-            for (int i = 0; i < profiles.length; i++) {
-                Profile profile = profiles[i];
-
-                switch (i) {
-                    case 0:
-                        profile1Label.setText(profile.getName());
-                        break;
-                    case 1:
-                        profile2Label.setVisible(true);
-                        profile2Label.setText(profile.getName());
-                        break;
-                    default:
-                        numberOfExtraProfiles += 1;
-                        break;
-                }
-            }
-
-            if (numberOfExtraProfiles > 0) {
-                extraProfilesLabel.setVisible(true);
-                extraProfilesLabel.setText(String.format("...and %d more", numberOfExtraProfiles));
-            }
-        });
-
-    }
-
-    private Profile getProfile(Lookup lookup) {
-        return lookup.lookup(Profile.class);
-    }
-
-    private void moveProfilesToSomeSelectedGroup() {
-        groupsMap.keySet()
-                .stream()
-                .filter(CheckBox::isSelected)
-                .findFirst()
-                .map(groupsMap::get)
-                .ifPresent(this::moveProfilesToGroup);
-    }
-
-    private void moveProfilesToGroup(Group group) {
-        profileNodeResult.allInstances()
-                .stream()
-                .map(ProfileNode::getLookup)
-                .map(this::getProfile)
-                .filter(Objects::nonNull)
-                .forEach(profile -> {
-                    profile.setGroup(group);
-                    ProfilesRepository.getDefault().update(profile);
-                });
-
+//    private void updateSelectedProfileLabels() {
+//        Profile[] profiles = profileNodeResult.allInstances()
+//                .stream()
+//                .map(ProfileNode::getLookup)
+//                .map(this::getProfile)
+//                .filter(Objects::nonNull)
+//                .toArray(Profile[]::new);
+//
+//        Platform.runLater(() -> {
+//            int numberOfExtraProfiles = 0;
+//
+//            for (int i = 0; i < profiles.length; i++) {
+//                Profile profile = profiles[i];
+//
+//                switch (i) {
+//                    case 0:
+//                        firstProfileToMoveLabel.setText(profile.getName());
+//                        break;
+//                    case 1:
+//                        secondProfileToMoveLabel.setVisible(true);
+//                        secondProfileToMoveLabel.setText(profile.getName());
+//                        break;
+//                    default:
+//                        numberOfExtraProfiles += 1;
+//                        break;
+//                }
+//            }
+//
+//            if (numberOfExtraProfiles > 0) {
+//                otherProfilesToMoveLabel.setVisible(true);
+//                otherProfilesToMoveLabel.setText(String.format("...and %d more", numberOfExtraProfiles));
+//            }
+//        });
+//
+//    }
+//    private Profile getProfile(Lookup lookup) {
+//        return lookup.lookup(Profile.class);
+//    }
+//
+//    private void moveProfilesToSomeSelectedGroup() {
+//        groupsMap.keySet()
+//                .stream()
+//                .filter(CheckBox::isSelected)
+//                .findFirst()
+//                .map(groupsMap::get)
+//                .ifPresent(this::moveProfilesToGroup);
+//    }
+//
+//    private void moveProfilesToGroup(Group group) {
+//        profileNodeResult.allInstances()
+//                .stream()
+//                .map(ProfileNode::getLookup)
+//                .map(this::getProfile)
+//                .filter(Objects::nonNull)
+//                .forEach(profile -> {
+//                    profile.setGroup(group);
+//                    ProfilesRepository.getDefault().update(profile);
+//                });
+//
 //        profileNodeResult.allInstances()
 //                .stream()
 //                .forEach(node -> CONTEXT.remove(node));
-    }
+//    }
 }

@@ -8,6 +8,7 @@ import com.github.idelstak.manyfacesfx.api.Stackable;
 import com.github.idelstak.manyfacesfx.model.Profile;
 import com.github.idelstak.manyfacesfx.ui.controllers.DeleteProfileDialogController;
 import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.events.JFXDialogEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
@@ -15,6 +16,7 @@ import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Region;
@@ -36,7 +38,7 @@ public class DeleteProfileDialog {
     private Text messageText;
     private final JFXDialog dialog;
     private Region content;
-    private boolean successful;
+    private boolean deleted;
 
     static {
         LOG = Logger.getLogger(DeleteProfileDialog.class.getName());
@@ -57,6 +59,7 @@ public class DeleteProfileDialog {
 
         if (content != null) {
             dialog.setContent(content);
+            dialog.setDialogContainer(DIALOG_CONTAINER);
 
             DeleteProfileDialogController controller = fxmlLoader.getController();
             closeButton = controller.getCloseButton();
@@ -69,63 +72,67 @@ public class DeleteProfileDialog {
         }
     }
 
-    public boolean delete(Profile profile) {
+    public void setProfile(Profile profile) {
         checkForNullArgument("Profile", profile);
 
         messageText.setText(messageFor(profile));
 
         yesButton.setOnAction(e -> {
-            successful = PROFILES_REPO.delete(profile);
+            deleted = PROFILES_REPO.delete(profile);
 
             closeDialogOnFinish();
         });
-
-        Platform.runLater(() -> dialog.show(DIALOG_CONTAINER));
-
-        return successful;
     }
 
-    public boolean delete(Profile... profiles) {
+    public void setProfiles(Profile... profiles) {
         checkForNullArgument("Profiles", profiles);
 
         if (profiles.length == 1) {
-            return delete(profiles[0]);
+            setProfile(profiles[0]);
+        } else {
+            checkForNullsInArgument("Profile", Arrays.asList(profiles));
+
+            messageText.setText(messageFor(profiles));
+
+            yesButton.setOnAction(e -> {
+                int deletedProfiles = Long.valueOf(Arrays.stream(profiles)
+                        .map(PROFILES_REPO::delete)
+                        .filter(Boolean.TRUE::equals)
+                        .count())
+                        .intValue();
+                //Operation is considered a success if 
+                //all the received profiles were deleted
+                deleted = (deletedProfiles == profiles.length);
+
+                closeDialogOnFinish();
+            });
         }
+    }
 
-        checkForNullsInArgument("Profile", Arrays.asList(profiles));
+    public boolean profileDeleted() {
+        return deleted;
+    }
 
-        messageText.setText(messageFor(profiles));
+    public void show() {
+        dialog.show();
+    }
 
-        yesButton.setOnAction(e -> {
-            int numberOfDeletedProfiles = Long.valueOf(Arrays.stream(profiles)
-                    .map(PROFILES_REPO::delete)
-                    .filter(Boolean.TRUE::equals)
-                    .count())
-                    .intValue();
-            //Operation is considered a success if 
-            //all the received profiles were deleted
-            successful = (numberOfDeletedProfiles == profiles.length);
-
-            closeDialogOnFinish();
-        });
-
-        Platform.runLater(() -> dialog.show(DIALOG_CONTAINER));
-
-        return successful;
+    public void setOnDialogClosed(EventHandler<? super JFXDialogEvent> handler) {
+        dialog.setOnDialogClosed(handler);
     }
 
     private <T> void checkForNullsInArgument(String argumentName, Collection<T> arguments) throws IllegalArgumentException {
         boolean containsIllegalArgument = false;
-        
+
         for (T argument : arguments) {
             if (argument == null) {
                 containsIllegalArgument = true;
                 break;
             }
         }
-        
+
         if (containsIllegalArgument) {
-            throw new IllegalArgumentException("No " + argumentName+ " should be null");
+            throw new IllegalArgumentException("No " + argumentName + " should be null");
         }
     }
 

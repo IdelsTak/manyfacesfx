@@ -9,6 +9,7 @@ import com.github.idelstak.manyfacesfx.model.Group;
 import com.github.idelstak.manyfacesfx.model.Profile;
 import com.github.idelstak.manyfacesfx.ui.controllers.RemoveProfileFromGroupDialogController;
 import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.events.JFXDialogEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
@@ -16,6 +17,7 @@ import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Region;
@@ -37,7 +39,7 @@ public class UngroupProfileDialog {
     private Text messageText;
     private final JFXDialog dialog;
     private Region content;
-    private boolean successful;
+    private boolean ungrouped;
 
     static {
         LOG = Logger.getLogger(DeleteProfileDialog.class.getName());
@@ -58,6 +60,7 @@ public class UngroupProfileDialog {
 
         if (content != null) {
             dialog.setContent(content);
+            dialog.setDialogContainer(DIALOG_CONTAINER);
 
             RemoveProfileFromGroupDialogController controller = fxmlLoader.getController();
             closeButton = controller.getCloseButton();
@@ -70,53 +73,57 @@ public class UngroupProfileDialog {
         }
     }
 
-    public boolean ungroup(Profile profile) {
+    public void setProfile(Profile profile) {
         checkForNullArgument("Profile", profile);
 
         messageText.setText(messageFor(profile));
 
         yesButton.setOnAction(e -> {
             profile.setGroup(Group.DEFAULT);
-            successful = PROFILES_REPO.update(profile);
+            ungrouped = PROFILES_REPO.update(profile);
 
             closeDialogOnFinish();
         });
-
-        Platform.runLater(() -> dialog.show(DIALOG_CONTAINER));
-
-        return successful;
     }
 
-    public boolean ungroup(Profile... profiles) {
+    public void setProfiles(Profile... profiles) {
         checkForNullArgument("Profiles", profiles);
 
         if (profiles.length == 1) {
-            return ungroup(profiles[0]);
+            setProfile(profiles[0]);
+        } else {
+            checkForNullsInArgument("Profile", Arrays.asList(profiles));
+
+            messageText.setText(messageFor(profiles));
+
+            yesButton.setOnAction(e -> {
+                int ungroupedProfiles = Long.valueOf(Arrays.stream(profiles)
+                        .map(profile -> {
+                            profile.setGroup(Group.DEFAULT);
+                            return PROFILES_REPO.update(profile);
+                        })
+                        .filter(Boolean.TRUE::equals)
+                        .count())
+                        .intValue();
+                //Operation is considered a success if 
+                //all the received profiles were ungrouped
+                ungrouped = (ungroupedProfiles == profiles.length);
+
+                closeDialogOnFinish();
+            });
         }
+    }
 
-        checkForNullsInArgument("Profile", Arrays.asList(profiles));
+    public boolean profileUngrouped() {
+        return ungrouped;
+    }
 
-        messageText.setText(messageFor(profiles));
+    public void show() {
+        dialog.show();
+    }
 
-        yesButton.setOnAction(e -> {
-            int numberOfUngroupedProfiles = Long.valueOf(Arrays.stream(profiles)
-                    .map(profile -> {
-                        profile.setGroup(Group.DEFAULT);
-                        return PROFILES_REPO.update(profile);
-                    })
-                    .filter(Boolean.TRUE::equals)
-                    .count())
-                    .intValue();
-            //Operation is considered a success if 
-            //all the received profiles were ungrouped
-            successful = (numberOfUngroupedProfiles == profiles.length);
-
-            closeDialogOnFinish();
-        });
-
-        Platform.runLater(() -> dialog.show(DIALOG_CONTAINER));
-
-        return successful;
+    public void setOnDialogClosed(EventHandler<? super JFXDialogEvent> handler) {
+        dialog.setOnDialogClosed(handler);
     }
 
     private <T> void checkForNullsInArgument(String argumentName, Collection<T> arguments) throws IllegalArgumentException {

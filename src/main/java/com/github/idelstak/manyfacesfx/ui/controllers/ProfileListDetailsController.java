@@ -5,21 +5,18 @@ package com.github.idelstak.manyfacesfx.ui.controllers;
 
 import com.github.idelstak.manyfacesfx.api.GlobalContext;
 import com.github.idelstak.manyfacesfx.api.ProfilesRepository;
-import com.github.idelstak.manyfacesfx.api.Stackable;
 import com.github.idelstak.manyfacesfx.model.Group;
 import com.github.idelstak.manyfacesfx.model.Profile;
 import com.github.idelstak.manyfacesfx.ui.BulkProfilesSelect;
 import com.github.idelstak.manyfacesfx.ui.DeleteProfileDialog;
+import com.github.idelstak.manyfacesfx.ui.MoveProfileToGroupDialog;
 import com.github.idelstak.manyfacesfx.ui.ProfileNode;
 import com.github.idelstak.manyfacesfx.ui.UngroupProfileDialog;
 import com.github.idelstak.manyfacesfx.ui.util.TitledPaneInputEventBypass;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
-import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXToggleNode;
-import java.io.IOException;
-import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,14 +32,12 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.ObservableSet;
 import javafx.collections.SetChangeListener.Change;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Accordion;
 import javafx.scene.control.Label;
 import javafx.scene.control.TitledPane;
 import javafx.scene.input.InputEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import org.openide.util.Lookup;
 
@@ -131,7 +126,7 @@ public class ProfileListDetailsController {
         profileNodeResult.addLookupListener(e -> listenToSelectedProfiles());
 
         deleteButton.setOnAction(e -> deleteSelectedProfiles());
-        moveToGroupButton.setOnAction(e -> showMoveProfilesDialog());
+        moveToGroupButton.setOnAction(e -> moveSelectedProfiles());
         removeFromGroupButton.setOnAction(e -> ungroupSelectedProfiles());
 
         Platform.runLater(() -> rootBox.getChildren().remove(groupNameBox));
@@ -152,22 +147,38 @@ public class ProfileListDetailsController {
 
     private void deleteSelectedProfiles() {
         Profile[] profiles = getNonNullProfiles();
-
-        boolean deleteSuccessful = new DeleteProfileDialog().delete(profiles);
-
-        if (deleteSuccessful) {
-            removeAllProfileNodesFromContext();
-        }
+        DeleteProfileDialog dialog = new DeleteProfileDialog();
+        dialog.setProfiles(profiles);
+        dialog.setOnDialogClosed(handler -> {
+            if (dialog.profileDeleted()) {
+                removeSelectedNodesFromContext();
+            }
+        });
+        dialog.show();
     }
-    
+
+    private void moveSelectedProfiles() {
+        Profile[] profiles = getNonNullProfiles();
+        MoveProfileToGroupDialog dialog = new MoveProfileToGroupDialog();
+        dialog.setProfiles(profiles);
+        dialog.setOnDialogClosed(handler -> {
+            if (dialog.profileMoved()) {
+                removeSelectedNodesFromContext();
+            }
+        });
+        dialog.show();
+    }
+
     private void ungroupSelectedProfiles() {
         Profile[] profiles = getNonNullProfiles();
-
-        boolean ungroupSuccessful = new UngroupProfileDialog().ungroup(profiles);
-
-        if (ungroupSuccessful) {
-            removeAllProfileNodesFromContext();
-        }
+        UngroupProfileDialog dialog = new UngroupProfileDialog();
+        dialog.setProfiles(profiles);
+        dialog.setOnDialogClosed(handler -> {
+            if (dialog.profileUngrouped()) {
+                removeSelectedNodesFromContext();
+            }
+        });
+        dialog.show();
     }
 
     private Profile[] getNonNullProfiles() {
@@ -179,7 +190,7 @@ public class ProfileListDetailsController {
                 .toArray(Profile[]::new);
     }
 
-    private void removeAllProfileNodesFromContext() {
+    private void removeSelectedNodesFromContext() {
         profileNodeResult.allInstances().forEach(CONTEXT::remove);
     }
 
@@ -267,28 +278,8 @@ public class ProfileListDetailsController {
                 .collect(Collectors.toList());
         boolean selectedProfilesAvailable = !selectedProfiles.isEmpty();
 
+        LOG.log(Level.INFO, "Is there a selection? [{0}] ", selectedProfilesAvailable);
+
         selectionAvailable.set(selectedProfilesAvailable);
     }
-
-    private void showMoveProfilesDialog() {
-        URL location = getClass().getResource("/fxml/MoveProfilesDialog.fxml");
-        FXMLLoader loader = new FXMLLoader(location);
-        Pane pane = null;
-        MoveProfilesDialogController controller = null;
-
-        try {
-            pane = loader.load();
-            controller = loader.getController();
-        } catch (IOException ex) {
-            LOG.log(Level.SEVERE, null, ex);
-        }
-
-        if (pane != null && controller != null) {
-            JFXDialog dialog = new JFXDialog();
-            dialog.setContent(pane);
-            controller.setDialog(dialog);
-            dialog.show(Stackable.getDefault().getStackPane());
-        }
-    }
-
 }
