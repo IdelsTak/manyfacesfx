@@ -22,6 +22,7 @@ public abstract class ProfileAttributesEditContext implements NodeContext<MenuNo
     public static final String NAME = "new profile";
     private static final Logger LOG = Logger.getLogger(EditProfileNodeContext.class.getName());
     private static final MenuNode NODE;
+    private static final GlobalContext CONTEXT = GlobalContext.getDefault();
 
     static {
         Node detailsPane = null;
@@ -51,8 +52,8 @@ public abstract class ProfileAttributesEditContext implements NodeContext<MenuNo
 
     @Override
     public void select() {
-        GlobalContext.getDefault().set(MenuNode.class, NODE);
-        
+        CONTEXT.set(MenuNode.class, NODE);
+
         Platform.runLater(() -> new OverViewNodeContext().select());
     }
 

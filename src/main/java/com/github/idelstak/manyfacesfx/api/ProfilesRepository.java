@@ -106,7 +106,7 @@ public abstract class ProfilesRepository {
                 });
             });
 
-            service.start();
+//            service.start();
         }
 
         @Override

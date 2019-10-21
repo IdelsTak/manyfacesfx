@@ -5,7 +5,9 @@ package com.github.idelstak.manyfacesfx.ui.controllers;
 
 import com.github.idelstak.manyfacesfx.api.AbstractProfileListDetails;
 import com.github.idelstak.manyfacesfx.api.GlobalContext;
+import com.github.idelstak.manyfacesfx.api.ProfilesRepository;
 import com.github.idelstak.manyfacesfx.model.Group;
+import com.github.idelstak.manyfacesfx.model.Profile;
 import com.github.idelstak.manyfacesfx.ui.MenuNode;
 import com.jfoenix.controls.JFXTabPane;
 import java.io.IOException;
@@ -15,10 +17,13 @@ import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.collections.SetChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.control.Tab;
+import javafx.scene.layout.Pane;
 import org.openide.util.Lookup;
 
 /**
@@ -30,16 +35,17 @@ public class HomeDetailsController {
 
     private static final Logger LOG = Logger.getLogger(HomeDetailsController.class.getName());
     private static final GlobalContext CONTEXT = GlobalContext.getDefault();
+    private static final ProfilesRepository PROFILES_REPO = ProfilesRepository.getDefault();
     @FXML
     private JFXTabPane detailsTabPane;
     @FXML
     private Tab profileListTab;
     @FXML
     private Tab groupsTab;
-    private Node groupsContent;
     private MenuNode homeNode;
     private final Lookup.Result<MenuNode> menuNodeResult;
     private final Lookup.Result<Group> groupResult;
+    private ChangeListener<Tab> tabChangeListener;
 
     {
         menuNodeResult = CONTEXT.lookupResult(MenuNode.class);
@@ -86,6 +92,47 @@ public class HomeDetailsController {
 
         profileListTab.setContent(AbstractProfileListDetails.getDefault().getPane());
         groupsTab.setContent(getGroupsTab());
+
+        
+        tabChangeListener = (ob, ov, nv) -> {
+            if (nv.equals(groupsTab)) {
+                detailsTabPane.getSelectionModel().selectFirst();
+            }
+        };
+
+        PROFILES_REPO.addListener((SetChangeListener.Change<? extends Profile> change) -> {
+            updateProfileListContent();
+        });
+        
+        updateProfileListContent();
+    }
+
+    private void updateProfileListContent() {
+        if (PROFILES_REPO.findAll().isEmpty()) {
+            profileListTab.setContent(getNoProfilePane());
+            detailsTabPane.getSelectionModel()
+                    .selectedItemProperty()
+                    .addListener(tabChangeListener);
+        } else {
+            profileListTab.setContent(AbstractProfileListDetails.getDefault().getPane());
+            detailsTabPane.getSelectionModel()
+                    .selectedItemProperty()
+                    .removeListener(tabChangeListener);
+        }
+    }
+
+    private Pane getNoProfilePane() {
+        URL location = getClass().getResource("/fxml/NoProfileAvailable.fxml");
+        FXMLLoader fxmlLoader = new FXMLLoader(location);
+        Pane pane = null;
+
+        try {
+            pane = fxmlLoader.load();
+        } catch (IOException ex) {
+            LOG.log(Level.SEVERE, null, ex);
+        }
+
+        return pane;
     }
 
     private String from(Tab tab) {
@@ -121,7 +168,7 @@ public class HomeDetailsController {
 
         if (it.hasNext()) {
             Group nextGroup = it.next();
-            
+
             Platform.runLater(() -> {
                 detailsTabPane.getSelectionModel().select(groupsTab);
                 getProfilesListByGroupContent(nextGroup).ifPresent(groupsTab::setContent);

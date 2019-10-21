@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="22.0" style="-fx-base: white; -fx-background-color: white;" stylesheets="@../styles/app.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.idelstak.manyfacesfx.ui.controllers.NoProfileAvailableController">
+   <children>
+      <Label alignment="CENTER" contentDisplay="TOP" graphicTextGap="23.0" maxWidth="1.7976931348623157E308" style="-fx-font-family: 'Roboto Medium'; -fx-font-size: 15;" text="You have no saved browser profiles.">
+         <graphic>
+            <ImageView fitHeight="148.0" fitWidth="167.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../images/no-profile.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
+      <HBox spacing="3.0">
+         <children>
+            <Label alignment="CENTER_RIGHT" maxWidth="1.7976931348623157E308" text="Create" HBox.hgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+               </padding>
+            </Label>
+            <Hyperlink fx:id="createProfileHyperlink" maxWidth="1.7976931348623157E308" style="-fx-text-fill: #0000EE; -fx-font-family: 'Roboto Medium';" text="New browser profile" visited="true" HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+   </children>
+   <padding>
+      <Insets bottom="60.0" left="60.0" right="60.0" top="60.0" />
+   </padding>
+</VBox>
