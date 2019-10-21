@@ -56,16 +56,6 @@ public class PluginsController {
          Platform.runLater(() -> refreshRows());
     }
 
-//    public void setPageHeaderController(PageHeaderController phc) {
-//        if (phc == null) {
-//            String message = "PageHeaderController should not be null";
-//            throw new IllegalArgumentException(message);
-//        }
-//        phc.setHeaderText("Plugins");
-//
-//        Platform.runLater(() -> refreshRows());
-//    }
-
     private TitledPane getPluginRow(String name, Node content) {
         URL location = getClass().getResource("/fxml/PluginsListRow.fxml");
         FXMLLoader loader = new FXMLLoader(location);

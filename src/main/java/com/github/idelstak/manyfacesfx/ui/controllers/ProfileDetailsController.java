@@ -105,7 +105,6 @@ public class ProfileDetailsController {
 
             Platform.runLater(() -> {
                 selectCheckBox.setSelected(optionalProfile.isPresent());
-//                selectCheckBox.fireEvent(new ActionEvent());
             });
         });
     }
@@ -193,27 +192,4 @@ public class ProfileDetailsController {
 
         profileMenu.show(menuButton, Side.LEFT, xOffset, yOffset);
     }
-
-//    private void showMoveProfileDialog(ProfileNode node) {
-//        URL location = getClass().getResource("/fxml/MoveProfilesDialog.fxml");
-//        FXMLLoader loader = new FXMLLoader(location);
-//        Pane pane = null;
-//        MoveProfilesDialogController controller = null;
-//
-//        try {
-//            pane = loader.load();
-//            controller = loader.getController();
-//        } catch (IOException ex) {
-//            LOG.log(Level.SEVERE, null, ex);
-//        }
-//
-//        if (pane != null && controller != null) {
-//            JFXDialog dialog = new JFXDialog();
-//            dialog.setContent(pane);
-//            controller.setDialog(dialog);
-//
-//            CONTEXT.set(ProfileNode.class, node);
-//            Platform.runLater(() -> dialog.show(Stackable.getDefault().getStackPane()));
-//        }
-//    }
 }

@@ -6,7 +6,6 @@ package com.github.idelstak.manyfacesfx.ui.controllers;
 import com.jfoenix.controls.JFXComboBox;
 import java.util.logging.Logger;
 import javafx.application.Platform;
-import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
@@ -45,14 +44,6 @@ public class PreferencesController {
      */
     @FXML
     public void initialize() {
-        //Ensure the pane fits the screen
-//        StackPane sp = Stackable.getDefault().getStackPane();
-//        ReadOnlyDoubleProperty rodp = sp.heightProperty();
-//        SimpleDoubleProperty sdp = new HeightProperty(rodp.get());
-//
-//        sdp.bind(rodp);
-//        preferencesRootPane.prefHeightProperty().bind(sdp);
-
         nativeResolutionComboBox.getItems().setAll(Resolution.values());
         minResolutionComboBox.getItems().setAll(Resolution.values());
         maxResolutionComboBox.getItems().setAll(Resolution.values());
@@ -62,18 +53,6 @@ public class PreferencesController {
             minResolutionComboBox.getSelectionModel().select(8);
             maxResolutionComboBox.getSelectionModel().selectLast();
         });
-    }
-
-    private static class HeightProperty extends SimpleDoubleProperty {
-
-        private HeightProperty(double initialValue) {
-            super(initialValue);
-        }
-
-        @Override
-        public double get() {
-            return super.get() - 100.0;
-        }
     }
 
     private enum Resolution implements Size {
