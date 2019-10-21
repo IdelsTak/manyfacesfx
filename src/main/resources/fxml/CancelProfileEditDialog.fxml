@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+<?import org.kordamp.ikonli.javafx.FontIcon?>
+
+<AnchorPane id="AnchorPane" styleClass="logout-dialog-root" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.idelstak.manyfacesfx.ui.controllers.CancelProfileEditDialogController">
+   <children>
+      <HBox styleClass="header-area" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label text="Cancel of the profile change">
+               <HBox.margin>
+                  <Insets left="33.0" top="20.0" />
+               </HBox.margin>
+            </Label>
+            <HBox HBox.hgrow="ALWAYS" />
+            <JFXButton fx:id="closeButton">
+               <graphic>
+                  <FontIcon fx:id="icon" />
+               </graphic>
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin>
+            </JFXButton>
+            <HBox maxHeight="-Infinity" minWidth="-Infinity" prefWidth="10.0" />
+         </children>
+      </HBox>
+      <VBox styleClass="content-area" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+         <children>
+            <VBox VBox.vgrow="ALWAYS">
+               <children>
+                  <Text fx:id="messageText" strokeType="OUTSIDE" strokeWidth="0.0" text="Do you really want to cancel &lt;editing&gt; this profile?" />
+               </children>
+               <VBox.margin>
+                  <Insets left="32.0" top="35.0" />
+               </VBox.margin>
+            </VBox>
+            <HBox spacing="10.0" styleClass="buttons-area">
+               <children>
+                  <HBox prefHeight="44.0" HBox.hgrow="ALWAYS" />
+                  <JFXButton fx:id="yesButton" defaultButton="true" text="Yes" />
+                  <JFXButton fx:id="noButton" cancelButton="true" text="No" />
+                  <HBox layoutX="213.0" layoutY="26.0" prefHeight="44.0" HBox.hgrow="ALWAYS" />
+               </children>
+               <padding>
+                  <Insets top="16.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="40.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+   <stylesheets>
+      <URL value="@../styles/app.css" />
+      <URL value="@../styles/logout-dialog.css" />
+   </stylesheets>
+</AnchorPane>
