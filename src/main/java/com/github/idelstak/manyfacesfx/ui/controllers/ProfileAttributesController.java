@@ -55,11 +55,13 @@ public class ProfileAttributesController {
             Iterator<? extends ProfileMenuNode> it = lookupResult.allInstances().iterator();
 
             if (it.hasNext()) {
+                ProfileMenuNode nextProfileMenuNode = it.next();
+                
                 Platform.runLater(() -> {
-                    Node detailsPane = it.next().getDetailsPane();
-                    
+                    Node detailsPane = nextProfileMenuNode.getDetailsPane();
+
                     detailsBox.getChildren().setAll(detailsPane);
-                    
+
                     AnchorPane.setTopAnchor(detailsPane, 0.0);
                     AnchorPane.setRightAnchor(detailsPane, 0.0);
                     AnchorPane.setBottomAnchor(detailsPane, 0.0);

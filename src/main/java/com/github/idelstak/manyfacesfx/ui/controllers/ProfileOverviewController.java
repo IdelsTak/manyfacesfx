@@ -45,11 +45,11 @@ public class ProfileOverviewController {
     private Hyperlink editOsHyperlink;
     @FXML
     private Label osLabel;
-
+    
     static {
         LOG = Logger.getLogger(ProfileOverviewController.class.getName());
     }
-
+    
     /**
      Initializes the controller class.
      */

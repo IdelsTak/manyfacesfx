@@ -4,6 +4,7 @@
 package com.github.idelstak.manyfacesfx.ui.controllers;
 
 import com.github.idelstak.manyfacesfx.api.GlobalContext;
+import com.github.idelstak.manyfacesfx.ui.EditType;
 import com.github.idelstak.manyfacesfx.ui.GeolocationNodeContext;
 import com.github.idelstak.manyfacesfx.ui.HomeNodeContext;
 import com.github.idelstak.manyfacesfx.ui.OverViewNodeContext;
@@ -20,6 +21,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TitledPane;
 import javafx.scene.control.ToggleGroup;
@@ -37,6 +39,8 @@ public class ProfileMenuController {
     private static final GlobalContext CONTEXT = GlobalContext.getDefault();
     @FXML
     private JFXButton goHomeButton;
+    @FXML
+    private Label menuTitleLabel;
     @FXML
     private ToggleGroup profileMenuGroup;
     @FXML
@@ -69,10 +73,12 @@ public class ProfileMenuController {
     private RadioButton browserPluginsToggle;
     @FXML
     private RadioButton otherToggle;
-    private final Lookup.Result<ProfileMenuNode> lookupResult;
+    private final Lookup.Result<ProfileMenuNode> profileMenuNodeResult;
+    private final Lookup.Result<EditType> editTypeResult;
 
     {
-        lookupResult = CONTEXT.lookupResult(ProfileMenuNode.class);
+        profileMenuNodeResult = CONTEXT.lookupResult(ProfileMenuNode.class);
+        editTypeResult = CONTEXT.lookupResult(EditType.class);
     }
 
     /**
@@ -82,11 +88,11 @@ public class ProfileMenuController {
      */
     @FXML
     public void initialize() throws IOException {
-        ProfileMenuNode overviewNode = new OverViewNodeContext().getNode();
-        ProfileMenuNode proxyNode = new ProxyNodeContext().getNode();
-        ProfileMenuNode timezoneNode = new TimezoneNodeContext().getNode();
-        ProfileMenuNode webRtcNode = new WebRtcNodeContext().getNode();
-        ProfileMenuNode geolocationNode = new GeolocationNodeContext().getNode();
+        OverViewNodeContext overViewNodeContext = new OverViewNodeContext();
+        ProxyNodeContext proxyNodeContext = new ProxyNodeContext();
+        TimezoneNodeContext timezoneNodeContext = new TimezoneNodeContext();
+        WebRtcNodeContext webRtcNodeContext = new WebRtcNodeContext();
+        GeolocationNodeContext geolocationNodeContext = new GeolocationNodeContext();
 
         ProfileMenuNode mediaDevicesNode = new ProfileMenuNode(
                 "media devices",
@@ -121,20 +127,20 @@ public class ProfileMenuController {
                 storageOptionsToggle.getText(),
                 FXMLLoader.load(getClass().getResource("/fxml/ProfileAdvancedStorage.fxml")));
 
-        overviewToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, overviewNode));
-        proxyToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, proxyNode));
-        timezoneToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, timezoneNode));
-        webRtcToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, webRtcNode));
-        geolocationToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, geolocationNode));
+        overviewToggle.setOnAction(e -> overViewNodeContext.select());
+        proxyToggle.setOnAction(e -> proxyNodeContext.select());
+        timezoneToggle.setOnAction(e -> timezoneNodeContext.select());
+        webRtcToggle.setOnAction(e -> webRtcNodeContext.select());
+        geolocationToggle.setOnAction(e -> geolocationNodeContext.select());
 
-        mediaDevicesToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, mediaDevicesNode));
-        extensionsToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, extensionsNode));
-        fontsToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, fontsNode));
-        hardwareToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, hardwareNode));
-        navigatorToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, navigatorNode));
-        otherToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, otherNode));
-        browserPluginsToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, browserPluginsNode));
-        storageOptionsToggle.setOnAction(e -> CONTEXT.replace(ProfileMenuNode.class, storageOptionsNode));
+        mediaDevicesToggle.setOnAction(e -> CONTEXT.set(ProfileMenuNode.class, mediaDevicesNode));
+        extensionsToggle.setOnAction(e -> CONTEXT.set(ProfileMenuNode.class, extensionsNode));
+        fontsToggle.setOnAction(e -> CONTEXT.set(ProfileMenuNode.class, fontsNode));
+        hardwareToggle.setOnAction(e -> CONTEXT.set(ProfileMenuNode.class, hardwareNode));
+        navigatorToggle.setOnAction(e -> CONTEXT.set(ProfileMenuNode.class, navigatorNode));
+        otherToggle.setOnAction(e -> CONTEXT.set(ProfileMenuNode.class, otherNode));
+        browserPluginsToggle.setOnAction(e -> CONTEXT.set(ProfileMenuNode.class, browserPluginsNode));
+        storageOptionsToggle.setOnAction(e -> CONTEXT.set(ProfileMenuNode.class, storageOptionsNode));
 
         //Ensure overview is selected
         Platform.runLater(() -> {
@@ -152,11 +158,15 @@ public class ProfileMenuController {
             Platform.runLater(() -> advancedMenuToggle.setSelected(false));
         });
 
-        lookupResult.addLookupListener(e -> manageToggleSelection());
+        profileMenuNodeResult.addLookupListener(e -> manageToggleSelection());
+        
+        updateMenuTitleText();
+        
+        editTypeResult.addLookupListener(e -> updateMenuTitleText());
     }
 
     private void manageToggleSelection() {
-        Iterator<? extends ProfileMenuNode> it = lookupResult.allInstances().iterator();
+        Iterator<? extends ProfileMenuNode> it = profileMenuNodeResult.allInstances().iterator();
 
         if (it.hasNext()) {
             ProfileMenuNode node = it.next();
@@ -176,6 +186,29 @@ public class ProfileMenuController {
                 button.setSelected(true);
             }
         });
+    }
+
+    private void updateMenuTitleText() {
+        Iterator<? extends EditType> it = editTypeResult.allInstances().iterator();
+        
+        if (it.hasNext()) {
+            EditType editType = it.next();
+
+            switch (editType) {
+                case CREATE:
+                    setMenuTitleText("New");
+                    break;
+                case UPDATE:
+                    setMenuTitleText("Edit");
+                    break;
+                default:
+                    throw new IllegalArgumentException("Edit type not known");
+            }
+        }
+    }
+
+    private void setMenuTitleText(String text) {
+        Platform.runLater(() -> menuTitleLabel.setText(text + " browser profile"));
     }
 
 }

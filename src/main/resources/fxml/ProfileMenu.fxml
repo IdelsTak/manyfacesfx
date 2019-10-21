@@ -21,7 +21,7 @@
             <FontIcon />
          </graphic>
       </JFXButton>
-      <Label styleClass="menu-title" text="New browser profile">
+      <Label fx:id="menuTitleLabel" styleClass="menu-title" text="New browser profile">
          <VBox.margin>
             <Insets top="27.0" />
          </VBox.margin>

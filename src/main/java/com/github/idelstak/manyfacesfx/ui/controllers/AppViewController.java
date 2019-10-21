@@ -3,7 +3,6 @@
  */
 package com.github.idelstak.manyfacesfx.ui.controllers;
 
-import com.github.idelstak.manyfacesfx.api.AbstractNotificationPane;
 import com.github.idelstak.manyfacesfx.api.GlobalContext;
 import com.github.idelstak.manyfacesfx.ui.AppMenu;
 import com.github.idelstak.manyfacesfx.ui.MenuNode;
@@ -18,7 +17,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
@@ -37,21 +35,15 @@ public class AppViewController {
     @FXML
     private VBox masterBox;
     @FXML
-    private VBox viewBox;
-    @FXML
-    private HBox titleBox;
-    @FXML
     private Label titleLabel;
     @FXML
     private JFXToggleNode notificationsToggle;
     @FXML
     private StackPane detailPane;
     private final Lookup.Result<MenuNode> menuNodeResult;
-    private final Lookup.Result<ProfileMenuNode> profileMenuNodeResult;
 
     {
         menuNodeResult = CONTEXT.lookupResult(MenuNode.class);
-        profileMenuNodeResult = CONTEXT.lookupResult(ProfileMenuNode.class);
     }
 
     /**
@@ -66,19 +58,15 @@ public class AppViewController {
         menuNodeResult.addLookupListener(e -> {
             Iterator<? extends MenuNode> it = menuNodeResult.allInstances().iterator();
 
-            if (it.hasNext()) {
-                Platform.runLater(() -> initComponents(it.next()));
-            }
-        });
-
-        profileMenuNodeResult.addLookupListener(e -> {
-            Iterator<? extends ProfileMenuNode> it = profileMenuNodeResult.allInstances().iterator();
-
-            if (it.hasNext()) {
-                Platform.runLater(() -> {
-                    titleLabel.textProperty().unbind();
-                    titleLabel.textProperty().bind(it.next().displayNameProperty());
-                });
+            //Use while loop because a ProfileMenuNode
+            //extends the MenuNode. The while loop thus 
+            //enables operations to be carried on the last
+            //context in the global lookup
+            while (it.hasNext()) {
+                //Variable declared outside the Platform.runLater
+                //runnable to avoid introducing a race condition
+                MenuNode nextMenuNode = it.next();
+                Platform.runLater(() -> initComponents(nextMenuNode));
             }
         });
     }
@@ -90,14 +78,18 @@ public class AppViewController {
      */
     @FXML
     void showNotification(ActionEvent event) {
-        AbstractNotificationPane.getDefault().notify(event.toString());
+//        AbstractNotificationPane.getDefault().notify(event.toString());
     }
 
     private void initComponents(MenuNode node) {
-        titleLabel.textProperty().unbind();
         titleLabel.textProperty().bind(node.displayNameProperty());
         notificationsToggle.setVisible(node.showsNotifications());
-        detailPane.getChildren().setAll(node.getDetailsPane());
+
+        //Don't allow profile menu nodes to set the 
+        //detailsPane content. That's handled elsewhere
+        if (!node.getClass().equals(ProfileMenuNode.class)) {
+            detailPane.getChildren().setAll(node.getDetailsPane());
+        }
 
         ObservableList<Node> nodes = masterBox.getChildren();
 

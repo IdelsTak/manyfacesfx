@@ -22,7 +22,6 @@ public enum AppMenu implements Supplier<Pane> {
     private static final Logger LOG = Logger.getLogger(AppMenu.class.getName());
     private final String path;
     private Pane pane;
-//    private MenuNode homeNode;
 
     private AppMenu(String path) {
         this.path = path;
@@ -39,36 +38,5 @@ public enum AppMenu implements Supplier<Pane> {
         }
         return pane;
     }
-
-//    public MenuNode getHomeNode() {
-//        if (homeNode == null) {
-//            Node detailsPane = null;
-//
-//            try {
-//                detailsPane = FXMLLoader.load(getClass().getResource("/fxml/HomeDetails.fxml"));
-//            } catch (IOException ex) {
-//                LOG.log(Level.SEVERE, null, ex);
-//            }
-//
-//            homeNode = new MenuNode(
-//                    "home",
-//                    "Home",
-//                    true,
-//                    detailsPane,
-//                    AppMenu.HOME);
-//        }
-//        return homeNode;
-//    }
-//
-//    public void setHomeAsOnlyContext() {
-//        GlobalContext context = GlobalContext.getDefault();
-//        MenuNode node = context.lookup(MenuNode.class);
-//
-//        if (node != null && !Objects.equals(node, getHomeNode())) {
-//            context.remove(node);
-//        }
-//        
-//        context.add(getHomeNode());
-//    }
 
 }

@@ -20,6 +20,7 @@ public class OverViewNodeContext implements NodeContext<ProfileMenuNode> {
 
     private static final Logger LOG = Logger.getLogger(OverViewNodeContext.class.getName());
     private static final ProfileMenuNode OVERVIEW_NODE;
+    private static final GlobalContext CONTEXT = GlobalContext.getDefault();
 
     static {
         Node detailsPane = null;
@@ -37,9 +38,6 @@ public class OverViewNodeContext implements NodeContext<ProfileMenuNode> {
                 detailsPane);
     }
 
-    /**
-     Default constructor.
-     */
     public OverViewNodeContext() {
     }
 
@@ -50,7 +48,7 @@ public class OverViewNodeContext implements NodeContext<ProfileMenuNode> {
 
     @Override
     public void select() {
-        GlobalContext.getDefault().set(ProfileMenuNode.class, OVERVIEW_NODE);
+        CONTEXT.set(ProfileMenuNode.class, OVERVIEW_NODE);
     }
 
 }

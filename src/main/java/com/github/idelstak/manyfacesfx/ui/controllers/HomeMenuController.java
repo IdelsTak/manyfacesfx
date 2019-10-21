@@ -10,9 +10,11 @@ import com.github.idelstak.manyfacesfx.api.Stackable;
 import com.github.idelstak.manyfacesfx.model.Group;
 import com.github.idelstak.manyfacesfx.model.Profile;
 import com.github.idelstak.manyfacesfx.ui.AppMenu;
+import com.github.idelstak.manyfacesfx.ui.EditType;
 import com.github.idelstak.manyfacesfx.ui.HomeNodeContext;
 import com.github.idelstak.manyfacesfx.ui.MenuNode;
-import com.github.idelstak.manyfacesfx.ui.OverViewNodeContext;
+import com.github.idelstak.manyfacesfx.ui.NewProfileNodeContext;
+import com.github.idelstak.manyfacesfx.ui.ProfileAttributesEditContext;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXListView;
@@ -97,18 +99,12 @@ public class HomeMenuController {
                 true,
                 FXMLLoader.load(getClass().getResource("/fxml/HelpAndSupport.fxml")),
                 AppMenu.HOME);
-        MenuNode newProfileNode = new MenuNode(
-                "new profile",
-                newProfileToggle.getText(),
-                false,
-                FXMLLoader.load(getClass().getResource("/fxml/ProfileAttributes.fxml")),
-                AppMenu.PROFILE);
+        NewProfileNodeContext newProfileNodeContext = new NewProfileNodeContext();
 
         homeToggle.setOnAction(e -> CONTEXT.set(MenuNode.class, homeNode));
         newProfileToggle.setOnAction(e -> {
-            CONTEXT.set(MenuNode.class, newProfileNode);
-            //Ensure the overview node context is added to lookup
-            Platform.runLater(() -> new OverViewNodeContext().select());
+            CONTEXT.set(EditType.class, EditType.CREATE);
+            newProfileNodeContext.select();
         });
         myAccountToggle.setOnAction(e -> CONTEXT.set(MenuNode.class, myAccountNode));
         pluginsToggle.setOnAction(e -> CONTEXT.set(MenuNode.class, pluginsNode));
@@ -119,10 +115,7 @@ public class HomeMenuController {
         lookupResult.addLookupListener(e -> {
             Iterator<? extends MenuNode> it = lookupResult.allInstances().iterator();
 
-            if (it.hasNext()
-                    && it.next()
-                            .getName()
-                            .equals(newProfileNode.getName())) {
+            if (hasExpectedNameAndIsNextIn(it)) {
                 Platform.runLater(() -> homeToggle.setSelected(true));
             } else {
                 Platform.runLater(groupsList.getSelectionModel()::clearSelection);
@@ -195,6 +188,17 @@ public class HomeMenuController {
             }
 
         });
+    }
+
+    private static boolean hasExpectedNameAndIsNextIn(Iterator<? extends MenuNode> it) {
+        boolean hasNext = it.hasNext();
+        MenuNode nextMenuNode = it.hasNext() ? it.next() : null;
+        boolean hasExpectedName
+                = (nextMenuNode != null)
+                  ? nextMenuNode.getName()
+                                .equals(ProfileAttributesEditContext.NAME)
+                  : false;
+        return hasExpectedName && hasNext;
     }
 
     public void updateDisplayName(Group group) {

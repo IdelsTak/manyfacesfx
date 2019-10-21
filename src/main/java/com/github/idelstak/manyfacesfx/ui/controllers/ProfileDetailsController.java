@@ -7,6 +7,8 @@ import com.github.idelstak.manyfacesfx.api.GlobalContext;
 import com.github.idelstak.manyfacesfx.model.Profile;
 import com.github.idelstak.manyfacesfx.ui.BulkProfilesSelect;
 import com.github.idelstak.manyfacesfx.ui.DeleteProfileDialog;
+import com.github.idelstak.manyfacesfx.ui.EditProfileNodeContext;
+import com.github.idelstak.manyfacesfx.ui.EditType;
 import com.github.idelstak.manyfacesfx.ui.MoveProfileToGroupDialog;
 import com.github.idelstak.manyfacesfx.ui.ProfileNode;
 import com.jfoenix.controls.JFXButton;
@@ -144,7 +146,13 @@ public class ProfileDetailsController {
             }
         });
 
+        EditProfileNodeContext editProfileNodeContext = new EditProfileNodeContext();
+        
         menuButton.setOnAction(e -> showProfileContextMenu());
+        editProfileItem.setOnAction(e -> {
+            CONTEXT.set(EditType.class, EditType.UPDATE);
+            Platform.runLater(editProfileNodeContext::select);
+        });
         moveProfileToAGroupItem.setOnAction(e -> {
             MoveProfileToGroupDialog dialog = new MoveProfileToGroupDialog();
             dialog.setProfile(profile);
