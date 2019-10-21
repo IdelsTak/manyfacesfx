@@ -135,6 +135,8 @@ public abstract class ProfilesRepository {
                     .map(wasRemoved -> wasRemoved
                                        ? profiles.add(profile)
                                        : false);
+            
+            LOG.log(Level.FINE, "Did update occur? {0}", added);
 
             return added.orElse(false);
         }

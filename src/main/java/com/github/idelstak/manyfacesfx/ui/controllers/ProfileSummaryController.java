@@ -149,7 +149,7 @@ public class ProfileSummaryController {
     private void createProfile(Profile profile) {
         profile.setLastEdited(LocalDate.now());
         
-        LOG.log(Level.INFO, "Creating profile: {0}", profile);
+        LOG.log(Level.FINE, "Creating profile: {0}", profile);
         
         PROFILES_REPO.add(profile);
     }
@@ -157,7 +157,7 @@ public class ProfileSummaryController {
     private void editProfile(Profile profile) {
         profile.setLastEdited(LocalDate.now());
         
-        LOG.log(Level.INFO, "Editing profile: {0}", profile);
+        LOG.log(Level.FINE, "Editing profile: {0}", profile);
         
         PROFILES_REPO.update(profile);
     }

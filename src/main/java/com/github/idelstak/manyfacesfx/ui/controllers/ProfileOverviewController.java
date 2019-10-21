@@ -77,8 +77,13 @@ public class ProfileOverviewController {
 
     private void initProfileNameBinding() {
         getProfileFromContext().ifPresent(profile -> {
-            LOG.log(Level.INFO, "Current profile: {0}", currentProfile);
-            LOG.log(Level.INFO, "Incoming profile: {0}", profile);
+            LOG.log(Level.FINE, "Current profile: {0}", currentProfile);
+            LOG.log(Level.FINE, "Incoming profile: {0}", profile);
+
+            if (currentProfile != null) {
+                profileNameField.textProperty()
+                        .unbindBidirectional(currentProfile.nameProperty());
+            }
 
             profileNameField.textProperty()
                     .bindBidirectional(profile.nameProperty());

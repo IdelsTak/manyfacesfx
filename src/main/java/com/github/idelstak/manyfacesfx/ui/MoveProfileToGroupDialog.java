@@ -100,6 +100,8 @@ public class MoveProfileToGroupDialog {
 
         moveButton.setOnAction(e -> {
             Optional<Group> selectedGroup = controller.getSelectedGroup();
+            
+            LOG.log(Level.FINE, "Selected group: {0}", selectedGroup);
 
             selectedGroup.ifPresent(group -> {
                 profile.setGroup(group);

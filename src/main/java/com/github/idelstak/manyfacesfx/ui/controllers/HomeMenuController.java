@@ -107,7 +107,7 @@ public class HomeMenuController {
         newProfileToggle.setOnAction(e -> {
             String id = new Faker().internet().uuid();
             Profile profile = new Profile(id, "", "", LocalDate.now());
-            
+
             CONTEXT.set(Profile.class, profile);
             CONTEXT.set(EditType.class, EditType.CREATE);
             newProfileNodeContext.select();
@@ -156,7 +156,10 @@ public class HomeMenuController {
         //updated in the display name of the group
         groups.forEach(group -> {
             group.numberOfProfilesProperty()
-                    .addListener((ob, ov, nv) -> updateDisplayName(group));
+                    .addListener((ob, ov, nv) -> {
+                        LOG.log(Level.FINE, "No of profiles prop changed to: {0}", nv);
+                        updateDisplayName(group);
+                    });
             group.nameProperty()
                     .addListener((ob, ov, nv) -> updateDisplayName(group));
         });

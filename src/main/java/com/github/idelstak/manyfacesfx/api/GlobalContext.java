@@ -52,7 +52,13 @@ public abstract class GlobalContext extends ProxyLookup {
 
         @Override
         public synchronized <T> GlobalContext add(T inst) {
+            lookupAll(inst.getClass())
+                    .stream()
+                    .filter(t -> t.equals(inst))
+                    .forEach(content::remove);
+            
             content.add(inst);
+            
             return this;
         }
 
@@ -73,7 +79,7 @@ public abstract class GlobalContext extends ProxyLookup {
                 content.add(inst);
             }
         }
-        
+
         @Override
         public synchronized <T> void set(Class<? extends T> type, T inst) {
             lookupAll(type).stream().forEach(content::remove);
