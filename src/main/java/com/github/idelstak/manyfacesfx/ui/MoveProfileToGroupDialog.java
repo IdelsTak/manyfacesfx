@@ -45,7 +45,7 @@ public class MoveProfileToGroupDialog {
     private Button moveButton;
     private Button cancelButton;
     private Button closeButton;
-    private boolean moveSuccessful;
+    private boolean moved;
 
     static {
         LOG = Logger.getLogger(DeleteProfileDialog.class.getName());
@@ -90,7 +90,7 @@ public class MoveProfileToGroupDialog {
     }
 
     public boolean profileMoved() {
-        return moveSuccessful;
+        return moved;
     }
 
     public void setProfile(Profile profile) {
@@ -103,7 +103,7 @@ public class MoveProfileToGroupDialog {
 
             selectedGroup.ifPresent(group -> {
                 profile.setGroup(group);
-                moveSuccessful = PROFILES_REPO.update(profile);
+                moved = PROFILES_REPO.update(profile);
             });
 
             closeDialogOnFinish();
@@ -137,7 +137,7 @@ public class MoveProfileToGroupDialog {
                 }
                 //Operation is considered a success if 
                 //all the received profiles were deleted
-                moveSuccessful = (numberOfMovedProfiles == profiles.length);
+                moved = (numberOfMovedProfiles == profiles.length);
 
                 closeDialogOnFinish();
             });
