@@ -15,11 +15,13 @@ import com.github.idelstak.manyfacesfx.ui.HomeNodeContext;
 import com.github.idelstak.manyfacesfx.ui.MenuNode;
 import com.github.idelstak.manyfacesfx.ui.NewProfileNodeContext;
 import com.github.idelstak.manyfacesfx.ui.ProfileAttributesEditContext;
+import com.github.javafaker.Faker;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXListView;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -103,6 +105,10 @@ public class HomeMenuController {
 
         homeToggle.setOnAction(e -> CONTEXT.set(MenuNode.class, homeNode));
         newProfileToggle.setOnAction(e -> {
+            String id = new Faker().internet().uuid();
+            Profile profile = new Profile(id, "", "", LocalDate.now());
+            
+            CONTEXT.set(Profile.class, profile);
             CONTEXT.set(EditType.class, EditType.CREATE);
             newProfileNodeContext.select();
         });

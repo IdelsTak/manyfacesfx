@@ -94,9 +94,11 @@ public class Profile {
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 97 * hash + Objects.hashCode(getId());
-        hash = 97 * hash + Objects.hashCode(getName());
+        int hash = 7;
+        hash = 73 * hash + Objects.hashCode(this.getId());
+        hash = 73 * hash + Objects.hashCode(this.getName());
+        hash = 73 * hash + Objects.hashCode(this.getLastEdited());
+        hash = 73 * hash + Objects.hashCode(this.getGroup());
         return hash;
     }
 
@@ -115,7 +117,13 @@ public class Profile {
         if (!Objects.equals(this.getId(), other.getId())) {
             return false;
         }
-        return Objects.equals(this.getName(), other.getName());
+        if (!Objects.equals(this.getName(), other.getName())) {
+            return false;
+        }
+        if (!Objects.equals(this.getLastEdited(), other.getLastEdited())) {
+            return false;
+        }
+        return Objects.equals(this.getGroup(), other.getGroup());
     }
 
     @Override

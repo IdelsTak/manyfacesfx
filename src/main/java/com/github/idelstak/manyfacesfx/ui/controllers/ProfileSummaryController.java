@@ -4,12 +4,16 @@
 package com.github.idelstak.manyfacesfx.ui.controllers;
 
 import com.github.idelstak.manyfacesfx.api.GlobalContext;
+import com.github.idelstak.manyfacesfx.api.ProfilesRepository;
 import com.github.idelstak.manyfacesfx.api.Stackable;
+import com.github.idelstak.manyfacesfx.model.Profile;
 import com.github.idelstak.manyfacesfx.ui.EditType;
+import com.github.idelstak.manyfacesfx.ui.HomeNodeContext;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -29,14 +33,17 @@ public class ProfileSummaryController {
 
     private static final Logger LOG = Logger.getLogger(ProfileSummaryController.class.getName());
     private static final GlobalContext CONTEXT = GlobalContext.getDefault();
+    private static final ProfilesRepository PROFILES_REPO = ProfilesRepository.getDefault();
     @FXML
     private JFXButton cancelButton;
     @FXML
     private JFXButton updateButton;
     private final Lookup.Result<EditType> editTypeResult;
+    private final Lookup.Result<Profile> profileResult;
 
     {
         editTypeResult = CONTEXT.lookupResult(EditType.class);
+        profileResult = CONTEXT.lookupResult(Profile.class);
     }
 
     /**
@@ -48,6 +55,7 @@ public class ProfileSummaryController {
 
         editTypeResult.addLookupListener(e -> refreshUpdateButtonText());
         cancelButton.setOnAction(e -> showCancelProfileChangeDialog());
+        updateButton.setOnAction(e -> updateProfile());
     }
 
     private void refreshUpdateButtonText() {
@@ -87,12 +95,71 @@ public class ProfileSummaryController {
         dialogContent.ifPresent(content -> {
             JFXDialog dialog = new JFXDialog();
             dialog.setContent(content);
-            
+
             CancelProfileEditDialogController controller = fxmlLoader.getController();
             controller.setDialog(dialog);
-            
+
             dialog.show(Stackable.getDefault().getStackPane());
         });
+    }
+
+    private void updateProfile() {
+        getProfileFromContext().ifPresent(profile -> {
+            getEditTypeFromContext().ifPresent(editType -> {
+                switch (editType) {
+                    case CREATE:
+                        createProfile(profile);
+                        break;
+                    case UPDATE:
+                        editProfile(profile);
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Edit type not known");
+                }
+
+                Platform.runLater(() -> new HomeNodeContext().select());
+            });
+        });
+    }
+
+    private Optional<Profile> getProfileFromContext() {
+        Optional<Profile> optionalProfile = Optional.empty();
+        Iterator<? extends Profile> it = profileResult.allInstances().iterator();
+
+        while (it.hasNext()) {
+            Profile nextProfile = it.next();
+            optionalProfile = Optional.of(nextProfile);
+        }
+
+        return optionalProfile;
+    }
+
+    private Optional<EditType> getEditTypeFromContext() {
+        Optional<EditType> optionalEditType = Optional.empty();
+        Iterator<? extends EditType> it = editTypeResult.allInstances().iterator();
+
+        while (it.hasNext()) {
+            EditType nextEditType = it.next();
+            optionalEditType = Optional.of(nextEditType);
+        }
+
+        return optionalEditType;
+    }
+
+    private void createProfile(Profile profile) {
+        profile.setLastEdited(LocalDate.now());
+        
+        LOG.log(Level.INFO, "Creating profile: {0}", profile);
+        
+        PROFILES_REPO.add(profile);
+    }
+
+    private void editProfile(Profile profile) {
+        profile.setLastEdited(LocalDate.now());
+        
+        LOG.log(Level.INFO, "Editing profile: {0}", profile);
+        
+        PROFILES_REPO.update(profile);
     }
 
 }

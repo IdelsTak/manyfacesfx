@@ -3,7 +3,9 @@
  */
 package com.github.idelstak.manyfacesfx.ui.controllers;
 
+import com.github.idelstak.manyfacesfx.api.GlobalContext;
 import com.github.idelstak.manyfacesfx.api.Stackable;
+import com.github.idelstak.manyfacesfx.model.Profile;
 import com.github.idelstak.manyfacesfx.ui.GeolocationNodeContext;
 import com.github.idelstak.manyfacesfx.ui.ProxyNodeContext;
 import com.github.idelstak.manyfacesfx.ui.TimezoneNodeContext;
@@ -13,6 +15,8 @@ import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Iterator;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
@@ -30,7 +34,6 @@ import org.openide.util.Lookup;
 public class ProfileOverviewController {
 
     private static final Logger LOG;
-    private static final Lookup LOOKUP = Lookup.getDefault();
     @FXML
     private JFXButton editProxyButton;
     @FXML
@@ -45,11 +48,17 @@ public class ProfileOverviewController {
     private Hyperlink editOsHyperlink;
     @FXML
     private Label osLabel;
-    
+    private final Lookup.Result<Profile> profileResult;
+    private Profile currentProfile;
+
     static {
         LOG = Logger.getLogger(ProfileOverviewController.class.getName());
     }
-    
+
+    {
+        profileResult = GlobalContext.getDefault().lookupResult(Profile.class);
+    }
+
     /**
      Initializes the controller class.
      */
@@ -60,6 +69,22 @@ public class ProfileOverviewController {
         timezoneHyperlink.setOnAction(e -> new TimezoneNodeContext().select());
         webRtcHyperlink.setOnAction(e -> new WebRtcNodeContext().select());
         geolocationHyperlink.setOnAction(e -> new GeolocationNodeContext().select());
+
+        initProfileNameBinding();
+
+        profileResult.addLookupListener(e -> initProfileNameBinding());
+    }
+
+    private void initProfileNameBinding() {
+        getProfileFromContext().ifPresent(profile -> {
+            LOG.log(Level.INFO, "Current profile: {0}", currentProfile);
+            LOG.log(Level.INFO, "Incoming profile: {0}", profile);
+
+            profileNameField.textProperty()
+                    .bindBidirectional(profile.nameProperty());
+
+            currentProfile = profile;
+        });
     }
 
     private void showChooseOSDialog() {
@@ -82,6 +107,18 @@ public class ProfileOverviewController {
             controller.setOSLabel(osLabel);
             dialog.show(Stackable.getDefault().getStackPane());
         }
+    }
+
+    private Optional<Profile> getProfileFromContext() {
+        Optional<Profile> optionalProfile = Optional.empty();
+        Iterator<? extends Profile> it = profileResult.allInstances().iterator();
+
+        while (it.hasNext()) {
+            Profile nextProfile = it.next();
+            optionalProfile = Optional.of(nextProfile);
+        }
+
+        return optionalProfile;
     }
 
 }

@@ -150,6 +150,7 @@ public class ProfileDetailsController {
         
         menuButton.setOnAction(e -> showProfileContextMenu());
         editProfileItem.setOnAction(e -> {
+            CONTEXT.set(Profile.class, profile);
             CONTEXT.set(EditType.class, EditType.UPDATE);
             Platform.runLater(editProfileNodeContext::select);
         });
