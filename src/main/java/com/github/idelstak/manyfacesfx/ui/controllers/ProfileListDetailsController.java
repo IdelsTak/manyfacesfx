@@ -23,7 +23,6 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javafx.application.Platform;
@@ -271,15 +270,12 @@ public class ProfileListDetailsController {
     }
 
     private void listenToSelectedProfiles() {
-        List<Profile> selectedProfiles = profileNodeResult.allInstances()
+        List<Profile> selectedNodes = profileNodeResult.allInstances()
                 .stream()
                 .map(node -> node.getLookup().lookup(Profile.class))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
-        boolean selectedProfilesAvailable = !selectedProfiles.isEmpty();
 
-        LOG.log(Level.INFO, "Is there a selection? [{0}] ", selectedProfilesAvailable);
-
-        selectionAvailable.set(selectedProfilesAvailable);
+        selectionAvailable.set(!selectedNodes.isEmpty());
     }
 }
